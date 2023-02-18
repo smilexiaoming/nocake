@@ -13,11 +13,11 @@ func init() {
 }
 
 type User struct {
+	
 }
 
 //控制器的方法 分页查询
 func (api *User) Pages_get(c *gin.Context) { //,httpMethod string
-	//api.httpMethod="GET"
 	users := []int{1, 2, 3}
 	c.JSON(http.StatusOK, gin.H{
 		"code": 1,
@@ -27,7 +27,6 @@ func (api *User) Pages_get(c *gin.Context) { //,httpMethod string
 
 }
 func (api *User) AddUser(c *gin.Context) { //,httpMethod string
-	//api.httpMethod="GET"
 	users := []int{2, 3, 6}
 	c.JSON(http.StatusOK, gin.H{
 		"code": 1,

@@ -38,7 +38,7 @@ func Register(controller interface{}) bool {
 	for i := 0; i < v.NumMethod(); i++ {
 		method := v.Method(i)
 		action := v.Type().Method(i).Name
-		path := "/" + module + "/" + action
+		path := "/mini/" + module + "/" + action
 		//遍历参数
 		params := make([]reflect.Type, 0, v.NumMethod())
 		httpMethod := "POST"
