@@ -1,5 +1,6 @@
 package models
 
+//
 import (
 	"fmt"
 	"log"
@@ -14,10 +15,10 @@ import (
 var db *gorm.DB
 
 type Model struct {
-	ID         int `gorm:"primary_key" json:"id"`
-	CreatedOn  int `json:"created_on"`
-	ModifiedOn int `json:"modified_on"`
-	DeletedOn  int `json:"deleted_on"`
+	ID         int       `db:"id"`
+	CreatedOn  time.Time `db:"created_on"`
+	ModifiedOn time.Time `db:"modified_on"`
+	DeletedOn  int       `db:"deleted_on"`
 }
 
 // Setup initializes the database instance

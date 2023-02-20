@@ -1,8 +1,9 @@
 package main
 
 import (
-	_ "nocake/http_server/controllers"
+	"fmt"
 	route "nocake/http_server/routers"
+	_ "nocake/http_server/routers/api"
 	"nocake/models"
 	"nocake/pkg/logging"
 	"nocake/pkg/setting"
@@ -20,6 +21,7 @@ func init() {
 }
 
 func main() {
+	port := fmt.Sprintf(":%d", setting.ServerSetting.HttpPort)
 	r := route.InitRouter()
-	r.Run() // listen and serve on 0.0.0.0:8080
+	r.Run(port) // listen and serve on 0.0.0.0:8080
 }

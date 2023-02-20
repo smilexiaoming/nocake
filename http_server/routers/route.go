@@ -1,4 +1,4 @@
-package Routes
+package routers
 
 import (
 	"fmt"
@@ -51,10 +51,6 @@ func Register(controller interface{}) bool {
 		}
 		fmt.Println("params=", params)
 		fmt.Println("action=", action)
-		//if Routes[module] == nil {
-		//	Routes[module] = make(map[string]Route)
-		//}
-		//Routes[module][action] = Route{method,params}
 		route := Route{path: path, Method: method, Args: params, httpMethod: httpMethod}
 		Routes = append(Routes, route)
 	}
