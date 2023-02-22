@@ -19,7 +19,7 @@ type PageResult struct {
 
 func Success(message string, data interface{}, c *gin.Context) {
 	c.JSON(http.StatusOK, Response{
-		Code:    0,
+		Code:    200,
 		Message: message,
 		Data:    data,
 	})
@@ -27,7 +27,7 @@ func Success(message string, data interface{}, c *gin.Context) {
 
 func Error(message string, c *gin.Context) {
 	c.JSON(http.StatusOK, Response{
-		Code:    1,
+		Code:    400,
 		Message: message,
 		Data:    "",
 	})
