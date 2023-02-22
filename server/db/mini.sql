@@ -1,0 +1,128 @@
+-- 主表start
+DROP TABLE IF EXISTS t_user;
+CREATE TABLE `t_user` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+    `open_id` varchar(63) NULL COMMENT '微信登录openid',
+    `wx_id` varchar(63) NULL COMMENT '用户原始微信id',
+    `username` varchar(63) NULL COMMENT '用户名称',
+    `nickname` varchar(63) NULL COMMENT '用户昵称',
+    `password` varchar(63) NULL COMMENT '用户密码',
+    `status` tinyint(1) NULL DEFAULT '0' COMMENT '0 可用, 1 禁用, 2 注销',
+    `gender` tinyint(1) NULL DEFAULT '0' COMMENT '性别：0 未知， 1男， 1 女',
+    `birthday` date NULL COMMENT '生日',
+    `last_login_time` datetime NULL COMMENT '最近一次登录时间',
+    `last_login_ip` varchar(63) NULL COMMENT '最近一次登录IP地址',
+    `user_level` tinyint(1) NULL DEFAULT '0' COMMENT '0 普通用户，1 VIP用户，2 高级VIP用户',
+    `mobile` varchar(20) NULL COMMENT '用户手机号码',
+    `avatar` varchar(255) NULL COMMENT '用户头像图片',
+    `session_key` varchar(100) NULL COMMENT '微信登录会话KEY',
+    `deleted` tinyint(1) NULL DEFAULT '0' COMMENT '逻辑删除',
+    `created_on` varchar(50) DEFAULT NULL COMMENT '创建时间',
+    `updated_on` varchar(50) DEFAULT NULL COMMENT '更新时间',
+    `deleted_on` varchar(50) DEFAULT NULL COMMENT '删除时间',
+    UNIQUE KEY `username` (`username`),
+    PRIMARY KEY (`id`)
+) ENGINE = InnoDB COMMENT '微信商城小程序-用户表';
+DROP TABLE IF EXISTS t_goods;
+CREATE TABLE `t_goods` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+    `goods_sn` varchar(63) NULL COMMENT '商品编号',
+    `goods_name` varchar(127) NULL COMMENT '商品名称',
+    `category_id` int(11) NULL DEFAULT '0' COMMENT '商品所属类目ID',
+    `brand_id` int(11) NULL DEFAULT '0' COMMENT '',
+    `gallery` varchar(1023) NULL COMMENT '商品宣传图片列表，采用JSON数组格式',
+    `keywords` varchar(255) NULL COMMENT '商品关键字，采用逗号间隔',
+    `brief` varchar(255) NULL COMMENT '商品简介',
+    `is_on_sale` tinyint(1) NULL DEFAULT '1' COMMENT '是否上架',
+    `sort_order` smallint(4) NULL DEFAULT '100' COMMENT '',
+    `pic_url` varchar(255) NULL COMMENT '商品页面商品图片',
+    `share_url` varchar(255) NULL COMMENT '商品分享朋友圈图片',
+    `is_new` tinyint(1) NULL DEFAULT '0' COMMENT '是否新品首发，如果设置则可以在新品首发页面展示',
+    `is_hot` tinyint(1) NULL DEFAULT '0' COMMENT '是否人气推荐，如果设置则可以在人气推荐页面展示',
+    `unit` varchar(31) NULL DEFAULT '’件‘' COMMENT '商品单位，例如件、盒',
+    `counter_price` decimal(10, 2) NULL DEFAULT '0.00' COMMENT '专柜价格',
+    `retail_price` decimal(10, 2) NULL DEFAULT '100000.00' COMMENT '零售价格',
+    `detail` text NULL COMMENT '商品详细介绍，是富文本格式',
+    `deleted` tinyint(1) NULL DEFAULT '0' COMMENT '逻辑删除',
+    KEY `goods_sn` (`goods_sn`),
+    KEY `category_id` (`category_id`),
+    KEY `brand_id` (`brand_id`),
+    KEY `sort_order` (`sort_order`),
+    PRIMARY KEY (`id`)
+) ENGINE = InnoDB COMMENT '微信商城小程序-商品基本信息表';
+DROP TABLE IF EXISTS t_cart;
+CREATE TABLE `t_cart` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+    `user_id` int(11) NULL COMMENT '用户表的用户ID',
+    `goods_id` int(11) NULL COMMENT '商品表的商品ID',
+    `goods_sn` varchar(63) NULL COMMENT '商品编号',
+    `goods_name` varchar(127) NULL COMMENT '商品名称',
+    `product_id` int(11) NULL COMMENT '商品货品表的货品ID',
+    `price` decimal(10, 2) NULL DEFAULT '0.00' COMMENT '商品货品的价格',
+    `cart_number` smallint(5) NULL DEFAULT '0' COMMENT '商品货品的数量',
+    `specifications` varchar(1023) NULL COMMENT '商品规格值列表，采用JSON数组格式',
+    `checked` tinyint(1) NULL DEFAULT '1' COMMENT '购物车中商品是否选择状态',
+    `pic_url` varchar(255) NULL COMMENT '商品图片或者商品货品图片',
+    `deleted` tinyint(1) NULL DEFAULT '0' COMMENT '逻辑删除',
+    PRIMARY KEY (`id`)
+) ENGINE = InnoDB COMMENT '微信商城小程序-购物车商品表';
+DROP TABLE IF EXISTS t_order;
+CREATE TABLE `t_order` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+    `user_id` int(11) NULL COMMENT '用户表的用户ID',
+    `order_sn` varchar(63) NULL COMMENT '订单编号',
+    `order_status` smallint(6) NULL COMMENT '订单状态',
+    `consignee` varchar(63) NULL COMMENT '收货人名称',
+    `mobile` varchar(63) NULL COMMENT '收货人手机号',
+    `address` varchar(127) NULL COMMENT '收货具体地址',
+    `message` varchar(512) NULL COMMENT '用户订单留言',
+    `goods_price` decimal(10, 2) NULL COMMENT '商品总费用',
+    `freight_price` decimal(10, 2) NULL COMMENT '配送费用',
+    `coupon_price` decimal(10, 2) NULL COMMENT '优惠券减免',
+    `integral_price` decimal(10, 2) NULL COMMENT '用户积分减免',
+    `groupon_price` decimal(10, 2) NULL COMMENT '团购优惠价减免',
+    `order_price` decimal(10, 2) NULL COMMENT '订单费用， = goods_price + freight_price - coupon_price',
+    `actual_price` decimal(10, 2) NULL COMMENT '实付费用， = order_price - integral_price',
+    `pay_id` varchar(63) NULL COMMENT '微信付款编号',
+    `pay_time` datetime NULL COMMENT '微信付款时间',
+    `ship_sn` varchar(63) NULL COMMENT '发货编号',
+    `ship_channel` varchar(63) NULL COMMENT '发货快递公司',
+    `ship_time` datetime NULL COMMENT '发货开始时间',
+    `confirm_time` datetime NULL COMMENT '用户确认收货时间',
+    `comments` smallint(6) NULL DEFAULT '0' COMMENT '待评价订单商品数量',
+    `end_time` datetime NULL COMMENT '订单关闭时间',
+    `deleted` tinyint(1) NULL DEFAULT '0' COMMENT '逻辑删除',
+    PRIMARY KEY (`id`)
+) ENGINE = InnoDB COMMENT '微信商城小程序-订单表';
+DROP TABLE IF EXISTS t_address;
+CREATE TABLE `t_address` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+    `address_name` varchar(63) NULL COMMENT '收货人名称',
+    `user_id` int(11) NULL DEFAULT '0' COMMENT '用户表的用户ID',
+    `province` varchar(63) NULL COMMENT '行政区域表的省ID',
+    `city` varchar(63) NULL COMMENT '行政区域表的市ID',
+    `county` varchar(63) NULL COMMENT '行政区域表的区县ID',
+    `address_detail` varchar(127) NULL COMMENT '详细收货地址',
+    `area_code` char(6) NULL COMMENT '地区编码',
+    `postal_code` char(6) NULL COMMENT '邮政编码',
+    `tel` varchar(20) NULL COMMENT '手机号码',
+    `is_default` tinyint(1) NULL DEFAULT '0' COMMENT '是否默认地址',
+    `deleted` tinyint(1) NULL DEFAULT '0' COMMENT '逻辑删除',
+    KEY `user_id` (`user_id`),
+    PRIMARY KEY (`id`)
+) ENGINE = InnoDB COMMENT '微信商城小程序-收货地址表';
+DROP TABLE IF EXISTS t_comment;
+CREATE TABLE `t_comment` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+    `value_id` int(11) NULL DEFAULT '0' COMMENT '如果type=0，则是商品评论；如果是type=1，则是专题评论。',
+    `comment_type` tinyint(3) NULL DEFAULT '0' COMMENT '评论类型，如果type=0，则是商品评论；如果是type=1，则是专题评论；如果type=3，则是订单商品评论。',
+    `content` varchar(1023) NULL COMMENT '评论内容',
+    `user_id` int(11) NULL DEFAULT '0' COMMENT '用户表的用户ID',
+    `has_picture` tinyint(1) NULL DEFAULT '0' COMMENT '是否含有图片',
+    `pic_urls` varchar(1023) NULL COMMENT '图片地址列表，采用JSON数组格式',
+    `star` smallint(6) NULL DEFAULT '1' COMMENT '评分， 1-5',
+    `deleted` tinyint(1) NULL DEFAULT '0' COMMENT '逻辑删除',
+    KEY `value_id` (`value_id`),
+    PRIMARY KEY (`id`)
+) ENGINE = InnoDB COMMENT '微信商城小程序-评论表';
+-- 主表end
