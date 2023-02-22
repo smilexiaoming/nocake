@@ -23,6 +23,26 @@ CREATE TABLE `t_user` (
     UNIQUE KEY `username` (`username`),
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB COMMENT '微信商城小程序-用户表';
+
+DROP TABLE IF EXISTS t_category;
+CREATE TABLE `t_category` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+    `name` varchar(63) NULL COMMENT '类目名称',
+    `keywords` varchar(1023) NULL COMMENT '类目关键字，以JSON数组格式',
+    `desc` varchar(255) NULL COMMENT '类目广告语介绍',
+    `pid` int(11) NULL DEFAULT '0' COMMENT '父类目ID',
+    `icon_url` varchar(255) NULL COMMENT '类目图标',
+    `pic_url` varchar(255) NULL COMMENT '类目图片',
+    `level` tinyint(1) NULL DEFAULT '1' COMMENT '',
+    `sort_order` tinyint(3) NULL DEFAULT '50' COMMENT '排序',
+    `deleted` tinyint(1) NULL DEFAULT '0' COMMENT '逻辑删除',
+    KEY `pid` (`pid`),
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB COMMENT '微信商城小程序-类目表';
+
+INSERT INTO `t_category` (`id`, `name`, `keywords`, `desc`, `pid`, `icon_url`, `pic_url`, `level`) VALUES (1, '蛋糕', '{"受众":"大众"}', "蛋糕，大家都喜欢", 0, 'http://tubiao.png', 'http://tupian.png', "1");
+INSERT INTO `t_category` (`id`, `name`, `keywords`, `desc`, `pid`, `icon_url`, `pic_url`, `level`) VALUES (2, '甜品', '{"受众":"小众"}', "甜品，少数人喜欢", 0, 'http://tubiao.png', 'http://tupian.png', "1");
+
 DROP TABLE IF EXISTS t_goods;
 CREATE TABLE `t_goods` (
     `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,

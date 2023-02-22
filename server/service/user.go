@@ -29,17 +29,19 @@ func (u *AppUserService) Login(code string) *app.UserInfo {
 		fmt.Println("decoder error")
 		return nil
 	}
-
+	if acsJson.ErrCode != 0 || acsJson.OpenId == "" {
+		fmt.Println("acsJson.ErrMsg :", acsJson.ErrMsg)
+		return nil
+	}
 	rows := global.Db.Where("open_id = ?", acsJson.OpenId).First(&app.User{}).RowsAffected
 	if rows == 0 {
-		fmt.Println(acsJson.OpenId)
 		user := app.User{
-			OpenId:  acsJson.OpenId,
-			Status:  1,
-			Created: common.NowTime(),
+			OpenId:    acsJson.OpenId,
+			Status:    1,
+			CreatedOn: common.NowTime(),
 		}
 		row := global.Db.Create(&user).RowsAffected
-		if row == 0{
+		if row == 0 {
 			fmt.Println("add app user error")
 		}
 	}
