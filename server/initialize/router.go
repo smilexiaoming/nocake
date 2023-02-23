@@ -40,6 +40,8 @@ func Router() {
 		// 商品分类
 		app.GET("/category/option", api.GetAppCategory().GetCategoryOption)
 		app.GET("/goods/list", api.GetAppGoods().GetGoodList)
+		app.GET("/goods/detail", api.GetAppGoods().GetGoodsDetail)
+		app.GET("/goods/search", api.GetAppGoods().SearchGoods)
 	}
 
 	// 启动、监听端口
