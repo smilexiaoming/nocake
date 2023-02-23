@@ -18,9 +18,9 @@ func GetAppUser() *AppUser {
 
 // @Summary 用户登陆
 // @Description 传入code进行鉴权
-// @Accept  json
+// @Accept  multipart/form-data
 // @Produce  json
-// @Param code path string true "code"
+// @Param code formData string true "code"
 // @Success 200 {object} response.Response "请求成功"
 // @Failure 400 {object} response.Response "请求错误"
 // @Failure 500 {object} response.Response "内部错误"
@@ -32,7 +32,7 @@ func (u *AppUser) UserLogin(context *gin.Context) {
 		return
 	}
 	userInfo, errMessage := u.Login(code)
-	if errMessage != ""{
+	if errMessage != "" {
 		response.Error(errMessage, context)
 		return
 	}

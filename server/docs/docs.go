@@ -16,11 +16,11 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/category/option": {
+        "/app/category/option": {
             "get": {
                 "description": "传入level",
                 "consumes": [
-                    "application/json"
+                    "multipart/form-data"
                 ],
                 "produces": [
                     "application/json"
@@ -31,8 +31,13 @@ const docTemplate = `{
                         "type": "string",
                         "description": "level",
                         "name": "level",
-                        "in": "query",
-                        "required": true
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "pid",
+                        "name": "pid",
+                        "in": "query"
                     }
                 ],
                 "responses": {
@@ -57,11 +62,60 @@ const docTemplate = `{
                 }
             }
         },
-        "/login": {
+        "/app/goods/list": {
+            "get": {
+                "description": "传入 categoryid | kewords | name",
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "summary": "获取商品列表",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "category_id",
+                        "name": "categoryid",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "keywords",
+                        "name": "kewords",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "name",
+                        "name": "name",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "请求成功",
+                        "schema": {
+                            "$ref": "#/definitions/app.GoodsList"
+                        }
+                    },
+                    "400": {
+                        "description": "请求错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    },
+                    "500": {
+                        "description": "内部错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/app/login": {
             "post": {
                 "description": "传入code进行鉴权",
                 "consumes": [
-                    "application/json"
+                    "multipart/form-data"
                 ],
                 "produces": [
                     "application/json"
@@ -72,7 +126,7 @@ const docTemplate = `{
                         "type": "string",
                         "description": "code",
                         "name": "code",
-                        "in": "path",
+                        "in": "formData",
                         "required": true
                     }
                 ],
@@ -107,6 +161,69 @@ const docTemplate = `{
                     "type": "integer"
                 },
                 "text": {
+                    "type": "string"
+                }
+            }
+        },
+        "app.GoodsList": {
+            "type": "object",
+            "properties": {
+                "brief": {
+                    "description": "商品简介",
+                    "type": "string"
+                },
+                "categoryId": {
+                    "description": "商品所属类目ID",
+                    "type": "integer"
+                },
+                "counterPrice": {
+                    "description": "专柜价格",
+                    "type": "number"
+                },
+                "detail": {
+                    "description": "商品详细介绍，是富文本格式",
+                    "type": "string"
+                },
+                "gallery": {
+                    "description": "商品宣传图片列表，采用JSON数组格式",
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "isHot": {
+                    "description": "是否人气推荐，如果设置则可以在人气推荐页面展示",
+                    "type": "integer"
+                },
+                "isNew": {
+                    "description": "是否新品首发，如果设置则可以在新品首发页面展示",
+                    "type": "integer"
+                },
+                "isOnSale": {
+                    "description": "是否上架",
+                    "type": "integer"
+                },
+                "keywords": {
+                    "description": "商品关键字，采用逗号间隔",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "商品名称",
+                    "type": "string"
+                },
+                "picUrl": {
+                    "description": "商品页面商品图片",
+                    "type": "string"
+                },
+                "retailPrice": {
+                    "description": "零售价格",
+                    "type": "number"
+                },
+                "sortOrder": {
+                    "type": "integer"
+                },
+                "unit": {
+                    "description": "商品单位，例如件、盒",
                     "type": "string"
                 }
             }
