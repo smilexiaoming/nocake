@@ -19,7 +19,7 @@ func GetAppCategory() *AppCategory {
 
 // @Summary 获取品类列表
 // @Description 传入level
-// @Accept  json
+// @Accept   multipart/form-data
 // @Produce  json
 // @Param level query string true "level"
 // @Success 200 {object} app.CategoryOption "请求成功"

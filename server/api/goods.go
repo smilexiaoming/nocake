@@ -20,9 +20,9 @@ func GetAppGoods() *AppGoods {
 // @Summary 获取商品列表
 // @Description 传入 categoryid | kewords | name
 // @Accept  multipart/form-data
-// @Param categoryid formData int false "categoryid"
-// @Param kewords formData string false "kewords"
-// @Param name formData string false "name"
+// @Param categoryid query int false "categoryid"
+// @Param kewords query string false "kewords"
+// @Param name query string false "name"
 // @Success 200 {object} app.GoodsList "请求成功"
 // @Failure 400 {object} response.Response "请求错误"
 // @Failure 500 {object} response.Response "内部错误"
