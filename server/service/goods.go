@@ -15,7 +15,7 @@ func (g *AppGoodsService) GetList(param app.GoodsListQueryParam) []app.GoodsList
 }
 
 func (g *AppGoodsService) GetDetail(param app.GoodsDetailQueryParam) app.GoodsDetail {
-	goodsDetail := *&app.GoodsDetail{}
+	goodsDetail := app.GoodsDetail{}
 	global.Db.Debug().Table("t_goods").Where("is_on_sale = 1").First(&goodsDetail, param.Id)
 	return goodsDetail
 }

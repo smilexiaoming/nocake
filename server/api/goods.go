@@ -60,7 +60,7 @@ func (g *AppGoods) GetGoodsDetail(c *gin.Context) {
 // @Success 200 {object} app.GoodsList "请求成功"
 // @Failure 400 {object} response.Response "请求错误"
 // @Failure 500 {object} response.Response "内部错误"
-// @Router /app/goods/list [get]
+// @Router /app/goods/search [get]
 func (g *AppGoods) SearchGoods(c *gin.Context) {
 	param := app.GoodsSearchQueryParam{}
 	if err := c.ShouldBind(&param); err != nil {
