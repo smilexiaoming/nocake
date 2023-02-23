@@ -24,7 +24,7 @@ func GetAppUser() *AppUser {
 // @Success 200 {object} response.Response "请求成功"
 // @Failure 400 {object} response.Response "请求错误"
 // @Failure 500 {object} response.Response "内部错误"
-// @Router /login [post]
+// @Router /app/login [post]
 func (u *AppUser) UserLogin(context *gin.Context) {
 	code := context.PostForm("code")
 	if code == "" {

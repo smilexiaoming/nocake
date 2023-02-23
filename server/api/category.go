@@ -25,7 +25,7 @@ func GetAppCategory() *AppCategory {
 // @Success 200 {object} app.CategoryOption "请求成功"
 // @Failure 400 {object} response.Response "请求错误"
 // @Failure 500 {object} response.Response "内部错误"
-// @Router /category/option [get]
+// @Router /app/category/option [get]
 func (g *AppCategory) GetCategoryOption(c *gin.Context) {
 	param := app.CategoryQueryParam{}
 	if err := c.ShouldBind(&param); err != nil {
