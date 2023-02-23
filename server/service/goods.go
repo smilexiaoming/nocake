@@ -10,9 +10,9 @@ type AppGoodsService struct {
 }
 
 func (g *AppGoodsService) GetList(param app.GoodsQueryParam) []app.GoodsList {
+	fmt.Printf("param: %v\n", param)
 	goodsList := make([]app.GoodsList, 0)
 	Db := global.Db.Table("t_goods")
-	fmt.Println("param :", param)
 	if param.CategoryId != 0 {
 		Db.Where("category_id = ?", param.CategoryId)
 	}

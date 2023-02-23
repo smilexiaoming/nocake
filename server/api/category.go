@@ -26,15 +26,15 @@ func GetAppCategory() *AppCategory {
 // @Failure 400 {object} response.Response "请求错误"
 // @Failure 500 {object} response.Response "内部错误"
 // @Router /category/option [get]
-func (c *AppCategory) GetCategoryOption(context *gin.Context) {
-	var param app.CategoryQueryParam
-	if err := context.ShouldBind(&param); err != nil {
-		response.Error(constant.ParamInvalid, context)
+func (g *AppCategory) GetCategoryOption(c *gin.Context) {
+	param := app.CategoryQueryParam{}
+	if err := c.ShouldBind(&param); err != nil {
+		response.Error(constant.ParamInvalid, c)
 		return
 	}
-	option, errMessage := c.GetOption(param)
+	option, errMessage := g.GetOption(param)
 	if errMessage != "" {
-		response.Error(errMessage, context)
+		response.Error(errMessage, c)
 	}
-	response.Success(constant.Selected, option, context)
+	response.Success(constant.Selected, option, c)
 }

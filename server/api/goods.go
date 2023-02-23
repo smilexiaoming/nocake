@@ -19,15 +19,14 @@ func GetAppGoods() *AppGoods {
 
 // @Summary 获取商品列表
 // @Description 传入 categoryid | kewords | name
-// @Accept  json
-// @Produce  json
-// @Param categoryid query int true "categoryid"
-// @Param kewords query string true "kewords"
-// @Param name query string true "name"
+// @Accept  multipart/form-data
+// @Param categoryid formData int false "categoryid"
+// @Param kewords formData string false "kewords"
+// @Param name formData string false "name"
 // @Success 200 {object} app.GoodsList "请求成功"
 // @Failure 400 {object} response.Response "请求错误"
 // @Failure 500 {object} response.Response "内部错误"
-// @Router /category/option [get]
+// @Router /goods/list [get]
 func (g *AppGoods) GetGoodList(c *gin.Context) {
 	param := app.GoodsQueryParam{}
 	if err := c.ShouldBind(&param); err != nil {
