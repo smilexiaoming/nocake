@@ -19,13 +19,14 @@ func GetAppCategory() *AppCategory {
 
 // @Summary 获取品类列表
 // @Description 传入level
-// @Accept   multipart/form-data
+// @Accept  json
 // @Produce  json
-// @Param level query string true "level"
+// @Param level query string "level"
+// @Param pid query string "pid"
 // @Success 200 {object} app.CategoryOption "请求成功"
 // @Failure 400 {object} response.Response "请求错误"
 // @Failure 500 {object} response.Response "内部错误"
-// @Router /app/category/option [get]
+// @Router /category/option [get]
 func (g *AppCategory) GetCategoryOption(c *gin.Context) {
 	param := app.CategoryQueryParam{}
 	if err := c.ShouldBind(&param); err != nil {
