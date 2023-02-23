@@ -1,0 +1,23 @@
+{
+  "name": "app",
+  "version": "1.0.0",
+  "description": "imall mini app",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "zchengo",
+  "license": "ISC",
+  "dependencies": {
+    "@vant/area-data": "^1.2.4",
+    "@vant/weapp": "^1.10.13"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/zchengo/imall.git"
+  },
+  "bugs": {
+    "url": "https://github.com/zchengo/imall/issues"
+  },
+  "homepage": "https://github.com/zchengo/imall#readme"
+}

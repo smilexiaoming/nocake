@@ -22,9 +22,7 @@ type Goods struct {
 
 // 商品列表参数
 type GoodsListQueryParam struct {
-	CategoryId int    `form:"category_id"`
-	Name       string `form:"name"`
-	Keywords   string `form:"keywords"`
+	CategoryId int `form:"category_id" binding:"required,gt=0"`
 }
 
 // 商品列表
