@@ -1,6 +1,8 @@
 package main
 
-import "nocake/initialize"
+import (
+	"nocake/initialize"
+)
 
 func main() {
 	initialize.Run()

@@ -1,0 +1,155 @@
+definitions:
+  app.CategoryOption:
+    properties:
+      id:
+        type: integer
+      text:
+        type: string
+    type: object
+  app.GoodsList:
+    properties:
+      brief:
+        description: 商品简介
+        type: string
+      categoryId:
+        description: 商品所属类目ID
+        type: integer
+      counterPrice:
+        description: 专柜价格
+        type: number
+      detail:
+        description: 商品详细介绍，是富文本格式
+        type: string
+      gallery:
+        description: 商品宣传图片列表，采用JSON数组格式
+        type: string
+      id:
+        type: integer
+      isHot:
+        description: 是否人气推荐，如果设置则可以在人气推荐页面展示
+        type: integer
+      isNew:
+        description: 是否新品首发，如果设置则可以在新品首发页面展示
+        type: integer
+      isOnSale:
+        description: 是否上架
+        type: integer
+      keywords:
+        description: 商品关键字，采用逗号间隔
+        type: string
+      name:
+        description: 商品名称
+        type: string
+      picUrl:
+        description: 商品页面商品图片
+        type: string
+      retailPrice:
+        description: 零售价格
+        type: number
+      sortOrder:
+        type: integer
+      unit:
+        description: 商品单位，例如件、盒
+        type: string
+    type: object
+  response.Response:
+    properties:
+      code:
+        type: integer
+      data: {}
+      message:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /app/category/option:
+    get:
+      consumes:
+      - multipart/form-data
+      description: 传入level
+      parameters:
+      - description: level
+        in: query
+        name: level
+        type: string
+      - description: pid
+        in: query
+        name: pid
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 请求成功
+          schema:
+            $ref: '#/definitions/app.CategoryOption'
+        "400":
+          description: 请求错误
+          schema:
+            $ref: '#/definitions/response.Response'
+        "500":
+          description: 内部错误
+          schema:
+            $ref: '#/definitions/response.Response'
+      summary: 获取品类列表
+  /app/goods/list:
+    get:
+      consumes:
+      - multipart/form-data
+      description: 传入 categoryid | kewords | name
+      parameters:
+      - description: category_id
+        in: query
+        name: categoryid
+        type: integer
+      - description: keywords
+        in: query
+        name: kewords
+        type: string
+      - description: name
+        in: query
+        name: name
+        type: string
+      responses:
+        "200":
+          description: 请求成功
+          schema:
+            $ref: '#/definitions/app.GoodsList'
+        "400":
+          description: 请求错误
+          schema:
+            $ref: '#/definitions/response.Response'
+        "500":
+          description: 内部错误
+          schema:
+            $ref: '#/definitions/response.Response'
+      summary: 获取商品列表
+  /app/login:
+    post:
+      consumes:
+      - multipart/form-data
+      description: 传入code进行鉴权
+      parameters:
+      - description: code
+        in: formData
+        name: code
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 请求成功
+          schema:
+            $ref: '#/definitions/response.Response'
+        "400":
+          description: 请求错误
+          schema:
+            $ref: '#/definitions/response.Response'
+        "500":
+          description: 内部错误
+          schema:
+            $ref: '#/definitions/response.Response'
+      summary: 用户登陆
+swagger: "2.0"

@@ -12,7 +12,7 @@ import (
 type AppUserService struct {
 }
 
-func (u *AppUserService) Login(code string) *app.UserInfo {
+func (u *AppUserService) Login(code string) (*app.UserInfo, string) {
 	var acsJson app.Code2SessionResult
 	acs := app.Code2Session{
 		Code:      code,
@@ -22,16 +22,13 @@ func (u *AppUserService) Login(code string) *app.UserInfo {
 	api := "https://api.weixin.qq.com/sns/jscode2session?appid=%s&secret=%s&js_code=%s&grant_type=authorization_code"
 	res, err := http.DefaultClient.Get(fmt.Sprintf(api, acs.AppId, acs.AppSecret, acs.Code))
 	if err != nil {
-		fmt.Println("微信登录凭证校验接口请求错误")
-		return nil
+		return nil, err.Error()
 	}
 	if err := json.NewDecoder(res.Body).Decode(&acsJson); err != nil {
-		fmt.Println("decoder error")
-		return nil
+		return nil, err.Error()
 	}
 	if acsJson.ErrCode != 0 || acsJson.OpenId == "" {
-		fmt.Println("acsJson.ErrMsg :", acsJson.ErrMsg)
-		return nil
+		return nil, acsJson.ErrMsg
 	}
 	rows := global.Db.Where("open_id = ?", acsJson.OpenId).First(&app.User{}).RowsAffected
 	if rows == 0 {
@@ -45,5 +42,5 @@ func (u *AppUserService) Login(code string) *app.UserInfo {
 			fmt.Println("add app user error")
 		}
 	}
-	return &app.UserInfo{OpenId: acsJson.OpenId}
+	return &app.UserInfo{OpenId: acsJson.OpenId}, ""
 }

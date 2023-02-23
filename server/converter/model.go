@@ -1,48 +1,5 @@
 package model
 
-type T_address struct {
-	Id            int    `:"id"`
-	AddressName   string `:"address_name"`   // 收货人名称
-	UserId        int    `:"user_id"`        // 用户表的用户ID
-	Province      string `:"province"`       // 行政区域表的省ID
-	City          string `:"city"`           // 行政区域表的市ID
-	County        string `:"county"`         // 行政区域表的区县ID
-	AddressDetail string `:"address_detail"` // 详细收货地址
-	AreaCode      string `:"area_code"`      // 地区编码
-	PostalCode    string `:"postal_code"`    // 邮政编码
-	Tel           string `:"tel"`            // 手机号码
-	IsDefault     int    `:"is_default"`     // 是否默认地址
-	Deleted       int    `:"deleted"`        // 逻辑删除
-}
-
-type T_cart struct {
-	Id             int     `:"id"`
-	UserId         int     `:"user_id"`        // 用户表的用户ID
-	GoodsId        int     `:"goods_id"`       // 商品表的商品ID
-	GoodsSn        string  `:"goods_sn"`       // 商品编号
-	GoodsName      string  `:"goods_name"`     // 商品名称
-	ProductId      int     `:"product_id"`     // 商品货品表的货品ID
-	Price          float64 `:"price"`          // 商品货品的价格
-	CartNumber     int     `:"cart_number"`    // 商品货品的数量
-	Specifications string  `:"specifications"` // 商品规格值列表，采用JSON数组格式
-	Checked        int     `:"checked"`        // 购物车中商品是否选择状态
-	PicUrl         string  `:"pic_url"`        // 商品图片或者商品货品图片
-	Deleted        int     `:"deleted"`        // 逻辑删除
-}
-
-type T_category struct {
-	Id        int    `:"id"`
-	Name      string `:"name"`     // 类目名称
-	Keywords  string `:"keywords"` // 类目关键字，以JSON数组格式
-	Desc      string `:"desc"`     // 类目广告语介绍
-	Pid       int    `:"pid"`      // 父类目ID
-	IconUrl   string `:"icon_url"` // 类目图标
-	PicUrl    string `:"pic_url"`  // 类目图片
-	Level     int    `:"level"`
-	SortOrder int    `:"sort_order"` // 排序
-	Deleted   int    `:"deleted"`    // 逻辑删除
-}
-
 type T_comment struct {
 	Id          int    `:"id"`
 	ValueId     int    `:"value_id"`     // 如果type=0，则是商品评论；如果是type=1，则是专题评论。
@@ -57,14 +14,13 @@ type T_comment struct {
 
 type T_goods struct {
 	Id           int     `:"id"`
-	GoodsSn      string  `:"goods_sn"`    // 商品编号
-	GoodsName    string  `:"goods_name"`  // 商品名称
+	Name         string  `:"name"`        // 商品名称
+	Brief        string  `:"brief"`       // 商品简介
+	Detail       string  `:"detail"`      // 商品详细介绍，是富文本格式
 	CategoryId   int     `:"category_id"` // 商品所属类目ID
-	BrandId      int     `:"brand_id"`
-	Gallery      string  `:"gallery"`    // 商品宣传图片列表，采用JSON数组格式
-	Keywords     string  `:"keywords"`   // 商品关键字，采用逗号间隔
-	Brief        string  `:"brief"`      // 商品简介
-	IsOnSale     int     `:"is_on_sale"` // 是否上架
+	Gallery      string  `:"gallery"`     // 商品宣传图片列表，采用JSON数组格式
+	Keywords     string  `:"keywords"`    // 商品关键字，采用逗号间隔
+	IsOnSale     int     `:"is_on_sale"`  // 是否上架
 	SortOrder    int     `:"sort_order"`
 	PicUrl       string  `:"pic_url"`       // 商品页面商品图片
 	ShareUrl     string  `:"share_url"`     // 商品分享朋友圈图片
@@ -73,7 +29,6 @@ type T_goods struct {
 	Unit         string  `:"unit"`          // 商品单位，例如件、盒
 	CounterPrice float64 `:"counter_price"` // 专柜价格
 	RetailPrice  float64 `:"retail_price"`  // 零售价格
-	Detail       string  `:"detail"`        // 商品详细介绍，是富文本格式
 	Deleted      int     `:"deleted"`       // 逻辑删除
 }
 
@@ -124,4 +79,47 @@ type T_user struct {
 	CreatedOn     string `:"created_on"`      // 创建时间
 	UpdatedOn     string `:"updated_on"`      // 更新时间
 	DeletedOn     string `:"deleted_on"`      // 删除时间
+}
+
+type T_address struct {
+	Id            int    `:"id"`
+	AddressName   string `:"address_name"`   // 收货人名称
+	UserId        int    `:"user_id"`        // 用户表的用户ID
+	Province      string `:"province"`       // 行政区域表的省ID
+	City          string `:"city"`           // 行政区域表的市ID
+	County        string `:"county"`         // 行政区域表的区县ID
+	AddressDetail string `:"address_detail"` // 详细收货地址
+	AreaCode      string `:"area_code"`      // 地区编码
+	PostalCode    string `:"postal_code"`    // 邮政编码
+	Tel           string `:"tel"`            // 手机号码
+	IsDefault     int    `:"is_default"`     // 是否默认地址
+	Deleted       int    `:"deleted"`        // 逻辑删除
+}
+
+type T_cart struct {
+	Id             int     `:"id"`
+	UserId         int     `:"user_id"`        // 用户表的用户ID
+	GoodsId        int     `:"goods_id"`       // 商品表的商品ID
+	GoodsSn        string  `:"goods_sn"`       // 商品编号
+	GoodsName      string  `:"goods_name"`     // 商品名称
+	ProductId      int     `:"product_id"`     // 商品货品表的货品ID
+	Price          float64 `:"price"`          // 商品货品的价格
+	CartNumber     int     `:"cart_number"`    // 商品货品的数量
+	Specifications string  `:"specifications"` // 商品规格值列表，采用JSON数组格式
+	Checked        int     `:"checked"`        // 购物车中商品是否选择状态
+	PicUrl         string  `:"pic_url"`        // 商品图片或者商品货品图片
+	Deleted        int     `:"deleted"`        // 逻辑删除
+}
+
+type T_category struct {
+	Id        int    `:"id"`
+	Name      string `:"name"`       // 类目名称
+	Keywords  string `:"keywords"`   // 类目关键字，以JSON数组格式
+	Desc      string `:"desc"`       // 类目广告语介绍
+	Pid       int    `:"pid"`        // 父类目ID
+	IconUrl   string `:"icon_url"`   // 类目图标
+	PicUrl    string `:"pic_url"`    // 类目图片
+	Level     int    `:"level"`      // 类目层级
+	SortOrder int    `:"sort_order"` // 排序
+	Deleted   int    `:"deleted"`    // 逻辑删除
 }
