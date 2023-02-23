@@ -4,9 +4,9 @@
   <van-icon custom-class="back_icon" name="arrow-left" color="#fff" bindtap="backToHome" />
   <image src="{{goods.pic_url}}" style="width: {{windowWidth}}px; height: {{windowWidth}}px;" />
   <view class="goods_info">
-    <View class="goods_info_title">{{goods.title}}</View>
+    <View class="goods_info_title">{{goods.name}}</View>
     <View class="goods_info_price">
-      <view class="price_value"><text style="font-size: 35rpx;padding-right: 8rpx;">¥</text>{{goods.price}}</view>
+      <view class="price_value"><text style="font-size: 35rpx;padding-right: 8rpx;">¥</text>{{goods.retail_price}}</view>
       <view>
         <view wx:if="{{goodsCount == 0}}" class="goods_plus_icon" bindtap="addGoods" />
         <van-stepper wx:else value="{{ goodsCount }}" minus-class="goods_van_stepper_minus" input-class="goods_van_stepper_input" plus-class="goods_van_stepper_plus" min="0" bind:change="stepperChange"/>
@@ -21,7 +21,7 @@
     </view>
     <view class="goods_detail_view">
       <view class="goods_detail_param">备注</view>
-      <view class="goods_detail_value">{{goods.remark}}</view>
+      <view class="goods_detail_value">{{goods.brief}}</view>
     </view>
   </view>
   <view class="footer">
