@@ -31,7 +31,12 @@ func (u *AppUser) UserLogin(context *gin.Context) {
 		response.Error(constant.ParamInvalid, context)
 		return
 	}
-	if userInfo := u.Login(code); userInfo != nil {
+	userInfo, errMessage := u.Login(code)
+	if errMessage != ""{
+		response.Error(errMessage, context)
+		return
+	}
+	if userInfo != nil {
 		response.Success(constant.LoginSuccess, userInfo, context)
 		return
 	}

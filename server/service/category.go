@@ -1,6 +1,7 @@
 package service
 
 import (
+	"nocake/constant"
 	"nocake/global"
 	"nocake/models/app"
 )
@@ -8,10 +9,15 @@ import (
 type AppCategoryService struct {
 }
 
-func (c *AppCategoryService) GetOption(param app.CategoryQueryParam) (option []app.CategoryOption) {
+func (c *AppCategoryService) GetOption(param app.CategoryQueryParam) (option []app.CategoryOption, errMessage string) {
 	categorys := make([]app.Category, 0)
 	categoryOptions := make([]app.CategoryOption, 0)
-	global.Db.Table("t_category").Where("Level = ?", param.Level).Find(&categorys)
+	Db := global.Db.Table("t_category")
+	if param.Level > 0 && param.Pid == 0 {
+		errMessage = constant.ParamInvalid
+		return nil, errMessage
+	}
+	Db.Where("level = ? and pid = ?", param.Level, param.Pid).Find(&categorys)
 	for _, item := range categorys {
 		option := app.CategoryOption{
 			Id:   item.Id,
@@ -19,5 +25,5 @@ func (c *AppCategoryService) GetOption(param app.CategoryQueryParam) (option []a
 		}
 		categoryOptions = append(categoryOptions, option)
 	}
-	return categoryOptions
+	return categoryOptions, ""
 }

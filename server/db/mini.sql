@@ -33,7 +33,7 @@ CREATE TABLE `t_category` (
     `pid` int(11) NULL DEFAULT '0' COMMENT '父类目ID',
     `icon_url` varchar(255) NULL COMMENT '类目图标',
     `pic_url` varchar(255) NULL COMMENT '类目图片',
-    `level` tinyint(1) NULL DEFAULT '1' COMMENT '',
+    `level` tinyint(1) NULL DEFAULT '1' COMMENT '类目层级',
     `sort_order` tinyint(3) NULL DEFAULT '50' COMMENT '排序',
     `deleted` tinyint(1) NULL DEFAULT '0' COMMENT '逻辑删除',
     KEY `pid` (`pid`),
@@ -46,30 +46,31 @@ INSERT INTO `t_category` (`id`, `name`, `keywords`, `desc`, `pid`, `icon_url`, `
 DROP TABLE IF EXISTS t_goods;
 CREATE TABLE `t_goods` (
     `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-    `goods_sn` varchar(63) NULL COMMENT '商品编号',
-    `goods_name` varchar(127) NULL COMMENT '商品名称',
+    `name` varchar(127) NULL COMMENT '商品名称',
+    `brief` varchar(255) NULL COMMENT '商品简介',
+    `detail` text NULL COMMENT '商品详细介绍，是富文本格式',
     `category_id` int(11) NULL DEFAULT '0' COMMENT '商品所属类目ID',
-    `brand_id` int(11) NULL DEFAULT '0' COMMENT '',
     `gallery` varchar(1023) NULL COMMENT '商品宣传图片列表，采用JSON数组格式',
     `keywords` varchar(255) NULL COMMENT '商品关键字，采用逗号间隔',
-    `brief` varchar(255) NULL COMMENT '商品简介',
     `is_on_sale` tinyint(1) NULL DEFAULT '1' COMMENT '是否上架',
     `sort_order` smallint(4) NULL DEFAULT '100' COMMENT '',
     `pic_url` varchar(255) NULL COMMENT '商品页面商品图片',
     `share_url` varchar(255) NULL COMMENT '商品分享朋友圈图片',
     `is_new` tinyint(1) NULL DEFAULT '0' COMMENT '是否新品首发，如果设置则可以在新品首发页面展示',
     `is_hot` tinyint(1) NULL DEFAULT '0' COMMENT '是否人气推荐，如果设置则可以在人气推荐页面展示',
-    `unit` varchar(31) NULL DEFAULT '’件‘' COMMENT '商品单位，例如件、盒',
+    `unit` varchar(31) NULL DEFAULT '件' COMMENT '商品单位，例如件、盒',
     `counter_price` decimal(10, 2) NULL DEFAULT '0.00' COMMENT '专柜价格',
     `retail_price` decimal(10, 2) NULL DEFAULT '100000.00' COMMENT '零售价格',
-    `detail` text NULL COMMENT '商品详细介绍，是富文本格式',
     `deleted` tinyint(1) NULL DEFAULT '0' COMMENT '逻辑删除',
-    KEY `goods_sn` (`goods_sn`),
     KEY `category_id` (`category_id`),
-    KEY `brand_id` (`brand_id`),
     KEY `sort_order` (`sort_order`),
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB COMMENT '微信商城小程序-商品基本信息表';
+
+INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `gallery`, `keywords`) VALUES (1, '水果蛋糕', '很多水果', "丰富原材料", 1, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕");
+INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `gallery`, `keywords`) VALUES (2, '水果蛋糕2', '很多水果', "丰富原材料", 1, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕");
+INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `gallery`, `keywords`) VALUES (3, '水果蛋糕2', '很多水果', "丰富原材料", 1, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕");
+
 DROP TABLE IF EXISTS t_cart;
 CREATE TABLE `t_cart` (
     `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,

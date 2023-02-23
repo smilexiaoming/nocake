@@ -32,6 +32,9 @@ func (c *AppCategory) GetCategoryOption(context *gin.Context) {
 		response.Error(constant.ParamInvalid, context)
 		return
 	}
-	option := c.GetOption(param)
+	option, errMessage := c.GetOption(param)
+	if errMessage != "" {
+		response.Error(errMessage, context)
+	}
 	response.Success(constant.Selected, option, context)
 }
