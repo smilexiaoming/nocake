@@ -15,8 +15,8 @@ type Category struct {
 
 // 类目选项查询参数模型
 type CategoryQueryParam struct {
-	Pid   int `josn:"pid"`
-	Level int `json:"level"`
+	Pid   int `form:"pid"`
+	Level int `form:"level"`
 }
 
 // 商品类目选项传输模型
