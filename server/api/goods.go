@@ -55,8 +55,8 @@ func (g *AppGoods) GetGoodsDetail(c *gin.Context) {
 // @Summary 搜索商品
 // @Description 传入   name | kewords
 // @Accept  multipart/form-data
-// @Param name query int false "name"
-// @Param keywords query int false "keywords"
+// @Param name query string false "name"
+// @Param keywords query string false "keywords"
 // @Success 200 {object} app.GoodsList "请求成功"
 // @Failure 400 {object} response.Response "请求错误"
 // @Failure 500 {object} response.Response "内部错误"
