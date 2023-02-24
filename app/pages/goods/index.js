@@ -81,9 +81,7 @@ Page({
 
   // 清空购物车
   async clearCart(){
-    await http.DELETE('/cart/clear',{ 
-      open_id: wx.getStorageSync('open_id')
-    })
+    await http.DELETE('/cart/clear?open_id='+wx.getStorageSync('open_id'))
   },
   
   // 购物车选中
