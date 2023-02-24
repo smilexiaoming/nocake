@@ -9,6 +9,7 @@ type Config struct {
 	Cron         Cron         `mapstructure:"cron"`
 	Code2Session Code2Session `mapstructure:"code2Session"`
 	Feedback     Feedback     `mapstructure:"feedback"`
+	Log          Log          `mapstructure:"log"`
 }
 
 // 服务启动端口号配置
@@ -51,4 +52,9 @@ type Feedback struct {
 	QqSmtp        string `mapstructure:"qqSmtp"`
 	QqEmail       string `mapstructure:"qqEmail"`
 	QqEmailSecret string `mapstructure:"qqEmailSecret"`
+}
+
+// 日志文件配置
+type Log struct {
+	Path string `mapstructure:"path"`
 }

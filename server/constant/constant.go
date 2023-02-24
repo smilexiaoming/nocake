@@ -5,11 +5,13 @@ const (
 	Created      = "已添加"
 	Deleted      = "已删除"
 	Updated      = "已编辑"
+	Cleared      = "已清除"
 	Selected     = "查询成功"
 
 	NotCreated  = "添加失败"
 	NotDeleted  = "删除失败"
 	NotUpdated  = "编辑失败"
+	NotCleared  = "清除失败"
 	NotSelected = "未查询到数据"
 
 	SendSuccess = "发送成功"

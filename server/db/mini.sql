@@ -17,9 +17,9 @@ CREATE TABLE `t_user` (
     `avatar` varchar(255) NULL COMMENT '用户头像图片',
     `session_key` varchar(100) NULL COMMENT '微信登录会话KEY',
     `deleted` tinyint(1) NULL DEFAULT '0' COMMENT '逻辑删除',
-    `created_on` varchar(50) DEFAULT NULL COMMENT '创建时间',
-    `updated_on` varchar(50) DEFAULT NULL COMMENT '更新时间',
-    `deleted_on` varchar(50) DEFAULT NULL COMMENT '删除时间',
+    `created_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `updated_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+    `deleted_time` timestamp DEFAULT NULL COMMENT '删除时间',
     UNIQUE KEY `username` (`username`),
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB COMMENT '微信商城小程序-用户表';
@@ -36,6 +36,9 @@ CREATE TABLE `t_category` (
     `level` tinyint(1) NULL DEFAULT '1' COMMENT '类目层级',
     `sort_order` tinyint(3) NULL DEFAULT '50' COMMENT '排序',
     `deleted` tinyint(1) NULL DEFAULT '0' COMMENT '逻辑删除',
+    `created_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `updated_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+    `deleted_time` timestamp DEFAULT NULL COMMENT '删除时间',
     KEY `pid` (`pid`),
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB COMMENT '微信商城小程序-类目表';
@@ -61,36 +64,41 @@ CREATE TABLE `t_goods` (
     `unit` varchar(31) NULL DEFAULT '件' COMMENT '商品单位，例如件、盒',
     `counter_price` decimal(10, 2) NULL DEFAULT '0.00' COMMENT '专柜价格',
     `retail_price` decimal(10, 2) NULL DEFAULT '100000.00' COMMENT '零售价格',
+    `price` decimal(10, 2) NULL DEFAULT '100000.00' COMMENT '线上价格',
     `deleted` tinyint(1) NULL DEFAULT '0' COMMENT '逻辑删除',
+    `created_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `updated_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+    `deleted_time` timestamp DEFAULT NULL COMMENT '删除时间',
     KEY `category_id` (`category_id`),
     KEY `sort_order` (`sort_order`),
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB COMMENT '微信商城小程序-商品基本信息表';
 
-INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `gallery`, `keywords`) VALUES (1, '水果蛋糕', '很多水果', "丰富原材料", 1, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕");
-INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `gallery`, `keywords`) VALUES (2, '水果蛋糕2', '很多水果', "丰富原材料", 1, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕");
-INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `gallery`, `keywords`) VALUES (3, '水果蛋糕2', '很多水果', "丰富原材料", 1, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕");
+INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `gallery`, `keywords`, `price`) VALUES (1, '水果蛋糕', '很多水果', "丰富原材料", 1, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕", "128");
+INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `gallery`, `keywords`, `price`) VALUES (2, '水果蛋糕2', '很多水果', "丰富原材料", 1, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕", "128");
+INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `gallery`, `keywords`, `price`) VALUES (3, '水果蛋糕2', '很多水果', "丰富原材料", 1, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕", "128");
 
 DROP TABLE IF EXISTS t_cart;
 CREATE TABLE `t_cart` (
     `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-    `user_id` int(11) NULL COMMENT '用户表的用户ID',
+    `open_id` int(11) NULL COMMENT '用户表的用户ID',
     `goods_id` int(11) NULL COMMENT '商品表的商品ID',
-    `goods_sn` varchar(63) NULL COMMENT '商品编号',
     `goods_name` varchar(127) NULL COMMENT '商品名称',
-    `product_id` int(11) NULL COMMENT '商品货品表的货品ID',
     `price` decimal(10, 2) NULL DEFAULT '0.00' COMMENT '商品货品的价格',
     `cart_number` smallint(5) NULL DEFAULT '0' COMMENT '商品货品的数量',
     `specifications` varchar(1023) NULL COMMENT '商品规格值列表，采用JSON数组格式',
     `checked` tinyint(1) NULL DEFAULT '1' COMMENT '购物车中商品是否选择状态',
     `pic_url` varchar(255) NULL COMMENT '商品图片或者商品货品图片',
     `deleted` tinyint(1) NULL DEFAULT '0' COMMENT '逻辑删除',
+    `created_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `updated_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+    `deleted_time` timestamp DEFAULT NULL COMMENT '删除时间',
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB COMMENT '微信商城小程序-购物车商品表';
 DROP TABLE IF EXISTS t_order;
 CREATE TABLE `t_order` (
     `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-    `user_id` int(11) NULL COMMENT '用户表的用户ID',
+    `open_id` int(11) NULL COMMENT '用户表的用户ID',
     `order_sn` varchar(63) NULL COMMENT '订单编号',
     `order_status` smallint(6) NULL COMMENT '订单状态',
     `consignee` varchar(63) NULL COMMENT '收货人名称',
@@ -113,13 +121,16 @@ CREATE TABLE `t_order` (
     `comments` smallint(6) NULL DEFAULT '0' COMMENT '待评价订单商品数量',
     `end_time` datetime NULL COMMENT '订单关闭时间',
     `deleted` tinyint(1) NULL DEFAULT '0' COMMENT '逻辑删除',
+    `created_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `updated_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+    `deleted_time` timestamp DEFAULT NULL COMMENT '删除时间',
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB COMMENT '微信商城小程序-订单表';
 DROP TABLE IF EXISTS t_address;
 CREATE TABLE `t_address` (
     `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
     `address_name` varchar(63) NULL COMMENT '收货人名称',
-    `user_id` int(11) NULL DEFAULT '0' COMMENT '用户表的用户ID',
+    `open_id` int(11) NULL DEFAULT '0' COMMENT '用户表的用户ID',
     `province` varchar(63) NULL COMMENT '行政区域表的省ID',
     `city` varchar(63) NULL COMMENT '行政区域表的市ID',
     `county` varchar(63) NULL COMMENT '行政区域表的区县ID',
@@ -129,7 +140,10 @@ CREATE TABLE `t_address` (
     `tel` varchar(20) NULL COMMENT '手机号码',
     `is_default` tinyint(1) NULL DEFAULT '0' COMMENT '是否默认地址',
     `deleted` tinyint(1) NULL DEFAULT '0' COMMENT '逻辑删除',
-    KEY `user_id` (`user_id`),
+    `created_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `updated_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+    `deleted_time` timestamp DEFAULT NULL COMMENT '删除时间',
+    KEY `open_id` (`open_id`),
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB COMMENT '微信商城小程序-收货地址表';
 DROP TABLE IF EXISTS t_comment;
@@ -138,12 +152,50 @@ CREATE TABLE `t_comment` (
     `value_id` int(11) NULL DEFAULT '0' COMMENT '如果type=0，则是商品评论；如果是type=1，则是专题评论。',
     `comment_type` tinyint(3) NULL DEFAULT '0' COMMENT '评论类型，如果type=0，则是商品评论；如果是type=1，则是专题评论；如果type=3，则是订单商品评论。',
     `content` varchar(1023) NULL COMMENT '评论内容',
-    `user_id` int(11) NULL DEFAULT '0' COMMENT '用户表的用户ID',
+    `open_id` int(11) NULL DEFAULT '0' COMMENT '用户表的用户ID',
     `has_picture` tinyint(1) NULL DEFAULT '0' COMMENT '是否含有图片',
     `pic_urls` varchar(1023) NULL COMMENT '图片地址列表，采用JSON数组格式',
     `star` smallint(6) NULL DEFAULT '1' COMMENT '评分， 1-5',
     `deleted` tinyint(1) NULL DEFAULT '0' COMMENT '逻辑删除',
+    `created_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `updated_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+    `deleted_time` timestamp DEFAULT NULL COMMENT '删除时间',
     KEY `value_id` (`value_id`),
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB COMMENT '微信商城小程序-评论表';
+-- 商品货品表
+DROP TABLE IF EXISTS t_goods_product;
+CREATE TABLE `t_goods_product` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+    `goods_id` int(11) NULL DEFAULT '0' COMMENT '商品表的商品ID',
+    `specifications` varchar(1023) NULL COMMENT '商品规格值列表，采用JSON数组格式',
+    `price` decimal(10,2) NULL DEFAULT '0.00' COMMENT '商品货品价格',
+    `product_number` int(11) NULL DEFAULT '0' COMMENT '商品货品数量',
+    `url` varchar(125) NULL COMMENT '商品货品图片',
+    `deleted` tinyint(1) NULL DEFAULT '0' COMMENT '逻辑删除',
+    `created_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `updated_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+    `deleted_time` timestamp DEFAULT NULL COMMENT '删除时间',
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB COMMENT '微信商城小程序-商品货品表';
 -- 主表end
+DROP TABLE IF EXISTS t_order_goods;
+CREATE TABLE `t_order_goods` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+    `order_id` int(11) NULL DEFAULT '0' COMMENT '订单表的订单ID',
+    `goods_id` int(11) NULL DEFAULT '0' COMMENT '商品表的商品ID',
+    `goods_name` varchar(127) NULL COMMENT '商品名称',
+    `product_id` int(11) NULL DEFAULT '0' COMMENT '商品货品表的货品ID',
+    `goods_number` smallint(5) NULL DEFAULT '0' COMMENT '商品货品的购买数量',
+    `price` decimal(10,2) NULL DEFAULT '0.00' COMMENT '商品货品的售价',
+    `specifications` varchar(1023) NULL COMMENT '商品货品的规格列表',
+    `pic_url` varchar(255) NULL COMMENT '商品货品图片或者商品图片',
+    `goods_comment` int(11) NULL DEFAULT '0' COMMENT '订单商品评论，如果是-1，则超期不能评价；如果是0，则可以评价；如果其他值，则是comment表里面的评论ID。',
+    `deleted` tinyint(1) NULL DEFAULT '0' COMMENT '逻辑删除',
+    `created_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `updated_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+    `deleted_time` timestamp DEFAULT NULL COMMENT '删除时间',
+    KEY `order_id` (`order_id`),
+    KEY `goods_id` (`goods_id`),
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB COMMENT '微信商城小程序-订单商品表';

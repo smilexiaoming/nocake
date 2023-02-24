@@ -1,8 +1,12 @@
 package initialize
 
+import "nocake/pkg/logging"
+
 func Run() {
 	// 加载配置
 	LoadConfig()
+	// 加载日志
+	logging.Setup()
 	// 加载数据库
 	Mysql()
 	// 加载redis

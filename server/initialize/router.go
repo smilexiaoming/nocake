@@ -29,6 +29,7 @@ import (
 // @securityDefinitions.basic  BasicAuth
 func Router() {
 	engine := gin.Default()
+	engine.Use(gin.Recovery())
 
 	engine.GET("/app/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
@@ -37,11 +38,21 @@ func Router() {
 	{
 		// 用户登录
 		app.POST("/login", api.GetAppUser().UserLogin)
+
 		// 商品分类
 		app.GET("/category/option", api.GetAppCategory().GetCategoryOption)
+
+		// 商品
 		app.GET("/goods/list", api.GetAppGoods().GetGoodList)
 		app.GET("/goods/detail", api.GetAppGoods().GetGoodsDetail)
 		app.GET("/goods/search", api.GetAppGoods().SearchGoods)
+
+		// 购物车
+		app.POST("/cart/add", api.GetAppCart().AddCart)
+		app.DELETE("/cart/delete", api.GetAppCart().DeleteCart)
+		app.DELETE("/cart/clear", api.GetAppCart().ClearCart)
+		app.GET("/cart/query", api.GetAppCart().GetCartInfo)
+
 	}
 
 	// 启动、监听端口
