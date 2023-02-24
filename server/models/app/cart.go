@@ -52,5 +52,6 @@ type CartItem struct {
 // 购物车信息传输模型
 type CartInfo struct {
 	CartItem   []CartItem `json:"cart_item"`
+	TotalCart  int        `json:"total_cart"`
 	TotalPrice float64    `json:"total_price"`
 }

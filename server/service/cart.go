@@ -58,6 +58,7 @@ func (c *AppCartService) GetInfo(param app.CartQueryParam) app.CartInfo {
 			fmt.Printf("item: %v\n", item)
 			cartInfo.CartItem[i].Carnumber = idsAndCounts[item.Id]
 			cartInfo.TotalPrice = cartInfo.TotalPrice + item.Price*float64(idsAndCounts[item.Id])
+			cartInfo.TotalCart = cartInfo.TotalCart + idsAndCounts[item.Id]
 		}
 	}
 	fmt.Printf("cartInfo: %v\n", cartInfo)
