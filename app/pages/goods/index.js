@@ -7,7 +7,7 @@ Page({
     goods: null,
     windowWidth: 0,
     goodsId: 0,
-    goodsCount: 0,
+    cart_number: 0,
     show: false,
     goodsItem: [],
     totalPrice: 0.00,
@@ -30,21 +30,21 @@ Page({
 
   // 增加商品数量
   addGoods() {
-    this.setData({goodsCount: 1})
+    this.setData({cart_number: 1})
   },
 
   // 当进步器改变时，修改商品数量
   stepperChange(event){
-    this.setData({goodsCount: event.detail})
+    this.setData({cart_number: event.detail})
     this.addToCart()
   },
 
   // 添加商品到购物车
   async addToCart() {
     await http.POST('/cart/add',{ 
-      goodsId: this.data.goodsId, 
-      goodsCount: this.data.goodsCount,
-      openId: wx.getStorageSync('openId')
+      goods_id: this.data.goodsId, 
+      cart_number: this.data.cart_number,
+      open_id: wx.getStorageSync('open_id')
     })
   },
 
@@ -61,27 +61,28 @@ Page({
   // 生命周期函数--监听页面显示
   async onShow() {
     // 获取购物车信息
-    let res = await http.GET('/cart/info', {openId: wx.getStorageSync('openId')})
+    let res = await http.GET('/cart/query', {open_id: wx.getStorageSync('open_id')})
     this.setData({
-      goodsItem: res.data.data.cartItem,
-      totalPrice: res.data.data.totalPrice,
-      goodsCount: this.data.goodsItem[this.data.goodsId]
+      goodsItem: res.data.data.cart_item,
+      totalPrice: res.data.data.total_price,
+      cart_number: this.data.goodsItem[this.data.goodsId],
+      totalGoodsCount:res.data.data.total_cart,
     })
-    let totalGoodsCount = 0
-    for (let i = 0; i < this.data.goodsItem.length; i++) {
-      totalGoodsCount = totalGoodsCount + this.data.goodsItem[i].count
-      if (this.data.goodsItem[i].id == this.data.goodsId) {
-        this.setData({goodsCount: this.data.goodsItem[i].count})
-        console.log(this.data.goodsItem[i].count);
-      }
-    }
-    this.setData({totalGoodsCount: totalGoodsCount})
+    // let totalGoodsCount = 0
+    // for (let i = 0; i < this.data.goodsItem.length; i++) {
+    //   totalGoodsCount = totalGoodsCount + this.data.goodsItem[i].count
+    //   if (this.data.goodsItem[i].id == this.data.goodsId) {
+    //     this.setData({cart_number: this.data.goodsItem[i].count})
+    //     console.log(this.data.goodsItem[i].count);
+    //   }
+    // }
+    // this.setData({totalGoodsCount: totalGoodsCount})
   },
 
   // 清空购物车
   async clearCart(){
     await http.DELETE('/cart/clear',{ 
-      openId: wx.getStorageSync('openId')
+      open_id: wx.getStorageSync('open_id')
     })
   },
   

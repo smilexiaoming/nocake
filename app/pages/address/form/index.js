@@ -82,7 +82,7 @@ Page({
       district: this.data.district,
       detailedAddress: this.data.detailedAddress,
       isDefault: this.data.isDefault,
-      openId: wx.getStorageSync('openId')
+      open_id: wx.getStorageSync('open_id')
     })
     if(res.data.code === 200){ 
       wx.navigateBack({ url: '/pages/address/list/index' })

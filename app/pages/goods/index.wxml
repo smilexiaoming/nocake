@@ -6,10 +6,10 @@
   <view class="goods_info">
     <View class="goods_info_title">{{goods.name}}</View>
     <View class="goods_info_price">
-      <view class="price_value"><text style="font-size: 35rpx;padding-right: 8rpx;">¥</text>{{goods.retail_price}}</view>
+      <view class="price_value"><text style="font-size: 35rpx;padding-right: 8rpx;">¥</text>{{goods.price}}</view>
       <view>
-        <view wx:if="{{goodsCount == 0}}" class="goods_plus_icon" bindtap="addGoods" />
-        <van-stepper wx:else value="{{ goodsCount }}" minus-class="goods_van_stepper_minus" input-class="goods_van_stepper_input" plus-class="goods_van_stepper_plus" min="0" bind:change="stepperChange"/>
+        <view wx:if="{{cart_number == 0}}" class="goods_plus_icon" bindtap="addGoods" />
+        <van-stepper wx:else value="{{ cart_number }}" minus-class="goods_van_stepper_minus" input-class="goods_van_stepper_input" plus-class="goods_van_stepper_plus" min="0" bind:change="stepperChange"/>
       </view>
     </View>
   </view>

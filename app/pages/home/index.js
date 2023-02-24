@@ -95,21 +95,16 @@ Page({
   
   // 获取购物车信息
   async getCartInfo(){
-    let res = await http.GET('/cart/info', {openId: wx.getStorageSync('openId')})
+    let res = await http.GET('/cart/query', {open_id: wx.getStorageSync('open_id')})
     this.setData({
-      goodsItem: res.data.data.cartItem,
-      totalPrice: res.data.data.totalPrice,
-      goodsCount: this.data.goodsItem[this.data.goodsId]
+      cartItem: res.data.data.cartItem,
+      totalPrice: res.data.data.total_price,
     })
     let totalGoodsCount = 0
     let checkedGoods = []
     for (let i = 0; i < this.data.goodsItem.length; i++) {
-      totalGoodsCount = totalGoodsCount + this.data.goodsItem[i].count
+      totalGoodsCount = totalGoodsCount + this.data.goodsItem[i].cart_number
       checkedGoods.push(this.data.goodsItem[i].id)
-      if (this.data.goodsItem[i].id == this.data.goodsId) {
-        this.setData({goodsCount: this.data.goodsItem[i].count})
-        console.log(this.data.goodsItem[i].count);
-      }
     }
     this.setData({totalGoodsCount: totalGoodsCount})
     this.setData({checkedGoods: checkedGoods})
@@ -118,7 +113,7 @@ Page({
   // 清空购物车
   async clearCart(){
     await http.DELETE('/cart/clear',{ 
-      openId: wx.getStorageSync('openId')
+      open_id: wx.getStorageSync('open_id')
     })
     this.setData({ show: false, totalGoodsCount: 0, totalPrice: 0 });
   },

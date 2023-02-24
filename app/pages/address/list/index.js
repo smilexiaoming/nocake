@@ -21,7 +21,7 @@ Page({
 
   // 生命周期函数--监听页面显示
   async onShow() {
-    let res = await http.GET('/address/list',{ openId: wx.getStorageSync('openId') })
+    let res = await http.GET('/address/list',{ open_id: wx.getStorageSync('open_id') })
     this.setData({ addressList: res.data.data })
     if (this.data.addressList.length === 0){
       this.setData({ showEmpty: true })

@@ -19,7 +19,7 @@ Page({
 
   // 获取购物车信息
   async getCartInfo(){
-    let res = await http.GET('/cart/info', {openId: wx.getStorageSync('openId')})
+    let res = await http.GET('/cart/query', {open_id: wx.getStorageSync('open_id')})
     this.setData({
       goodsItem: res.data.data.cartItem,
       totalPrice: res.data.data.totalPrice
@@ -44,7 +44,7 @@ Page({
   confirmPay(){
     this.setData({showView: false})
     http.POST('/order/submit', {
-      openId: wx.getStorageSync('openId'),
+      open_id: wx.getStorageSync('open_id'),
       sid: parseInt(wx.getStorageSync('sid'))
     })
   },

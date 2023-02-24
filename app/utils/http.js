@@ -49,7 +49,7 @@ function DELETE(url, data = {}){
     wx.request({
       url: basePath + url,
       data: data,
-      header: { 'content-type': 'application/json' },
+      header: { 'content-type': 'application/x-www-form-urlencoded' },
       method: 'DELETE',
       success: (res) => { console.log(res); resolve(res) },
       fail: (err) => { console.log(err); reject(err) }

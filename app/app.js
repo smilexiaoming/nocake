@@ -9,7 +9,7 @@ App({
           let response = await http.POST('/login',{ 
             code: res.code 
           })
-          wx.setStorageSync('openId', response.data.data.openId);
+          wx.setStorageSync('open_id', response.data.data.openId);
         }
       }
     })

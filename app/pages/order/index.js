@@ -27,7 +27,7 @@ Page({
   async getOrderList(orderType){
     let res = await http.GET('/order/list',{
       type: orderType+1,
-      openId: wx.getStorageSync('openId'),
+      open_id: wx.getStorageSync('open_id'),
       sid: parseInt(wx.getStorageSync('sid'))
     });
     this.setData({orderList: res.data.data})
