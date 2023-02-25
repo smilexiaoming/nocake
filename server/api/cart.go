@@ -1,7 +1,6 @@
 package api
 
 import (
-	"fmt"
 	"nocake/constant"
 	"nocake/models/app"
 	"nocake/response"
@@ -34,12 +33,10 @@ func (a *AppCart) AddCart(c *gin.Context) {
 
 func (a *AppCart) DeleteCart(c *gin.Context) {
 	param := app.CartDeleteParam{}
-	fmt.Printf("c.Query(\"cart_number\"): %v\n", c.Query("cart_number"))
 	if err := c.ShouldBind(&param); err != nil {
 		response.Error(constant.ParamInvalid, c)
 		return
 	}
-	fmt.Printf("param: %v\n", param)
 	if deleted := a.Delete(param); deleted > 0 {
 		response.Success(constant.Deleted, nil, c)
 		return

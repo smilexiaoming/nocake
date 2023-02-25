@@ -1,41 +1,30 @@
 package service
 
 import (
+	"encoding/json"
 	"fmt"
 	"nocake/global"
 	"nocake/models/app"
 	"strconv"
 	"strings"
+	"time"
 )
 
-type AppCartService struct {
+type AppOrderService struct {
 }
 
-func (c *AppCartService) Add(param app.CartAddParam) int64 {
-	key := strings.Join([]string{"user", param.OpenId, "cart"}, ":")
-	goodsId := strconv.Itoa(int(param.GoodsId))
-	return global.Rdb.HIncrBy(ctx, key, goodsId, int64(param.Carnumber)).Val()
-}
-
-func (c *AppCartService) Delete(param app.CartDeleteParam) int64 {
-	key := strings.Join([]string{"user", param.OpenId, "cart"}, ":")
+func (o *AppOrderService) Update(param app.OrderUpdateParam) int64 {
 	fmt.Printf("param: %v\n", param)
-	if param.Carnumber != 0 {
-		value := global.Rdb.HIncrBy(ctx, key, param.GoodsId, int64(param.Carnumber)).Val()
-		if value < 0 {
-			return global.Rdb.HDel(ctx, key, param.GoodsId).Val()
-		}
-		return value
+	orderInfo := app.Order{
+		Id:          param.Id,
+		OpenId:      param.OpenId,
+		Status:      param.Status,
+		UpdatedTime: time.Now(),
 	}
-	return global.Rdb.HDel(ctx, key, param.GoodsId).Val()
+	return global.Db.Debug().Table("t_order").Model(&orderInfo).Updates(orderInfo).RowsAffected
 }
 
-func (c *AppCartService) Clear(param app.CartClearParam) int64 {
-	key := strings.Join([]string{"user", param.OpenId, "cart"}, ":")
-	return global.Rdb.Del(ctx, key).Val()
-}
-
-func (c *AppCartService) GetInfo(param app.CartQueryParam) app.CartInfo {
+func (o *AppOrderService) Submit(param app.OrderSubmitParam) int64 {
 	cartInfo := app.CartInfo{}
 	key := strings.Join([]string{"user", param.OpenId, "cart"}, ":")
 	goodsIdNumberInfo := global.Rdb.HGetAll(ctx, key).Val()
@@ -52,11 +41,25 @@ func (c *AppCartService) GetInfo(param app.CartQueryParam) app.CartInfo {
 	if len(goodsIdNumberInfo) > 0 {
 		global.Db.Debug().Table("t_goods").Find(&cartInfo.CartItem, goodsIds)
 		for i, item := range cartInfo.CartItem {
-			fmt.Printf("item: %v\n", item)
 			cartInfo.CartItem[i].Carnumber = idsAndCounts[item.Id]
 			cartInfo.TotalPrice = cartInfo.TotalPrice + item.Price*float64(idsAndCounts[item.Id])
 			cartInfo.TotalCart = cartInfo.TotalCart + idsAndCounts[item.Id]
 		}
 	}
-	return cartInfo
+	address := app.Address{}
+	orderInfo := app.Order{
+		GoodsIds:    strings.Join(goodsIds, ""),
+		GoodsPrice:  cartInfo.TotalPrice,
+		OpenId:      param.OpenId,
+		CreatedTime: time.Now(),
+	}
+	global.Db.Table("t_address").Where("open_id = ? and is_default = 1", param.OpenId).Find(&address)
+
+	addressJson, _ := json.Marshal(address)
+	orderInfo.Address = string(addressJson)
+	rowsAffected := global.Db.Table("t_order").Create(&orderInfo).RowsAffected
+	if rowsAffected > 0 {
+		go global.Rdb.Del(ctx, key)
+	}
+	return rowsAffected
 }

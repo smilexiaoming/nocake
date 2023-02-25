@@ -31,3 +31,23 @@ type Order struct {
 	UpdatedTime   time.Time `gorm:"updated_time"`   // 更新时间
 	DeletedTime   time.Time `gorm:"deleted_time"`   // 删除时间
 }
+
+// 订单更新状态模型
+type OrderUpdateParam struct {
+	Id     int    `form:"id"`
+	OpenId string `form:"open_id"`
+	Status int    `form:"status"`
+}
+
+// 提交订单模型
+type OrderSubmitParam struct {
+	OpenId string `form:"open_id"`
+}
+
+// 查询订单模型
+type OrderQueryParam struct {
+	OpenId   string `form:"open_id"`
+	Status   int    `form:"status"`
+	PageNum  int    `form:"page_num"`
+	PageSize int    `form:"page_size"`
+}

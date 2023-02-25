@@ -53,6 +53,10 @@ func Router() {
 		app.DELETE("/cart/clear", api.GetAppCart().ClearCart)
 		app.GET("/cart/query", api.GetAppCart().GetCartInfo)
 
+		// 订单
+		app.POST("/order/submit", api.GetAppOrder().SubmitOrder)
+		app.POST("/order/update", api.GetAppOrder().UpdateOrder)
+
 	}
 
 	// 启动、监听端口
