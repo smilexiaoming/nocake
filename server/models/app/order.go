@@ -48,8 +48,8 @@ type OrderSubmitParam struct {
 type OrderQueryListParam struct {
 	OpenId   string `form:"open_id"`
 	Status   int    `form:"status"`
-	PageNum  int    `form:"page_num"`
-	PageSize int    `form:"page_size"`
+	PageNum  int    `form:"page_num" gorm:"default 1"`
+	PageSize int    `form:"page_size" gorm:"default 10"`
 }
 
 // 查询订单模型

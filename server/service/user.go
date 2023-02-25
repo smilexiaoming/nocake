@@ -4,9 +4,9 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
-	"nocake/common"
 	"nocake/global"
 	"nocake/models/app"
+	"time"
 )
 
 type AppUserService struct {
@@ -30,14 +30,14 @@ func (u *AppUserService) Login(code string) (*app.UserInfo, string) {
 	if acsJson.ErrCode != 0 || acsJson.OpenId == "" {
 		return nil, acsJson.ErrMsg
 	}
-	rows := global.Db.Where("open_id = ?", acsJson.OpenId).First(&app.User{}).RowsAffected
+	rows := global.Db.Table("t_user").Where("open_id = ?", acsJson.OpenId).First(&app.User{}).RowsAffected
 	if rows == 0 {
 		user := app.User{
-			OpenId:    acsJson.OpenId,
-			Status:    1,
-			CreatedOn: common.NowTime(),
+			OpenId:      acsJson.OpenId,
+			Status:      1,
+			CreatedTime: time.Now(),
 		}
-		row := global.Db.Create(&user).RowsAffected
+		row := global.Db.Table("t_user").Create(&user).RowsAffected
 		if row == 0 {
 			fmt.Println("add app user error")
 		}

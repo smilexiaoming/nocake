@@ -2,6 +2,7 @@ package service
 
 import (
 	"encoding/json"
+	"fmt"
 	"nocake/global"
 	"nocake/models/app"
 	"strconv"
@@ -66,14 +67,15 @@ func (o *AppOrderService) Submit(param app.OrderSubmitParam) int64 {
 
 func (o *AppOrderService) GetList(param app.OrderQueryListParam) []app.Order {
 	orderList := make([]app.Order, 0)
-	global.Db.Debug().Table("t_order").Where("open_id = ? and status = ?", param.OpenId, param.Status).Limit(param.PageSize).Offset((param.PageNum - 1) * param.PageSize).Find(orderList)
+	fmt.Printf("param: %v\n", param)
+	global.Db.Debug().Table("t_order").Where("open_id = ? and status = ?", param.OpenId, param.Status).Limit(param.PageSize).Offset((param.PageNum - 1) * param.PageSize).Find(&orderList)
 	return orderList
 }
 
 func (o *AppOrderService) GetDetail(param app.OrderQueryDetailParam) app.OrderDetail {
 	orderDetail := app.OrderDetail{}
 	order := app.Order{}
-	global.Db.Debug().Table("t_order").Where("open_id = ? and status = ? and id = ?", param.OpenId, param.Status, param.OrderId).Find(order)
+	global.Db.Debug().Table("t_order").Where("open_id = ? and status = ? and id = ?", param.OpenId, param.Status, param.OrderId).Find(&order)
 	goodIds := make([]uint, 0)
 	goodsIdCount := make(map[string]string, 0)
 	err := json.Unmarshal([]byte(order.GoodsIdsCount), &goodsIdCount)

@@ -1,6 +1,7 @@
 package api
 
 import (
+	"fmt"
 	"nocake/constant"
 	"nocake/models/app"
 	"nocake/response"
@@ -49,6 +50,7 @@ func (o *AppOrder) GetOrderList(c *gin.Context) {
 		response.Error(constant.ParamInvalid, c)
 		return
 	}
+	fmt.Printf("param: %v\n", param)
 	orderList := o.GetList(param)
 	if len(orderList) > 0 {
 		response.Success(constant.Selected, orderList, c)
