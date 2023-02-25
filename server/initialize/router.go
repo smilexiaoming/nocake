@@ -56,6 +56,8 @@ func Router() {
 		// 订单
 		app.POST("/order/submit", api.GetAppOrder().SubmitOrder)
 		app.POST("/order/update", api.GetAppOrder().UpdateOrder)
+		app.GET("/order/list", api.GetAppOrder().GetOrderList)
+		app.GET("/order/detail", api.GetAppOrder().GetOrderDetail)
 
 	}
 

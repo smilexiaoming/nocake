@@ -2,7 +2,6 @@ package service
 
 import (
 	"encoding/json"
-	"fmt"
 	"nocake/global"
 	"nocake/models/app"
 	"strconv"
@@ -14,7 +13,6 @@ type AppOrderService struct {
 }
 
 func (o *AppOrderService) Update(param app.OrderUpdateParam) int64 {
-	fmt.Printf("param: %v\n", param)
 	orderInfo := app.Order{
 		Id:          param.Id,
 		OpenId:      param.OpenId,
@@ -28,6 +26,7 @@ func (o *AppOrderService) Submit(param app.OrderSubmitParam) int64 {
 	cartInfo := app.CartInfo{}
 	key := strings.Join([]string{"user", param.OpenId, "cart"}, ":")
 	goodsIdNumberInfo := global.Rdb.HGetAll(ctx, key).Val()
+	GoodsIdsCountInfo, _ := json.Marshal(goodsIdNumberInfo)
 	goodsIds := make([]string, 0)
 	// 遍历，获取所有的goods_id
 	idsAndCounts := make(map[uint64]int, 0)
@@ -46,20 +45,54 @@ func (o *AppOrderService) Submit(param app.OrderSubmitParam) int64 {
 			cartInfo.TotalCart = cartInfo.TotalCart + idsAndCounts[item.Id]
 		}
 	}
-	address := app.Address{}
-	orderInfo := app.Order{
-		GoodsIds:    strings.Join(goodsIds, ""),
-		GoodsPrice:  cartInfo.TotalPrice,
-		OpenId:      param.OpenId,
-		CreatedTime: time.Now(),
-	}
-	global.Db.Table("t_address").Where("open_id = ? and is_default = 1", param.OpenId).Find(&address)
 
+	address := app.Address{}
+	global.Db.Table("t_address").Where("open_id = ? and is_default = 1", param.OpenId).Find(&address)
 	addressJson, _ := json.Marshal(address)
-	orderInfo.Address = string(addressJson)
+	orderInfo := app.Order{
+		Address:       string(addressJson),
+		GoodsIdsCount: string(GoodsIdsCountInfo),
+		GoodsPrice:    cartInfo.TotalPrice,
+		OpenId:        param.OpenId,
+		CreatedTime:   time.Now(),
+	}
+
 	rowsAffected := global.Db.Table("t_order").Create(&orderInfo).RowsAffected
 	if rowsAffected > 0 {
 		go global.Rdb.Del(ctx, key)
 	}
 	return rowsAffected
+}
+
+func (o *AppOrderService) GetList(param app.OrderQueryListParam) []app.Order {
+	orderList := make([]app.Order, 0)
+	global.Db.Debug().Table("t_order").Where("open_id = ? and status = ?", param.OpenId, param.Status).Limit(param.PageSize).Offset((param.PageNum - 1) * param.PageSize).Find(orderList)
+	return orderList
+}
+
+func (o *AppOrderService) GetDetail(param app.OrderQueryDetailParam) app.OrderDetail {
+	orderDetail := app.OrderDetail{}
+	order := app.Order{}
+	global.Db.Debug().Table("t_order").Where("open_id = ? and status = ? and id = ?", param.OpenId, param.Status, param.OrderId).Find(order)
+	goodIds := make([]uint, 0)
+	goodsIdCount := make(map[string]string, 0)
+	err := json.Unmarshal([]byte(order.GoodsIdsCount), &goodsIdCount)
+	if err != nil {
+		return orderDetail
+	}
+	goods := make([]app.Goods, 0)
+	global.Db.Debug().Table("t_goods").Find(&goods, goodIds)
+	for _, v := range goods {
+		idstr := strconv.Itoa(v.Id)
+		coutInt, _ := strconv.Atoi(goodsIdCount[idstr])
+		goodItem := app.GoodsItem{
+			Id:     v.Id,
+			Name:   v.Name,
+			Price:  v.Price,
+			PicUrl: v.PicUrl,
+			Count:  coutInt,
+		}
+		orderDetail.GoodsItem = append(orderDetail.GoodsItem, goodItem)
+	}
+	return orderDetail
 }

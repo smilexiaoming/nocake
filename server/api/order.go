@@ -42,3 +42,28 @@ func (o *AppOrder) UpdateOrder(c *gin.Context) {
 	}
 	response.Error(constant.NotSubmited, c)
 }
+
+func (o *AppOrder) GetOrderList(c *gin.Context) {
+	param := app.OrderQueryListParam{}
+	if err := c.ShouldBind(&param); err != nil {
+		response.Error(constant.ParamInvalid, c)
+		return
+	}
+	orderList := o.GetList(param)
+	if len(orderList) > 0 {
+		response.Success(constant.Selected, orderList, c)
+		return
+	}
+	response.Error(constant.NotSelected, c)
+}
+
+func (o *AppOrder) GetOrderDetail(c *gin.Context) {
+	param := app.OrderQueryDetailParam{}
+	if err := c.ShouldBind(&param); err != nil {
+		response.Error(constant.ParamInvalid, c)
+		return
+	}
+	orderDetail := o.GetDetail(param)
+	response.Success(constant.Selected, orderDetail, c)
+	return
+}

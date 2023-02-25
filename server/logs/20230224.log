@@ -1,4 +1,0 @@
-[INFO][goods.go:31]2023/02/24 16:34:36 info
-[ERROR][goods.go:32]2023/02/24 16:34:36 err1
-[DEBUG][goods.go:33]2023/02/24 16:34:36 debug
-[WARN][goods.go:34]2023/02/24 16:34:36 warnning
