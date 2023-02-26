@@ -23,8 +23,8 @@ cron:
 
 # 微信小程序配置
 code2Session:
-  appId: wx3cb7b0s2793390f63
-  appSecret: 86d8z38cac01ff375b2676d35f65e021
+  appId: wx66a60da0143f9827
+  appSecret: 5b57064a1848a91c0b7989321cb2012a
 
 # 问题反馈配置
 feedback:
