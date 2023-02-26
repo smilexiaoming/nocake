@@ -48,10 +48,14 @@ func (o *AppOrderService) Submit(param app.OrderSubmitParam) int64 {
 	}
 
 	address := app.Address{}
-	global.Db.Table("t_address").Where("open_id = ? and is_default = 1", param.OpenId).Find(&address)
-	addressJson, _ := json.Marshal(address)
+	rows_affect := global.Db.Table("t_address").Where("open_id = ? and is_default = 1", param.OpenId).Find(&address).RowsAffected
+	adressStr := ""
+	if rows_affect > 0 {
+		addressByte, _ := json.Marshal(address)
+		adressStr = string(addressByte)
+	}
 	orderInfo := app.Order{
-		Address:       string(addressJson),
+		Address:       adressStr,
 		GoodsIdsCount: string(GoodsIdsCountInfo),
 		GoodsPrice:    cartInfo.TotalPrice,
 		OpenId:        param.OpenId,
@@ -76,13 +80,16 @@ func (o *AppOrderService) GetDetail(param app.OrderQueryDetailParam) app.OrderDe
 	orderDetail := app.OrderDetail{}
 	order := app.Order{}
 	global.Db.Debug().Table("t_order").Where("open_id = ? and status = ? and id = ?", param.OpenId, param.Status, param.OrderId).Find(&order)
-	goodIds := make([]uint, 0)
+	goodIds := make([]string, 0)
 	goodsIdCount := make(map[string]string, 0)
 	err := json.Unmarshal([]byte(order.GoodsIdsCount), &goodsIdCount)
 	if err != nil {
 		return orderDetail
 	}
 	goods := make([]app.Goods, 0)
+	for k, _ := range goodsIdCount {
+		goodIds = append(goodIds, k)
+	}
 	global.Db.Debug().Table("t_goods").Find(&goods, goodIds)
 	for _, v := range goods {
 		idstr := strconv.Itoa(v.Id)
