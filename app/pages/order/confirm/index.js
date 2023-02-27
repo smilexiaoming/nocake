@@ -21,8 +21,8 @@ Page({
   async getCartInfo(){
     let res = await http.GET('/cart/query', {open_id: wx.getStorageSync('open_id')})
     this.setData({
-      goodsItem: res.data.data.cartItem,
-      totalPrice: res.data.data.totalPrice
+      goodsItem: res.data.data.cart_item,
+      totalPrice: res.data.data.total_price
     })
     let totalGoodsCount = 0
     for (let i = 0; i < this.data.goodsItem.length; i++) {

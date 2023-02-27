@@ -99,6 +99,7 @@ page {
 .goods-card-dec{
   flex: 3;
   color: #646566;
+  margin-left: 30%;
   font-size: 22rpx;
   line-height: 30rpx;
 }

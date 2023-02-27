@@ -35,7 +35,7 @@ Page({
   // 获取订单列表
   async getOrderList(orderType){
     let res = await http.GET('/order/list',{
-      status: orderType + 1,
+      status: orderType,
       open_id: wx.getStorageSync('open_id'),
     });
     this.setData({orderList: res.data.data})

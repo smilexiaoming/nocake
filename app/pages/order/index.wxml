@@ -18,8 +18,8 @@
               </view>
             </view>
             <view class="order-card_goods_value">
-              <view class="order-card_goods_price"><text style="font-size: 28rpx;padding-right:8rpx;">¥</text>{{item.totalPrice}}</view>
-              <view class="order-card_goods_count">x{{item.goodsCount}} 件</view>
+              <view class="order-card_goods_price"><text style="font-size: 28rpx;padding-right:8rpx;">¥</text>{{item.goods_price}}</view>
+              <!-- <view class="order-card_goods_count">x{{item.goodsCount}} 件</view> -->
             </view>
           </view>
           <view class="order-card_footer">

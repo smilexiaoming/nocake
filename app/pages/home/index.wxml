@@ -18,13 +18,14 @@
         <image src="{{item.pic_url}}" class="goods-card-image"/>
         <View style="display: flex;padding: 0 10rpx;flex-direction: column;flex: 1.4;">
           <View class="goods-card-title">{{item.name}}</View>
-          <View class="goods-card-dec">月售 {{item.sales}}</View>
+          
           <View class="goods_card_data">
             <view class="goods-card-price">
               <text style="font-size: 28xrpx;padding-right: 5rpx;">¥</text>
               <text>{{item.price}}</text>
             </view>
-            <view><view class="goods_plus_icon"></view></view>
+            <View class="goods-card-dec">月售 {{item.sales}}</View>
+            <!-- <view><view class="goods_plus_icon"></view></view> -->
           </View>
         </View>
       </view>

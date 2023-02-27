@@ -43,11 +43,12 @@ Page({
 
   // 添加商品到购物车
   async addToCart() {
-    await http.POST('/cart/add',{ 
+    await http.POST('/cart/set',{ 
       goods_id: this.data.goodsId, 
       cart_number: this.data.cart_number,
       open_id: wx.getStorageSync('open_id')
     })
+    this.onShow()
   },
 
   // 展示购物车
@@ -69,7 +70,6 @@ Page({
       totalPrice: res.data.data.total_price,
       totalGoodsCount:res.data.data.total_cart,
     })
-    console.log("this.data!!!",this.data)
     for (let i = 0; i < this.data.goodsItem.length; i++) {
       if (String(this.data.goodsItem[i].id) == this.data.goodsId) {
         console.log(this.data.goodsItem[i].cart_number);

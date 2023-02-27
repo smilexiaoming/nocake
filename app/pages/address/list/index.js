@@ -11,6 +11,7 @@ Page({
 
   // 跳转到添加地址
   toAddForm: function(event) {
+    console.log("jump!!!")
     wx.navigateTo({ url: '/pages/address/form/index' })
   },
 

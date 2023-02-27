@@ -98,16 +98,13 @@ Page({
     this.setData({
       goodsItem: res.data.data.cart_item,
       totalPrice: res.data.data.total_price,
-      cart_number: this.data.goodsItem[this.data.goodsId],
       totalGoodsCount:res.data.data.total_cart,
     })
   },
 
   // 清空购物车
   async clearCart(){
-    await http.DELETE('/cart/clear',{ 
-      open_id: wx.getStorageSync('open_id')
-    })
+    await http.DELETE('/cart/clear?open_id='+wx.getStorageSync('open_id'))
     this.setData({ show: false, totalGoodsCount: 0, totalPrice: 0 });
   },
 
