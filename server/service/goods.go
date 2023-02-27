@@ -10,7 +10,7 @@ type AppGoodsService struct {
 
 func (g *AppGoodsService) GetList(param app.GoodsListQueryParam) []app.GoodsList {
 	goodsList := make([]app.GoodsList, 0)
-	global.Db.Debug().Table("t_goods").Where("category_id = ?", param.CategoryId).Find(&goodsList)
+	global.Db.Debug().Table("t_goods").Where("category_id = ?", param.CategoryId).Limit(param.PageSize).Offset((param.PageNum - 1) * param.PageSize).Find(&goodsList)
 	return goodsList
 }
 
@@ -29,6 +29,6 @@ func (g *AppGoodsService) Search(param app.GoodsSearchQueryParam) []app.GoodsLis
 	if param.Keywords != "" {
 		Db = Db.Where("keywords like ?", "%"+param.Keywords+"%")
 	}
-	Db.Debug().Find(&goodsList)
+	Db.Debug().Limit(param.PageSize).Offset((param.PageNum - 1) * param.PageSize).Find(&goodsList)
 	return goodsList
 }

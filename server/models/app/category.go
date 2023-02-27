@@ -10,7 +10,6 @@ type Category struct {
 	PicUrl    string `gorm:"pic_url"`    // 类目图片
 	Level     int    `gorm:"level"`      // 类目层级
 	SortOrder int    `gorm:"sort_order"` // 排序
-	Deleted   int    `gorm:"deleted"`    // 逻辑删除
 }
 
 // 类目选项查询参数模型

@@ -1,6 +1,8 @@
 package app
 
-import "time"
+import (
+	"time"
+)
 
 // 用户数据映射模型
 type User struct {
@@ -24,15 +26,6 @@ type User struct {
 	UpdatedTime   time.Time `gorm:"updated_time"`    // 更新时间
 	DeletedTime   time.Time `gorm:"deleted_time"`    // 删除时间
 }
-
-// 	Id       uint64 `gorm:"primaryKey"` // 用户编号
-// 	OpenId   string `gorm:"open_id"`    // 微信用户唯一标识
-// 	Username string `gorm:"username"`   // 用户名称
-// 	Password string `gorm:"password"`   // 用户密码
-// 	Status   uint   `gorm:"status"`     // 用户状态
-// 	Created  string `gorm:"created"`    // 创建时间
-// 	Updated  string `gorm:"updated"`    // 更新时间
-// }
 
 // 用户登录凭证校验模型
 type Code2Session struct {

@@ -2,7 +2,6 @@ package service
 
 import (
 	"encoding/json"
-	"fmt"
 	"nocake/global"
 	"nocake/models/app"
 	"strconv"
@@ -24,6 +23,7 @@ func (o *AppOrderService) Update(param app.OrderUpdateParam) int64 {
 }
 
 func (o *AppOrderService) Submit(param app.OrderSubmitParam) int64 {
+	var rowsAffected int64
 	cartInfo := app.CartInfo{}
 	key := strings.Join([]string{"user", param.OpenId, "cart"}, ":")
 	goodsIdNumberInfo := global.Rdb.HGetAll(ctx, key).Val()
@@ -38,20 +38,33 @@ func (o *AppOrderService) Submit(param app.OrderSubmitParam) int64 {
 		idsAndCounts[uint64(id)] = count
 	}
 	// 计算价格、总价、数量
-	if len(goodsIdNumberInfo) > 0 {
-		global.Db.Debug().Table("t_goods").Find(&cartInfo.CartItem, goodsIds)
-		for i, item := range cartInfo.CartItem {
-			cartInfo.CartItem[i].Carnumber = idsAndCounts[item.Id]
-			cartInfo.TotalPrice = cartInfo.TotalPrice + item.Price*float64(idsAndCounts[item.Id])
-			cartInfo.TotalCart = cartInfo.TotalCart + idsAndCounts[item.Id]
-		}
+	if len(goodsIdNumberInfo) <= 0 {
+		return rowsAffected
 	}
 
-	address := app.Address{}
+	global.Db.Debug().Table("t_goods").Find(&cartInfo.CartItem, goodsIds)
+	for i, item := range cartInfo.CartItem {
+		cartInfo.CartItem[i].Carnumber = idsAndCounts[item.Id]
+		cartInfo.TotalPrice = cartInfo.TotalPrice + item.Price*float64(idsAndCounts[item.Id])
+		cartInfo.TotalCart = cartInfo.TotalCart + idsAndCounts[item.Id]
+	}
+
+	address := app.AddressAddParam{}
 	rows_affect := global.Db.Table("t_address").Where("open_id = ? and is_default = 1", param.OpenId).Find(&address).RowsAffected
 	adressStr := ""
+	addressInfo := app.AddressAddParam{
+		Name:       address.Name,
+		OpenId:     address.OpenId,
+		Province:   address.Province,
+		City:       address.City,
+		County:     address.County,
+		Detail:     address.Detail,
+		AreaCode:   address.AreaCode,
+		PostalCode: address.PostalCode,
+		Tel:        address.Tel,
+	}
 	if rows_affect > 0 {
-		addressByte, _ := json.Marshal(address)
+		addressByte, _ := json.Marshal(addressInfo)
 		adressStr = string(addressByte)
 	}
 	orderInfo := app.Order{
@@ -62,7 +75,7 @@ func (o *AppOrderService) Submit(param app.OrderSubmitParam) int64 {
 		CreatedTime:   time.Now(),
 	}
 
-	rowsAffected := global.Db.Table("t_order").Create(&orderInfo).RowsAffected
+	rowsAffected = global.Db.Table("t_order").Create(&orderInfo).RowsAffected
 	if rowsAffected > 0 {
 		go global.Rdb.Del(ctx, key)
 	}
@@ -71,7 +84,6 @@ func (o *AppOrderService) Submit(param app.OrderSubmitParam) int64 {
 
 func (o *AppOrderService) GetList(param app.OrderQueryListParam) []app.Order {
 	orderList := make([]app.Order, 0)
-	fmt.Printf("param: %v\n", param)
 	global.Db.Debug().Table("t_order").Where("open_id = ? and status = ?", param.OpenId, param.Status).Limit(param.PageSize).Offset((param.PageNum - 1) * param.PageSize).Find(&orderList)
 	return orderList
 }

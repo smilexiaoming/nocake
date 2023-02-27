@@ -11,9 +11,6 @@ type Cart struct {
 	Checked        int     `gorm:"checked"`        // 购物车中商品是否选择状态
 	PicUrl         string  `gorm:"pic_url"`        // 商品图片或者商品货品图片
 	Deleted        int     `gorm:"deleted"`        // 逻辑删除
-	CreatedTime    string  `gorm:"created_time"`   // 创建时间
-	UpdatedTime    string  `gorm:"updated_time"`   // 更新时间
-	DeletedTime    string  `gorm:"deleted_time"`   // 删除时间
 }
 
 // 购物车添加参数模型

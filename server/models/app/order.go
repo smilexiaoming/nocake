@@ -1,6 +1,8 @@
 package app
 
-import "time"
+import (
+	"time"
+)
 
 type Order struct {
 	Id            int       `gorm:"id"`
@@ -48,8 +50,8 @@ type OrderSubmitParam struct {
 type OrderQueryListParam struct {
 	OpenId   string `form:"open_id"`
 	Status   int    `form:"status"`
-	PageNum  int    `form:"page_num" gorm:"default 1"`
-	PageSize int    `form:"page_size" gorm:"default 10"`
+	PageNum  int    `form:"page_num required,gt=0" gorm:"required,gt=0"`
+	PageSize int    `form:"page_size required,gt=0" gorm:"required,gt=0"`
 }
 
 // 查询订单模型

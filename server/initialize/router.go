@@ -32,7 +32,7 @@ func Router() {
 	engine.Use(gin.Recovery())
 
 	engine.GET("/app/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
-
+	// engine.SetTrustedProxies([]string{"127.0.0.1"})
 	// 微信小程序API
 	app := engine.Group("/app")
 	{
@@ -58,6 +58,12 @@ func Router() {
 		app.POST("/order/update", api.GetAppOrder().UpdateOrder)
 		app.GET("/order/list", api.GetAppOrder().GetOrderList)
 		app.GET("/order/detail", api.GetAppOrder().GetOrderDetail)
+
+		// 地址管理
+		app.POST("/address/submit", api.GetAppAddress().AddAddress)
+		app.POST("/address/update", api.GetAppAddress().UpdateAddress)
+		app.DELETE("/address/delete", api.GetAppAddress().DeleteAddress)
+		app.GET("/address/list", api.GetAppAddress().GetAddressList)
 
 	}
 

@@ -27,6 +27,8 @@ type Goods struct {
 // 商品列表参数
 type GoodsListQueryParam struct {
 	CategoryId int `form:"category_id" binding:"required,gt=0"`
+	PageNum    int `form:"page_num" gorm:"required,gt=0"`
+	PageSize   int `form:"page_size" gorm:"required,gt=0"`
 }
 
 // 商品列表
@@ -78,4 +80,6 @@ type GoodsDetail struct {
 type GoodsSearchQueryParam struct {
 	Name     string `form:"name"`     // 商品名称
 	Keywords string `form:"keywords"` // 商品关键字，采用逗号间隔
+	PageNum  int    `form:"page_num" gorm:"required,gt=0"`
+	PageSize int    `form:"page_size" gorm:"required,gt=0"`
 }

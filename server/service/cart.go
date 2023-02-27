@@ -22,7 +22,7 @@ func (c *AppCartService) Delete(param app.CartDeleteParam) int64 {
 	fmt.Printf("param: %v\n", param)
 	if param.Carnumber != 0 {
 		value := global.Rdb.HIncrBy(ctx, key, param.GoodsId, int64(param.Carnumber)).Val()
-		if value < 0 {
+		if value <= 0 {
 			return global.Rdb.HDel(ctx, key, param.GoodsId).Val()
 		}
 		return value
