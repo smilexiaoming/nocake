@@ -17,6 +17,20 @@ func GetAppCart() *AppCart {
 	return &AppCart{}
 }
 
+func (a *AppCart) SetCart(c *gin.Context) {
+	param := app.CartSetParam{}
+	if err := c.ShouldBind(&param); err != nil {
+		response.Error(constant.ParamInvalid, c)
+		return
+	}
+
+	if added := a.Set(param); added {
+		response.Success(constant.Created, nil, c)
+		return
+	}
+	response.Error(constant.NotCreated, c)
+}
+
 func (a *AppCart) AddCart(c *gin.Context) {
 	param := app.CartAddParam{}
 	if err := c.ShouldBind(&param); err != nil {

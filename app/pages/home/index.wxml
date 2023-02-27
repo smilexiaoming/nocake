@@ -21,7 +21,7 @@
           <View class="goods-card-dec">月售 {{item.sales}}</View>
           <View class="goods_card_data">
             <view class="goods-card-price">
-              <text style="font-size: 28rpx;padding-right: 5rpx;">¥</text>
+              <text style="font-size: 28xrpx;padding-right: 5rpx;">¥</text>
               <text>{{item.price}}</text>
             </view>
             <view><view class="goods_plus_icon"></view></view>
@@ -56,7 +56,7 @@
   <view class="popup_content">
     <van-card custom-class="popup_van_card" wx:for="{{goodsItem}}" wx:key="{{item.id}}" thumb-class="popup_van_card_thumb" title-class="popup_van_card_title" price="{{item.price}}" title="{{item.name}}" thumb="{{item.pic_url}}">
             <view slot="num" style="float: right;margin-top: -12rpx;">
-              <van-stepper value="{{ item.count }}" minus-class="popup_van_stepper_minus" input-class="popup_van_stepper_input" plus-class="popup_van_stepper_plus" bind:change="stepperChange"/>
+              <van-stepper value="{{ item.cart_number }}" minus-class="popup_van_stepper_minus" input-class="popup_van_stepper_input" plus-class="popup_van_stepper_plus" bind:change="stepperChange"/>
             </view>
           </van-card>
   </view>

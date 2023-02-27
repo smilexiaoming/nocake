@@ -11,6 +11,13 @@ import (
 type AppCartService struct {
 }
 
+func (c *AppCartService) Set(param app.CartSetParam) bool {
+	key := strings.Join([]string{"user", param.OpenId, "cart"}, ":")
+	goodsId := strconv.Itoa(int(param.GoodsId))
+	fmt.Printf("global.Rdb.HSet(ctx, key, goodsId, int64(param.Carnumber)).Val(): %v\n", global.Rdb.HSet(ctx, key, goodsId, int64(param.Carnumber)).Val())
+	return true
+}
+
 func (c *AppCartService) Add(param app.CartAddParam) int64 {
 	key := strings.Join([]string{"user", param.OpenId, "cart"}, ":")
 	goodsId := strconv.Itoa(int(param.GoodsId))
@@ -22,7 +29,7 @@ func (c *AppCartService) Delete(param app.CartDeleteParam) int64 {
 	fmt.Printf("param: %v\n", param)
 	if param.Carnumber != 0 {
 		value := global.Rdb.HIncrBy(ctx, key, param.GoodsId, int64(param.Carnumber)).Val()
-		if value <= 0 {
+		if value < 0 {
 			return global.Rdb.HDel(ctx, key, param.GoodsId).Val()
 		}
 		return value

@@ -49,6 +49,7 @@ func Router() {
 
 		// 购物车
 		app.POST("/cart/add", api.GetAppCart().AddCart)
+		app.POST("/cart/set", api.GetAppCart().SetCart)
 		app.DELETE("/cart/delete", api.GetAppCart().DeleteCart)
 		app.DELETE("/cart/clear", api.GetAppCart().ClearCart)
 		app.GET("/cart/query", api.GetAppCart().GetCartInfo)

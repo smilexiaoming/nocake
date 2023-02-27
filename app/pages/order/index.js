@@ -17,6 +17,15 @@ Page({
     this.getOrderList(event.detail.name)
   },
 
+  // 添加商品到购物车
+  async addToCart() {
+    await http.POST('/cart/add',{ 
+      goods_id: this.data.goodsId, 
+      cart_number: this.data.cart_number,
+      open_id: wx.getStorageSync('open_id')
+    })
+  },
+
   // 生命周期函数--监听页面显示
   onShow() {
     this.getTabBar().init();
@@ -26,9 +35,8 @@ Page({
   // 获取订单列表
   async getOrderList(orderType){
     let res = await http.GET('/order/list',{
-      type: orderType+1,
+      status: orderType + 1,
       open_id: wx.getStorageSync('open_id'),
-      sid: parseInt(wx.getStorageSync('sid'))
     });
     this.setData({orderList: res.data.data})
   },
@@ -37,7 +45,7 @@ Page({
   async cancelOrder(event){
     let res = await http.PUT('/order/update',{
       id: event.currentTarget.id,
-      status: 2
+      status: 3
     });
   },
 

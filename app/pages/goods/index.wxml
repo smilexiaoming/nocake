@@ -52,9 +52,9 @@
   <view class="popup_content">
     <van-checkbox-group value="{{ checked }}" bind:change="onChange">
       <van-checkbox name="{{item.id}}" wx:for="{{goodsItem}}" wx:key="{{item.id}}" label-class="popup_van_checkbox_label" checked-color="#12CAFF" icon-size="32rpx">
-          <van-card custom-class="popup_van_card" thumb-class="popup_van_card_thumb" title-class="popup_van_card_title" price="{{item.price}}" title="{{item.title}}" thumb="{{item.pic_url}}">
+          <van-card custom-class="popup_van_card" thumb-class="popup_van_card_thumb" title-class="popup_van_card_title" price="{{item.price}}" title="{{item.name}}" thumb="{{item.pic_url}}">
             <view slot="num" style="float: right;margin-top: -12rpx;">
-              <van-stepper value="{{ item.count }}" minus-class="popup_van_stepper_minus" input-class="popup_van_stepper_input" plus-class="popup_van_stepper_plus" bind:change="stepperChange"/>
+              <van-stepper value="{{ item.cart_number }}" minus-class="popup_van_stepper_minus" input-class="popup_van_stepper_input" plus-class="popup_van_stepper_plus" bind:change="stepperChange"/>
             </view>
           </van-card>
       </van-checkbox>

@@ -78,7 +78,6 @@ Page({
   // 生命周期函数--监听页面显示
   onShow() {
     this.getTabBar().init()
-    // this.getBanners()
     this.getCategoryOption()
     this.getCartInfo()
   },
@@ -97,17 +96,11 @@ Page({
   async getCartInfo(){
     let res = await http.GET('/cart/query', {open_id: wx.getStorageSync('open_id')})
     this.setData({
-      cartItem: res.data.data.cartItem,
+      goodsItem: res.data.data.cart_item,
       totalPrice: res.data.data.total_price,
+      cart_number: this.data.goodsItem[this.data.goodsId],
+      totalGoodsCount:res.data.data.total_cart,
     })
-    let totalGoodsCount = 0
-    let checkedGoods = []
-    for (let i = 0; i < this.data.goodsItem.length; i++) {
-      totalGoodsCount = totalGoodsCount + this.data.goodsItem[i].cart_number
-      checkedGoods.push(this.data.goodsItem[i].id)
-    }
-    this.setData({totalGoodsCount: totalGoodsCount})
-    this.setData({checkedGoods: checkedGoods})
   },
 
   // 清空购物车

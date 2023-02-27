@@ -31,10 +31,12 @@ Page({
   // 增加商品数量
   addGoods() {
     this.setData({cart_number: 1})
+    this.addToCart()
   },
 
   // 当进步器改变时，修改商品数量
   stepperChange(event){
+    console.log(event)
     this.setData({cart_number: event.detail})
     this.addToCart()
   },
@@ -65,18 +67,15 @@ Page({
     this.setData({
       goodsItem: res.data.data.cart_item,
       totalPrice: res.data.data.total_price,
-      cart_number: this.data.goodsItem[this.data.goodsId],
       totalGoodsCount:res.data.data.total_cart,
     })
-    // let totalGoodsCount = 0
-    // for (let i = 0; i < this.data.goodsItem.length; i++) {
-    //   totalGoodsCount = totalGoodsCount + this.data.goodsItem[i].count
-    //   if (this.data.goodsItem[i].id == this.data.goodsId) {
-    //     this.setData({cart_number: this.data.goodsItem[i].count})
-    //     console.log(this.data.goodsItem[i].count);
-    //   }
-    // }
-    // this.setData({totalGoodsCount: totalGoodsCount})
+    console.log("this.data!!!",this.data)
+    for (let i = 0; i < this.data.goodsItem.length; i++) {
+      if (String(this.data.goodsItem[i].id) == this.data.goodsId) {
+        console.log(this.data.goodsItem[i].cart_number);
+        this.setData({cart_number: this.data.goodsItem[i].cart_number})
+      }
+    }
   },
 
   // 清空购物车
