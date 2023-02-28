@@ -36,9 +36,9 @@ type Order struct {
 
 // 订单更新状态模型
 type OrderUpdateParam struct {
-	Id     int    `form:"id"`
-	OpenId string `form:"open_id"`
-	Status int    `form:"status"`
+	OrderId int    `form:"order_id"`
+	OpenId  string `form:"open_id"`
+	Status  int    `form:"status"`
 }
 
 // 提交订单模型
@@ -57,7 +57,6 @@ type OrderQueryListParam struct {
 // 查询订单模型
 type OrderQueryDetailParam struct {
 	OpenId  string `form:"open_id"`
-	Status  int    `form:"status"`
 	OrderId int    `form:"order_id"`
 }
 

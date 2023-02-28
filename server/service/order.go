@@ -14,7 +14,7 @@ type AppOrderService struct {
 
 func (o *AppOrderService) Update(param app.OrderUpdateParam) int64 {
 	orderInfo := app.Order{
-		Id:          param.Id,
+		Id:          param.OrderId,
 		OpenId:      param.OpenId,
 		Status:      param.Status,
 		UpdatedTime: time.Now(),
@@ -91,7 +91,7 @@ func (o *AppOrderService) GetList(param app.OrderQueryListParam) []app.Order {
 func (o *AppOrderService) GetDetail(param app.OrderQueryDetailParam) app.OrderDetail {
 	orderDetail := app.OrderDetail{}
 	order := app.Order{}
-	global.Db.Debug().Table("t_order").Where("open_id = ? and status = ? and id = ?", param.OpenId, param.Status, param.OrderId).Find(&order)
+	global.Db.Debug().Table("t_order").Where("id = ? and open_id = ?", param.OrderId, param.OrderId).Find(&order)
 	goodIds := make([]string, 0)
 	goodsIdCount := make(map[string]string, 0)
 	err := json.Unmarshal([]byte(order.GoodsIdsCount), &goodsIdCount)
