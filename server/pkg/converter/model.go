@@ -1,4 +1,4 @@
-package model
+package converter
 
 type Cart struct {
 	Id             int     `gorm:"id"`
