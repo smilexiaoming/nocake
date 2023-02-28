@@ -128,9 +128,6 @@ func (a *AppCart) GetCartInfo(c *gin.Context) {
 		response.Error(constant.ParamInvalid, c)
 		return
 	}
-	if info := a.GetInfo(param); len(info.CartItem) > 0 {
-		response.Success(constant.Selected, info, c)
-		return
-	}
-	response.Error(constant.NotSelected, c)
+	info := a.GetInfo(param)
+	response.Success(constant.Selected, info, c)
 }

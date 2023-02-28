@@ -19,7 +19,7 @@ Page({
   async onLoad(options) {
     this.setData({ goodsId: options.id })
     this.setData({ windowWidth: wx.getSystemInfoSync().windowWidth })
-    let res = await http.GET('/goods/detail',{ id: options.id });
+    let res = await http.GET('/goods/detail',{ goods_id: options.id });
     this.setData({ goods: res.data.data })
   },
 
@@ -81,6 +81,7 @@ Page({
   // 清空购物车
   async clearCart(){
     await http.DELETE('/cart/clear?open_id='+wx.getStorageSync('open_id'))
+    this.setData({ show: false, totalGoodsCount: 0, totalPrice: 0 });
   },
   
   // 购物车选中

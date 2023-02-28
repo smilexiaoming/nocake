@@ -82,25 +82,35 @@ func (o *AppOrderService) Submit(param app.OrderSubmitParam) int64 {
 	return rowsAffected
 }
 
-func (o *AppOrderService) GetList(param app.OrderQueryListParam) []app.Order {
-	orderList := make([]app.Order, 0)
-	global.Db.Debug().Table("t_order").Where("open_id = ? and status = ?", param.OpenId, param.Status).Limit(param.PageSize).Offset((param.PageNum - 1) * param.PageSize).Find(&orderList)
+func (o *AppOrderService) GetList(param app.OrderQueryListParam) []app.OrderInfo {
+	orders := make([]app.Order, 0)
+	global.Db.Debug().Table("t_order").Where("open_id = ? and status = ?", param.OpenId, param.Status).Limit(param.PageSize).Offset((param.PageNum - 1) * param.PageSize).Find(&orders)
+	orderList := make([]app.OrderInfo, 0)
+	for _, order := range orders {
+		orderList = append(orderList, GetDetail(order))
+	}
 	return orderList
 }
 
-func (o *AppOrderService) GetDetail(param app.OrderQueryDetailParam) app.OrderDetail {
-	orderDetail := app.OrderDetail{}
-	order := app.Order{}
-	global.Db.Debug().Table("t_order").Where("id = ? and open_id = ?", param.OrderId, param.OrderId).Find(&order)
+func GetDetail(param app.Order) app.OrderInfo {
 	goodIds := make([]string, 0)
 	goodsIdCount := make(map[string]string, 0)
-	err := json.Unmarshal([]byte(order.GoodsIdsCount), &goodsIdCount)
+	err := json.Unmarshal([]byte(param.GoodsIdsCount), &goodsIdCount)
 	if err != nil {
-		return orderDetail
+		return app.OrderInfo{}
 	}
 	goods := make([]app.Goods, 0)
-	for k, _ := range goodsIdCount {
+	goodsCount := 0
+	for k, v := range goodsIdCount {
 		goodIds = append(goodIds, k)
+		count, _ := strconv.Atoi(v)
+		goodsCount += count
+	}
+	orderDetail := app.OrderInfo{
+		OrderId:    param.Id,
+		Status:     param.Status,
+		TotalPrice: param.GoodsPrice,
+		GoodsCount: goodsCount,
 	}
 	global.Db.Debug().Table("t_goods").Find(&goods, goodIds)
 	for _, v := range goods {

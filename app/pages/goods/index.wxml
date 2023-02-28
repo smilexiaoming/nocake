@@ -44,21 +44,21 @@
 <!-- 购物车弹出框 -->
 <van-popup custom-class="van_popup" show="{{ show }}" position="bottom" round>
   <view class="popup_head">
-    <van-checkbox value="{{ checked }}" bind:change="onChange" checked-color="#12CAFF" icon-size="32rpx">
+    <!-- <van-checkbox value="{{ checked }}" bind:change="onChange" checked-color="#12CAFF" icon-size="32rpx">
       <View class="popup_head_label">全选<text class="popup_head_label-text">（已选3件商品）</text></View>
-    </van-checkbox>
+    </van-checkbox> -->
     <view class="popup_head_clear" bindtap="clearCart"><van-icon name="delete-o" color="#666666" size="30rpx" />清空</view>
   </view>
   <view class="popup_content">
-    <van-checkbox-group value="{{ checked }}" bind:change="onChange">
-      <van-checkbox name="{{item.id}}" wx:for="{{goodsItem}}" wx:key="{{item.id}}" label-class="popup_van_checkbox_label" checked-color="#12CAFF" icon-size="32rpx">
+    <!-- <van-checkbox-group value="{{ checked }}" bind:change="onChange"> -->
+      <view name="{{item.id}}" wx:for="{{goodsItem}}" wx:key="{{item.id}}" label-class="popup_van_checkbox_label" checked-color="#12CAFF" icon-size="32rpx">
           <van-card custom-class="popup_van_card" thumb-class="popup_van_card_thumb" title-class="popup_van_card_title" price="{{item.price}}" title="{{item.name}}" thumb="{{item.pic_url}}">
             <view slot="num" style="float: right;margin-top: -12rpx;">
               <van-stepper value="{{ item.cart_number }}" minus-class="popup_van_stepper_minus" input-class="popup_van_stepper_input" plus-class="popup_van_stepper_plus" bind:change="stepperChange"/>
             </view>
           </van-card>
-      </van-checkbox>
-    </van-checkbox-group>
+      </view>
+    <!-- </van-checkbox-group> -->
   </view>
   <view class="popup_footer" />
 </van-popup>

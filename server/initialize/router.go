@@ -58,7 +58,6 @@ func Router() {
 		app.POST("/order/submit", api.GetAppOrder().SubmitOrder)
 		app.POST("/order/update", api.GetAppOrder().UpdateOrder)
 		app.GET("/order/list", api.GetAppOrder().GetOrderList)
-		app.GET("/order/detail", api.GetAppOrder().GetOrderDetail)
 
 		// 地址管理
 		app.POST("/address/submit", api.GetAppAddress().AddAddress)

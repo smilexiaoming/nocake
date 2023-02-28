@@ -14,7 +14,7 @@
   </View>
   <van-tree-select items="{{ options }}" id="{{ items.id }}" active-id="{{ activeId }}" bind:click-nav="changeOption">
     <view slot="content">
-      <view class="goods-card" wx:for="{{goodsList}}" wx:key="{{item.id}}" id="{{item.id}}" bindtap="checkGoodsDetail">
+      <view class="goods-card" wx:for="{{goodsList}}" wx:key="id" id="{{item.id}}" bindtap="checkGoodsDetail">
         <image src="{{item.pic_url}}" class="goods-card-image"/>
         <View style="display: flex;padding: 0 10rpx;flex-direction: column;flex: 1.4;">
           <View class="goods-card-title">{{item.name}}</View>
@@ -49,13 +49,13 @@
 <!-- 购物车弹出框 -->
 <van-popup custom-class="van_popup" show="{{ show }}" position="bottom" zIndex="2" round>
   <view class="popup_head">
-    <van-checkbox value="{{ true }}" bind:change="onChange" checked-color="#12CAFF" icon-size="32rpx">
-      <View class="popup_head_label">全选<text class="popup_head_label-text">（已选{{totalGoodsCount}}件商品）</text></View>
-    </van-checkbox>
+    <van value="{{ true }}" bind:change="onChange" checked-color="#12CAFF" icon-size="32rpx">
+      <View class="popup_head_label"><text>（已选{{totalGoodsCount}}件商品）</text></View>
+    </van>
     <view class="popup_head_clear" bindtap="clearCart"><van-icon name="delete-o" color="#666666" size="30rpx" />清空</view>
   </view>
   <view class="popup_content">
-    <van-card custom-class="popup_van_card" wx:for="{{goodsItem}}" wx:key="{{item.id}}" thumb-class="popup_van_card_thumb" title-class="popup_van_card_title" price="{{item.price}}" title="{{item.name}}" thumb="{{item.pic_url}}">
+    <van-card custom-class="popup_van_card" wx:for="{{goodsItem}}" wx:key="id" id="{{item.id}}" thumb-class="popup_van_card_thumb" title-class="popup_van_card_title" price="{{item.price}}" title="{{item.name}}" thumb="{{item.pic_url}}">
             <view slot="num" style="float: right;margin-top: -12rpx;">
               <van-stepper value="{{ item.cart_number }}" minus-class="popup_van_stepper_minus" input-class="popup_van_stepper_input" plus-class="popup_van_stepper_plus" bind:change="stepperChange"/>
             </view>

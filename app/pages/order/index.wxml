@@ -11,7 +11,7 @@
             <view style="color: #12CAFF;font-weight: 400;" wx:if="{{item.status == 4}}">配送中</view>
             <view style="color: #12CAFF;font-weight: 400;" wx:if="{{item.status == 5}}">已完成</view>
           </view>
-          <view class="order-card_content">
+          <view class="order-card_content" bindtap="OrderDetail">
             <view class="order-card_goods">
               <view wx:for="{{item.goodsItem}}" wx:key="{{item.id}}">
                 <image src="{{item.pic_url}}" class="order-card_goods_image" />

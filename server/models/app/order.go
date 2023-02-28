@@ -69,10 +69,10 @@ type GoodsItem struct {
 	Count  int     `json:"count"`
 }
 
-type OrderDetail struct {
-	Id         int         `json:"id"`
+type OrderInfo struct {
+	OrderId    int         `json:"order_id"`
 	Status     int         `json:"stauts"`
 	TotalPrice float64     `json:"total_price"`
-	GoodsCount uint        `json:"goods_count"`
+	GoodsCount int        `json:"goods_count"`
 	GoodsItem  []GoodsItem `json:"goods_item"`
 }

@@ -219,6 +219,7 @@ page{
   display: inline-flex;
   align-items: center;
   justify-items: center;
+  float: right;
 }
 .popup_content{
   /* height: 620rpx; */

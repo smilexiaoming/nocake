@@ -90,23 +90,3 @@ func (o *AppOrder) GetOrderList(c *gin.Context) {
 	}
 	response.Error(constant.NotSelected, c)
 }
-
-// @Summary 获取订单详情
-// @Description
-// @Accept  multipart/form-data
-// @Param open_id formData string true "open_id"
-// @Param order_id formData int true "订单号"
-// @Produce  json
-// @Success 200 {object} app.OrderDetail "请求成功"
-// @Failure 400 {object} response.Response "请求错误"
-// @Failure 500 {object} response.Response "内部错误"
-// @Router /app/order/detail [get]
-func (o *AppOrder) GetOrderDetail(c *gin.Context) {
-	param := app.OrderQueryDetailParam{}
-	if err := c.ShouldBind(&param); err != nil {
-		response.Error(constant.ParamInvalid, c)
-		return
-	}
-	orderDetail := o.GetDetail(param)
-	response.Success(constant.Selected, orderDetail, c)
-}
