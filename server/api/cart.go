@@ -52,7 +52,7 @@ func (a *AppCart) SetCart(c *gin.Context) {
 // @Success 200 {object} response.Response "请求成功"
 // @Failure 400 {object} response.Response "请求错误"
 // @Failure 500 {object} response.Response "内部错误"
-// @Router /app/cartr/add [post]
+// @Router /app/cartr/update [post]
 func (a *AppCart) UpdateCart(c *gin.Context) {
 	param := app.CartUpdateParam{}
 	if err := c.ShouldBind(&param); err != nil {
@@ -113,8 +113,8 @@ func (a *AppCart) ClearCart(c *gin.Context) {
 	response.Error(constant.NotCleared, c)
 }
 
-// @Summary 清空购物车
-// @Description 
+// @Summary 查看购物车
+// @Description
 // @Accept  multipart/form-data
 // @Produce  json
 // @Param open_id formData string true "open_id"

@@ -44,8 +44,8 @@ func (o *AppOrder) SubmitOrder(c *gin.Context) {
 // @Description
 // @Accept  multipart/form-data
 // @Param open_id formData string true "open_id"
-// @Param order_id formData int true "order_id"
-// @Param status formData int true "status"
+// @Param order_id formData int true "订单号"
+// @Param status formData int true "订单状态"
 // @Produce  json
 // @Success 200 {object} response.Response "请求成功"
 // @Failure 400 {object} response.Response "请求错误"
@@ -68,9 +68,9 @@ func (o *AppOrder) UpdateOrder(c *gin.Context) {
 // @Description
 // @Accept  multipart/form-data
 // @Param open_id formData string true "open_id"
-// @Param status formData int true "status"
-// @Param page_size formData int true "page_size"
-// @Param page_num formData int true "page_num"
+// @Param status formData int true "订单状态"
+// @Param page_size formData int true "分页参数"
+// @Param page_num formData int true "分页参数"
 // @Produce  json
 // @Success 200 {array} app.Order "请求成功"
 // @Failure 400 {object} response.Response "请求错误"
@@ -95,7 +95,7 @@ func (o *AppOrder) GetOrderList(c *gin.Context) {
 // @Description
 // @Accept  multipart/form-data
 // @Param open_id formData string true "open_id"
-// @Param order_id formData int true "order_id"
+// @Param order_id formData int true "订单号"
 // @Produce  json
 // @Success 200 {object} app.OrderDetail "请求成功"
 // @Failure 400 {object} response.Response "请求错误"
