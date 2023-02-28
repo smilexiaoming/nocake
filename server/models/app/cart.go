@@ -13,22 +13,24 @@ type Cart struct {
 	Deleted        int     `gorm:"deleted"`        // 逻辑删除
 }
 
-// 购物车添加参数模型
-type CartAddParam struct {
+// 购物车设置商品数量参数模型
+type CartUpdateParam struct {
 	GoodsId   uint   `form:"goods_id" binding:"required"`
 	OpenId    string `form:"open_id" binding:"required"`
 	Carnumber uint   `form:"cart_number" binding:"required"`
 }
 
+// 购物车修改商品数量参数模型
 type CartSetParam struct {
 	GoodsId   uint   `form:"goods_id" binding:"required"`
 	OpenId    string `form:"open_id" binding:"required"`
 	Carnumber uint   `form:"cart_number" binding:"required"`
 }
 
-// 购物车查询参数模型
-type CartQueryParam struct {
-	OpenId string `form:"open_id" binding:"required"`
+// 购物车删除商品参数模型
+type CartDeleteParam struct {
+	OpenId  string `form:"open_id" binding:"required"`
+	GoodsId string `form:"goods_id" binding:"required"`
 }
 
 // 购物车清除参数模型
@@ -36,11 +38,9 @@ type CartClearParam struct {
 	OpenId string `form:"open_id" binding:"required"`
 }
 
-// 购物车删除或减少商品参数模型
-type CartDeleteParam struct {
-	OpenId    string `form:"open_id" binding:"required"`
-	GoodsId   string `form:"goods_id" binding:"required"`
-	Carnumber int    `form:"cart_number"`
+// 购物车查询参数模型
+type CartQueryParam struct {
+	OpenId string `form:"open_id" binding:"required"`
 }
 
 // 购物车商品项传输模型

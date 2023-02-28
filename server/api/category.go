@@ -18,7 +18,7 @@ func GetAppCategory() *AppCategory {
 }
 
 // @Summary 获取品类列表
-// @Description 传入level
+// @Description 传入level 和 pid
 // @Accept  multipart/form-data
 // @Produce  json
 // @Param level query string false "level"
