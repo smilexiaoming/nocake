@@ -9,12 +9,14 @@ Page({
     totalPrice: 0.00,
     totalGoodsCount: 0,
     show: false,
-    showView: true
+    showView: true,
+    addressList:[]
   },
 
   // 生命周期函数--监听页面显示
   onShow() {
     this.getCartInfo()
+    this.getDefaultAddress()
   },
 
   // 获取购物车信息
@@ -24,15 +26,14 @@ Page({
       goodsItem: res.data.data.cart_item,
       totalPrice: res.data.data.total_price
     })
-    let totalGoodsCount = 0
-    for (let i = 0; i < this.data.goodsItem.length; i++) {
-      totalGoodsCount = totalGoodsCount + this.data.goodsItem[i].count
-      if (this.data.goodsItem[i].id == this.data.goodsId) {
-        this.setData({goodsCount: this.data.goodsItem[i].count})
-        console.log(this.data.goodsItem[i].count);
-      }
-    }
-    this.setData({totalGoodsCount: totalGoodsCount})
+  },
+  async getDefaultAddress(){
+    let res = await http.GET('/address/list', {open_id: wx.getStorageSync('open_id')})
+    this.setData({
+      addressList: res.data.data,
+      addressListDefault:res.data.data[0]
+    })
+
   },
 
   // 提交订单
