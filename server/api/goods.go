@@ -32,6 +32,10 @@ func (g *AppGoods) GetGoodList(c *gin.Context) {
 		return
 	}
 	goodList := g.GetList(param)
+	if len(goodList) == 0 {
+		response.Error(constant.NotSelected, c)
+		return
+	}
 	response.Success(constant.Selected, goodList, c)
 }
 
