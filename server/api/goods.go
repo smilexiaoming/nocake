@@ -50,6 +50,10 @@ func (g *AppGoods) GetGoodsDetail(c *gin.Context) {
 		return
 	}
 	goodDetail := g.GetDetail(param)
+	if goodDetail.Id == 0 {
+		response.Error(constant.NotSelected, c)
+		return
+	}
 	response.Success(constant.Selected, goodDetail, c)
 }
 
@@ -69,5 +73,9 @@ func (g *AppGoods) SearchGoods(c *gin.Context) {
 		return
 	}
 	goodList := g.Search(param)
+	if len(goodList) == 0 {
+		response.Error(constant.NotSelected, c)
+		return
+	}
 	response.Success(constant.Selected, goodList, c)
 }
