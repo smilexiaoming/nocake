@@ -4,9 +4,539 @@
         "contact": {}
     },
     "paths": {
+        "/app/address/add": {
+            "post": {
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "新增地址",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "收货人名称",
+                        "name": "name",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "用户表的用户ID",
+                        "name": "open_id",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "行政区域表的省ID",
+                        "name": "province",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "行政区域表的市ID",
+                        "name": "city",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "行政区域表的区县ID",
+                        "name": "county",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "详细收货地址",
+                        "name": "detail",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "地区编码",
+                        "name": "area_code",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "邮政编码",
+                        "name": "postal_code",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "手机号码",
+                        "name": "tel",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "是否默认地址",
+                        "name": "is_default",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "请求成功",
+                        "schema": {
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "请求错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    },
+                    "500": {
+                        "description": "内部错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/app/address/delete": {
+            "delete": {
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "删除地址",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "地址id",
+                        "name": "address_id",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "open_id",
+                        "name": "open_id",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "请求成功",
+                        "schema": {
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "请求错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    },
+                    "500": {
+                        "description": "内部错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/app/address/list": {
+            "get": {
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "获取地址列表",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "open_id",
+                        "name": "open_id",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "请求成功",
+                        "schema": {
+                            "$ref": "#/definitions/app.Address"
+                        }
+                    },
+                    "400": {
+                        "description": "请求错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    },
+                    "500": {
+                        "description": "内部错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/app/address/update": {
+            "post": {
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "更改地址",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "收货人名称",
+                        "name": "name",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "用户表的用户ID",
+                        "name": "open_id",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "行政区域表的省ID",
+                        "name": "province",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "行政区域表的市ID",
+                        "name": "city",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "行政区域表的区县ID",
+                        "name": "county",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "详细收货地址",
+                        "name": "detail",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "地区编码",
+                        "name": "area_code",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "邮政编码",
+                        "name": "postal_code",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "手机号码",
+                        "name": "tel",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "是否默认地址",
+                        "name": "is_default",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "请求成功",
+                        "schema": {
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "请求错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    },
+                    "500": {
+                        "description": "内部错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/app/cart/clear": {
+            "delete": {
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "清空购物车",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "open_id",
+                        "name": "open_id",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "请求成功",
+                        "schema": {
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "请求错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    },
+                    "500": {
+                        "description": "内部错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/app/cart/delete": {
+            "delete": {
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "删除购物车商品",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "open_id",
+                        "name": "open_id",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "商品id",
+                        "name": "goods_id",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "请求成功",
+                        "schema": {
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "请求错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    },
+                    "500": {
+                        "description": "内部错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/app/cart/query": {
+            "get": {
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "查看购物车",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "open_id",
+                        "name": "open_id",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "请求成功",
+                        "schema": {
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "请求错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    },
+                    "500": {
+                        "description": "内部错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/app/cart/set": {
+            "post": {
+                "description": "传入code进行鉴权",
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "更改购物车商品数量",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "open_id",
+                        "name": "open_id",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "商品id",
+                        "name": "goods_id",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "设置的数量",
+                        "name": "cart_number",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "请求成功",
+                        "schema": {
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "请求错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    },
+                    "500": {
+                        "description": "内部错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/app/cartr/update": {
+            "post": {
+                "description": "传入code进行鉴权",
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "增加或者减少购物车商品数量",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "open_id",
+                        "name": "open_id",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "商品id",
+                        "name": "goods_id",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "更改量",
+                        "name": "cart_number",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "请求成功",
+                        "schema": {
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "请求错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    },
+                    "500": {
+                        "description": "内部错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    }
+                }
+            }
+        },
         "/app/category/option": {
             "get": {
-                "description": "传入level",
+                "description": "传入level 和 pid",
                 "consumes": [
                     "multipart/form-data"
                 ],
@@ -50,9 +580,47 @@
                 }
             }
         },
+        "/app/goods/detail": {
+            "get": {
+                "description": "传入 id",
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "summary": "获取商品详情",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "id",
+                        "name": "id",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "请求成功",
+                        "schema": {
+                            "$ref": "#/definitions/app.GoodsDetail"
+                        }
+                    },
+                    "400": {
+                        "description": "请求错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    },
+                    "500": {
+                        "description": "内部错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    }
+                }
+            }
+        },
         "/app/goods/list": {
             "get": {
-                "description": "传入 categoryid | kewords | name",
+                "description": "传入 category_id | kewords | name",
                 "consumes": [
                     "multipart/form-data"
                 ],
@@ -61,19 +629,51 @@
                     {
                         "type": "integer",
                         "description": "category_id",
-                        "name": "categoryid",
-                        "in": "query"
+                        "name": "category_id",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "请求成功",
+                        "schema": {
+                            "$ref": "#/definitions/app.GoodsList"
+                        }
                     },
+                    "400": {
+                        "description": "请求错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    },
+                    "500": {
+                        "description": "内部错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/app/goods/search": {
+            "get": {
+                "description": "传入   name | kewords",
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "summary": "搜索商品",
+                "parameters": [
                     {
                         "type": "string",
-                        "description": "keywords",
-                        "name": "kewords",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "description": "name",
+                        "description": "商品名称",
                         "name": "name",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "关键字",
+                        "name": "keywords",
                         "in": "query"
                     }
                 ],
@@ -139,9 +739,279 @@
                     }
                 }
             }
+        },
+        "/app/order/detail": {
+            "get": {
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "获取订单详情",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "open_id",
+                        "name": "open_id",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "订单号",
+                        "name": "order_id",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "请求成功",
+                        "schema": {
+                            "$ref": "#/definitions/app.OrderDetail"
+                        }
+                    },
+                    "400": {
+                        "description": "请求错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    },
+                    "500": {
+                        "description": "内部错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/app/order/list": {
+            "get": {
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "获取订单列表",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "open_id",
+                        "name": "open_id",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "订单状态",
+                        "name": "status",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "分页参数",
+                        "name": "page_size",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "分页参数",
+                        "name": "page_num",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "请求成功",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/app.Order"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "请求错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    },
+                    "500": {
+                        "description": "内部错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/app/order/submit": {
+            "post": {
+                "description": "从购物车中提交订单",
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "提交订单",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "open_id",
+                        "name": "open_id",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "请求成功",
+                        "schema": {
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "请求错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    },
+                    "500": {
+                        "description": "内部错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/app/order/update": {
+            "post": {
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "修改订单状态",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "open_id",
+                        "name": "open_id",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "订单号",
+                        "name": "order_id",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "订单状态",
+                        "name": "status",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "请求成功",
+                        "schema": {
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "请求错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    },
+                    "500": {
+                        "description": "内部错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
+        "app.Address": {
+            "type": "object",
+            "properties": {
+                "areaCode": {
+                    "description": "地区编码",
+                    "type": "string"
+                },
+                "city": {
+                    "description": "行政区域表的市ID",
+                    "type": "string"
+                },
+                "county": {
+                    "description": "行政区域表的区县ID",
+                    "type": "string"
+                },
+                "createdTime": {
+                    "description": "创建时间",
+                    "type": "string"
+                },
+                "deleted": {
+                    "description": "逻辑删除",
+                    "type": "integer"
+                },
+                "deletedTime": {
+                    "description": "删除时间",
+                    "type": "string"
+                },
+                "detail": {
+                    "description": "详细收货地址",
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "isDefault": {
+                    "description": "是否默认地址",
+                    "type": "integer"
+                },
+                "name": {
+                    "description": "收货人名称",
+                    "type": "string"
+                },
+                "openId": {
+                    "description": "用户表的用户ID",
+                    "type": "string"
+                },
+                "postalCode": {
+                    "description": "邮政编码",
+                    "type": "string"
+                },
+                "province": {
+                    "description": "行政区域表的省ID",
+                    "type": "string"
+                },
+                "tel": {
+                    "description": "手机号码",
+                    "type": "string"
+                },
+                "updatedTime": {
+                    "description": "更新时间",
+                    "type": "string"
+                }
+            }
+        },
         "app.CategoryOption": {
             "type": "object",
             "properties": {
@@ -153,18 +1023,18 @@
                 }
             }
         },
-        "app.GoodsList": {
+        "app.GoodsDetail": {
             "type": "object",
             "properties": {
                 "brief": {
                     "description": "商品简介",
                     "type": "string"
                 },
-                "categoryId": {
+                "category_id": {
                     "description": "商品所属类目ID",
                     "type": "integer"
                 },
-                "counterPrice": {
+                "counter_price": {
                     "description": "专柜价格",
                     "type": "number"
                 },
@@ -179,15 +1049,15 @@
                 "id": {
                     "type": "integer"
                 },
-                "isHot": {
+                "is_hot": {
                     "description": "是否人气推荐，如果设置则可以在人气推荐页面展示",
                     "type": "integer"
                 },
-                "isNew": {
+                "is_new": {
                     "description": "是否新品首发，如果设置则可以在新品首发页面展示",
                     "type": "integer"
                 },
-                "isOnSale": {
+                "is_on_sale": {
                     "description": "是否上架",
                     "type": "integer"
                 },
@@ -199,20 +1069,246 @@
                     "description": "商品名称",
                     "type": "string"
                 },
-                "picUrl": {
+                "pic_url": {
                     "description": "商品页面商品图片",
                     "type": "string"
                 },
-                "retailPrice": {
+                "price": {
+                    "description": "线上价格",
+                    "type": "number"
+                },
+                "retail_price": {
                     "description": "零售价格",
                     "type": "number"
                 },
-                "sortOrder": {
+                "sort_order": {
                     "type": "integer"
                 },
                 "unit": {
                     "description": "商品单位，例如件、盒",
                     "type": "string"
+                }
+            }
+        },
+        "app.GoodsItem": {
+            "type": "object",
+            "properties": {
+                "count": {
+                    "type": "integer"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "pic_url": {
+                    "type": "string"
+                },
+                "price": {
+                    "type": "number"
+                }
+            }
+        },
+        "app.GoodsList": {
+            "type": "object",
+            "properties": {
+                "brief": {
+                    "description": "商品简介",
+                    "type": "string"
+                },
+                "category_id": {
+                    "description": "商品所属类目ID",
+                    "type": "integer"
+                },
+                "counter_price": {
+                    "description": "专柜价格",
+                    "type": "number"
+                },
+                "detail": {
+                    "description": "商品详细介绍，是富文本格式",
+                    "type": "string"
+                },
+                "gallery": {
+                    "description": "商品宣传图片列表，采用JSON数组格式",
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "is_hot": {
+                    "description": "是否人气推荐，如果设置则可以在人气推荐页面展示",
+                    "type": "integer"
+                },
+                "is_new": {
+                    "description": "是否新品首发，如果设置则可以在新品首发页面展示",
+                    "type": "integer"
+                },
+                "is_on_sale": {
+                    "description": "是否上架",
+                    "type": "integer"
+                },
+                "keywords": {
+                    "description": "商品关键字，采用逗号间隔",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "商品名称",
+                    "type": "string"
+                },
+                "pic_url": {
+                    "description": "商品页面商品图片",
+                    "type": "string"
+                },
+                "price": {
+                    "description": "线上价格",
+                    "type": "number"
+                },
+                "retail_price": {
+                    "description": "零售价格",
+                    "type": "number"
+                },
+                "sort_order": {
+                    "type": "integer"
+                },
+                "unit": {
+                    "description": "商品单位，例如件、盒",
+                    "type": "string"
+                }
+            }
+        },
+        "app.Order": {
+            "type": "object",
+            "properties": {
+                "actual_price": {
+                    "description": "实付费用， = order_price - integral_price",
+                    "type": "number"
+                },
+                "address": {
+                    "description": "收货具体地址",
+                    "type": "string"
+                },
+                "comments": {
+                    "description": "待评价订单商品数量",
+                    "type": "integer"
+                },
+                "confirm_time": {
+                    "description": "用户确认收货时间",
+                    "type": "string"
+                },
+                "consignee": {
+                    "description": "收货人名称",
+                    "type": "string"
+                },
+                "coupon_price": {
+                    "description": "优惠券减免",
+                    "type": "number"
+                },
+                "created_time": {
+                    "description": "创建时间",
+                    "type": "string"
+                },
+                "deleted": {
+                    "description": "逻辑删除",
+                    "type": "integer"
+                },
+                "deleted_time": {
+                    "description": "删除时间",
+                    "type": "string"
+                },
+                "dis_price": {
+                    "description": "配送费用",
+                    "type": "number"
+                },
+                "end_time": {
+                    "description": "订单关闭时间",
+                    "type": "string"
+                },
+                "goods_ids_count": {
+                    "description": "货品id列表",
+                    "type": "string"
+                },
+                "goods_price": {
+                    "description": "商品总费用",
+                    "type": "number"
+                },
+                "groupon_price": {
+                    "description": "团购优惠价减免",
+                    "type": "number"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "integral_price": {
+                    "description": "用户积分减免",
+                    "type": "number"
+                },
+                "message": {
+                    "description": "用户订单留言",
+                    "type": "string"
+                },
+                "mobile": {
+                    "description": "收货人手机号",
+                    "type": "string"
+                },
+                "open_id": {
+                    "description": "用户表的用户ID",
+                    "type": "string"
+                },
+                "order_price": {
+                    "description": "订单费用， = goods_price + dis_price - coupon_price",
+                    "type": "number"
+                },
+                "pay_id": {
+                    "description": "微信付款编号",
+                    "type": "string"
+                },
+                "pay_time": {
+                    "description": "微信付款时间",
+                    "type": "string"
+                },
+                "ship_channel": {
+                    "description": "发货快递公司",
+                    "type": "string"
+                },
+                "ship_sn": {
+                    "description": "发货编号",
+                    "type": "string"
+                },
+                "ship_time": {
+                    "description": "发货开始时间",
+                    "type": "string"
+                },
+                "status": {
+                    "description": "订单状态",
+                    "type": "integer"
+                },
+                "updated_time": {
+                    "description": "更新时间",
+                    "type": "string"
+                }
+            }
+        },
+        "app.OrderDetail": {
+            "type": "object",
+            "properties": {
+                "goods_count": {
+                    "type": "integer"
+                },
+                "goods_item": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/app.GoodsItem"
+                    }
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "stauts": {
+                    "type": "integer"
+                },
+                "total_price": {
+                    "type": "number"
                 }
             }
         },
