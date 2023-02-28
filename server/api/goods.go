@@ -47,6 +47,7 @@ func (g *AppGoods) GetGoodsDetail(c *gin.Context) {
 	param := app.GoodsDetailQueryParam{}
 	if err := c.ShouldBind(&param); err != nil {
 		response.Error(constant.ParamInvalid, c)
+		return
 	}
 	goodDetail := g.GetDetail(param)
 	response.Success(constant.Selected, goodDetail, c)
