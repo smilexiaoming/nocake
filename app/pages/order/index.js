@@ -59,12 +59,6 @@ Page({
       _this.getOrderList()
     });
   },
-
-  // 订单详情
-  OrderDetail(event){
-    console.log("event !!!!", event)
-    wx.navigateTo({url: '/pages/order/detail/index'+ event.currentTarget.id})
-  }
 })
 
   

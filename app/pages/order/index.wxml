@@ -4,7 +4,7 @@
       <view wx:if="{{orderList.length > 0}}" class="order-card-container">
         <view class="order-card" wx:for="{{orderList}}" wx:key="{{item.id}}">
           <view class="order-card_header">
-            <view>订单号 {{item.id}}</view>
+            <view>订单号 {{item.order_id}}</view>
             <view style="color: #12CAFF;font-weight: 400;" wx:if="{{item.status == 1}}">待付款</view>
             <view style="color: #4e4e4e;font-weight: 400;" wx:if="{{item.status == 2}}">已取消</view>
             <view style="color: #12CAFF;font-weight: 400;" wx:if="{{item.status == 3}}">已付款</view>
@@ -13,13 +13,13 @@
           </view>
           <view class="order-card_content" bindtap="OrderDetail">
             <view class="order-card_goods">
-              <view wx:for="{{item.goodsItem}}" wx:key="{{item.id}}">
+              <view wx:for="{{item.goods_item}}" wx:key="{{item.id}}">
                 <image src="{{item.pic_url}}" class="order-card_goods_image" />
               </view>
             </view>
             <view class="order-card_goods_value">
-              <view class="order-card_goods_price"><text style="font-size: 28rpx;padding-right:8rpx;">¥</text>{{item.goods_price}}</view>
-              <!-- <view class="order-card_goods_count">x{{item.goodsCount}} 件</view> -->
+              <view class="order-card_goods_price"><text style="font-size: 28rpx;padding-right:8rpx;">¥</text>{{item.total_price}}</view>
+              <view class="order-card_goods_count">x{{item.goods_count}} 件</view>
             </view>
           </view>
           <view class="order-card_footer">

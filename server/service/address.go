@@ -61,3 +61,9 @@ func (a *AppAddressService) GetList(param app.AddressListQueryParam) []app.Addre
 	global.Db.Debug().Table("t_address").Where("open_id = ? and deleted != 1", param.OpenId).Order("is_default desc").Find(&addressList)
 	return addressList
 }
+
+func (a *AppAddressService) GetDetail(param app.AddressQueryParam) app.Address {
+	address := app.Address{}
+	global.Db.Debug().Table("t_address").Where("id = ? and open_id = ?", param.Id, param.OpenId).Find(&address)
+	return address
+}

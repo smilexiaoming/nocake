@@ -64,6 +64,7 @@ func Router() {
 		app.POST("/address/update", api.GetAppAddress().UpdateAddress)
 		app.DELETE("/address/delete", api.GetAppAddress().DeleteAddress)
 		app.GET("/address/list", api.GetAppAddress().GetAddressList)
+		app.GET("/address/detail", api.GetAppAddress().GetAddressDetail)
 
 	}
 

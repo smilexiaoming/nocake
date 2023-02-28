@@ -18,7 +18,7 @@ func GetAppAddress() *AppAddress {
 }
 
 // @Summary 新增地址
-// @Description 
+// @Description
 // @Accept  multipart/form-data
 // @Produce  json
 // @Param name formData string true "收货人名称"
@@ -49,7 +49,7 @@ func (a *AppAddress) AddAddress(c *gin.Context) {
 }
 
 // @Summary 删除地址
-// @Description 
+// @Description
 // @Accept  multipart/form-data
 // @Produce  json
 // @Param address_id formData int true "地址id"
@@ -72,7 +72,7 @@ func (a *AppAddress) DeleteAddress(c *gin.Context) {
 }
 
 // @Summary 更改地址
-// @Description 
+// @Description
 // @Accept  multipart/form-data
 // @Produce  json
 // @Param name formData string true "收货人名称"
@@ -122,4 +122,24 @@ func (a *AppAddress) GetAddressList(c *gin.Context) {
 		return
 	}
 	response.Error(constant.NotSelected, c)
+}
+
+// @Summary 获取地址列表
+// @Description
+// @Accept  multipart/form-data
+// @Produce  json
+// @Param open_id formData string true "open_id"
+// @Param address_id formData string true "地址id"
+// @Success 200 {object} app.Address "请求成功"
+// @Failure 400 {object} response.Response "请求错误"
+// @Failure 500 {object} response.Response "内部错误"
+// @Router /app/address/detail [get]
+func (a *AppAddress) GetAddressDetail(c *gin.Context) {
+	param := app.AddressQueryParam{}
+	if err := c.Bind(&param); err != nil {
+		response.Error(constant.ParamInvalid, c)
+		return
+	}
+	addressInfo := a.GetDetail(param)
+	response.Success(constant.Selected, addressInfo, c)
 }
