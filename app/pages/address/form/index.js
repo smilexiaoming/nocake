@@ -13,10 +13,11 @@ Page({
     city: '',
     district: '',
     detailedAddress: '',
-    isDefault: 2,
+    isDefault: 0,
     area: '',
     show: false,
     checked: false,
+    submitType:"submit",
   },
 
   // 展示地区选择弹出框
@@ -29,7 +30,7 @@ Page({
     this.setData({ show: false });
     this.setData({ province: event.detail.values[0].name });
     this.setData({ city: event.detail.values[1].name });
-    this.setData({ district: event.detail.values[2].name });
+    this.setData({ county: event.detail.values[2].name });
     this.setData({ area: event.detail.values[0].name + " " + event.detail.values[1].name + " " + event.detail.values[2].name});
   },
 
@@ -49,19 +50,20 @@ Page({
   // 生命周期函数--监听页面加载
   async onLoad(options){
     if (options.id > 0){
-      let res = await http.GET('/address/info',{ id: options.id });
+      let res = await http.GET('/address/detail',{ id: options.id, open_id:wx.getStorageSync('open_id') });
       if(res.data.code === 200){
         var response = res.data.data;
         this.setData({
           id: response.id,
           name: response.name,
-          mobile: response.mobile,
+          tel: response.tel,
           province: response.province,
           city: response.city,
-          district: response.district,
-          detailedAddress: response.detailedAddress,
-          area: response.province + ' ' + response.city + ' ' + response.district,
-          isDefault: response.isDefault
+          county: response.county,
+          detail: response.detail,
+          area: response.province + ' ' + response.city + ' ' + response.county,
+          isDefault: response.is_default,
+          submitType:"update"
         })
         if (this.data.isDefault === 1){
           this.setData({ checked: true })
@@ -72,16 +74,16 @@ Page({
 
   // 保存地址
   async submitForm(options) {
-    let res = await http.POST('/address/save',{
-      id: this.data.id,
+    console.log("this.data.submitType ", this.data.submitType)
+    let res = await http.POST('/address/'+this.data.submitType,{
+      address_id: this.data.id,
       name: this.data.name,
-      mobile: this.data.mobile,
-      postalCode: this.data.postalCode,
+      tel: this.data.tel,
       province: this.data.province,
       city: this.data.city,
-      district: this.data.district,
-      detailedAddress: this.data.detailedAddress,
-      isDefault: this.data.isDefault,
+      county: this.data.county,
+      detail: this.data.detail,
+      is_default: this.data.isDefault,
       open_id: wx.getStorageSync('open_id')
     })
     if(res.data.code === 200){ 

@@ -11,7 +11,6 @@ Page({
 
   // 跳转到添加地址
   toAddForm: function(event) {
-    console.log("jump!!!")
     wx.navigateTo({ url: '/pages/address/form/index' })
   },
 
@@ -41,9 +40,7 @@ Page({
   
   // 删除收货地址
   async delete(event){
-    await http.DELETE('/address/delete',{
-      id: parseInt(event.currentTarget.id)
-    })
+    await http.DELETE('/address/delete?address_id='+event.currentTarget.id+"&open_id="+wx.getStorageSync('open_id'))
     this.onShow()
   }
 })
