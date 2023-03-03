@@ -2,14 +2,103 @@ package service
 
 import (
 	"encoding/json"
+	"nocake/common"
 	"nocake/global"
 	"nocake/models/app"
+	"nocake/models/web"
 	"strconv"
 	"strings"
 	"time"
 )
 
 type AppOrderService struct {
+}
+type WebOrderService struct {
+}
+
+// 删除订单
+func (o *WebOrderService) Delete(param web.OrderDeleteParam) int64 {
+	order := app.Order{
+		Deleted:     1,
+		DeletedTime: time.Now(),
+	}
+
+	return global.Db.Debug().Table("t_order").Where("id = ?", param.Id).Updates(order).RowsAffected
+}
+
+// 更新订单
+func (o *WebOrderService) Update(param web.OrderUpdateParam) int64 {
+	order := web.Order{
+		Id:          param.Id,
+		Status:      param.Status,
+		UpdatedTime: time.Now(),
+	}
+	return global.Db.Table("t_order").Model(&order).Updates(order).RowsAffected
+}
+
+// 获取订单列表
+func (o *WebOrderService) GetList(param web.OrderListParam) ([]web.OrderItem, int64) {
+	orders := make([]web.Order, 0)
+	query := &web.Order{
+		Status: param.Status,
+	}
+	rows := common.RestPage(param.Page, "t_order", query, &orders, &[]web.Order{})
+	orderList := make([]web.OrderItem, 0)
+	var user app.User
+	for _, o := range orders {
+		global.Db.Table("t_user").Where("open_id = ?", o.OpenId).First(&user)
+		order := web.OrderItem{
+			Id:            o.Id,
+			Avatar:        user.Avatar,
+			Nickname:      user.Nickname,
+			Username:      user.Username,
+			GoodsPrice:    o.GoodsPrice,
+			GoodsIdsCount: o.GoodsIdsCount,
+			GoodsCount:    o.GoodsCount,
+			Status:        o.Status,
+			CreatedTime:   o.CreatedTime,
+		}
+		orderList = append(orderList, order)
+	}
+	return orderList, rows
+}
+
+// 获取订单详情
+func (o *WebOrderService) GetDetail(param web.OrderDetailParam) (od web.OrderDetail) {
+	var order web.Order
+	// 查询订单信息
+	global.Db.Table("t_order").First(&order, param.Id)
+
+	goodIds := make([]string, 0)
+	goodsIdCount := make(map[string]string, 0)
+	err := json.Unmarshal([]byte(order.GoodsIdsCount), &goodsIdCount)
+	if err != nil {
+		return web.OrderDetail{}
+	}
+	goods := make([]app.Goods, 0)
+	goodsCount := 0
+	for k, v := range goodsIdCount {
+		goodIds = append(goodIds, k)
+		count, _ := strconv.Atoi(v)
+		goodsCount += count
+	}
+	orderDetail := web.OrderDetail{
+		Order: order,
+	}
+	global.Db.Debug().Table("t_goods").Find(&goods, goodIds)
+	for _, v := range goods {
+		idstr := strconv.Itoa(v.Id)
+		coutInt, _ := strconv.Atoi(goodsIdCount[idstr])
+		goodItem := web.GoodsItem{
+			Id:     v.Id,
+			Name:   v.Name,
+			Price:  v.Price,
+			PicUrl: v.PicUrl,
+			Count:  coutInt,
+		}
+		orderDetail.GoodsItem = append(orderDetail.GoodsItem, goodItem)
+	}
+	return orderDetail
 }
 
 func (o *AppOrderService) Update(param app.OrderUpdateParam) int64 {
@@ -71,6 +160,7 @@ func (o *AppOrderService) Submit(param app.OrderSubmitParam) int64 {
 		Address:       adressStr,
 		GoodsIdsCount: string(GoodsIdsCountInfo),
 		GoodsPrice:    cartInfo.TotalPrice,
+		GoodsCount:    cartInfo.TotalCart,
 		OpenId:        param.OpenId,
 		CreatedTime:   time.Now(),
 	}

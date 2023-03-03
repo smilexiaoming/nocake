@@ -96,7 +96,7 @@ definitions:
       retail_price:
         description: 零售价格
         type: number
-      sort_order:
+      weight:
         type: integer
       unit:
         description: 商品单位，例如件、盒
@@ -158,7 +158,7 @@ definitions:
       retail_price:
         description: 零售价格
         type: number
-      sort_order:
+      weight:
         type: integer
       unit:
         description: 商品单位，例如件、盒

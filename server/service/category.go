@@ -5,14 +5,96 @@ import (
 	"nocake/constant"
 	"nocake/global"
 	"nocake/models/app"
+	"nocake/models/web"
 	"strconv"
 	"strings"
 	"time"
 )
 
+type WebCategoryService struct {
+}
+
 type AppCategoryService struct {
 }
 
+// 获取树形结构的选项
+func getTreeOptions(id int, cateList []web.CategoryList) (option []web.CategoryOption) {
+	optionList := make([]web.CategoryOption, 0)
+	for _, opt := range cateList {
+		if opt.Pid == id && (opt.Level == 1 || opt.Level == 2) {
+			option := web.CategoryOption{
+				Value:    opt.Id,
+				Label:    opt.Name,
+				Children: getTreeOptions(opt.Id, cateList),
+			}
+			if opt.Level == 2 {
+				option.Children = nil
+			}
+			optionList = append(optionList, option)
+		}
+	}
+	return optionList
+}
+
+// 创建商品类目
+func (c *WebCategoryService) Create(param web.CategoryCreateParam) int64 {
+	category := web.Category{
+		Name:        param.Name,
+		Brief:       param.Brief,
+		Keywords:    param.Keywords,
+		Pid:         param.Pid,
+		Level:       param.Level,
+		IconUrl:     param.IconUrl,
+		Weight:      param.Weight,
+		CreatedTime: time.Now(),
+	}
+	return global.Db.Table("t_category").Create(&category).RowsAffected
+}
+
+// 删除商品类目
+func (c *WebCategoryService) Delete(param web.CategoryDeleteParam) int64 {
+	category := app.Category{
+		Deleted:     1,
+		DeletedTime: time.Now(),
+	}
+	return global.Db.Debug().Table("t_category").Where("id = ?", param.Id).Updates(category).RowsAffected
+
+}
+
+// 更新商品类目
+func (c *WebCategoryService) Update(param web.CategoryUpdateParam) int64 {
+	category := web.Category{
+		Id:          param.Id,
+		Name:        param.Name,
+		Brief:       param.Brief,
+		Keywords:    param.Keywords,
+		Pid:         param.Pid,
+		Level:       param.Level,
+		IconUrl:     param.IconUrl,
+		Weight:      param.Weight,
+		UpdatedTime: time.Now(),
+	}
+	return global.Db.Debug().Table("t_category").Model(&category).Updates(&category).RowsAffected
+}
+
+// 获取商品类目列表
+func (g *WebCategoryService) GetList(param web.CategoryQueryParam) []web.CategoryList {
+	query := &web.Category{
+		Name:  param.Name,
+		Pid:   param.Pid,
+		Level: param.Level,
+	}
+	categoryList := make([]web.CategoryList, 0)
+	global.Db.Debug().Table("t_category").Where(query).Find(&categoryList)
+	return categoryList
+}
+
+// 获取商品类目选项
+func (c *WebCategoryService) GetOption() (option []web.CategoryOption) {
+	selectList := make([]web.CategoryList, 0)
+	global.Db.Table("t_category").Find(&selectList)
+	return getTreeOptions(0, selectList)
+}
 func (c *AppCategoryService) GetOption(param app.CategoryQueryParam) (option []app.CategoryOption, errMessage string) {
 	pid := strconv.Itoa(param.Pid)
 	level := strconv.Itoa(param.Level)

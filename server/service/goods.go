@@ -1,11 +1,88 @@
 package service
 
 import (
+	"fmt"
+	"nocake/common"
 	"nocake/global"
 	"nocake/models/app"
+	"nocake/models/web"
+	"time"
 )
 
+type WebGoodsService struct {
+}
 type AppGoodsService struct {
+}
+
+// 创建商品
+func (g *WebGoodsService) Create(param web.GoodsCreateParam) int64 {
+	goods := web.Goods{
+		Name:        param.Name,
+		Brief:       param.Brief,
+		Detail:      param.Detail,
+		CategoryId:  param.CategoryId,
+		Keywords:    param.Keywords,
+		Status:      param.Status,
+		Weight:      param.Weight,
+		PicUrl:      param.PicUrl,
+		PicUrls:     param.PicUrls,
+		Unit:        param.Unit,
+		Price:       param.Price,
+		CreatedTime: time.Now(),
+	}
+	return global.Db.Table("t_goods").Create(&goods).RowsAffected
+}
+
+// 删除商品
+func (g *WebGoodsService) Delete(param web.GoodsDeleteParam) int64 {
+	goods := app.Goods{
+		Deleted:     1,
+		DeletedTime: time.Now(),
+	}
+	return global.Db.Debug().Table("t_goods").Where("id = ?", param.Id).Updates(goods).RowsAffected
+}
+
+// 更新商品
+func (g *WebGoodsService) Update(param web.GoodsUpdateParam) int64 {
+	goods := web.Goods{
+		Id:          param.Id,
+		Name:        param.Name,
+		Brief:       param.Brief,
+		Detail:      param.Detail,
+		CategoryId:  param.CategoryId,
+		Keywords:    param.Keywords,
+		Status:      param.Status,
+		Weight:      param.Weight,
+		PicUrl:      param.PicUrl,
+		PicUrls:     param.PicUrls,
+		Unit:        param.Unit,
+		Price:       param.Price,
+		UpdatedTime: time.Now(),
+	}
+	return global.Db.Table("t_goods").Model(&goods).Updates(goods).RowsAffected
+}
+
+// 更新商品状态
+func (g *WebGoodsService) UpdateStatus(param web.GoodsStatusUpdateParam) int64 {
+	goods := web.Goods{
+		Id:     param.Id,
+		Status: param.Status,
+	}
+	return global.Db.Table("t_goods").Model(&goods).Update("status", goods.Status).RowsAffected
+}
+
+// 获取商品列表
+func (g *WebGoodsService) GetList(param web.GoodsListParam) ([]web.GoodsList, int64) {
+	query := &web.Goods{
+		Id:         param.Id,
+		CategoryId: param.CategoryId,
+		Name:       param.Name,
+		Status:     param.Status,
+	}
+	goodsList := make([]web.GoodsList, 0)
+	fmt.Printf("param: %v\n", param)
+	rows := common.RestPage(param.Page, "t_goods", query, &goodsList, &[]web.Goods{})
+	return goodsList, rows
 }
 
 func (g *AppGoodsService) GetList(param app.GoodsListQueryParam) []app.GoodsList {

@@ -11,7 +11,7 @@ type Goods struct {
 	Gallery      string    `gorm:"gallery"`     // 商品宣传图片列表，采用JSON数组格式
 	Keywords     string    `gorm:"keywords"`    // 商品关键字，采用逗号间隔
 	IsOnSale     int       `gorm:"is_on_sale"`  // 是否上架
-	Sororder     int       `gorm:"sort_order"`
+	Weight       int       `gorm:"weight"`
 	PicUrl       string    `gorm:"pic_url"`       // 商品页面商品图片
 	ShareUrl     string    `gorm:"share_url"`     // 商品分享朋友圈图片
 	IsNew        int       `gorm:"is_new"`        // 是否新品首发，如果设置则可以在新品首发页面展示
@@ -43,7 +43,7 @@ type GoodsList struct {
 	Gallery      string  `json:"gallery"`     // 商品宣传图片列表，采用JSON数组格式
 	Keywords     string  `json:"keywords"`    // 商品关键字，采用逗号间隔
 	IsOnSale     int     `json:"is_on_sale"`  // 是否上架
-	SortOrder    int     `json:"sort_order"`
+	Weight       int     `json:"weight"`
 	PicUrl       string  `json:"pic_url"`       // 商品页面商品图片
 	IsNew        int     `json:"is_new"`        // 是否新品首发，如果设置则可以在新品首发页面展示
 	IsHot        int     `json:"is_hot"`        // 是否人气推荐，如果设置则可以在人气推荐页面展示
@@ -68,7 +68,7 @@ type GoodsDetail struct {
 	Gallery      string  `json:"gallery"`     // 商品宣传图片列表，采用JSON数组格式
 	Keywords     string  `json:"keywords"`    // 商品关键字，采用逗号间隔
 	IsOnSale     int     `json:"is_on_sale"`  // 是否上架
-	SortOrder    int     `json:"sort_order"`
+	Weight       int     `json:"weight"`
 	PicUrl       string  `json:"pic_url"`       // 商品页面商品图片
 	IsNew        int     `json:"is_new"`        // 是否新品首发，如果设置则可以在新品首发页面展示
 	IsHot        int     `json:"is_hot"`        // 是否人气推荐，如果设置则可以在人气推荐页面展示

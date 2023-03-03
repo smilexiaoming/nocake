@@ -6,12 +6,24 @@ import (
 	"net/http"
 	"nocake/global"
 	"nocake/models/app"
+	"nocake/models/web"
 	"time"
 )
+
+type UserService struct {
+}
 
 type AppUserService struct {
 }
 
+// 商家用户登录
+func (u *UserService) Login(param web.LoginParam) uint64 {
+	var user web.User
+	global.Db.Table("t_web_user").Where("username = ? and password = ?", param.Username, param.Password).First(&user)
+	return uint64(user.Id)
+}
+
+// 小程序登录
 func (u *AppUserService) Login(code string) (*app.UserInfo, string) {
 	var acsJson app.Code2SessionResult
 	acs := app.Code2Session{

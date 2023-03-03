@@ -1093,7 +1093,7 @@ const docTemplate = `{
                     "description": "零售价格",
                     "type": "number"
                 },
-                "sort_order": {
+                "weight": {
                     "type": "integer"
                 },
                 "unit": {
@@ -1180,7 +1180,7 @@ const docTemplate = `{
                     "description": "零售价格",
                     "type": "number"
                 },
-                "sort_order": {
+                "weight": {
                     "type": "integer"
                 },
                 "unit": {

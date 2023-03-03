@@ -11,7 +11,7 @@ type Category struct {
 	IconUrl     string    `gorm:"icon_url"`     // 类目图标
 	PicUrl      string    `gorm:"pic_url"`      // 类目图片
 	Level       int       `gorm:"level"`        // 类目层级
-	Sororder    int       `gorm:"sort_order"`   // 排序
+	Weight      int       `gorm:"weight"`       // 排序
 	Deleted     int       `gorm:"deleted"`      // 逻辑删除
 	CreatedTime time.Time `gorm:"created_time"` // 创建时间
 	UpdatedTime time.Time `gorm:"updated_time"` // 更新时间

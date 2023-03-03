@@ -3,24 +3,18 @@ DROP TABLE IF EXISTS t_user;
 CREATE TABLE `t_user` (
     `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
     `open_id` varchar(63) NOT NULL DEFAULT "" COMMENT '微信登录openid',
-    `wx_id` varchar(63) NOT NULL DEFAULT "" NULL COMMENT '用户原始微信id',
-    `username` varchar(63) NOT NULL DEFAULT "" COMMENT '用户名称',
     `nickname` varchar(63) NOT NULL DEFAULT "" COMMENT '用户昵称',
-    `password` varchar(63) NOT NULL DEFAULT "" COMMENT '用户密码',
-    `status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0 可用, 1 禁用, 2 注销',
+    `avatar` varchar(255) NOT NULL DEFAULT "" COMMENT '用户头像图片',
     `gender` tinyint(1) NOT NULL DEFAULT '0' COMMENT '性别：0 未知， 1男， 1 女',
     `birthday` varchar(20) NOT NULL DEFAULT '0' COMMENT '生日',
     `last_login_time` timestamp DEFAULT NULL COMMENT '最近一次登录时间',
-    `last_login_ip` varchar(63) NOT NULL DEFAULT "" COMMENT '最近一次登录IP地址',
     `user_level` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0 普通用户，1 VIP用户，2 高级VIP用户',
-    `mobile` varchar(20) NOT NULL COMMENT '用户手机号码',
-    `avatar` varchar(255) NOT NULL COMMENT '用户头像图片',
-    `session_key` varchar(100) NOT NULL DEFAULT "" COMMENT '微信登录会话KEY',
+    `tel` varchar(20) NOT NULL DEFAULT "" COMMENT '用户手机号码',
     `deleted` tinyint(1) NOT NULL DEFAULT '0' COMMENT '逻辑删除',
     `created_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `updated_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     `deleted_time` timestamp DEFAULT NULL COMMENT '删除时间',
-    UNIQUE KEY `username` (`username`),
+    KEY `open_id` (`open_id`),
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB COMMENT '微信商城小程序-用户表';
 
@@ -28,121 +22,97 @@ DROP TABLE IF EXISTS t_category;
 CREATE TABLE `t_category` (
     `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
     `name` varchar(63) NOT NULL DEFAULT "" COMMENT '类目名称',
+    `brief` varchar(255) NOT NULL DEFAULT "" COMMENT '类目简介',
     `keywords` varchar(1023) NOT NULL DEFAULT "" COMMENT '类目关键字，以JSON数组格式',
-    `desc` varchar(255) NOT NULL DEFAULT "" COMMENT '类目广告语介绍',
     `pid` int(11) NOT NULL DEFAULT '0' COMMENT '父类目ID',
-    `icon_url` varchar(255) NOT NULL DEFAULT "" COMMENT '类目图标',
-    `pic_url` varchar(255) NOT NULL DEFAULT "" COMMENT '类目图片',
     `level` tinyint(1) NOT NULL DEFAULT '1' COMMENT '类目层级',
-    `sort_order` tinyint(3) NOT NULL DEFAULT '50' COMMENT '排序',
+    `icon_url` varchar(255) NOT NULL DEFAULT "" COMMENT '类目图标',
+    `weight` tinyint NOT NULL DEFAULT '50' COMMENT '排序',
     `deleted` tinyint(1) NOT NULL DEFAULT '0' COMMENT '逻辑删除',
     `created_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `updated_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     `deleted_time` timestamp DEFAULT NULL COMMENT '删除时间',
-    KEY `pid` (`pid`),
+    KEY `uk_pid_level` (`pid`,`level`),
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB COMMENT '微信商城小程序-类目表';
 
-INSERT INTO `t_category` (`id`, `name`, `keywords`, `desc`, `pid`, `icon_url`, `pic_url`, `level`) VALUES (1, '蛋糕', '{"受众":"大众"}', "蛋糕，大家都喜欢", 0, 'http://tubiao.png', 'http://tupian.png', "1");
-INSERT INTO `t_category` (`id`, `name`, `keywords`, `desc`, `pid`, `icon_url`, `pic_url`, `level`) VALUES (2, '甜品', '{"受众":"小众"}', "甜品，少数人喜欢", 0, 'http://tubiao.png', 'http://tupian.png', "1");
+INSERT INTO `t_category` (`id`, `name`, `keywords`, `brief`, `pid`, `icon_url`, `level`) VALUES (1, '蛋糕', '{"受众":"大众"}', "蛋糕，大家都喜欢", 0, 'http://tubiao.png', "1");
+INSERT INTO `t_category` (`id`, `name`, `keywords`, `brief`, `pid`, `icon_url`, `level`) VALUES (2, '甜品', '{"受众":"小众"}', "甜品，少数人喜欢", 0, 'http://tubiao.png', "1");
 
 DROP TABLE IF EXISTS t_goods;
 CREATE TABLE `t_goods` (
     `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
     `name` varchar(127) NOT NULL DEFAULT "" COMMENT '商品名称',
-    `brief` varchar(255) NOT NULL DEFAULT "" COMMENT '商品简介',
+    `brief` varchar(1023) NOT NULL DEFAULT "" COMMENT '商品简介',
     `detail` text NULL COMMENT '商品详细介绍，是富文本格式',
     `category_id` int(11) NOT NULL DEFAULT '0' COMMENT '商品所属类目ID',
-    `gallery` varchar(1023) NOT NULL DEFAULT "" COMMENT '商品宣传图片列表，采用JSON数组格式',
     `keywords` varchar(255) NOT NULL DEFAULT "" COMMENT '商品关键字，采用逗号间隔',
-    `is_on_sale` tinyint(1) NOT NULL DEFAULT '1' COMMENT '是否上架',
-    `sort_order` smallint(4) NOT NULL DEFAULT '100' COMMENT '',
-    `pic_url` varchar(255) NOT NULL DEFAULT "" COMMENT '商品页面商品图片',
-    `share_url` varchar(255) NOT NULL DEFAULT "" COMMENT '商品分享朋友圈图片',
-    `is_new` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否新品首发，如果设置则可以在新品首发页面展示',
-    `is_hot` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否人气推荐，如果设置则可以在人气推荐页面展示',
+    `status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '状态',
+    `weight` tinyint(1) NOT NULL DEFAULT '100' COMMENT '',
+    `pic_url` varchar(255) NOT NULL DEFAULT "" COMMENT '商品主图',
+    `pic_urls` varchar(1023) NOT NULL DEFAULT "" COMMENT '商品附图JSON数组格式',
     `unit` varchar(31) NOT NULL DEFAULT '个' COMMENT '商品单位，例如件、盒',
-    `counter_price` decimal(10, 2) NOT NULL DEFAULT '100000.00' COMMENT '专柜价格',
-    `retail_price` decimal(10, 2) NOT NULL DEFAULT '100000.00' COMMENT '零售价格',
-    `price` decimal(10, 2) NOT NULL DEFAULT '100000.00' COMMENT '线上价格',
+    `price` decimal(10, 2) NOT NULL DEFAULT '100000.00' COMMENT '价格',
     `deleted` tinyint(1) NOT NULL DEFAULT '0' COMMENT '逻辑删除',
     `created_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `updated_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     `deleted_time` timestamp DEFAULT NULL COMMENT '删除时间',
     KEY `category_id` (`category_id`),
-    KEY `sort_order` (`sort_order`),
+    KEY `weight` (`weight`),
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB COMMENT '微信商城小程序-商品基本信息表';
 
-INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `gallery`, `keywords`, `price`, `pic_url`) VALUES (1, '水果蛋糕1', '很多水果', "丰富原材料", 1, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕", "128","http://1.14.106.241/images/cake.png");
-INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `gallery`, `keywords`, `price`, `pic_url`) VALUES (2, '水果蛋糕2', '很多水果', "丰富原材料", 1, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕", "128","http://1.14.106.241/images/cake.png");
-INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `gallery`, `keywords`, `price`, `pic_url`) VALUES (3, '水果蛋糕3', '很多水果', "丰富原材料", 1, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕", "128","http://1.14.106.241/images/cake.png");
-INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `gallery`, `keywords`, `price`, `pic_url`) VALUES (4, '水果蛋糕4', '很多水果', "丰富原材料", 1, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕", "128","http://1.14.106.241/images/cake.png");
-INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `gallery`, `keywords`, `price`, `pic_url`) VALUES (5, '水果蛋糕5', '很多水果', "丰富原材料", 1, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕", "128","http://1.14.106.241/images/cake.png");
-INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `gallery`, `keywords`, `price`, `pic_url`) VALUES (6, '水果蛋糕6', '很多水果', "丰富原材料", 1, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕", "128","http://1.14.106.241/images/cake.png");
-INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `gallery`, `keywords`, `price`, `pic_url`) VALUES (7, '水果蛋糕7', '很多水果', "丰富原材料", 1, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕", "128","http://1.14.106.241/images/cake.png");
-INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `gallery`, `keywords`, `price`, `pic_url`) VALUES (8, '水果蛋糕8', '很多水果', "丰富原材料", 1, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕", "128","http://1.14.106.241/images/cake.png");
-INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `gallery`, `keywords`, `price`, `pic_url`) VALUES (9, '水果蛋糕9', '很多水果', "丰富原材料", 1, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕", "128","http://1.14.106.241/images/cake.png");
-INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `gallery`, `keywords`, `price`, `pic_url`) VALUES (10, '水果蛋糕10', '很多水果', "丰富原材料", 1, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕", "128","http://1.14.106.241/images/cake.png");
-INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `gallery`, `keywords`, `price`, `pic_url`) VALUES (11, '水果蛋糕11', '很多水果', "丰富原材料", 1, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕", "128","http://1.14.106.241/images/cake.png");
-INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `gallery`, `keywords`, `price`, `pic_url`) VALUES (12, '水果蛋糕12', '很多水果', "丰富原材料", 1, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕", "128","http://1.14.106.241/images/cake.png");
-INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `gallery`, `keywords`, `price`, `pic_url`) VALUES (13, '水果蛋糕13', '很多水果', "丰富原材料", 1, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕", "128","http://1.14.106.241/images/cake.png");
-INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `gallery`, `keywords`, `price`, `pic_url`) VALUES (14, '水果蛋糕14', '很多水果', "丰富原材料", 1, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕", "128","http://1.14.106.241/images/cake.png");
-INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `gallery`, `keywords`, `price`, `pic_url`) VALUES (15, '水果蛋糕15', '很多水果', "丰富原材料", 1, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕", "128","http://1.14.106.241/images/cake.png");
-INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `gallery`, `keywords`, `price`, `pic_url`) VALUES (16, '水果蛋糕16', '很多水果', "丰富原材料", 1, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕", "128","http://1.14.106.241/images/cake.png");
-INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `gallery`, `keywords`, `price`, `pic_url`) VALUES (17, '水果蛋糕17', '很多水果', "丰富原材料", 1, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕", "128","http://1.14.106.241/images/cake.png");
-INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `gallery`, `keywords`, `price`, `pic_url`) VALUES (18, '水果蛋糕18', '很多水果', "丰富原材料", 1, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕", "128","http://1.14.106.241/images/cake.png");
-INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `gallery`, `keywords`, `price`, `pic_url`) VALUES (19, '水果蛋糕19', '很多水果', "丰富原材料", 1, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕", "128","http://1.14.106.241/images/cake.png");
-INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `gallery`, `keywords`, `price`, `pic_url`) VALUES (20, '水果蛋糕20', '很多水果', "丰富原材料", 1, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕", "128","http://1.14.106.241/images/cake.png");
-INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `gallery`, `keywords`, `price`,`pic_url`) VALUES (21, '甜品1', '很多水果', "丰富原材料", 2, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕", "128","http://1.14.106.241/images/cake.png");
-INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `gallery`, `keywords`, `price`,`pic_url`) VALUES (22, '甜品2', '很多水果', "丰富原材料", 2, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕", "128","http://1.14.106.241/images/cake.png");
-INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `gallery`, `keywords`, `price`,`pic_url`) VALUES (23, '甜品3', '很多水果', "丰富原材料", 2, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕", "128","http://1.14.106.241/images/cake.png");
-INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `gallery`, `keywords`, `price`,`pic_url`) VALUES (24, '甜品4', '很多水果', "丰富原材料", 2, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕", "128","http://1.14.106.241/images/cake.png");
-INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `gallery`, `keywords`, `price`,`pic_url`) VALUES (25, '甜品5', '很多水果', "丰富原材料", 2, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕", "128","http://1.14.106.241/images/cake.png");
-INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `gallery`, `keywords`, `price`,`pic_url`) VALUES (26, '甜品6', '很多水果', "丰富原材料", 2, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕", "128","http://1.14.106.241/images/cake.png");
-INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `gallery`, `keywords`, `price`,`pic_url`) VALUES (27, '甜品7', '很多水果', "丰富原材料", 2, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕", "128","http://1.14.106.241/images/cake.png");
-INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `gallery`, `keywords`, `price`,`pic_url`) VALUES (28, '甜品8', '很多水果', "丰富原材料", 2, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕", "128","http://1.14.106.241/images/cake.png");
-INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `gallery`, `keywords`, `price`,`pic_url`) VALUES (29, '甜品9', '很多水果', "丰富原材料", 2, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕", "128","http://1.14.106.241/images/cake.png");
-INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `gallery`, `keywords`, `price`,`pic_url`) VALUES (30, '甜品10', '很多水果', "丰富原材料", 2, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕", "128","http://1.14.106.241/images/cake.png");
-INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `gallery`, `keywords`, `price`,`pic_url`) VALUES (31, '甜品11', '很多水果', "丰富原材料", 2, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕", "128","http://1.14.106.241/images/cake.png");
-INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `gallery`, `keywords`, `price`,`pic_url`) VALUES (32, '甜品12', '很多水果', "丰富原材料", 2, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕", "128","http://1.14.106.241/images/cake.png");
-INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `gallery`, `keywords`, `price`,`pic_url`) VALUES (33, '甜品13', '很多水果', "丰富原材料", 2, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕", "128","http://1.14.106.241/images/cake.png");
-INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `gallery`, `keywords`, `price`,`pic_url`) VALUES (34, '甜品14', '很多水果', "丰富原材料", 2, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕", "128","http://1.14.106.241/images/cake.png");
-INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `gallery`, `keywords`, `price`,`pic_url`) VALUES (35, '甜品15', '很多水果', "丰富原材料", 2, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕", "128","http://1.14.106.241/images/cake.png");
-INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `gallery`, `keywords`, `price`,`pic_url`) VALUES (36, '甜品16', '很多水果', "丰富原材料", 2, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕", "128","http://1.14.106.241/images/cake.png");
-INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `gallery`, `keywords`, `price`,`pic_url`) VALUES (37, '甜品17', '很多水果', "丰富原材料", 2, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕", "128","http://1.14.106.241/images/cake.png");
-INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `gallery`, `keywords`, `price`,`pic_url`) VALUES (38, '甜品18', '很多水果', "丰富原材料", 2, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕", "128","http://1.14.106.241/images/cake.png");
-INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `gallery`, `keywords`, `price`,`pic_url`) VALUES (39, '甜品19', '很多水果', "丰富原材料", 2, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕", "128","http://1.14.106.241/images/cake.png");
-INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `gallery`, `keywords`, `price`,`pic_url`) VALUES (40, '甜品20', '很多水果', "丰富原材料", 2, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕", "128","http://1.14.106.241/images/cake.png");
-
--- DROP TABLE IF EXISTS t_cart;
--- CREATE TABLE `t_cart` (
---     `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
---     `open_id` varchar(63) NOT NULL DEFAULT "" COMMENT '用户表的用户ID',
---     `goods_id` int(11) NULL COMMENT '商品表的商品ID',
---     `goods_name` varchar(127) NULL COMMENT '商品名称',
---     `price` decimal(10, 2) NULL DEFAULT '0.00' COMMENT '商品货品的价格',
---     `cart_number` smallint(5) NULL DEFAULT '0' COMMENT '商品货品的数量',
---     `specifications` varchar(1023) NULL COMMENT '商品规格值列表，采用JSON数组格式',
---     `checked` tinyint(1) NULL DEFAULT '1' COMMENT '购物车中商品是否选择状态',
---     `pic_url` varchar(255) NULL COMMENT '商品图片或者商品货品图片',
---     `deleted` tinyint(1) NULL DEFAULT '0' COMMENT '逻辑删除',
---     `created_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
---     `updated_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
---     `deleted_time` timestamp DEFAULT NULL COMMENT '删除时间',
---     PRIMARY KEY (`id`)
--- ) ENGINE = InnoDB COMMENT '微信商城小程序-购物车商品表';
+INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `pic_urls`, `keywords`, `price`, `pic_url`) VALUES (1, '水果蛋糕1', '很多水果', "丰富原材料", 1, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕", "128","http://1.14.106.241/images/cake.png");
+INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `pic_urls`, `keywords`, `price`, `pic_url`) VALUES (2, '水果蛋糕2', '很多水果', "丰富原材料", 1, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕", "128","http://1.14.106.241/images/cake.png");
+INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `pic_urls`, `keywords`, `price`, `pic_url`) VALUES (3, '水果蛋糕3', '很多水果', "丰富原材料", 1, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕", "128","http://1.14.106.241/images/cake.png");
+INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `pic_urls`, `keywords`, `price`, `pic_url`) VALUES (4, '水果蛋糕4', '很多水果', "丰富原材料", 1, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕", "128","http://1.14.106.241/images/cake.png");
+INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `pic_urls`, `keywords`, `price`, `pic_url`) VALUES (5, '水果蛋糕5', '很多水果', "丰富原材料", 1, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕", "128","http://1.14.106.241/images/cake.png");
+INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `pic_urls`, `keywords`, `price`, `pic_url`) VALUES (6, '水果蛋糕6', '很多水果', "丰富原材料", 1, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕", "128","http://1.14.106.241/images/cake.png");
+INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `pic_urls`, `keywords`, `price`, `pic_url`) VALUES (7, '水果蛋糕7', '很多水果', "丰富原材料", 1, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕", "128","http://1.14.106.241/images/cake.png");
+INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `pic_urls`, `keywords`, `price`, `pic_url`) VALUES (8, '水果蛋糕8', '很多水果', "丰富原材料", 1, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕", "128","http://1.14.106.241/images/cake.png");
+INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `pic_urls`, `keywords`, `price`, `pic_url`) VALUES (9, '水果蛋糕9', '很多水果', "丰富原材料", 1, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕", "128","http://1.14.106.241/images/cake.png");
+INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `pic_urls`, `keywords`, `price`, `pic_url`) VALUES (10, '水果蛋糕10', '很多水果', "丰富原材料", 1, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕", "128","http://1.14.106.241/images/cake.png");
+INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `pic_urls`, `keywords`, `price`, `pic_url`) VALUES (11, '水果蛋糕11', '很多水果', "丰富原材料", 1, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕", "128","http://1.14.106.241/images/cake.png");
+INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `pic_urls`, `keywords`, `price`, `pic_url`) VALUES (12, '水果蛋糕12', '很多水果', "丰富原材料", 1, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕", "128","http://1.14.106.241/images/cake.png");
+INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `pic_urls`, `keywords`, `price`, `pic_url`) VALUES (13, '水果蛋糕13', '很多水果', "丰富原材料", 1, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕", "128","http://1.14.106.241/images/cake.png");
+INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `pic_urls`, `keywords`, `price`, `pic_url`) VALUES (14, '水果蛋糕14', '很多水果', "丰富原材料", 1, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕", "128","http://1.14.106.241/images/cake.png");
+INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `pic_urls`, `keywords`, `price`, `pic_url`) VALUES (15, '水果蛋糕15', '很多水果', "丰富原材料", 1, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕", "128","http://1.14.106.241/images/cake.png");
+INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `pic_urls`, `keywords`, `price`, `pic_url`) VALUES (16, '水果蛋糕16', '很多水果', "丰富原材料", 1, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕", "128","http://1.14.106.241/images/cake.png");
+INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `pic_urls`, `keywords`, `price`, `pic_url`) VALUES (17, '水果蛋糕17', '很多水果', "丰富原材料", 1, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕", "128","http://1.14.106.241/images/cake.png");
+INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `pic_urls`, `keywords`, `price`, `pic_url`) VALUES (18, '水果蛋糕18', '很多水果', "丰富原材料", 1, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕", "128","http://1.14.106.241/images/cake.png");
+INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `pic_urls`, `keywords`, `price`, `pic_url`) VALUES (19, '水果蛋糕19', '很多水果', "丰富原材料", 1, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕", "128","http://1.14.106.241/images/cake.png");
+INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `pic_urls`, `keywords`, `price`, `pic_url`) VALUES (20, '水果蛋糕20', '很多水果', "丰富原材料", 1, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕", "128","http://1.14.106.241/images/cake.png");
+INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `pic_urls`, `keywords`, `price`,`pic_url`) VALUES (21, '甜品1', '很多水果', "丰富原材料", 2, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕", "128","http://1.14.106.241/images/cake.png");
+INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `pic_urls`, `keywords`, `price`,`pic_url`) VALUES (22, '甜品2', '很多水果', "丰富原材料", 2, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕", "128","http://1.14.106.241/images/cake.png");
+INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `pic_urls`, `keywords`, `price`,`pic_url`) VALUES (23, '甜品3', '很多水果', "丰富原材料", 2, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕", "128","http://1.14.106.241/images/cake.png");
+INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `pic_urls`, `keywords`, `price`,`pic_url`) VALUES (24, '甜品4', '很多水果', "丰富原材料", 2, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕", "128","http://1.14.106.241/images/cake.png");
+INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `pic_urls`, `keywords`, `price`,`pic_url`) VALUES (25, '甜品5', '很多水果', "丰富原材料", 2, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕", "128","http://1.14.106.241/images/cake.png");
+INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `pic_urls`, `keywords`, `price`,`pic_url`) VALUES (26, '甜品6', '很多水果', "丰富原材料", 2, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕", "128","http://1.14.106.241/images/cake.png");
+INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `pic_urls`, `keywords`, `price`,`pic_url`) VALUES (27, '甜品7', '很多水果', "丰富原材料", 2, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕", "128","http://1.14.106.241/images/cake.png");
+INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `pic_urls`, `keywords`, `price`,`pic_url`) VALUES (28, '甜品8', '很多水果', "丰富原材料", 2, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕", "128","http://1.14.106.241/images/cake.png");
+INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `pic_urls`, `keywords`, `price`,`pic_url`) VALUES (29, '甜品9', '很多水果', "丰富原材料", 2, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕", "128","http://1.14.106.241/images/cake.png");
+INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `pic_urls`, `keywords`, `price`,`pic_url`) VALUES (30, '甜品10', '很多水果', "丰富原材料", 2, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕", "128","http://1.14.106.241/images/cake.png");
+INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `pic_urls`, `keywords`, `price`,`pic_url`) VALUES (31, '甜品11', '很多水果', "丰富原材料", 2, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕", "128","http://1.14.106.241/images/cake.png");
+INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `pic_urls`, `keywords`, `price`,`pic_url`) VALUES (32, '甜品12', '很多水果', "丰富原材料", 2, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕", "128","http://1.14.106.241/images/cake.png");
+INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `pic_urls`, `keywords`, `price`,`pic_url`) VALUES (33, '甜品13', '很多水果', "丰富原材料", 2, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕", "128","http://1.14.106.241/images/cake.png");
+INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `pic_urls`, `keywords`, `price`,`pic_url`) VALUES (34, '甜品14', '很多水果', "丰富原材料", 2, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕", "128","http://1.14.106.241/images/cake.png");
+INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `pic_urls`, `keywords`, `price`,`pic_url`) VALUES (35, '甜品15', '很多水果', "丰富原材料", 2, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕", "128","http://1.14.106.241/images/cake.png");
+INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `pic_urls`, `keywords`, `price`,`pic_url`) VALUES (36, '甜品16', '很多水果', "丰富原材料", 2, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕", "128","http://1.14.106.241/images/cake.png");
+INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `pic_urls`, `keywords`, `price`,`pic_url`) VALUES (37, '甜品17', '很多水果', "丰富原材料", 2, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕", "128","http://1.14.106.241/images/cake.png");
+INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `pic_urls`, `keywords`, `price`,`pic_url`) VALUES (38, '甜品18', '很多水果', "丰富原材料", 2, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕", "128","http://1.14.106.241/images/cake.png");
+INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `pic_urls`, `keywords`, `price`,`pic_url`) VALUES (39, '甜品19', '很多水果', "丰富原材料", 2, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕", "128","http://1.14.106.241/images/cake.png");
+INSERT INTO `t_goods` (`id`, `name`, `brief`, `detail`, `category_id`, `pic_urls`, `keywords`, `price`,`pic_url`) VALUES (40, '甜品20', '很多水果', "丰富原材料", 2, '["http://tubiao.png","http://tubiao1.png"]', "大众,水果,蛋糕", "128","http://1.14.106.241/images/cake.png");
 DROP TABLE IF EXISTS t_order;
 CREATE TABLE `t_order` (
     `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
     `open_id` varchar(63) NOT NULL DEFAULT "" COMMENT '用户表的用户ID',
     `goods_ids_count`varchar(1023) NOT NULL DEFAULT "" COMMENT '货品id数量json',
     `status` smallint(6) NOT NULL DEFAULT '1' COMMENT '订单状态 1已提交 2已完成 3撤销 4已接单不可撤销 ',
-    `consignee` varchar(63) NOT NULL DEFAULT "" COMMENT '收货人名称',
-    `mobile` varchar(63) NOT NULL DEFAULT "" COMMENT '收货人手机号',
+    `sub_status` smallint(6) NOT NULL DEFAULT '1' COMMENT '订单子状态 1已提交 2已完成 3撤销 4已接单不可撤销 ',
     `address` varchar(1023) NOT NULL  DEFAULT "" COMMENT '收货具体地址',
     `message` varchar(512) NOT NULL  DEFAULT "" COMMENT '用户订单留言',
     `goods_price` decimal(10, 2) NOT NULL DEFAULT "100000.00" COMMENT '商品总费用',
+    `goods_count` tinyint NOT NULL DEFAULT "0" COMMENT '商品总数量',
     `coupon_price` decimal(10, 2) NOT NULL DEFAULT "0.00" COMMENT '优惠券减免',
     `dis_price` decimal(10, 2) NOT NULL DEFAULT "100000.00" COMMENT '配送费用',
     `integral_price` decimal(10, 2) NOT NULL DEFAULT "0.00" COMMENT '用户积分减免',
@@ -151,11 +121,10 @@ CREATE TABLE `t_order` (
     `actual_price` decimal(10, 2) NOT NULL DEFAULT "100000.00" COMMENT '实付费用， = order_price - integral_price',
     `pay_id` varchar(63) NOT NULL DEFAULT "" COMMENT '微信付款编号',
     `pay_time` timestamp DEFAULT NULL COMMENT '微信付款时间',
-    `ship_sn` varchar(63) NOT NULL DEFAULT "" COMMENT '发货编号',
-    `ship_channel` varchar(63) NOT NULL DEFAULT "" COMMENT '发货快递公司',
+    `ship_sn` varchar(63) NOT NULL DEFAULT "" COMMENT '外卖订单',
+    `ship_channel` tinyint NOT NULL DEFAULT "0" COMMENT '外卖平台',
     `ship_time` timestamp NULL COMMENT '发货开始时间',
     `confirm_time` timestamp NULL COMMENT '用户确认收货时间',
-    `comments` smallint(6) NOT NULL DEFAULT '0' COMMENT '待评价订单商品数量',
     `end_time` timestamp NULL COMMENT '订单关闭时间',
     `deleted` tinyint(1) NOT NULL DEFAULT '0' COMMENT '逻辑删除',
     `created_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
@@ -172,8 +141,6 @@ CREATE TABLE `t_address` (
     `city` varchar(63) NOT NULL DEFAULT "" COMMENT '行政区域表的市ID',
     `county` varchar(63) NOT NULL DEFAULT "" COMMENT '行政区域表的区县ID',
     `detail` varchar(127) NOT NULL DEFAULT "" COMMENT '详细收货地址',
-    `area_code` char(6) NOT NULL DEFAULT "" COMMENT '地区编码',
-    `postal_code` char(6) NOT NULL DEFAULT "" COMMENT '邮政编码',
     `tel` varchar(20) NOT NULL DEFAULT "" COMMENT '手机号码',
     `is_default` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否默认地址',
     `deleted` tinyint(1) NOT NULL DEFAULT '0' COMMENT '逻辑删除',
@@ -184,21 +151,19 @@ CREATE TABLE `t_address` (
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB COMMENT '微信商城小程序-收货地址表';
 INSERT INTO `t_address` (`id`, `name`, `open_id`, `province`, `is_default`) VALUES (1, '张印', 'lainzhang', "成都", 1);
-DROP TABLE IF EXISTS t_comment;
-CREATE TABLE `t_comment` (
+DROP TABLE IF EXISTS t_web_user;
+CREATE TABLE `t_web_user` (
     `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-    `value_id` int(11) NOT NULL DEFAULT '0' COMMENT '如果type=0，则是商品评论；如果是type=1，则是专题评论。',
-    `comment_type` tinyint(3) NOT NULL DEFAULT '0' COMMENT '评论类型，如果type=0，则是商品评论；如果是type=1，则是专题评论；如果type=3，则是订单商品评论。',
-    `content` varchar(1023) NOT NULL COMMENT '评论内容',
-    `open_id` varchar(63) NOT NULL DEFAULT "" COMMENT '用户表的用户ID',
-    `has_picture` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否含有图片',
-    `pic_urls` varchar(1023) NOT NULL DEFAULT "" COMMENT '图片地址列表，采用JSON数组格式',
-    `star` smallint(6) NOT NULL DEFAULT '1' COMMENT '评分， 1-5',
+    `username` varchar(63) NOT NULL DEFAULT "" COMMENT '用户名称',
+    `password` varchar(63) NOT NULL DEFAULT "" COMMENT '用户密码',
+    `avatar` varchar(255) NOT NULL DEFAULT "" COMMENT '用户头像图片',
     `deleted` tinyint(1) NOT NULL DEFAULT '0' COMMENT '逻辑删除',
     `created_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `updated_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     `deleted_time` timestamp DEFAULT NULL COMMENT '删除时间',
-    KEY `value_id` (`value_id`),
+    UNIQUE KEY `username` (`username`),
     PRIMARY KEY (`id`)
-) ENGINE = InnoDB COMMENT '微信商城小程序-评论表';
--- 主表end
+) ENGINE = InnoDB COMMENT '微信商城web后台-用户表';
+
+insert into t_web_user set username='zy', password='123456';
+insert into t_web_user set username='gly', password='123456';

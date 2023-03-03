@@ -3,6 +3,7 @@ package api
 import (
 	"nocake/constant"
 	"nocake/models/app"
+	"nocake/models/web"
 	"nocake/response"
 	"nocake/service"
 
@@ -15,6 +16,76 @@ type AppGoods struct {
 
 func GetAppGoods() *AppGoods {
 	return &AppGoods{}
+}
+
+type WebGoods struct {
+	service.WebGoodsService
+}
+
+func GetWebGoods() *WebGoods {
+	return &WebGoods{}
+}
+
+func (g *WebGoods) CreateGoods(c *gin.Context) {
+	var param web.GoodsCreateParam
+	if err := c.ShouldBind(&param); err != nil {
+		response.Error(constant.ParamInvalid, c)
+		return
+	}
+	if count := g.Create(param); count > 0 {
+		response.Success(constant.Created, count, c)
+		return
+	}
+	response.Error(constant.NotCreated, c)
+}
+
+func (g *WebGoods) DeleteGoods(c *gin.Context) {
+	var param web.GoodsDeleteParam
+	if err := c.ShouldBind(&param); err != nil {
+		response.Error(constant.ParamInvalid, c)
+		return
+	}
+	if count := g.Delete(param); count > 0 {
+		response.Success(constant.Deleted, count, c)
+		return
+	}
+	response.Error(constant.NotDeleted, c)
+}
+
+func (g *WebGoods) UpdateGoods(c *gin.Context) {
+	var param web.GoodsUpdateParam
+	if err := c.ShouldBind(&param); err != nil {
+		response.Error(constant.ParamInvalid, c)
+		return
+	}
+	if count := g.Update(param); count > 0 {
+		response.Success(constant.Updated, count, c)
+		return
+	}
+	response.Error(constant.NotUpdated, c)
+}
+
+func (g *WebGoods) UpdateGoodsStatus(c *gin.Context) {
+	var param web.GoodsStatusUpdateParam
+	if err := c.ShouldBind(&param); err != nil {
+		response.Error(constant.ParamInvalid, c)
+		return
+	}
+	if count := g.UpdateStatus(param); count > 0 {
+		response.Success(constant.Updated, count, c)
+		return
+	}
+	response.Error(constant.NotUpdated, c)
+}
+
+func (g *WebGoods) GetGoodsList(c *gin.Context) {
+	var param web.GoodsListParam
+	if err := c.ShouldBind(&param); err != nil {
+		response.Error(constant.ParamInvalid, c)
+		return
+	}
+	goodsList, rows := g.GetList(param)
+	response.SuccessPage(constant.Selected, goodsList, rows, c)
 }
 
 // @Summary 获取商品列表

@@ -2,9 +2,11 @@ package initialize
 
 import (
 	"fmt"
+	"net/http"
 	"nocake/api"
 	_ "nocake/docs"
 	"nocake/global"
+	"nocake/middleware"
 
 	"github.com/gin-gonic/gin"
 	swaggerFiles "github.com/swaggo/files"
@@ -29,10 +31,60 @@ import (
 // @securityDefinitions.basic  BasicAuth
 func Router() {
 	engine := gin.Default()
-	engine.Use(gin.Recovery())
+	// 开启跨域
+	engine.Use(middleware.Cors())
 
+	// ip来源校验
+	engine.SetTrustedProxies([]string{"127.0.0.1"})
+
+	// 404
+	engine.NoRoute(func(c *gin.Context) {
+		c.String(http.StatusNotFound, "404 not found")
+	})
+
+	// 静态资源请求映射
+	engine.Static("/image", global.Config.Upload.SavePath)
+
+	// swagger文档
 	engine.GET("/app/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
-	// engine.SetTrustedProxies([]string{"127.0.0.1"})
+
+	web := engine.Group("/web")
+	{
+		// 登录
+		web.GET("/captcha", api.GetWebUser().GetCaptcha)
+		web.POST("/login", api.GetWebUser().UserLogin)
+
+		// JWT认证
+		// web.Use(middleware.JwtAuth())
+
+		// 文件上传
+		web.POST("/upload", api.GetWebFileUpload().FileUpload)
+
+		// 商品管理
+		web.POST("/goods/create", api.GetWebGoods().CreateGoods)
+		web.DELETE("/goods/delete", api.GetWebGoods().DeleteGoods)
+		web.PUT("/goods/update", api.GetWebGoods().UpdateGoods)
+		web.PUT("/goods/status/update", api.GetWebGoods().UpdateGoodsStatus)
+		web.GET("/goods/list", api.GetWebGoods().GetGoodsList)
+
+		// 订单管理
+		web.DELETE("/order/delete", api.GetWebOrder().DeleteOrder)
+		web.PUT("/order/update", api.GetWebOrder().UpdateOrder)
+		web.GET("/order/list", api.GetWebOrder().GetOrderList)
+		web.GET("/order/detail", api.GetWebOrder().GetOrderDetail)
+
+		// 类目管理
+		web.POST("/category/create", api.GetWebCategory().CreateCategory)
+		web.DELETE("/category/delete", api.GetWebCategory().DeleteCategory)
+		web.PUT("/category/update", api.GetWebCategory().UpdateCategory)
+		web.GET("/category/list", api.GetWebCategory().GetCategoryList)
+		web.GET("/category/option", api.GetWebCategory().GetCategoryOption)
+
+		// 数据统计
+		web.GET("/today/data", api.GetWebStatistics().GetTodayData)
+		web.GET("/order/data", api.GetWebStatistics().GetOrderData)
+		web.GET("/shop/data", api.GetWebStatistics().GetShopData)
+	}
 	// 微信小程序API
 	app := engine.Group("/app")
 	{

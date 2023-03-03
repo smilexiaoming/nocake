@@ -1,6 +1,7 @@
-package app
+package web
 
 import (
+	"nocake/models"
 	"time"
 )
 
@@ -33,45 +34,71 @@ type Order struct {
 	DeletedTime   time.Time `gorm:"deleted_time" json:"deleted_time"`       // 删除时间
 }
 
-// 订单更新状态模型
+// 商品删除参数模型
+type OrderDeleteParam struct {
+	Id int `form:"id" binding:"required,gt=0"`
+}
+
+// 商品更新参数模型
 type OrderUpdateParam struct {
-	OrderId int    `form:"order_id"`
-	OpenId  string `form:"open_id"`
-	Status  int    `form:"status"`
+	Id     int `form:"id"`
+	Status int `form:"status"` // 状态
 }
 
-// 提交订单模型
-type OrderSubmitParam struct {
-	OpenId string `form:"open_id"`
+// 商品列表查询参数模型
+type OrderListParam struct {
+	Page   models.Page
+	Status int `form:"status"`
 }
 
-// 查询订单列表模型
-type OrderQueryListParam struct {
-	OpenId   string `form:"open_id"`
-	Status   int    `form:"status"`
-	PageNum  int    `form:"page_num required,gt=0" gorm:"required,gt=0"`
-	PageSize int    `form:"page_size required,gt=0" gorm:"required,gt=0"`
+// 商品列表查询参数模型
+type OrderDetailParam struct {
+	Id int `form:"id"`
 }
 
-// 查询订单模型
-type OrderQueryDetailParam struct {
-	OpenId  string `form:"open_id"`
-	OrderId int    `form:"order_id"`
+type OrderItem struct {
+	Id            int       `json:"id"`
+	OpenId        string    `json:"open_id"`         // 用户表的用户ID
+	Avatar        string    `json:"avatar"`          // 用户头像图片
+	Username      string    `json:"username"`        // 用户名称
+	Nickname      string    `json:"nickname"`        // 用户昵称
+	GoodsIdsCount string    `json:"goods_ids_count"` // 货品id数量json
+	Status        int       `json:"status"`          // 订单状态 1已提交 2已完成 3撤销 4已接单不可撤销
+	SubStatus     int       `json:"sub_status"`      // 订单子状态 1已提交 2已完成 3撤销 4已接单不可撤销
+	Address       string    `json:"address"`         // 收货具体地址
+	Message       string    `json:"message"`         // 用户订单留言
+	GoodsPrice    float64   `json:"goods_price"`     // 商品总费用
+	GoodsCount    int       `json:"goods_count"`     // 商品总数量
+	CouponPrice   float64   `json:"coupon_price"`    // 优惠券减免
+	DisPrice      float64   `json:"dis_price"`       // 配送费用
+	IntegralPrice float64   `json:"integral_price"`  // 用户积分减免
+	GrouponPrice  float64   `json:"groupon_price"`   // 团购优惠价减免
+	OrderPrice    float64   `json:"order_price"`     // 订单费用， = goods_price + dis_price - coupon_price
+	ActualPrice   float64   `json:"actual_price"`    // 实付费用， = order_price - integral_price
+	PayId         string    `json:"pay_id"`          // 微信付款编号
+	PayTime       time.Time `json:"pay_time"`        // 微信付款时间
+	ShipSn        string    `json:"ship_sn"`         // 外卖订单
+	ShipChannel   int       `json:"ship_channel"`    // 外卖平台
+	ShipTime      time.Time `json:"ship_time"`       // 发货开始时间
+	ConfirmTime   time.Time `json:"confirm_time"`    // 用户确认收货时间
+	EndTime       time.Time `json:"end_time"`        // 订单关闭时间
+	Deleted       int       `json:"deleted"`         // 逻辑删除
+	CreatedTime   time.Time `json:"created_time"`    // 创建时间
+	UpdatedTime   time.Time `json:"updated_time"`    // 更新时间
+	DeletedTime   time.Time `json:"deleted_time"`    // 删除时间
 }
 
-// 订单列表模型
+// 订单详情传输模型
+type OrderDetail struct {
+	Order
+	GoodsItem []GoodsItem `json:"goodsItem"`
+}
+
+// 订单商品项传输模型
 type GoodsItem struct {
 	Id     int     `json:"id"`
 	Name   string  `json:"name"`
 	Price  float64 `json:"price"`
 	PicUrl string  `json:"pic_url"`
 	Count  int     `json:"count"`
-}
-
-type OrderInfo struct {
-	OrderId    int         `json:"order_id"`
-	Status     int         `json:"stauts"`
-	TotalPrice float64     `json:"total_price"`
-	GoodsCount int         `json:"goods_count"`
-	GoodsItem  []GoodsItem `json:"goods_item"`
 }

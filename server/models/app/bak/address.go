@@ -10,8 +10,6 @@ type Address struct {
 	City        string    `gorm:"city"`         // 行政区域表的市ID
 	County      string    `gorm:"county"`       // 行政区域表的区县ID
 	Detail      string    `gorm:"detail"`       // 详细收货地址
-	AreaCode    string    `gorm:"area_code"`    // 地区编码
-	PostalCode  string    `gorm:"postal_code"`  // 邮政编码
 	Tel         string    `gorm:"tel"`          // 手机号码
 	IsDefault   int       `gorm:"is_default"`   // 是否默认地址
 	Deleted     int       `gorm:"deleted"`      // 逻辑删除
