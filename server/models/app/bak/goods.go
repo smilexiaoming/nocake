@@ -14,6 +14,7 @@ type Goods struct {
 	PicUrl      string    `gorm:"pic_url"`      // 商品主图
 	PicUrls     string    `gorm:"pic_urls"`     // 商品附图JSON数组格式
 	Unit        string    `gorm:"unit"`         // 商品单位，例如件、盒
+	Quantity    int       `gorm:"quantity"`     // 商品库存
 	Price       float64   `gorm:"price"`        // 价格
 	Deleted     int       `gorm:"deleted"`      // 逻辑删除
 	CreatedTime time.Time `gorm:"created_time"` // 创建时间
