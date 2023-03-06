@@ -38,6 +38,10 @@ CREATE TABLE `t_category` (
 
 INSERT INTO `t_category` (`id`, `name`, `keywords`, `brief`, `pid`, `icon_url`, `level`) VALUES (1, '蛋糕', '{"受众":"大众"}', "蛋糕，大家都喜欢", 0, 'http://tubiao.png', "1");
 INSERT INTO `t_category` (`id`, `name`, `keywords`, `brief`, `pid`, `icon_url`, `level`) VALUES (2, '甜品', '{"受众":"小众"}', "甜品，少数人喜欢", 0, 'http://tubiao.png', "1");
+INSERT INTO `t_category` (`id`, `name`, `keywords`, `brief`, `pid`, `icon_url`, `level`) VALUES (3, '甜品1', '{"受众":"小众"}', "甜品，少数人喜欢", 0, 'http://tubiao.png', "1");
+INSERT INTO `t_category` (`id`, `name`, `keywords`, `brief`, `pid`, `icon_url`, `level`) VALUES (4, '蛋糕2', '{"受众":"大众"}', "蛋糕，大家都喜欢", 0, 'http://tubiao.png', "1");
+INSERT INTO `t_category` (`id`, `name`, `keywords`, `brief`, `pid`, `icon_url`, `level`) VALUES (5, '甜品3', '{"受众":"小众"}', "甜品，少数人喜欢", 0, 'http://tubiao.png', "1");
+INSERT INTO `t_category` (`id`, `name`, `keywords`, `brief`, `pid`, `icon_url`, `level`) VALUES (6, '甜品4', '{"受众":"小众"}', "甜品，少数人喜欢", 0, 'http://tubiao.png', "1");
 
 DROP TABLE IF EXISTS t_goods;
 CREATE TABLE `t_goods` (
@@ -136,10 +140,10 @@ DROP TABLE IF EXISTS t_address;
 CREATE TABLE `t_address` (
     `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
     `name` varchar(63) NOT NULL DEFAULT "" COMMENT '收货人名称',
-    `open_id` varchar(63) NOT NULL DEFAULT "" COMMENT '用户表的用户ID',
-    `province` varchar(63) NOT NULL DEFAULT "" COMMENT '行政区域表的省ID',
-    `city` varchar(63) NOT NULL DEFAULT "" COMMENT '行政区域表的市ID',
-    `county` varchar(63) NOT NULL DEFAULT "" COMMENT '行政区域表的区县ID',
+    `open_id` varchar(63) NOT NULL DEFAULT "" COMMENT '用户表的用户',
+    `province` varchar(63) NOT NULL DEFAULT "" COMMENT '行政区域表的省',
+    `city` varchar(63) NOT NULL DEFAULT "" COMMENT '行政区域表的市',
+    `county` varchar(63) NOT NULL DEFAULT "" COMMENT '行政区域表的区县',
     `detail` varchar(127) NOT NULL DEFAULT "" COMMENT '详细收货地址',
     `tel` varchar(20) NOT NULL DEFAULT "" COMMENT '手机号码',
     `is_default` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否默认地址',
@@ -151,6 +155,7 @@ CREATE TABLE `t_address` (
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB COMMENT '微信商城小程序-收货地址表';
 INSERT INTO `t_address` (`id`, `name`, `open_id`, `province`, `is_default`) VALUES (1, '张印', 'lainzhang', "成都", 1);
+
 DROP TABLE IF EXISTS t_web_user;
 CREATE TABLE `t_web_user` (
     `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,

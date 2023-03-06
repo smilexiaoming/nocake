@@ -5,10 +5,10 @@ import "time"
 type Address struct {
 	Id          int       `gorm:"id"`
 	Name        string    `gorm:"name"`         // 收货人名称
-	OpenId      string    `gorm:"open_id"`      // 用户表的用户ID
-	Province    string    `gorm:"province"`     // 行政区域表的省ID
-	City        string    `gorm:"city"`         // 行政区域表的市ID
-	County      string    `gorm:"county"`       // 行政区域表的区县ID
+	OpenId      string    `gorm:"open_id"`      // 用户表的用户
+	Province    string    `gorm:"province"`     // 行政区域表的省
+	City        string    `gorm:"city"`         // 行政区域表的市
+	County      string    `gorm:"county"`       // 行政区域表的区县
 	Detail      string    `gorm:"detail"`       // 详细收货地址
 	Tel         string    `gorm:"tel"`          // 手机号码
 	IsDefault   int       `gorm:"is_default"`   // 是否默认地址

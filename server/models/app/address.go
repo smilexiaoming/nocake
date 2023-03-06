@@ -9,12 +9,10 @@ type Address struct {
 	Id          int       `gorm:"id" json:"id"`
 	Name        string    `gorm:"name" json:"name"`                 // 收货人名称
 	OpenId      string    `gorm:"open_id" json:"open_id"`           // 用户表的用户ID
-	Province    string    `gorm:"province" json:"province"`         // 行政区域表的省ID
-	City        string    `gorm:"city" json:"city"`                 // 行政区域表的市ID
-	County      string    `gorm:"county" json:"county"`             // 行政区域表的区县ID
+	Province    string    `gorm:"province" json:"province"`         // 行政区域表的省
+	City        string    `gorm:"city" json:"city"`                 // 行政区域表的市
+	County      string    `gorm:"county" json:"county"`             // 行政区域表的区县
 	Detail      string    `gorm:"detail" json:"detail"`             // 详细收货地址
-	AreaCode    string    `gorm:"area_code" json:"area_code"`       // 地区编码
-	PostalCode  string    `gorm:"postal_code" json:"postal_code"`   // 邮政编码
 	Tel         string    `gorm:"tel" json:"tel"`                   // 手机号码
 	IsDefault   int       `gorm:"is_default" json:"is_default"`     // 是否默认地址
 	Deleted     int       `gorm:"deleted" json:"deleted"`           // 逻辑删除
@@ -25,16 +23,14 @@ type Address struct {
 
 // 新增地址
 type AddressAddParam struct {
-	Name       string `form:"name" json:"name"`               // 收货人名称
-	OpenId     string `form:"open_id" json:"open_id"`         // 用户表的用户ID
-	Province   string `form:"province" json:"province"`       // 行政区域表的省ID
-	City       string `form:"city" json:"city"`               // 行政区域表的市ID
-	County     string `form:"county" json:"county"`           // 行政区域表的区县ID
-	Detail     string `form:"detail" json:"detail"`           // 详细收货地址
-	AreaCode   string `form:"area_code" json:"area_code"`     // 地区编码
-	PostalCode string `form:"postal_code" json:"postal_code"` // 邮政编码
-	Tel        string `form:"tel" json:"tel"`                 // 手机号码
-	IsDefault  int    `form:"is_default" json:"is_default"`   // 是否默认地址
+	Name      string `form:"name" json:"name"`             // 收货人名称
+	OpenId    string `form:"open_id" json:"open_id"`       // 用户表的用户ID
+	Province  string `form:"province" json:"province"`     // 行政区域表的省
+	City      string `form:"city" json:"city"`             // 行政区域表的市
+	County    string `form:"county" json:"county"`         // 行政区域表的区县
+	Detail    string `form:"detail" json:"detail"`         // 详细收货地址
+	Tel       string `form:"tel" json:"tel"`               // 手机号码
+	IsDefault int    `form:"is_default" json:"is_default"` // 是否默认地址
 }
 
 // 删除地址
@@ -55,17 +51,15 @@ type AddressList struct {
 
 // 更新地址
 type AddressUpdateParam struct {
-	AddressId  int    `form:"address_id"`
-	Name       string `form:"name"`        // 收货人名称
-	OpenId     string `form:"open_id"`     // 用户表的用户ID
-	Province   string `form:"province"`    // 行政区域表的省ID
-	City       string `form:"city"`        // 行政区域表的市ID
-	County     string `form:"county"`      // 行政区域表的区县ID
-	Detail     string `form:"detail"`      // 详细收货地址
-	AreaCode   string `form:"area_code"`   // 地区编码
-	PostalCode string `form:"postal_code"` // 邮政编码
-	Tel        string `form:"tel"`         // 手机号码
-	IsDefault  int    `form:"is_default"`  // 是否默认地址
+	AddressId int    `form:"address_id"`
+	Name      string `form:"name"`       // 收货人名称
+	OpenId    string `form:"open_id"`    // 用户表的用户ID
+	Province  string `form:"province"`   // 行政区域表的省
+	City      string `form:"city"`       // 行政区域表的市
+	County    string `form:"county"`     // 行政区域表的区县
+	Detail    string `form:"detail"`     // 详细收货地址
+	Tel       string `form:"tel"`        // 手机号码
+	IsDefault int    `form:"is_default"` // 是否默认地址
 }
 
 // 查看地址详情

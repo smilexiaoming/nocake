@@ -148,8 +148,6 @@ func (o *AppOrderService) Submit(param app.OrderSubmitParam) int64 {
 		City:       address.City,
 		County:     address.County,
 		Detail:     address.Detail,
-		AreaCode:   address.AreaCode,
-		PostalCode: address.PostalCode,
 		Tel:        address.Tel,
 	}
 	if rows_affect > 0 {

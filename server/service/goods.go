@@ -1,7 +1,6 @@
 package service
 
 import (
-	"fmt"
 	"nocake/common"
 	"nocake/global"
 	"nocake/models/app"
@@ -78,9 +77,9 @@ func (g *WebGoodsService) GetList(param web.GoodsListParam) ([]web.GoodsList, in
 		CategoryId: param.CategoryId,
 		Name:       param.Name,
 		Status:     param.Status,
+		Deleted:    "0",
 	}
 	goodsList := make([]web.GoodsList, 0)
-	fmt.Printf("param: %v\n", param)
 	rows := common.RestPage(param.Page, "t_goods", query, &goodsList, &[]web.Goods{})
 	return goodsList, rows
 }
