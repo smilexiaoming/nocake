@@ -48,7 +48,7 @@ func (c *WebCategoryService) Create(param web.CategoryCreateParam) int64 {
 		Weight:      param.Weight,
 		CreatedTime: time.Now(),
 	}
-	return global.Db.Table("t_category").Create(&category).RowsAffected
+	return global.Db.Debug().Table("t_category").Create(&category).RowsAffected
 }
 
 // 删除商品类目

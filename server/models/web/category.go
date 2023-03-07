@@ -19,13 +19,13 @@ type Category struct {
 
 // 商品类目创建参数模型
 type CategoryCreateParam struct {
-	Name     string `form:"name"`     // 类目名称
-	Brief    string `form:"brief"`    // 类目简介
-	Keywords string `form:"keywords"` // 类目关键字，以JSON数组格式
-	Pid      int    `form:"pid"`      // 父类目ID
-	Level    int    `form:"level"`    // 类目层级
-	IconUrl  string `form:"icon_url"` // 类目图标
-	Weight   int    `form:"weight"`   // 排序
+	Name     string `json:"name"`     // 类目名称
+	Brief    string `json:"brief"`    // 类目简介
+	Keywords string `json:"keywords"` // 类目关键字，以JSON数组格式
+	Pid      int    `json:"pid"`      // 父类目ID
+	Level    int    `json:"level"`    // 类目层级
+	IconUrl  string `json:"icon_url"` // 类目图标
+	Weight   int    `json:"weight"`   // 排序
 }
 
 // 商品类目删除参数模型

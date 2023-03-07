@@ -6,7 +6,6 @@ type Goods struct {
 	Id          int       `gorm:"id"`
 	Name        string    `gorm:"name"`        // 商品名称
 	Brief       string    `gorm:"brief"`       // 商品简介
-	Detail      string    `gorm:"detail"`      // 商品详细介绍，是富文本格式
 	CategoryId  int       `gorm:"category_id"` // 商品所属类目ID
 	Keywords    string    `gorm:"keywords"`    // 商品关键字，采用逗号间隔
 	Status      int       `gorm:"status"`      // 状态

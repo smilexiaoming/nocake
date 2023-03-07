@@ -1,6 +1,7 @@
 package api
 
 import (
+	"fmt"
 	"nocake/constant"
 	"nocake/models/app"
 	"nocake/models/web"
@@ -58,6 +59,7 @@ func (g *WebGoods) UpdateGoods(c *gin.Context) {
 		response.Error(constant.ParamInvalid, c)
 		return
 	}
+	fmt.Printf("param: %#v\n", param)
 	if count := g.Update(param); count > 0 {
 		response.Success(constant.Updated, count, c)
 		return

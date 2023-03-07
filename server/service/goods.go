@@ -1,6 +1,7 @@
 package service
 
 import (
+	"fmt"
 	"nocake/common"
 	"nocake/global"
 	"nocake/models/app"
@@ -18,7 +19,6 @@ func (g *WebGoodsService) Create(param web.GoodsCreateParam) int64 {
 	goods := web.Goods{
 		Name:        param.Name,
 		Brief:       param.Brief,
-		Detail:      param.Detail,
 		CategoryId:  param.CategoryId,
 		Keywords:    param.Keywords,
 		Status:      param.Status,
@@ -47,7 +47,6 @@ func (g *WebGoodsService) Update(param web.GoodsUpdateParam) int64 {
 		Id:          param.Id,
 		Name:        param.Name,
 		Brief:       param.Brief,
-		Detail:      param.Detail,
 		CategoryId:  param.CategoryId,
 		Keywords:    param.Keywords,
 		Status:      param.Status,
@@ -55,10 +54,12 @@ func (g *WebGoodsService) Update(param web.GoodsUpdateParam) int64 {
 		PicUrl:      param.PicUrl,
 		PicUrls:     param.PicUrls,
 		Unit:        param.Unit,
+		Quantity:    param.Quantity,
 		Price:       param.Price,
 		UpdatedTime: time.Now(),
 	}
-	return global.Db.Table("t_goods").Model(&goods).Updates(goods).RowsAffected
+	fmt.Printf("goods: %#v\n", goods)
+	return global.Db.Debug().Table("t_goods").Model(&goods).Updates(goods).RowsAffected
 }
 
 // 更新商品状态
@@ -67,7 +68,7 @@ func (g *WebGoodsService) UpdateStatus(param web.GoodsStatusUpdateParam) int64 {
 		Id:     param.Id,
 		Status: param.Status,
 	}
-	return global.Db.Table("t_goods").Model(&goods).Update("status", goods.Status).RowsAffected
+	return global.Db.Debug().Table("t_goods").Model(&goods).Update("status", goods.Status).RowsAffected
 }
 
 // 获取商品列表

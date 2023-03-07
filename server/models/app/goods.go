@@ -14,6 +14,7 @@ type Goods struct {
 	PicUrl      string    `gorm:"pic_url"`      // 商品主图
 	PicUrls     string    `gorm:"pic_urls"`     // 商品附图JSON数组格式
 	Unit        string    `gorm:"unit"`         // 商品单位，例如件、盒
+	Quantity    int       `gorm:"quantity"`     // 商品库存
 	Price       float64   `gorm:"price"`        // 价格
 	Deleted     int       `gorm:"deleted"`      // 逻辑删除
 	CreatedTime time.Time `gorm:"created_time"` // 创建时间
@@ -55,18 +56,18 @@ type GoodsDetailQueryParam struct {
 
 // 商品详情
 type GoodsDetail struct {
-	Id          int       `json:"id"`
-	Name        string    `json:"name"`        // 商品名称
-	Brief       string    `json:"brief"`       // 商品简介
-	Detail      string    `json:"detail"`      // 商品详细介绍，是富文本格式
-	CategoryId  int       `json:"category_id"` // 商品所属类目ID
-	Keywords    string    `json:"keywords"`    // 商品关键字，采用逗号间隔
-	Status      int       `json:"status"`      // 状态
-	Weight      int       `json:"weight"`
-	PicUrl      string    `json:"pic_url"`      // 商品主图
-	PicUrls     string    `json:"pic_urls"`     // 商品附图JSON数组格式
-	Unit        string    `json:"unit"`         // 商品单位，例如件、盒
-	Price       float64   `json:"price"`        // 价格
+	Id         int     `json:"id"`
+	Name       string  `json:"name"`        // 商品名称
+	Brief      string  `json:"brief"`       // 商品简介
+	Detail     string  `json:"detail"`      // 商品详细介绍，是富文本格式
+	CategoryId int     `json:"category_id"` // 商品所属类目ID
+	Keywords   string  `json:"keywords"`    // 商品关键字，采用逗号间隔
+	Status     int     `json:"status"`      // 状态
+	Weight     int     `json:"weight"`
+	PicUrl     string  `json:"pic_url"`  // 商品主图
+	PicUrls    string  `json:"pic_urls"` // 商品附图JSON数组格式
+	Unit       string  `json:"unit"`     // 商品单位，例如件、盒
+	Price      float64 `json:"price"`    // 价格
 }
 
 // 商品详情参数

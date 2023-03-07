@@ -7,7 +7,7 @@ type Category struct {
 	Name        string    `gorm:"name"`         // 类目名称
 	Brief       string    `gorm:"brief"`        // 类目简介
 	Keywords    string    `gorm:"keywords"`     // 类目关键字，以JSON数组格式
-	Pid         int       `gorm:"pid"`          // 父类目ID
+	Pid         string    `gorm:"pid"`          // 父类目ID
 	Level       int       `gorm:"level"`        // 类目层级
 	IconUrl     string    `gorm:"icon_url"`     // 类目图标
 	Weight      int       `gorm:"weight"`       // 排序
