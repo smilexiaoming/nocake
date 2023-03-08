@@ -107,7 +107,7 @@
         <el-form-item label="活动图片" prop="bannerImage">
           <el-input v-show="false" v-model="market.bannerImage"/>
           <el-upload
-              action="http://localhost:8000/web/upload"
+              action="http://1.14.106.241/web/upload"
               :headers="{'token': token}"
               :limit="1"
               name="file"
@@ -332,7 +332,6 @@ export default {
           status: this.query.status,
           pageNum: this.pageNum,
           pageSize: this.pageSize,
-          sid: parseInt(localStorage.getItem('sid'))
         }
       }).then((response) => {
         this.total = response.data.data.total;
@@ -427,7 +426,6 @@ export default {
               beginTime: this.market.beginTime,
               overTime: this.market.overTime,
               goodsIds: this.market.goodsIds,
-              sid: parseInt(localStorage.getItem('sid'))
             }).then((response) => {
               if (response.data.code === 200) {
                 ElMessage({message: response.data.message, type: 'success'})

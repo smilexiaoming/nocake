@@ -17,9 +17,9 @@
     <el-menu-item index="/order" @click="changeNav(this.order)">
       <el-icon><list /></el-icon><span>订单</span>
     </el-menu-item>
-    <el-menu-item index="/market" @click="changeNav(this.market)">
+    <!-- <el-menu-item index="/market" @click="changeNav(this.market)">
       <el-icon><ticket /></el-icon><span>营销</span>
-    </el-menu-item>
+    </el-menu-item> -->
   </el-menu>
     </el-aside>
     <el-container direction="vertical">
@@ -41,7 +41,6 @@
             <el-dropdown-menu>
               <div style="text-align: center;">
                 <el-avatar :size="45" :src="avatarURL" style="cursor: pointer;border: 1px solid #d9ecff;"/>
-                <div>SID: {{sid}}</div>
               </div>
               <el-dropdown-item :icon="SwitchButton" @click="logout" divided>退出账户</el-dropdown-item>
             </el-dropdown-menu>
@@ -70,7 +69,7 @@ import {
   HomeFilled,
   GoodsFilled,
   List,
-  Ticket
+  // Ticket
 } from "@element-plus/icons-vue";
 
 export default {
@@ -78,13 +77,13 @@ export default {
   components: {RefreshRight, Service, FullScreen, Bell, HomeFilled,
     GoodsFilled,
     List,
-    Ticket },
+    // Ticket 
+  },
   setup() {
     return {Edit, Bell, ArrowRight, SwitchButton}
   },
   data() {
     return {
-      sid: '',
       avatarURL: 'https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png',
       feedback: {
         content: ''
@@ -136,7 +135,6 @@ export default {
     this.defaultNav = this.$store.state.navigation[0].index
   },
   mounted() {
-    this.sid = localStorage.getItem('sid')
     this.defaultActive = this.$store.state.defaultActive
   },
   methods: {

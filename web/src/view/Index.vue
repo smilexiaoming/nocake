@@ -99,11 +99,7 @@ export default {
     let orderDataOption;
     let shopDataOption;
     this.$axios
-      .get("/order/data", {
-        params: {
-          sid: localStorage.getItem("sid"),
-        },
-      })
+      .get("/order/data")
       .then((response) => {
         console.log(response);
         orderDataOption = {
@@ -165,11 +161,7 @@ export default {
       });
 
     this.$axios
-      .get("/shop/data", {
-        params: {
-          sid: localStorage.getItem("sid"),
-        },
-      })
+      .get("/shop/data")
       .then((response) => {
         console.log(response);
         shopDataOption = {

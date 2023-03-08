@@ -100,7 +100,6 @@ export default {
             captchaValue: this.loginForm.captchaValue,
           }).then((response) => {
             localStorage.setItem("token", response.data.data.token)
-            localStorage.setItem("sid", response.data.data.sid)
             ElMessage({ message: '欢迎回来', type: 'success'})
             this.$router.push('/home');
           }).catch((error) => {

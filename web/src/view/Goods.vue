@@ -6,16 +6,16 @@
         <el-input v-model.number="query.id" placeholder="商品ID"/>
       </el-form-item>
       <el-form-item prop="title">
-        <el-input v-model="query.title" placeholder="商品标题"/>
+        <el-input v-model="query.name" placeholder="商品名称"/>
       </el-form-item>
-      <el-form-item prop="categoryId">
-        <el-cascader v-model="query.categoryId"
+      <el-form-item prop="category_id">
+        <el-cascader v-model="query.category_id"
                      :options="categoryOption" @focus="getCategoryOption" placeholder="请选择" clearable/>
       </el-form-item>
       <el-form-item prop="status">
         <el-select v-model="query.status" placeholder="商品状态">
-          <el-option label="已上架" value="1"></el-option>
-          <el-option label="未上架" value="2"></el-option>
+          <el-option label="已上架" value="2"></el-option>
+          <el-option label="未上架" value="1"></el-option>
         </el-select>
       </el-form-item>
       <el-form-item>
@@ -95,8 +95,8 @@
     <!-- 添加、编辑商品，通用对话框 -->
     <el-dialog :title="dialogTitle" v-model="goodsDialogVisible" :lock-scroll="false" top="5vh" width="45%" @close="cancel">
       <el-form ref="ruleForm" :rules="rules" :model="goods" label-width="80px">
-        <el-form-item label="类目" prop="categoryId">
-          <el-cascader v-model="goods.categoryId"
+        <el-form-item label="类目" prop="category_id">
+          <el-cascader v-model="goods.category_id"
                        :options="categoryOption"
                        @change="changeCategory"
                        change-on-select
@@ -118,10 +118,10 @@
             <template #append>件</template>
           </el-input>
         </el-form-item>
-        <el-form-item label="图片" prop="imageUrl">
-          <el-input v-show="false" v-model="goods.imageUrl" />
+        <el-form-item label="图片" prop="pic_url">
+          <el-input v-show="false" v-model="goods.pic_url" />
           <el-upload
-              action="http://localhost:8000/web/upload"
+              action="http://1.14.106.241/web/upload"
               :headers="{'token': token}"
               :limit="1"
               name="file"
@@ -170,7 +170,7 @@ export default {
       query: {
         id: '',
         title: '',
-        categoryId: '',
+        category_id: '',
         status: ''
       },
 
@@ -181,23 +181,22 @@ export default {
       goodsList: [],
       goods: {
         id: '',
-        categoryId: '',
-        title: '',
+        category_id: '',
         name: '',
+        brief: '',
         price: '',
         quantity: '',
-        imageUrl: '',
-        remark: '',
+        pic_url: '',
         status: ''
       },
 
       rules: {
-        categoryId: { required: true, message: '请选择一个类目', trigger: 'blur' },
-        title: { required: true, message: '请输入一个标题', trigger: 'blur' },
+        category_id: { required: true, message: '请选择一个类目', trigger: 'blur' },
         name: { required: true, message: '请输入一个名称', trigger: 'blur' },
+        brief: { required: true, message: '请输入一个简介', trigger: 'blur' },
         price: [ {required: true, message: '价格不能为空', trigger: 'blur' },{type: 'number',message: '价格必须为数字', trigger: 'blur'}],
         quantity: [ {required: true, message: '价格不能为空', trigger: 'blur' },{type: 'number',message: '价格必须为数字', trigger: 'blur'}],
-        imageUrl: { required: true, message: '至少上传一张图片', trigger: 'blur' },
+        pic_url: { required: true, message: '至少上传一张图片', trigger: 'blur' },
       },
 
       // 图片列表
@@ -244,14 +243,14 @@ export default {
 
     // 图片上传，处理函数
     handleImagePreview(file) {
-      this.goods.imageUrl = file.url
+      this.goods.pic_url = file.url
     },
     handleImageRemove(file, fileList) {
-      this.goods.imageUrl = ''
+      this.goods.pic_url = ''
       console.log(file, fileList)
     },
     handleImageSuccess(response) {
-      this.goods.imageUrl = response.data
+      this.goods.pic_url = response.data
     },
 
     // 添加、编辑商品
@@ -265,20 +264,20 @@ export default {
       this.dialogTitle = '编辑商品'
       this.operateType = 'edit'
       this.goods.id = row.id
-      this.goods.categoryId = row.categoryId
+      this.goods.category_id = row.category_id
       this.goods.title = row.title
       this.goods.name = row.name
       this.goods.price = row.price
       this.goods.quantity = row.quantity
-      this.goods.imageUrl = row.imageUrl
-      this.pictureList.push({url: row.imageUrl})
+      this.goods.pic_url = row.pic_url
+      this.pictureList.push({url: row.pic_url})
       this.goods.remark = row.remark
       this.goods.status = row.status
       this.goodsDialogVisible = true
     },
 
     changeCategory(value) {
-      this.goods.categoryId = value[1]
+      this.goods.category_id = value[1]
     },
 
     // 获取商品类目选项
@@ -295,8 +294,8 @@ export default {
       this.$axios.get('/goods/list', {
         params: {
           id: this.query.id,
-          title: this.query.title,
-          categoryId: this.query.categoryId[1],
+          title: this.query.name,
+          category_id: this.query.category_id[1],
           status: this.query.status,
           pageNum: this.pageNum,
           pageSize: this.pageSize,
@@ -335,14 +334,13 @@ export default {
           if (this.operateType === 'add') {
             // 添加商品
             this.$axios.post('/goods/create', {
-              categoryId: parseInt(this.goods.categoryId),
-              title: this.goods.title,
+              category_id: parseInt(this.goods.category_id),
               name: this.goods.name,
+              brief: this.goods.brief,
               price: parseInt(this.goods.price),
               quantity: parseInt(this.goods.quantity),
-              imageUrl: this.goods.imageUrl,
+              pic_url: this.goods.pic_url,
               remark: this.goods.remark,
-              sid: parseInt(localStorage.getItem('sid'))
             }).then((response) => {
               if (response.data.code === 200) {
                 ElMessage({message: response.data.message, type: 'success'})
@@ -407,7 +405,7 @@ export default {
     // 清空数据
     empty() {
       this.goods.id = ''
-      this.goods.categoryId = ''
+      this.goods.category_id = ''
       this.goods.title = ''
       this.goods.name = ''
       this.goods.price = ''

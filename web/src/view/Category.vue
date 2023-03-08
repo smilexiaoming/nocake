@@ -6,7 +6,7 @@
         <el-input v-model.number="query.name" placeholder="类目名称"/>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" :icon="Search" @click="getCategoryList">查询</el-button>
+        <el-button type="primary" :icon="Search" @click="getCategoryList(0, 1)">查询</el-button>
         <el-button type="primary" @click="addLv1Category">添加一级类目</el-button>
       </el-form-item>
     </el-form>
@@ -110,7 +110,7 @@ export default {
       category: {
         id: '',
         name: '',
-        parentId: '',
+        pid: '',
         level: '',
         sort: ''
       },
@@ -132,7 +132,7 @@ export default {
     }
   },
   mounted() {
-    this.getCategoryList(1)
+    this.getCategoryList(0, 1)
   },
   methods: {
 
@@ -156,7 +156,7 @@ export default {
       this.operateType = 'add'
       this.dialogTitle = '添加一级类目'
       this.category.level = 1
-      this.category.parentId = 1
+      this.category.pid = 0
       this.categoryDialogVisible = true
     },
 
@@ -175,7 +175,7 @@ export default {
       this.operateType = 'add'
       this.dialogTitle = '添加二级类目'
       this.category.level = 2
-      this.category.parentId = row.id
+      this.category.pid = row.id
       this.categoryDialogVisible = true
     },
 
@@ -192,20 +192,23 @@ export default {
     // 查看二级类目
     checkLv2Category(row){
       this.dialogTitle = '查看二级类目'
-      this.getCategoryList(row.id)
+      this.getCategoryList(row.id, 2)
       this.checkLv2CategoryDialogVisible = true
     },
 
     // 获取类目列表
-    getCategoryList(parentId){
+    getCategoryList(pid, level){
+      if (level == 2){
+        this.query.name = ""
+      }
       this.$axios.get('/category/list', {
         params: {
           name: this.query.name,
-          parentId: parentId,
-          sid: localStorage.getItem('sid')
+          pid: pid,
+          level:level,
         }
       }).then((response) => {
-        if (parentId === 1){
+        if (pid == 0){
           this.categoryLv1List = response.data.data;
         } else {
           this.categoryLv2List = response.data.data;
@@ -223,15 +226,14 @@ export default {
       if (this.operateType === 'add'){
         this.$axios.post('/category/create', {
           name: this.category.name,
-          parentId: this.category.parentId,
+          pid: this.category.pid,
           level: this.category.level,
           sort: this.category.sort,
-          sid: localStorage.getItem('sid')
         }).then((response) => {
           if (response.data.code === 200) {
             ElMessage({message: response.data.message, type: 'success'})
           }
-          this.getCategoryList(1)
+          this.getCategoryList(0, 1)
         }).catch((error) => {
           console.log(error)
         })
@@ -245,7 +247,7 @@ export default {
           if (response.data.code === 200) {
             ElMessage({message: response.data.message, type: 'success'})
           }
-          this.getCategoryList(1)
+          this.getCategoryList(0, 1)
         }).catch((error) => {
           console.log(error)
         })
@@ -262,7 +264,7 @@ export default {
           if (response.data.code === 200) {
             ElMessage({message: response.data.message, type: 'success'})
           }
-          this.getCategoryList(1)
+          this.getCategoryList(0, 1)
         }).catch((error) => {
           console.log(error)
       })
@@ -278,7 +280,7 @@ export default {
     emptyCategory(){
       this.category.id = ''
       this.category.name = ''
-      this.category.parentId = ''
+      this.category.pid = ''
       this.category.level = ''
       this.category.sort = ''
     }

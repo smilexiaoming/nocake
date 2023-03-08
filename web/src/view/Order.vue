@@ -199,7 +199,6 @@ export default {
           status: this.query.status,
           pageNum: this.pageNum,
           pageSize: this.pageSize,
-          sid: parseInt(localStorage.getItem('sid'))
         }
       }).then((response) => {
         this.total = response.data.data.total
