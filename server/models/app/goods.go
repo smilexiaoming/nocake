@@ -10,6 +10,7 @@ type Goods struct {
 	CategoryId  int       `gorm:"category_id"` // 商品所属类目ID
 	Keywords    string    `gorm:"keywords"`    // 商品关键字，采用逗号间隔
 	Status      int       `gorm:"status"`      // 状态
+	IsHot       int       `gorm:"is_hot"`      // 状态 1不推荐 2推荐
 	Weight      int       `gorm:"weight"`
 	PicUrl      string    `gorm:"pic_url"`      // 商品主图
 	PicUrls     string    `gorm:"pic_urls"`     // 商品附图JSON数组格式
@@ -41,7 +42,6 @@ type GoodsList struct {
 	IsOnSale     int     `json:"is_on_sale"`  // 是否上架
 	Weight       int     `json:"weight"`
 	PicUrl       string  `json:"pic_url"`       // 商品页面商品图片
-	IsNew        int     `json:"is_new"`        // 是否新品首发，如果设置则可以在新品首发页面展示
 	IsHot        int     `json:"is_hot"`        // 是否人气推荐，如果设置则可以在人气推荐页面展示
 	Unit         string  `json:"unit"`          // 商品单位，例如件、盒
 	CounterPrice float64 `json:"counter_price"` // 专柜价格

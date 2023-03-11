@@ -51,7 +51,6 @@ func (o *WebOrderService) GetList(param web.OrderListParam) ([]web.OrderItem, in
 			Id:            o.Id,
 			Avatar:        user.Avatar,
 			Nickname:      user.Nickname,
-			Username:      user.Username,
 			GoodsPrice:    o.GoodsPrice,
 			GoodsIdsCount: o.GoodsIdsCount,
 			GoodsCount:    o.GoodsCount,

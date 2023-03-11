@@ -91,6 +91,22 @@ func (g *WebGoods) GetGoodsList(c *gin.Context) {
 }
 
 // @Summary 获取商品列表
+// @Description 
+// @Accept  multipart/form-data
+// @Success 200 {object} app.GoodsList "请求成功"
+// @Failure 400 {object} response.Response "请求错误"
+// @Failure 500 {object} response.Response "内部错误"
+// @Router /app/goods/hot [get]
+func (g *AppGoods) GetGoodsHot(c *gin.Context) {
+	goodList := g.GetHot()
+	if len(goodList) == 0 {
+		response.Error(constant.NotSelected, c)
+		return
+	}
+	response.Success(constant.Selected, goodList, c)
+}
+
+// @Summary 获取商品列表
 // @Description 传入 category_id | kewords | name
 // @Accept  multipart/form-data
 // @Param category_id query int true "category_id"

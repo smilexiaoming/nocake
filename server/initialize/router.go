@@ -98,6 +98,7 @@ func Router() {
 		app.GET("/goods/list", api.GetAppGoods().GetGoodList)
 		app.GET("/goods/detail", api.GetAppGoods().GetGoodsDetail)
 		app.GET("/goods/search", api.GetAppGoods().SearchGoods)
+		app.GET("/goods/hot", api.GetAppGoods().GetGoodsHot)
 
 		// 购物车
 		app.POST("/cart/set", api.GetAppCart().SetCart)

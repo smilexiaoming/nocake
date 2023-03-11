@@ -6,21 +6,20 @@ import (
 
 // 数据库地址信息
 type Address struct {
-	Id          int       `gorm:"id"`
-	Name        string    `gorm:"name"`         // 收货人名称
-	OpenId      string    `gorm:"open_id"`      // 用户表的用户ID
-	Province    string    `gorm:"province"`     // 行政区域表的省ID
-	City        string    `gorm:"city"`         // 行政区域表的市ID
-	County      string    `gorm:"county"`       // 行政区域表的区县ID
-	Detail      string    `gorm:"detail"`       // 详细收货地址
-	Tel         string    `gorm:"tel"`          // 手机号码
-	IsDefault   int       `gorm:"is_default"`   // 是否默认地址
-	Deleted     int       `gorm:"deleted"`      // 逻辑删除
-	CreatedTime time.Time `gorm:"created_time"` // 创建时间
-	UpdatedTime time.Time `gorm:"updated_time"` // 更新时间
-	DeletedTime time.Time `gorm:"deleted_time"` // 删除时间
+	Id          int       `gorm:"id" json:"id"`
+	Name        string    `gorm:"name" json:"name"`                 // 收货人名称
+	OpenId      string    `gorm:"open_id" json:"open_id"`           // 用户表的用户ID
+	Province    string    `gorm:"province" json:"province"`         // 行政区域表的省ID
+	City        string    `gorm:"city" json:"city"`                 // 行政区域表的市ID
+	County      string    `gorm:"county" json:"county"`             // 行政区域表的区县ID
+	Detail      string    `gorm:"detail" json:"detail"`             // 详细收货地址
+	Tel         string    `gorm:"tel" json:"tel"`                   // 手机号码
+	IsDefault   int       `gorm:"is_default" json:"is_default"`     // 是否默认地址
+	Deleted     int       `gorm:"deleted" json:"deleted"`           // 逻辑删除
+	CreatedTime time.Time `gorm:"created_time" json:"created_time"` // 创建时间
+	UpdatedTime time.Time `gorm:"updated_time" json:"updated_time"` // 更新时间
+	DeletedTime time.Time `gorm:"deleted_time" json:"deleted_time"` // 删除时间
 }
-
 
 // 新增地址
 type AddressAddParam struct {

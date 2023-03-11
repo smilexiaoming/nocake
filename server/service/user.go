@@ -46,7 +46,6 @@ func (u *AppUserService) Login(code string) (*app.UserInfo, string) {
 	if rows == 0 {
 		user := app.User{
 			OpenId:      acsJson.OpenId,
-			Status:      1,
 			CreatedTime: time.Now(),
 		}
 		row := global.Db.Table("t_user").Create(&user).RowsAffected

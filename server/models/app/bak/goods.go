@@ -8,7 +8,8 @@ type Goods struct {
 	Brief       string    `gorm:"brief"`       // 商品简介
 	CategoryId  int       `gorm:"category_id"` // 商品所属类目ID
 	Keywords    string    `gorm:"keywords"`    // 商品关键字，采用逗号间隔
-	Status      int       `gorm:"status"`      // 状态
+	Status      int       `gorm:"status"`      // 状态 1未上架 2已上架
+	IsHot       int       `gorm:"is_hot"`      // 状态 1不推荐 2推荐
 	Weight      int       `gorm:"weight"`
 	PicUrl      string    `gorm:"pic_url"`      // 商品主图
 	PicUrls     string    `gorm:"pic_urls"`     // 商品附图JSON数组格式

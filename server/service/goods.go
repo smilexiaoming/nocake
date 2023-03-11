@@ -21,7 +21,6 @@ func (g *WebGoodsService) Create(param web.GoodsCreateParam) int64 {
 		Brief:       param.Brief,
 		CategoryId:  param.CategoryId,
 		Keywords:    param.Keywords,
-		Status:      param.Status,
 		Weight:      param.Weight,
 		PicUrl:      param.PicUrl,
 		PicUrls:     param.PicUrls,
@@ -87,19 +86,25 @@ func (g *WebGoodsService) GetList(param web.GoodsListParam) ([]web.GoodsList, in
 
 func (g *AppGoodsService) GetList(param app.GoodsListQueryParam) []app.GoodsList {
 	goodsList := make([]app.GoodsList, 0)
-	global.Db.Debug().Table("t_goods").Where("category_id = ?", param.CategoryId).Limit(param.PageSize).Offset((param.PageNum - 1) * param.PageSize).Find(&goodsList)
+	global.Db.Debug().Table("t_goods").Where("category_id = ? and status = 2", param.CategoryId).Limit(param.PageSize).Offset((param.PageNum - 1) * param.PageSize).Find(&goodsList)
+	return goodsList
+}
+
+func (g *AppGoodsService) GetHot() []app.GoodsList {
+	goodsList := make([]app.GoodsList, 0)
+	global.Db.Debug().Table("t_goods").Where("is_hot = 2 and status = 2").Find(&goodsList)
 	return goodsList
 }
 
 func (g *AppGoodsService) GetDetail(param app.GoodsDetailQueryParam) app.GoodsDetail {
 	goodsDetail := app.GoodsDetail{}
-	global.Db.Debug().Table("t_goods").Where("status = 0").First(&goodsDetail, param.GoodsId)
+	global.Db.Debug().Table("t_goods").Where("status = 2").First(&goodsDetail, param.GoodsId)
 	return goodsDetail
 }
 
 func (g *AppGoodsService) Search(param app.GoodsSearchQueryParam) []app.GoodsList {
 	goodsList := make([]app.GoodsList, 0)
-	Db := global.Db.Table("t_goods").Where("status = 0")
+	Db := global.Db.Table("t_goods").Where("status = 2")
 	if param.Name != "" {
 		Db = Db.Where("name like ?", "%"+param.Name+"%")
 	}
