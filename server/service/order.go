@@ -141,13 +141,13 @@ func (o *AppOrderService) Submit(param app.OrderSubmitParam) int64 {
 	rows_affect := global.Db.Table("t_address").Where("open_id = ? and is_default = 1", param.OpenId).Find(&address).RowsAffected
 	adressStr := ""
 	addressInfo := app.AddressAddParam{
-		Name:       address.Name,
-		OpenId:     address.OpenId,
-		Province:   address.Province,
-		City:       address.City,
-		County:     address.County,
-		Detail:     address.Detail,
-		Tel:        address.Tel,
+		Name:     address.Name,
+		OpenId:   address.OpenId,
+		Province: address.Province,
+		City:     address.City,
+		County:   address.County,
+		Detail:   address.Detail,
+		Tel:      address.Tel,
 	}
 	if rows_affect > 0 {
 		addressByte, _ := json.Marshal(addressInfo)

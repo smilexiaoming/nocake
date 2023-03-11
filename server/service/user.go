@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"nocake/common"
 	"nocake/global"
 	"nocake/models/app"
 	"nocake/models/web"
@@ -53,5 +54,6 @@ func (u *AppUserService) Login(code string) (*app.UserInfo, string) {
 			fmt.Println("add app user error")
 		}
 	}
-	return &app.UserInfo{OpenId: acsJson.OpenId}, ""
+	skey, _ := common.GenerateSkey(acsJson.OpenId)
+	return &app.UserInfo{OpenId: acsJson.OpenId, Skey: skey}, ""
 }

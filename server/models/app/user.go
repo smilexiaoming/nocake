@@ -39,4 +39,5 @@ type Code2SessionResult struct {
 // 用户信息,OpenID用户唯一标识
 type UserInfo struct {
 	OpenId string `json:"openId"`
+	Skey   string `json:"skey"`
 }

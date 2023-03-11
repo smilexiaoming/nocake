@@ -91,6 +91,8 @@ func Router() {
 		// 用户登录
 		app.POST("/login", api.GetAppUser().UserLogin)
 
+		app.Use(middleware.AppJwtAuth())
+
 		// 商品分类
 		app.GET("/category/option", api.GetAppCategory().GetCategoryOption)
 
