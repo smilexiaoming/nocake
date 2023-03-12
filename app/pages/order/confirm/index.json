@@ -1,10 +1,13 @@
 {
   "usingComponents": {
     "van-cell": "@vant/weapp/cell/index",
+    "van-field": "@vant/weapp/field/index",
     "van-icon": "@vant/weapp/icon/index",
     "van-card": "@vant/weapp/card/index",
     "van-cell-group": "@vant/weapp/cell-group/index",
-    "van-dialog": "@vant/weapp/dialog/index"
+    "van-dialog": "@vant/weapp/dialog/index",
+    "van-dropdown-menu": "@vant/weapp/dropdown-menu/index",
+    "van-dropdown-item": "@vant/weapp/dropdown-item/index"
   },
   "navigationBarTitleText": "订单确认",
   "backgroundColor": "#f7f8fa"

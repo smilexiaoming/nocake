@@ -1,26 +1,28 @@
 <!--pages/order/confirm/index.wxml-->
 <view wx:if="{{showView}}">
-<van-cell size="large" use-label-slot center>
-      <view slot="title">
-        <view>{{addressListDefault.name}}<text style="margin-left: 20rpx;">{{addressListDefault.tel}}</text></view>
-      </view>
-      <view slot="label" class="cell_label">
-        <view>
-          <van-tag color="#c6edf8" wx:if="{{addressListDefault.is_default === 1}}" text-color="#6666">默认</van-tag>{{addressListDefault.province}}{{addressListDefault.city}}{{addressListDefault.county}}{{addressListDefault.detail}}
-        </view>
-      </view>
-      <van-icon slot="right-icon" name="arrow" class="custom-icon" />
-</van-cell>
-
+<view>
+选择地址：
+  <van-dropdown-menu size="large" direction="up">
+    <van-dropdown-item value="{{ address_value }}" options="{{ address_option }}" />
+  </van-dropdown-menu>
+</view>
 <van-card custom-class="goods_van_card" title-class="goods_van_card_title" wx:for="{{goodsItem}}" wx:key="{{item.id}}" id="{{item.id}}" price="{{item.price}}" title="{{item.title}}" num="{{item.count}}" thumb="{{item.pic_url}}" bindtap="checkGoodsDetail" />
 
 <van-cell-group>
   <van-cell title="商品总额" value="" border="{{ false }}">
     <view style="font-weight: 600;font-size: 30rpx;color: #3e3f3f;">¥{{totalPrice}}</view>
   </van-cell>
-  <van-cell title="订单备注" value="选填" border="{{ false }}">
-    <van-icon slot="right-icon" name="arrow" class="custom-icon" />
-  </van-cell>
+</van-cell-group>
+<van-cell-group>
+  <van-field
+    bindchange="MarkChange"
+    v-model="message"
+    label="备注"
+    type="textarea"
+    placeholder="请输入备注"
+    rows="1"
+    autosize
+  />
 </van-cell-group>
 <!-- 提交订单 -->
 <view class="footer">

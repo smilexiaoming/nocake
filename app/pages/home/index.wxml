@@ -1,5 +1,5 @@
 <!-- pages/home/index.wxml -->
-<!-- <view class="header">
+<view class="header">
   <swiper indicator-dots="{{true}}" autoplay="{{true}}" style="height: 350rpx;">
     <block wx:for="{{bannerList}}">
       <swiper-item>
@@ -7,7 +7,7 @@
       </swiper-item>
     </block>
   </swiper>
-</view> -->
+</view>
 <view class="content">
   <View style="padding: 15rpx 0;">
     <van-search value="{{ keyWord }}" disabled="{{true}}" placeholder="请输入搜索关键词" shape="round" bindtap="toSearch"/>
