@@ -10,6 +10,7 @@ App({
             code: res.code 
           })
           wx.setStorageSync('open_id', response.data.data.openId);
+          wx.setStorageSync('skey', response.data.data.skey);
         }
       }
     })

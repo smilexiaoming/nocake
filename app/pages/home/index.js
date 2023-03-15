@@ -26,15 +26,14 @@ Page({
   onLoad(options) {
     this.getCategoryOption()
     this.getCartInfo()
+    this.getBanners()
   },
 
-  // 获取Banner
-  // async getBanners(){
-  //   let res = await http.GET('/banner/list',{
-  //     sid: parseInt(wx.getStorageSync('sid'))
-  //   })
-  //   this.setData({bannerList: res.data.data})
-  // },
+  // 获取Banner，人气商品
+  async getBanners(){
+    let res = await http.GET('/goods/hot')
+    this.setData({bannerList: res.data.data})
+  },
 
   // 点击banner
   onClickBanner(event){

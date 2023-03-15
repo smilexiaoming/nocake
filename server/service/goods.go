@@ -26,9 +26,10 @@ func (g *WebGoodsService) Create(param web.GoodsCreateParam) int64 {
 		PicUrls:     param.PicUrls,
 		Unit:        param.Unit,
 		Price:       param.Price,
+		Deleted:     1,
 		CreatedTime: time.Now(),
 	}
-	return global.Db.Table("t_goods").Create(&goods).RowsAffected
+	return global.Db.Debug().Table("t_goods").Create(&goods).RowsAffected
 }
 
 // 删除商品
@@ -77,7 +78,7 @@ func (g *WebGoodsService) GetList(param web.GoodsListParam) ([]web.GoodsList, in
 		CategoryId: param.CategoryId,
 		Name:       param.Name,
 		Status:     param.Status,
-		Deleted:    "0",
+		Deleted:    1,
 	}
 	goodsList := make([]web.GoodsList, 0)
 	rows := common.RestPage(param.Page, "t_goods", query, &goodsList, &[]web.Goods{})

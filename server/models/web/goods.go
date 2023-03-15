@@ -18,7 +18,7 @@ type Goods struct {
 	Unit        string    `gorm:"unit" json:"unit"`                 // 商品单位，例如件、盒
 	Quantity    int       `gorm:"quantity" json:"quantity"`         // 商品库存
 	Price       float64   `gorm:"price" json:"price"`               // 价格
-	Deleted     string    `gorm:"deleted" json:"deleted"`           // 逻辑删除
+	Deleted     int       `gorm:"deleted" json:"deleted"`           // 逻辑删除
 	CreatedTime time.Time `gorm:"created_time" json:"created_time"` // 创建时间
 	UpdatedTime time.Time `gorm:"updated_time" json:"updated_time"` // 更新时间
 	DeletedTime time.Time `gorm:"deleted_time" json:"deleted_time"` // 删除时间

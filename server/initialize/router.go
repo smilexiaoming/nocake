@@ -55,7 +55,7 @@ func Router() {
 		web.POST("/login", api.GetWebUser().UserLogin)
 
 		// JWT认证
-		// web.Use(middleware.JwtAuth())
+		web.Use(middleware.JwtAuth())
 
 		// 文件上传
 		web.POST("/upload", api.GetWebFileUpload().FileUpload)
