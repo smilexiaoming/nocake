@@ -5,7 +5,7 @@
       <el-form-item prop="id">
         <el-input v-model.number="query.id" placeholder="商品ID"/>
       </el-form-item>
-      <el-form-item prop="title">
+      <el-form-item prop="name">
         <el-input v-model="query.name" placeholder="商品名称"/>
       </el-form-item>
       <el-form-item prop="category_id">
@@ -44,8 +44,8 @@
       <el-table-column prop="sales" label="销量" sortable/>
       <el-table-column prop="status" label="状态">
         <template #default="scope">
-          <el-tag v-if="scope.row.status === 1" size="small">出售中</el-tag>
-          <el-tag v-if="scope.row.status === 2" size="small" type="success">仓库中</el-tag>
+          <el-tag v-if="scope.row.status === 2" size="small">出售中</el-tag>
+          <el-tag v-if="scope.row.status === 1" size="small" type="success">仓库中</el-tag>
         </template>
       </el-table-column>
       <el-table-column prop="created" label="创建时间" min-width="150" sortable>
@@ -61,9 +61,9 @@
       <el-table-column label="操作" min-width="130">
         <template #default="scope">
           <el-button size="small" :icon="Edit" @click="edit(scope.$index, scope.row)"/>
-          <el-button v-if="scope.row.status === 2" size="small" type="primary" @click="changeStatus(1,scope.row)">上架
+          <el-button v-if="scope.row.status === 1" size="small" type="primary" @click="changeStatus(2,scope.row)">上架
           </el-button>
-          <el-button v-if="scope.row.status === 1" size="small" type="primary" @click="changeStatus(2,scope.row)">下架
+          <el-button v-if="scope.row.status === 2" size="small" type="primary" @click="changeStatus(1,scope.row)">下架
           </el-button>
           <el-popconfirm title="此操作将永久删除该信息, 是否继续?"
                          confirmButtonText="确认"
@@ -121,7 +121,7 @@
         <el-form-item label="图片" prop="pic_url">
           <el-input v-show="false" v-model="goods.pic_url" />
           <el-upload
-              action="http://1.14.106.241/web/upload"
+              action="https://www.nocake.cn/web/upload"
               :headers="{'token': token}"
               :limit="1"
               name="file"
@@ -265,7 +265,6 @@ export default {
       this.operateType = 'edit'
       this.goods.id = row.id
       this.goods.category_id = row.category_id
-      this.goods.title = row.title
       this.goods.name = row.name
       this.goods.price = row.price
       this.goods.quantity = row.quantity
@@ -277,7 +276,7 @@ export default {
     },
 
     changeCategory(value) {
-      this.goods.category_id = value[1]
+      this.goods.category_id = value[0]
     },
 
     // 获取商品类目选项
@@ -294,8 +293,8 @@ export default {
       this.$axios.get('/goods/list', {
         params: {
           id: this.query.id,
-          title: this.query.name,
-          category_id: this.query.category_id[1],
+          name: this.query.name,
+          category_id: this.query.category_id[0],
           status: this.query.status,
           pageNum: this.pageNum,
           pageSize: this.pageSize,

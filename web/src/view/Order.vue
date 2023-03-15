@@ -22,10 +22,8 @@
     <!-- 订单列表 -->
     <el-table :data="orderList" height="65vh" style="width: 100%">
       <el-table-column prop="id" label="订单号" width="200px"/>
-      <el-table-column prop="totalPrice" label="订单金额"/>
-      <el-table-column prop="goodsCount" label="商品数量">
-        <template #default="scope">{{scope.row.goods_count}}</template>
-      </el-table-column>
+      <el-table-column prop="goods_price" label="订单金额"/>
+      <el-table-column prop="goods_count" label="商品数量"/>
       <el-table-column prop="status" label="订单状态">
         <template #default="scope">
           <el-tag v-if="scope.row.status === 1" size="small" type="info">待付款</el-tag>
@@ -107,8 +105,9 @@
       </descriptions>
       <descriptions label="收货人姓名">{{orderDetail.name}}</descriptions>
       <descriptions label="手机号">{{orderDetail.tel}}</descriptions>
-      <descriptions label="收货地址">{{orderDetail.province + ' ' + orderDetail.city + ' ' + orderDetail.district +
-      ' ' + orderDetail.detailedAddress }}</descriptions>
+      <descriptions label="用户备注">{{orderDetail.message}}</descriptions>
+      <descriptions label="收货地址">{{orderDetail.province + ' ' + orderDetail.city + ' ' + orderDetail.county +
+      ' ' + orderDetail.detail }}</descriptions>
       <descriptions label="创建时间">{{orderDetail.created}}</descriptions>
       <template #footer>
         <span class="dialog-footer">
@@ -151,11 +150,11 @@ export default {
         totalPrice: '',
         goodsItem: [],
         name: '',
-        mobile: '',
+        tel: '',
         province: '',
         city: '',
-        district: '',
-        detailedAddress: '',
+        county: '',
+        detail: '',
         created: '',
         nickName: ''
       },
@@ -219,17 +218,19 @@ export default {
       this.$axios.get('/order/detail', {
         params: { id: row.id }
       }).then((response) => {
+        let address = JSON.parse(response.data.data.address); // jsonstr是json字符串
         this.orderDetail.id = response.data.data.id
         this.orderDetail.status = response.data.data.status
-        this.orderDetail.totalPrice = response.data.data.totalPrice
+        this.orderDetail.totalPrice = response.data.data.goods_price
         this.orderDetail.goodsItem = response.data.data.goodsItem
-        this.orderDetail.name = response.data.data.name
-        this.orderDetail.mobile = response.data.data.mobile
-        this.orderDetail.province = response.data.data.province
-        this.orderDetail.city = response.data.data.city
-        this.orderDetail.district = response.data.data.district
-        this.orderDetail.detailedAddress = response.data.data.detailedAddress
-        this.orderDetail.created = response.data.data.created
+        this.orderDetail.name = address.name
+        this.orderDetail.tel = address.tel
+        this.orderDetail.province = address.province
+        this.orderDetail.city = address.city
+        this.orderDetail.county = address.county
+        this.orderDetail.detail = address.detail
+        this.orderDetail.created = response.data.data.created_time
+        this.orderDetail.message = response.data.data.message
       }).catch((error) => {
         console.log(error)
       })

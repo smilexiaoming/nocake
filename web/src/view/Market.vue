@@ -104,7 +104,7 @@
             <el-option v-for="item in typeOption" :key="item.value" :label="item.label" :value="item.value"/>
           </el-select>
         </el-form-item>
-        <el-form-item label="活动图片" prop="bannerImage">
+        <!-- <el-form-item label="活动图片" prop="bannerImage">
           <el-input v-show="false" v-model="market.bannerImage"/>
           <el-upload
               action="http://1.14.106.241/web/upload"
@@ -118,7 +118,7 @@
               :on-success="handleImageSuccess">
             <div class="goods_image_upload_icon">+</div>
           </el-upload>
-        </el-form-item>
+        </el-form-item> -->
         <el-form-item label="开始时间" prop="beginTime">
           <el-date-picker v-model="market.beginTime" value-format="YYYY-MM-DD HH:mm:ss" type="datetime" placeholder="请选择开始时间"/>
         </el-form-item>

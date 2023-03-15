@@ -3,7 +3,7 @@ import router from '../router/index';
 import { ElMessage } from 'element-plus';
 
 // axios.defaults.baseURL = "http://1.14.106.241/web";
-axios.defaults.baseURL = "http://127.0.0.1:8000/web";
+axios.defaults.baseURL = "https://www.nocake.cn/web";
 
 const request = axios.create({
     timeout: 5000,
