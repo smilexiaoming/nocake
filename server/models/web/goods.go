@@ -18,6 +18,7 @@ type Goods struct {
 	Unit        string    `gorm:"unit" json:"unit"`                 // 商品单位，例如件、盒
 	Quantity    int       `gorm:"quantity" json:"quantity"`         // 商品库存
 	Price       float64   `gorm:"price" json:"price"`               // 价格
+	Options     string    `gorm:"options" json:"options"`           // 商品购买选项
 	Deleted     int       `gorm:"deleted" json:"deleted"`           // 逻辑删除
 	CreatedTime time.Time `gorm:"created_time" json:"created_time"` // 创建时间
 	UpdatedTime time.Time `gorm:"updated_time" json:"updated_time"` // 更新时间
@@ -37,6 +38,7 @@ type GoodsCreateParam struct {
 	PicUrls    string  `form:"pic_urls"` // 商品附图JSON数组格式
 	Unit       string  `form:"unit"`     // 商品单位，例如件、盒
 	Price      float64 `form:"price"`    // 价格
+	Options    string  `form:"options"`  // 商品购买选项
 }
 
 // 商品删除参数模型
@@ -59,6 +61,7 @@ type GoodsUpdateParam struct {
 	Unit       string  `json:"unit"`     // 商品单位，例如件、盒
 	Quantity   int     `json:"quantity"` // 商品库存
 	Price      float64 `json:"price"`    // 价格
+	Options    string  `json:"options"`  // 商品购买选项
 }
 
 // 商品状态更新参数模型
@@ -91,5 +94,6 @@ type GoodsList struct {
 	Unit        string    `json:"unit"`         // 商品单位，例如件、盒
 	Quantity    int       `json:"quantity"`     // 商品库存
 	Price       float64   `json:"price"`        // 价格
+	Options     string    `json:"options"`      // 商品购买选项
 	CreatedTime time.Time `json:"created_time"` // 创建时间
 }

@@ -26,6 +26,7 @@ func (g *WebGoodsService) Create(param web.GoodsCreateParam) int64 {
 		PicUrls:     param.PicUrls,
 		Unit:        param.Unit,
 		Price:       param.Price,
+		Options:     param.Options,
 		Deleted:     1,
 		CreatedTime: time.Now(),
 	}
@@ -56,6 +57,7 @@ func (g *WebGoodsService) Update(param web.GoodsUpdateParam) int64 {
 		Unit:        param.Unit,
 		Quantity:    param.Quantity,
 		Price:       param.Price,
+		Options:     param.Options,
 		UpdatedTime: time.Now(),
 	}
 	fmt.Printf("goods: %#v\n", goods)
