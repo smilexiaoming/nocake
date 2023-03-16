@@ -138,7 +138,7 @@ func (o *AppOrderService) Submit(param app.OrderSubmitParam) int64 {
 	}
 
 	address := app.AddressAddParam{}
-	rows_affect := global.Db.Table("t_address").Where("open_id = ? and address_id = ?", param.OpenId, param.AddressId).Find(&address).RowsAffected
+	rows_affect := global.Db.Table("t_address").Where("open_id = ? and id = ?", param.OpenId, param.AddressId).Find(&address).RowsAffected
 	adressStr := ""
 	addressInfo := app.AddressAddParam{
 		Name:     address.Name,

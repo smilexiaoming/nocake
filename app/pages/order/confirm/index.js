@@ -37,12 +37,13 @@ Page({
     let address_option = []
     for (let index = 0; index < address_list.length; index++) {
       let element = address_list[index];
-      let temp_str = element.detail + " " +element.name + " " + element.tel
+      let temp_str = element.name + " " + element.detail + " " + element.tel
       address_option.push({"text":temp_str, "value":element.id})
     }
+    console.log("address_option:", address_option)
     this.setData({
       address_option: address_option,
-      address_value:address_list[1].id
+      address_value:address_list[0].id
     })
   },
 

@@ -17,6 +17,7 @@ type Goods struct {
 	Unit        string    `gorm:"unit"`         // 商品单位，例如件、盒
 	Quantity    int       `gorm:"quantity"`     // 商品库存
 	Price       float64   `gorm:"price"`        // 价格
+	Options     string    `gorm:"options"`      // 商品购买选项
 	Deleted     int       `gorm:"deleted"`      // 逻辑删除
 	CreatedTime time.Time `gorm:"created_time"` // 创建时间
 	UpdatedTime time.Time `gorm:"updated_time"` // 更新时间
@@ -47,6 +48,7 @@ type GoodsList struct {
 	CounterPrice float64 `json:"counter_price"` // 专柜价格
 	RetailPrice  float64 `json:"retail_price"`  // 零售价格
 	Price        float64 `json:"price"`         // 线上价格
+	Options      string  `json:"options"`       // 商品购买选项
 }
 
 // 商品详情参数
@@ -68,6 +70,7 @@ type GoodsDetail struct {
 	PicUrls    string  `json:"pic_urls"` // 商品附图JSON数组格式
 	Unit       string  `json:"unit"`     // 商品单位，例如件、盒
 	Price      float64 `json:"price"`    // 价格
+	Options    string  `json:"options"`  // 商品购买选项
 }
 
 // 商品详情参数

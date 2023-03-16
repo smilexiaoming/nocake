@@ -105,8 +105,8 @@
         <el-form-item label="名称" prop="name">
           <el-input v-model="goods.name" style="width: 90%;" type="text" maxlength="30" show-word-limit/>
         </el-form-item>
-        <el-form-item label="简介" prop="title">
-          <el-input v-model="goods.brief" style="width: 50%;" type="text" maxlength="10" show-word-limit/>
+        <el-form-item label="简介" prop="brief">
+          <el-input v-model="goods.brief" style="width: 50%;" type="text" maxlength="30" show-word-limit/>
         </el-form-item>
         <el-form-item label="价格" prop="price">
           <el-input v-model.number="goods.price" style="width: 50%;">
@@ -133,8 +133,15 @@
             <div class="goods_image_upload_icon">+</div>
           </el-upload>
         </el-form-item>
-        <el-form-item label="备注">
+        <!-- <el-form-item label="备注">
           <el-input v-model="goods.remark"
+                    style="width: 90%;"
+                    type="textarea"
+                    maxlength="100"
+                    :autosize="{ minRows: 2}" show-word-limit/>
+        </el-form-item> -->
+        <el-form-item label="购买选项">
+          <el-input v-model="goods.options"
                     style="width: 90%;"
                     type="textarea"
                     maxlength="100"
@@ -266,11 +273,12 @@ export default {
       this.goods.id = row.id
       this.goods.category_id = row.category_id
       this.goods.name = row.name
+      this.goods.brief = row.brief
       this.goods.price = row.price
       this.goods.quantity = row.quantity
       this.goods.pic_url = row.pic_url
       this.pictureList.push({url: row.pic_url})
-      this.goods.remark = row.remark
+      this.goods.options = row.options
       this.goods.status = row.status
       this.goodsDialogVisible = true
     },

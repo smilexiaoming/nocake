@@ -1,5 +1,6 @@
 // 通用请求路径basePath
-var basePath = 'http://127.0.0.1:8000/app'
+// var basePath = 'http://127.0.0.1:8000/app'
+var basePath = 'https://www.nocake.cn/app'
 // var basePath = 'http://1.14.106.241/app'
 
 // 发送GET请求

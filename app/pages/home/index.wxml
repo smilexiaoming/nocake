@@ -3,7 +3,7 @@
   <swiper indicator-dots="{{true}}" autoplay="{{true}}" style="height: 350rpx;">
     <block wx:for="{{bannerList}}">
       <swiper-item>
-        <image src="{{item.bannerImage}}" id="{{item.goodsIds}}" bindtap="onClickBanner" style="width: 100%;height: 100%;" />
+        <image src="{{item.pic_url}}" id="{{item.id}}" bindtap="onClickBanner" style="width: 100%;height: 100%;" />
       </swiper-item>
     </block>
   </swiper>

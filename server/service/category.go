@@ -54,7 +54,7 @@ func (c *WebCategoryService) Create(param web.CategoryCreateParam) int64 {
 // 删除商品类目
 func (c *WebCategoryService) Delete(param web.CategoryDeleteParam) int64 {
 	category := app.Category{
-		Deleted:     1,
+		Deleted:     2,
 		DeletedTime: time.Now(),
 	}
 	return global.Db.Debug().Table("t_category").Where("id = ?", param.Id).Updates(category).RowsAffected
@@ -80,9 +80,10 @@ func (c *WebCategoryService) Update(param web.CategoryUpdateParam) int64 {
 // 获取商品类目列表
 func (g *WebCategoryService) GetList(param web.CategoryQueryParam) []web.CategoryList {
 	query := &web.Category{
-		Name:  param.Name,
-		Pid:   param.Pid,
-		Level: param.Level,
+		Name:    param.Name,
+		Pid:     param.Pid,
+		Level:   param.Level,
+		Deleted: 1,
 	}
 	categoryList := make([]web.CategoryList, 0)
 	global.Db.Debug().Table("t_category").Where(query).Find(&categoryList)
@@ -114,7 +115,7 @@ func (c *AppCategoryService) GetOption(param app.CategoryQueryParam) (option []a
 		errMessage = constant.ParamInvalid
 		return nil, errMessage
 	}
-	Db.Debug().Where("level = ? and pid = ?", param.Level, param.Pid).Find(&categorys)
+	Db.Debug().Where("level = ? and pid = ? and deleted = 1", param.Level, param.Pid).Find(&categorys)
 	for _, item := range categorys {
 		option := app.CategoryOption{
 			Id:   item.Id,

@@ -11,7 +11,7 @@ mysql:
 # 图片路径配置
 upload:
   savePath: /data/static/images/
-  accessUrl: http://1.14.106.241/images/
+  accessUrl: https://www.nocake.cn/images/
 
 # JWT配置
 jwt:
