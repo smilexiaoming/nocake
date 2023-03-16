@@ -93,7 +93,7 @@ func (g *WebCategoryService) GetList(param web.CategoryQueryParam) []web.Categor
 // 获取商品类目选项
 func (c *WebCategoryService) GetOption() (option []web.CategoryOption) {
 	selectList := make([]web.CategoryList, 0)
-	global.Db.Table("t_category").Find(&selectList)
+	global.Db.Table("t_category").Where("deleted = 1").Find(&selectList)
 	return getTreeOptions(0, selectList)
 }
 func (c *AppCategoryService) GetOption(param app.CategoryQueryParam) (option []app.CategoryOption, errMessage string) {
