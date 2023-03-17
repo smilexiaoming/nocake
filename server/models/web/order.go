@@ -8,7 +8,7 @@ import (
 type Order struct {
 	Id            int       `gorm:"id" json:"id"`
 	OpenId        string    `gorm:"open_id" json:"open_id"`               // 用户表的用户ID
-	GoodsInfo     string    `gorm:"goods_info" json:"goods_info"`         // 商品信息json
+	Options       string    `gorm:"goods_info" json:"goods_info"`         // 商品信息json
 	Status        int       `gorm:"status" json:"status"`                 // 订单状态 1已提交 2已完成 3撤销 4已接单不可撤销
 	SubStatus     int       `gorm:"sub_status" json:"sub_status"`         // 订单子状态 1已提交 2已完成 3撤销 4已接单不可撤销
 	Address       string    `gorm:"address" json:"address"`               // 收货具体地址
@@ -62,7 +62,7 @@ type OrderItem struct {
 	Avatar        string    `json:"avatar"`         // 用户头像图片
 	Username      string    `json:"username"`       // 用户名称
 	Nickname      string    `json:"nickname"`       // 用户昵称
-	GoodsInfo     string    `json:"goods_info"`     // 商品信息json
+	Options       string    `json:"goods_info"`     // 商品信息json
 	Status        int       `json:"status"`         // 订单状态 1已提交 2已完成 3撤销 4已接单不可撤销
 	SubStatus     int       `json:"sub_status"`     // 订单子状态 1已提交 2已完成 3撤销 4已接单不可撤销
 	Address       string    `json:"address"`        // 收货具体地址
@@ -96,10 +96,9 @@ type OrderDetail struct {
 
 // 订单商品项传输模型
 type GoodsItem struct {
-	Id     int     `json:"id"`
-	Name   string  `json:"name"`
+	Id      int     `json:"id"`
+	Name    string  `json:"name"`
 	Options string  `json:"options"`
-	Price  float64 `json:"price"`
-	PicUrl string  `json:"pic_url"`
-	Count  int     `json:"count"`
+	Price   float64 `json:"price"`
+	PicUrl  string  `json:"pic_url"`
 }

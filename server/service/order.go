@@ -52,7 +52,7 @@ func (o *WebOrderService) GetList(param web.OrderListParam) ([]web.OrderItem, in
 			Avatar:      user.Avatar,
 			Nickname:    user.Nickname,
 			GoodsPrice:  o.GoodsPrice,
-			GoodsInfo:   o.GoodsInfo,
+			Options:     o.Options,
 			GoodsCount:  o.GoodsCount,
 			Status:      o.Status,
 			CreatedTime: o.CreatedTime,
@@ -70,7 +70,7 @@ func (o *WebOrderService) GetDetail(param web.OrderDetailParam) (od web.OrderDet
 
 	goodIds := make([]string, 0)
 	goodsInfo := make(map[string]map[string]string, 0)
-	err := json.Unmarshal([]byte(order.GoodsInfo), &goodsInfo)
+	err := json.Unmarshal([]byte(order.Options), &goodsInfo)
 	if err != nil {
 		return web.OrderDetail{}
 	}
@@ -86,15 +86,12 @@ func (o *WebOrderService) GetDetail(param web.OrderDetailParam) (od web.OrderDet
 	}
 	global.Db.Debug().Table("t_goods").Find(&goods, goodIds)
 	for _, v := range goods {
-		idstr := strconv.Itoa(v.Id)
-		coutInt, _ := strconv.Atoi(goodsInfo[idstr]["count"])
 		goodItem := web.GoodsItem{
 			Id:      v.Id,
 			Name:    v.Name,
 			Price:   v.Price,
 			PicUrl:  v.PicUrl,
 			Options: v.Options,
-			Count:   coutInt,
 		}
 		orderDetail.GoodsItem = append(orderDetail.GoodsItem, goodItem)
 	}
@@ -134,7 +131,7 @@ func (o *AppOrderService) Submit(param app.OrderSubmitParam) int64 {
 
 	global.Db.Debug().Table("t_goods").Find(&cartInfo.CartItem, goodsIds)
 	for i, item := range cartInfo.CartItem {
-		cartInfo.CartItem[i].Carnumber = idsAndCounts[item.Id]
+		cartInfo.CartItem[i].Options = redisInfo[strconv.Itoa(int(item.Id))]
 		cartInfo.TotalPrice = cartInfo.TotalPrice + item.Price*float64(idsAndCounts[item.Id])
 		cartInfo.TotalCart = cartInfo.TotalCart + idsAndCounts[item.Id]
 	}
@@ -159,7 +156,7 @@ func (o *AppOrderService) Submit(param app.OrderSubmitParam) int64 {
 	goodsInfo, _ := json.Marshal(redisInfo)
 	orderInfo := app.Order{
 		Address:     adressStr,
-		GoodsInfo:   string(goodsInfo),
+		Options:     string(goodsInfo),
 		GoodsPrice:  cartInfo.TotalPrice,
 		GoodsCount:  cartInfo.TotalCart,
 		OpenId:      param.OpenId,
@@ -186,18 +183,21 @@ func (o *AppOrderService) GetList(param app.OrderQueryListParam) []app.OrderInfo
 
 func GetDetail(param app.Order) app.OrderInfo {
 	goodIds := make([]string, 0)
-	goodsIdCount := make(map[string]string, 0)
-	err := json.Unmarshal([]byte(param.GoodsInfo), &goodsIdCount)
+	goodsInfo := make(map[string]string, 0)
+	err := json.Unmarshal([]byte(param.Options), &goodsInfo)
 	if err != nil {
 		return app.OrderInfo{}
 	}
 	goods := make([]app.Goods, 0)
 	goodsCount := 0
-	for k, v := range goodsIdCount {
+	for k, v := range goodsInfo {
+		info := make(map[string]string)
+		json.Unmarshal([]byte(v), &info)
 		goodIds = append(goodIds, k)
-		count, _ := strconv.Atoi(v)
+		count, _ := strconv.Atoi(info["count"])
 		goodsCount += count
 	}
+
 	orderDetail := app.OrderInfo{
 		OrderId:    param.Id,
 		Status:     param.Status,
@@ -206,14 +206,12 @@ func GetDetail(param app.Order) app.OrderInfo {
 	}
 	global.Db.Debug().Table("t_goods").Find(&goods, goodIds)
 	for _, v := range goods {
-		idstr := strconv.Itoa(v.Id)
-		coutInt, _ := strconv.Atoi(goodsIdCount[idstr])
 		goodItem := app.GoodsItem{
-			Id:     v.Id,
-			Name:   v.Name,
-			Price:  v.Price,
-			PicUrl: v.PicUrl,
-			Count:  coutInt,
+			Id:      v.Id,
+			Name:    v.Name,
+			Price:   v.Price,
+			PicUrl:  v.PicUrl,
+			Options: goodsInfo[strconv.Itoa(v.Id)],
 		}
 		orderDetail.GoodsItem = append(orderDetail.GoodsItem, goodItem)
 	}

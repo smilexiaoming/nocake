@@ -237,7 +237,7 @@ DROP TABLE IF EXISTS `t_order`;
 CREATE TABLE `t_order` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `open_id` varchar(63) NOT NULL DEFAULT '' COMMENT '用户表的用户ID',
-  `goods_info` varchar(1023) NOT NULL DEFAULT '' COMMENT '商品信息json',
+  `options` varchar(1023) NOT NULL DEFAULT '' COMMENT '商品选项json',
   `status` smallint NOT NULL DEFAULT '1' COMMENT '订单状态 1已提交 2已完成 3已撤销 4已接单不可撤销 ',
   `sub_status` smallint NOT NULL DEFAULT '1' COMMENT '订单子状态 1已提交 2已完成 3撤销 4已接单不可撤销 ',
   `address` varchar(1023) NOT NULL DEFAULT '' COMMENT '收货具体地址',

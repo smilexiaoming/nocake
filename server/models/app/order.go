@@ -7,7 +7,7 @@ import (
 type Order struct {
 	Id            int       `gorm:"id" json:"id"`
 	OpenId        string    `gorm:"open_id" json:"open_id"`               // 用户表的用户ID
-	GoodsInfo     string    `gorm:"goods_info" json:"goods_info"`         // 商品信息json
+	Options       string    `gorm:"goods_info" json:"goods_info"`         // 商品信息json
 	Status        int       `gorm:"status" json:"status"`                 // 订单状态 1已提交 2已完成 3撤销 4已接单不可撤销
 	SubStatus     int       `gorm:"sub_status" json:"sub_status"`         // 订单子状态 1已提交 2已完成 3撤销 4已接单不可撤销
 	Address       string    `gorm:"address" json:"address"`               // 收货具体地址
@@ -63,11 +63,11 @@ type OrderQueryDetailParam struct {
 
 // 订单列表模型
 type GoodsItem struct {
-	Id     int     `json:"id"`
-	Name   string  `json:"name"`
-	Price  float64 `json:"price"`
-	PicUrl string  `json:"pic_url"`
-	Count  int     `json:"count"`
+	Id      int     `json:"id"`
+	Name    string  `json:"name"`
+	Price   float64 `json:"price"`
+	PicUrl  string  `json:"pic_url"`
+	Options string  `json:"options"`
 }
 
 type OrderInfo struct {

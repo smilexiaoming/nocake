@@ -9,9 +9,9 @@ type CartUpdateParam struct {
 
 // 购物车修改商品数量参数模型
 type CartSetParam struct {
-	GoodsId   uint   `form:"goods_id" binding:"required"`
-	OpenId    string `form:"open_id" binding:"required"`
-	Carnumber uint   `form:"cart_number" binding:"required"`
+	GoodsId uint   `form:"goods_id" binding:"required"`
+	OpenId  string `form:"open_id" binding:"required"`
+	Options string `form:"options" binding:"required"`
 }
 
 // 购物车删除商品参数模型
@@ -32,11 +32,11 @@ type CartQueryParam struct {
 
 // 购物车商品项传输模型
 type CartItem struct {
-	Id        uint64  `gorm:"primaryKey" json:"id"`
-	PicUrl    string  `gorm:"pic_url"  json:"pic_url"`
-	Name      string  `gorm:"name"      json:"name"`
-	Price     float64 `gorm:"price"      json:"price"`
-	Carnumber int     `gorm:"cart_number"      json:"cart_number"`
+	Id      uint64  `gorm:"primaryKey" json:"id"`
+	PicUrl  string  `gorm:"pic_url"  json:"pic_url"`
+	Name    string  `gorm:"name"      json:"name"`
+	Price   float64 `gorm:"price"      json:"price"`
+	Options string  `gorm:"options"      json:"options"`
 }
 
 // 购物车信息传输模型

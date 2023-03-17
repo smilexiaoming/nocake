@@ -91,7 +91,7 @@ func Router() {
 		// 用户登录
 		app.POST("/login", api.GetAppUser().UserLogin)
 
-		app.Use(middleware.AppJwtAuth())
+		// app.Use(middleware.AppJwtAuth())
 
 		// 商品分类
 		app.GET("/category/option", api.GetAppCategory().GetCategoryOption)
@@ -104,7 +104,6 @@ func Router() {
 
 		// 购物车
 		app.POST("/cart/set", api.GetAppCart().SetCart)
-		app.POST("/cart/update", api.GetAppCart().UpdateCart)
 		app.DELETE("/cart/delete", api.GetAppCart().DeleteCart)
 		app.DELETE("/cart/clear", api.GetAppCart().ClearCart)
 		app.GET("/cart/query", api.GetAppCart().GetCartInfo)

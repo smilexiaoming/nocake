@@ -42,30 +42,6 @@ func (a *AppCart) SetCart(c *gin.Context) {
 	response.Error(constant.NotCreated, c)
 }
 
-// @Summary 增加或者减少购物车商品数量
-// @Description 传入code进行鉴权
-// @Accept  multipart/form-data
-// @Produce  json
-// @Param open_id formData string true "open_id"
-// @Param goods_id formData int true "商品id"
-// @Param cart_number formData int true "更改量"
-// @Success 200 {object} response.Response "请求成功"
-// @Failure 400 {object} response.Response "请求错误"
-// @Failure 500 {object} response.Response "内部错误"
-// @Router /app/cart/update [post]
-func (a *AppCart) UpdateCart(c *gin.Context) {
-	param := app.CartUpdateParam{}
-	if err := c.ShouldBind(&param); err != nil {
-		response.Error(constant.ParamInvalid, c)
-		return
-	}
-
-	if added := a.Update(param); added > 0 {
-		response.Success(constant.Created, nil, c)
-		return
-	}
-	response.Error(constant.NotCreated, c)
-}
 
 // @Summary 删除购物车商品
 // @Description
