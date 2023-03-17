@@ -27,18 +27,18 @@ type Goods struct {
 
 // 商品创建参数模型
 type GoodsCreateParam struct {
-	Name       string  `form:"name"`        // 商品名称
-	Brief      string  `form:"brief"`       // 商品简介
-	Detail     string  `form:"detail"`      // 商品详细介绍，是富文本格式
-	CategoryId int     `form:"category_id"` // 商品所属类目ID
-	Keywords   string  `form:"keywords"`    // 商品关键字，采用逗号间隔
-	Status     int     `form:"status"`      // 状态
-	Weight     int     `form:"weight"`
-	PicUrl     string  `form:"pic_url"`  // 商品主图
-	PicUrls    string  `form:"pic_urls"` // 商品附图JSON数组格式
-	Unit       string  `form:"unit"`     // 商品单位，例如件、盒
-	Price      float64 `form:"price"`    // 价格
-	Options    string  `form:"options"`  // 商品购买选项
+	Name       string  `json:"name"`        // 商品名称
+	Brief      string  `json:"brief"`       // 商品简介
+	Detail     string  `json:"detail"`      // 商品详细介绍，是富文本格式
+	CategoryId int     `json:"category_id"` // 商品所属类目ID
+	Keywords   string  `json:"keywords"`    // 商品关键字，采用逗号间隔
+	Status     int     `json:"status"`      // 状态
+	Weight     int     `json:"weight"`
+	PicUrl     string  `json:"pic_url"`  // 商品主图
+	PicUrls    string  `json:"pic_urls"` // 商品附图JSON数组格式
+	Unit       string  `json:"unit"`     // 商品单位，例如件、盒
+	Price      float64 `json:"price"`    // 价格
+	Options    string  `json:"options"`  // 商品购买选项
 }
 
 // 商品删除参数模型

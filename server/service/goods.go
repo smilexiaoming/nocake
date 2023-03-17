@@ -19,6 +19,7 @@ func (g *WebGoodsService) Create(param web.GoodsCreateParam) int64 {
 	goods := web.Goods{
 		Name:        param.Name,
 		Brief:       param.Brief,
+		Status:      1,
 		CategoryId:  param.CategoryId,
 		Keywords:    param.Keywords,
 		Weight:      param.Weight,

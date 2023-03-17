@@ -8,12 +8,14 @@ Page({
    * 页面的初始数据
    */
   data: {
-    tabList: ['未完成','已完成','',''],
+    // tabList: ['未完成','已完成'],
+    tabList: [{"text":'未完成', value:"1"},{"text":'已完成', value:"2"}],
     active: 0,
     orderList: []
   },
 
   tabsChange(event) {
+    console.log("event.detail.name : ", event.detail.name)
     this.getOrderList(event.detail.name)
   },
 
@@ -29,7 +31,7 @@ Page({
   // 生命周期函数--监听页面显示
   onShow() {
     this.getTabBar().init();
-    this.getOrderList(0)
+    this.getOrderList(1)
   },
 
   // 获取订单列表
