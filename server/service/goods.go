@@ -19,6 +19,7 @@ func (g *WebGoodsService) Create(param web.GoodsCreateParam) int64 {
 	goods := web.Goods{
 		Name:        param.Name,
 		Brief:       param.Brief,
+		Status:      1,
 		CategoryId:  param.CategoryId,
 		Keywords:    param.Keywords,
 		Weight:      param.Weight,
@@ -36,7 +37,7 @@ func (g *WebGoodsService) Create(param web.GoodsCreateParam) int64 {
 // 删除商品
 func (g *WebGoodsService) Delete(param web.GoodsDeleteParam) int64 {
 	goods := app.Goods{
-		Deleted:     1,
+		Deleted:     2,
 		DeletedTime: time.Now(),
 	}
 	return global.Db.Debug().Table("t_goods").Where("id = ?", param.Id).Updates(goods).RowsAffected

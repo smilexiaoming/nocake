@@ -347,7 +347,7 @@ export default {
               price: parseInt(this.goods.price),
               quantity: parseInt(this.goods.quantity),
               pic_url: this.goods.pic_url,
-              remark: this.goods.remark,
+              options: this.goods.options,
             }).then((response) => {
               if (response.data.code === 200) {
                 ElMessage({message: response.data.message, type: 'success'})
