@@ -84,8 +84,8 @@ func (c *WebCategory) GetCategoryOption(context *gin.Context) {
 // @Description 传入level 和 pid
 // @Accept  multipart/form-data
 // @Produce  json
-// @Param level query string false "level"
-// @Param pid query string false "pid"
+// @Param level query string false "level 类目层级"
+// @Param pid query string false "pid 父级id"
 // @Success 200 {object} app.CategoryOption "请求成功"
 // @Failure 400 {object} response.Response "请求错误"
 // @Failure 500 {object} response.Response "内部错误"

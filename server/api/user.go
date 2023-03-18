@@ -66,7 +66,7 @@ func (u *WebUser) UserLogin(c *gin.Context) {
 // @Accept  multipart/form-data
 // @Produce  json
 // @Param code formData string true "code"
-// @Success 200 {object} response.Response "请求成功"
+// @Success 200 {object} app.UserInfo "请求成功"
 // @Failure 400 {object} response.Response "请求错误"
 // @Failure 500 {object} response.Response "内部错误"
 // @Router /app/login [post]

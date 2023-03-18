@@ -1,22 +1,19 @@
 definitions:
   app.Address:
     properties:
-      areaCode:
-        description: 地区编码
-        type: string
       city:
         description: 行政区域表的市ID
         type: string
       county:
         description: 行政区域表的区县ID
         type: string
-      createdTime:
+      created_time:
         description: 创建时间
         type: string
       deleted:
         description: 逻辑删除
         type: integer
-      deletedTime:
+      deleted_time:
         description: 删除时间
         type: string
       detail:
@@ -24,17 +21,14 @@ definitions:
         type: string
       id:
         type: integer
-      isDefault:
+      is_default:
         description: 是否默认地址
         type: integer
       name:
         description: 收货人名称
         type: string
-      openId:
+      open_id:
         description: 用户表的用户ID
-        type: string
-      postalCode:
-        description: 邮政编码
         type: string
       province:
         description: 行政区域表的省ID
@@ -42,9 +36,33 @@ definitions:
       tel:
         description: 手机号码
         type: string
-      updatedTime:
+      updated_time:
         description: 更新时间
         type: string
+    type: object
+  app.CartInfo:
+    properties:
+      cart_item:
+        items:
+          $ref: '#/definitions/app.CartItem'
+        type: array
+      total_cart:
+        type: integer
+      total_price:
+        type: number
+    type: object
+  app.CartItem:
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+      options:
+        type: string
+      pic_url:
+        type: string
+      price:
+        type: number
     type: object
   app.CategoryOption:
     properties:
@@ -61,25 +79,10 @@ definitions:
       category_id:
         description: 商品所属类目ID
         type: integer
-      counter_price:
-        description: 专柜价格
-        type: number
       detail:
         description: 商品详细介绍，是富文本格式
         type: string
-      gallery:
-        description: 商品宣传图片列表，采用JSON数组格式
-        type: string
       id:
-        type: integer
-      is_hot:
-        description: 是否人气推荐，如果设置则可以在人气推荐页面展示
-        type: integer
-      is_new:
-        description: 是否新品首发，如果设置则可以在新品首发页面展示
-        type: integer
-      is_on_sale:
-        description: 是否上架
         type: integer
       keywords:
         description: 商品关键字，采用逗号间隔
@@ -87,33 +90,26 @@ definitions:
       name:
         description: 商品名称
         type: string
+      options:
+        description: 商品购买选项
+        type: string
       pic_url:
-        description: 商品页面商品图片
+        description: 商品主图
+        type: string
+      pic_urls:
+        description: 商品附图JSON数组格式
         type: string
       price:
-        description: 线上价格
+        description: 价格
         type: number
-      retail_price:
-        description: 零售价格
-        type: number
-      weight:
+      status:
+        description: 状态
         type: integer
       unit:
         description: 商品单位，例如件、盒
         type: string
-    type: object
-  app.GoodsItem:
-    properties:
-      count:
+      weight:
         type: integer
-      id:
-        type: integer
-      name:
-        type: string
-      pic_url:
-        type: string
-      price:
-        type: number
     type: object
   app.GoodsList:
     properties:
@@ -137,9 +133,6 @@ definitions:
       is_hot:
         description: 是否人气推荐，如果设置则可以在人气推荐页面展示
         type: integer
-      is_new:
-        description: 是否新品首发，如果设置则可以在新品首发页面展示
-        type: integer
       is_on_sale:
         description: 是否上架
         type: integer
@@ -148,6 +141,9 @@ definitions:
         type: string
       name:
         description: 商品名称
+        type: string
+      options:
+        description: 商品购买选项
         type: string
       pic_url:
         description: 商品页面商品图片
@@ -158,11 +154,11 @@ definitions:
       retail_price:
         description: 零售价格
         type: number
-      weight:
-        type: integer
       unit:
         description: 商品单位，例如件、盒
         type: string
+      weight:
+        type: integer
     type: object
   app.Order:
     properties:
@@ -172,14 +168,8 @@ definitions:
       address:
         description: 收货具体地址
         type: string
-      comments:
-        description: 待评价订单商品数量
-        type: integer
       confirm_time:
         description: 用户确认收货时间
-        type: string
-      consignee:
-        description: 收货人名称
         type: string
       coupon_price:
         description: 优惠券减免
@@ -199,8 +189,11 @@ definitions:
       end_time:
         description: 订单关闭时间
         type: string
-      goods_ids_count:
-        description: 货品id列表
+      goods_count:
+        description: 商品总数量
+        type: integer
+      goods_info:
+        description: 商品信息json
         type: string
       goods_price:
         description: 商品总费用
@@ -216,9 +209,6 @@ definitions:
       message:
         description: 用户订单留言
         type: string
-      mobile:
-        description: 收货人手机号
-        type: string
       open_id:
         description: 用户表的用户ID
         type: string
@@ -232,35 +222,30 @@ definitions:
         description: 微信付款时间
         type: string
       ship_channel:
-        description: 发货快递公司
-        type: string
+        description: 外卖平台
+        type: integer
       ship_sn:
-        description: 发货编号
+        description: 外卖订单
         type: string
       ship_time:
         description: 发货开始时间
         type: string
       status:
-        description: 订单状态
+        description: 订单状态 1已提交 2已完成 3撤销 4已接单不可撤销
+        type: integer
+      sub_status:
+        description: 订单子状态 1已提交 2已完成 3撤销 4已接单不可撤销
         type: integer
       updated_time:
         description: 更新时间
         type: string
     type: object
-  app.OrderDetail:
+  app.UserInfo:
     properties:
-      goods_count:
-        type: integer
-      goods_item:
-        items:
-          $ref: '#/definitions/app.GoodsItem'
-        type: array
-      id:
-        type: integer
-      stauts:
-        type: integer
-      total_price:
-        type: number
+      openId:
+        type: string
+      skey:
+        type: string
     type: object
   response.Response:
     properties:
@@ -283,22 +268,22 @@ paths:
         name: name
         required: true
         type: string
-      - description: 用户表的用户ID
+      - description: 用户open_id
         in: formData
         name: open_id
         required: true
         type: string
-      - description: 行政区域表的省ID
+      - description: 行政区域表的省
         in: formData
         name: province
         required: true
         type: string
-      - description: 行政区域表的市ID
+      - description: 行政区域表的市
         in: formData
         name: city
         required: true
         type: string
-      - description: 行政区域表的区县ID
+      - description: 行政区域表的区县
         in: formData
         name: county
         required: true
@@ -306,16 +291,6 @@ paths:
       - description: 详细收货地址
         in: formData
         name: detail
-        required: true
-        type: string
-      - description: 地区编码
-        in: formData
-        name: area_code
-        required: true
-        type: string
-      - description: 邮政编码
-        in: formData
-        name: postal_code
         required: true
         type: string
       - description: 手机号码
@@ -375,6 +350,37 @@ paths:
           schema:
             $ref: '#/definitions/response.Response'
       summary: 删除地址
+  /app/address/detail:
+    get:
+      consumes:
+      - multipart/form-data
+      parameters:
+      - description: open_id
+        in: formData
+        name: open_id
+        required: true
+        type: string
+      - description: 地址id
+        in: formData
+        name: address_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 请求成功
+          schema:
+            $ref: '#/definitions/app.Address'
+        "400":
+          description: 请求错误
+          schema:
+            $ref: '#/definitions/response.Response'
+        "500":
+          description: 内部错误
+          schema:
+            $ref: '#/definitions/response.Response'
+      summary: 获取地址详情
   /app/address/list:
     get:
       consumes:
@@ -391,7 +397,9 @@ paths:
         "200":
           description: 请求成功
           schema:
-            $ref: '#/definitions/app.Address'
+            items:
+              $ref: '#/definitions/app.Address'
+            type: array
         "400":
           description: 请求错误
           schema:
@@ -411,22 +419,22 @@ paths:
         name: name
         required: true
         type: string
-      - description: 用户表的用户ID
+      - description: 用户open_id
         in: formData
         name: open_id
         required: true
         type: string
-      - description: 行政区域表的省ID
+      - description: 行政区域表的省
         in: formData
         name: province
         required: true
         type: string
-      - description: 行政区域表的市ID
+      - description: 行政区域表的市
         in: formData
         name: city
         required: true
         type: string
-      - description: 行政区域表的区县ID
+      - description: 行政区域表的区县
         in: formData
         name: county
         required: true
@@ -434,16 +442,6 @@ paths:
       - description: 详细收货地址
         in: formData
         name: detail
-        required: true
-        type: string
-      - description: 地区编码
-        in: formData
-        name: area_code
-        required: true
-        type: string
-      - description: 邮政编码
-        in: formData
-        name: postal_code
         required: true
         type: string
       - description: 手机号码
@@ -545,7 +543,7 @@ paths:
         "200":
           description: 请求成功
           schema:
-            $ref: '#/definitions/response.Response'
+            $ref: '#/definitions/app.CartInfo'
         "400":
           description: 请求错误
           schema:
@@ -571,9 +569,9 @@ paths:
         name: goods_id
         required: true
         type: integer
-      - description: 设置的数量
+      - description: 商品选项设置，json格式：{
         in: formData
-        name: cart_number
+        name: options
         required: true
         type: integer
       produces:
@@ -591,55 +589,18 @@ paths:
           description: 内部错误
           schema:
             $ref: '#/definitions/response.Response'
-      summary: 更改购物车商品数量
-  /app/cartr/update:
-    post:
-      consumes:
-      - multipart/form-data
-      description: 传入code进行鉴权
-      parameters:
-      - description: open_id
-        in: formData
-        name: open_id
-        required: true
-        type: string
-      - description: 商品id
-        in: formData
-        name: goods_id
-        required: true
-        type: integer
-      - description: 更改量
-        in: formData
-        name: cart_number
-        required: true
-        type: integer
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: 请求成功
-          schema:
-            $ref: '#/definitions/response.Response'
-        "400":
-          description: 请求错误
-          schema:
-            $ref: '#/definitions/response.Response'
-        "500":
-          description: 内部错误
-          schema:
-            $ref: '#/definitions/response.Response'
-      summary: 增加或者减少购物车商品数量
+      summary: 更改购物车商品选项
   /app/category/option:
     get:
       consumes:
       - multipart/form-data
       description: 传入level 和 pid
       parameters:
-      - description: level
+      - description: level 类目层级
         in: query
         name: level
         type: string
-      - description: pid
+      - description: pid 父级id
         in: query
         name: pid
         type: string
@@ -665,9 +626,9 @@ paths:
       - multipart/form-data
       description: 传入 id
       parameters:
-      - description: id
+      - description: goods_id
         in: query
-        name: id
+        name: goods_id
         required: true
         type: integer
       responses:
@@ -684,6 +645,24 @@ paths:
           schema:
             $ref: '#/definitions/response.Response'
       summary: 获取商品详情
+  /app/goods/hot:
+    get:
+      consumes:
+      - multipart/form-data
+      responses:
+        "200":
+          description: 请求成功
+          schema:
+            type: arrary
+        "400":
+          description: 请求错误
+          schema:
+            $ref: '#/definitions/response.Response'
+        "500":
+          description: 内部错误
+          schema:
+            $ref: '#/definitions/response.Response'
+      summary: 获取热门商品列表
   /app/goods/list:
     get:
       consumes:
@@ -693,6 +672,16 @@ paths:
       - description: category_id
         in: query
         name: category_id
+        required: true
+        type: integer
+      - description: page_num
+        in: query
+        name: page_num
+        required: true
+        type: integer
+      - description: page_size
+        in: query
+        name: page_size
         required: true
         type: integer
       responses:
@@ -723,6 +712,16 @@ paths:
         in: query
         name: keywords
         type: string
+      - description: page_num
+        in: query
+        name: page_num
+        required: true
+        type: integer
+      - description: page_size
+        in: query
+        name: page_size
+        required: true
+        type: integer
       responses:
         "200":
           description: 请求成功
@@ -754,7 +753,7 @@ paths:
         "200":
           description: 请求成功
           schema:
-            $ref: '#/definitions/response.Response'
+            $ref: '#/definitions/app.UserInfo'
         "400":
           description: 请求错误
           schema:
@@ -764,37 +763,6 @@ paths:
           schema:
             $ref: '#/definitions/response.Response'
       summary: 用户登陆
-  /app/order/detail:
-    get:
-      consumes:
-      - multipart/form-data
-      parameters:
-      - description: open_id
-        in: formData
-        name: open_id
-        required: true
-        type: string
-      - description: 订单号
-        in: formData
-        name: order_id
-        required: true
-        type: integer
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: 请求成功
-          schema:
-            $ref: '#/definitions/app.OrderDetail'
-        "400":
-          description: 请求错误
-          schema:
-            $ref: '#/definitions/response.Response'
-        "500":
-          description: 内部错误
-          schema:
-            $ref: '#/definitions/response.Response'
-      summary: 获取订单详情
   /app/order/list:
     get:
       consumes:
@@ -847,6 +815,16 @@ paths:
       - description: open_id
         in: formData
         name: open_id
+        required: true
+        type: string
+      - description: messge 备注
+        in: formData
+        name: messge
+        required: true
+        type: string
+      - description: 选择地址的id
+        in: formData
+        name: address_id
         required: true
         type: string
       produces:

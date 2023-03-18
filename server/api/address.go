@@ -22,13 +22,11 @@ func GetAppAddress() *AppAddress {
 // @Accept  multipart/form-data
 // @Produce  json
 // @Param name formData string true "收货人名称"
-// @Param open_id formData string true "用户表的用户ID"
-// @Param province formData string true "行政区域表的省ID"
-// @Param city formData string true "行政区域表的市ID"
-// @Param county formData string true "行政区域表的区县ID"
+// @Param open_id formData string true "用户open_id"
+// @Param province formData string true "行政区域表的省"
+// @Param city formData string true "行政区域表的市"
+// @Param county formData string true "行政区域表的区县"
 // @Param detail formData string true "详细收货地址"
-// @Param area_code formData string true "地区编码"
-// @Param postal_code formData string true "邮政编码"
 // @Param tel formData string true "手机号码"
 // @Param is_default formData int true "是否默认地址"
 // @Success 200 {object} response.Response "请求成功"
@@ -76,13 +74,11 @@ func (a *AppAddress) DeleteAddress(c *gin.Context) {
 // @Accept  multipart/form-data
 // @Produce  json
 // @Param name formData string true "收货人名称"
-// @Param open_id formData string true "用户表的用户ID"
-// @Param province formData string true "行政区域表的省ID"
-// @Param city formData string true "行政区域表的市ID"
-// @Param county formData string true "行政区域表的区县ID"
+// @Param open_id formData string true "用户open_id"
+// @Param province formData string true "行政区域表的省"
+// @Param city formData string true "行政区域表的市"
+// @Param county formData string true "行政区域表的区县"
 // @Param detail formData string true "详细收货地址"
-// @Param area_code formData string true "地区编码"
-// @Param postal_code formData string true "邮政编码"
 // @Param tel formData string true "手机号码"
 // @Param is_default formData int true "是否默认地址"
 // @Success 200 {object} response.Response "请求成功"
@@ -107,7 +103,7 @@ func (a *AppAddress) UpdateAddress(c *gin.Context) {
 // @Accept  multipart/form-data
 // @Produce  json
 // @Param open_id formData string true "open_id"
-// @Success 200 {object} app.Address "请求成功"
+// @Success 200 {array} app.Address "请求成功"
 // @Failure 400 {object} response.Response "请求错误"
 // @Failure 500 {object} response.Response "内部错误"
 // @Router /app/address/list [get]
@@ -124,7 +120,7 @@ func (a *AppAddress) GetAddressList(c *gin.Context) {
 	response.Error(constant.NotSelected, c)
 }
 
-// @Summary 获取地址列表
+// @Summary 获取地址详情
 // @Description
 // @Accept  multipart/form-data
 // @Produce  json

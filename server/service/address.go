@@ -60,6 +60,6 @@ func (a *AppAddressService) GetList(param app.AddressListQueryParam) []app.Addre
 
 func (a *AppAddressService) GetDetail(param app.AddressQueryParam) app.Address {
 	address := app.Address{}
-	global.Db.Debug().Table("t_address").Where("id = ? and open_id = ?", param.Id, param.OpenId).Find(&address)
+	global.Db.Debug().Table("t_address").Where("id = ? and open_id = ?", param.AddressId, param.OpenId).Find(&address)
 	return address
 }

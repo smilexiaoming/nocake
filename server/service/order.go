@@ -2,6 +2,7 @@ package service
 
 import (
 	"encoding/json"
+	"fmt"
 	"nocake/common"
 	"nocake/global"
 	"nocake/models/app"
@@ -193,6 +194,7 @@ func GetDetail(param app.Order) app.OrderInfo {
 	for k, v := range goodsInfo {
 		info := make(map[string]string)
 		json.Unmarshal([]byte(v), &info)
+		fmt.Printf("info: %v\n", info)
 		goodIds = append(goodIds, k)
 		count, _ := strconv.Atoi(info["count"])
 		goodsCount += count

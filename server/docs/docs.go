@@ -35,28 +35,28 @@ const docTemplate = `{
                     },
                     {
                         "type": "string",
-                        "description": "用户表的用户ID",
+                        "description": "用户open_id",
                         "name": "open_id",
                         "in": "formData",
                         "required": true
                     },
                     {
                         "type": "string",
-                        "description": "行政区域表的省ID",
+                        "description": "行政区域表的省",
                         "name": "province",
                         "in": "formData",
                         "required": true
                     },
                     {
                         "type": "string",
-                        "description": "行政区域表的市ID",
+                        "description": "行政区域表的市",
                         "name": "city",
                         "in": "formData",
                         "required": true
                     },
                     {
                         "type": "string",
-                        "description": "行政区域表的区县ID",
+                        "description": "行政区域表的区县",
                         "name": "county",
                         "in": "formData",
                         "required": true
@@ -65,20 +65,6 @@ const docTemplate = `{
                         "type": "string",
                         "description": "详细收货地址",
                         "name": "detail",
-                        "in": "formData",
-                        "required": true
-                    },
-                    {
-                        "type": "string",
-                        "description": "地区编码",
-                        "name": "area_code",
-                        "in": "formData",
-                        "required": true
-                    },
-                    {
-                        "type": "string",
-                        "description": "邮政编码",
-                        "name": "postal_code",
                         "in": "formData",
                         "required": true
                     },
@@ -166,6 +152,53 @@ const docTemplate = `{
                 }
             }
         },
+        "/app/address/detail": {
+            "get": {
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "获取地址详情",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "open_id",
+                        "name": "open_id",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "地址id",
+                        "name": "address_id",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "请求成功",
+                        "schema": {
+                            "$ref": "#/definitions/app.Address"
+                        }
+                    },
+                    "400": {
+                        "description": "请求错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    },
+                    "500": {
+                        "description": "内部错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    }
+                }
+            }
+        },
         "/app/address/list": {
             "get": {
                 "consumes": [
@@ -188,7 +221,10 @@ const docTemplate = `{
                     "200": {
                         "description": "请求成功",
                         "schema": {
-                            "$ref": "#/definitions/app.Address"
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/app.Address"
+                            }
                         }
                     },
                     "400": {
@@ -225,28 +261,28 @@ const docTemplate = `{
                     },
                     {
                         "type": "string",
-                        "description": "用户表的用户ID",
+                        "description": "用户open_id",
                         "name": "open_id",
                         "in": "formData",
                         "required": true
                     },
                     {
                         "type": "string",
-                        "description": "行政区域表的省ID",
+                        "description": "行政区域表的省",
                         "name": "province",
                         "in": "formData",
                         "required": true
                     },
                     {
                         "type": "string",
-                        "description": "行政区域表的市ID",
+                        "description": "行政区域表的市",
                         "name": "city",
                         "in": "formData",
                         "required": true
                     },
                     {
                         "type": "string",
-                        "description": "行政区域表的区县ID",
+                        "description": "行政区域表的区县",
                         "name": "county",
                         "in": "formData",
                         "required": true
@@ -255,20 +291,6 @@ const docTemplate = `{
                         "type": "string",
                         "description": "详细收货地址",
                         "name": "detail",
-                        "in": "formData",
-                        "required": true
-                    },
-                    {
-                        "type": "string",
-                        "description": "地区编码",
-                        "name": "area_code",
-                        "in": "formData",
-                        "required": true
-                    },
-                    {
-                        "type": "string",
-                        "description": "邮政编码",
-                        "name": "postal_code",
                         "in": "formData",
                         "required": true
                     },
@@ -418,7 +440,7 @@ const docTemplate = `{
                     "200": {
                         "description": "请求成功",
                         "schema": {
-                            "$ref": "#/definitions/response.Response"
+                            "$ref": "#/definitions/app.CartInfo"
                         }
                     },
                     "400": {
@@ -445,7 +467,7 @@ const docTemplate = `{
                 "produces": [
                     "application/json"
                 ],
-                "summary": "更改购物车商品数量",
+                "summary": "更改购物车商品选项",
                 "parameters": [
                     {
                         "type": "string",
@@ -463,63 +485,8 @@ const docTemplate = `{
                     },
                     {
                         "type": "integer",
-                        "description": "设置的数量",
-                        "name": "cart_number",
-                        "in": "formData",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "请求成功",
-                        "schema": {
-                            "$ref": "#/definitions/response.Response"
-                        }
-                    },
-                    "400": {
-                        "description": "请求错误",
-                        "schema": {
-                            "$ref": "#/definitions/response.Response"
-                        }
-                    },
-                    "500": {
-                        "description": "内部错误",
-                        "schema": {
-                            "$ref": "#/definitions/response.Response"
-                        }
-                    }
-                }
-            }
-        },
-        "/app/cartr/update": {
-            "post": {
-                "description": "传入code进行鉴权",
-                "consumes": [
-                    "multipart/form-data"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "summary": "增加或者减少购物车商品数量",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "open_id",
-                        "name": "open_id",
-                        "in": "formData",
-                        "required": true
-                    },
-                    {
-                        "type": "integer",
-                        "description": "商品id",
-                        "name": "goods_id",
-                        "in": "formData",
-                        "required": true
-                    },
-                    {
-                        "type": "integer",
-                        "description": "更改量",
-                        "name": "cart_number",
+                        "description": "商品选项设置，json格式：{",
+                        "name": "options",
                         "in": "formData",
                         "required": true
                     }
@@ -559,13 +526,13 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "type": "string",
-                        "description": "level",
+                        "description": "level 类目层级",
                         "name": "level",
                         "in": "query"
                     },
                     {
                         "type": "string",
-                        "description": "pid",
+                        "description": "pid 父级id",
                         "name": "pid",
                         "in": "query"
                     }
@@ -602,8 +569,8 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "type": "integer",
-                        "description": "id",
-                        "name": "id",
+                        "description": "goods_id",
+                        "name": "goods_id",
                         "in": "query",
                         "required": true
                     }
@@ -613,6 +580,34 @@ const docTemplate = `{
                         "description": "请求成功",
                         "schema": {
                             "$ref": "#/definitions/app.GoodsDetail"
+                        }
+                    },
+                    "400": {
+                        "description": "请求错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    },
+                    "500": {
+                        "description": "内部错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/app/goods/hot": {
+            "get": {
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "summary": "获取热门商品列表",
+                "responses": {
+                    "200": {
+                        "description": "请求成功",
+                        "schema": {
+                            "type": "arrary"
                         }
                     },
                     "400": {
@@ -642,6 +637,20 @@ const docTemplate = `{
                         "type": "integer",
                         "description": "category_id",
                         "name": "category_id",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "page_num",
+                        "name": "page_num",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "page_size",
+                        "name": "page_size",
                         "in": "query",
                         "required": true
                     }
@@ -687,6 +696,20 @@ const docTemplate = `{
                         "description": "关键字",
                         "name": "keywords",
                         "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "page_num",
+                        "name": "page_num",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "page_size",
+                        "name": "page_size",
+                        "in": "query",
+                        "required": true
                     }
                 ],
                 "responses": {
@@ -734,54 +757,7 @@ const docTemplate = `{
                     "200": {
                         "description": "请求成功",
                         "schema": {
-                            "$ref": "#/definitions/response.Response"
-                        }
-                    },
-                    "400": {
-                        "description": "请求错误",
-                        "schema": {
-                            "$ref": "#/definitions/response.Response"
-                        }
-                    },
-                    "500": {
-                        "description": "内部错误",
-                        "schema": {
-                            "$ref": "#/definitions/response.Response"
-                        }
-                    }
-                }
-            }
-        },
-        "/app/order/detail": {
-            "get": {
-                "consumes": [
-                    "multipart/form-data"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "summary": "获取订单详情",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "open_id",
-                        "name": "open_id",
-                        "in": "formData",
-                        "required": true
-                    },
-                    {
-                        "type": "integer",
-                        "description": "订单号",
-                        "name": "order_id",
-                        "in": "formData",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "请求成功",
-                        "schema": {
-                            "$ref": "#/definitions/app.OrderDetail"
+                            "$ref": "#/definitions/app.UserInfo"
                         }
                     },
                     "400": {
@@ -880,6 +856,20 @@ const docTemplate = `{
                         "name": "open_id",
                         "in": "formData",
                         "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "messge 备注",
+                        "name": "messge",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "选择地址的id",
+                        "name": "address_id",
+                        "in": "formData",
+                        "required": true
                     }
                 ],
                 "responses": {
@@ -963,10 +953,6 @@ const docTemplate = `{
         "app.Address": {
             "type": "object",
             "properties": {
-                "areaCode": {
-                    "description": "地区编码",
-                    "type": "string"
-                },
                 "city": {
                     "description": "行政区域表的市ID",
                     "type": "string"
@@ -975,7 +961,7 @@ const docTemplate = `{
                     "description": "行政区域表的区县ID",
                     "type": "string"
                 },
-                "createdTime": {
+                "created_time": {
                     "description": "创建时间",
                     "type": "string"
                 },
@@ -983,7 +969,7 @@ const docTemplate = `{
                     "description": "逻辑删除",
                     "type": "integer"
                 },
-                "deletedTime": {
+                "deleted_time": {
                     "description": "删除时间",
                     "type": "string"
                 },
@@ -994,7 +980,7 @@ const docTemplate = `{
                 "id": {
                     "type": "integer"
                 },
-                "isDefault": {
+                "is_default": {
                     "description": "是否默认地址",
                     "type": "integer"
                 },
@@ -1002,12 +988,8 @@ const docTemplate = `{
                     "description": "收货人名称",
                     "type": "string"
                 },
-                "openId": {
+                "open_id": {
                     "description": "用户表的用户ID",
-                    "type": "string"
-                },
-                "postalCode": {
-                    "description": "邮政编码",
                     "type": "string"
                 },
                 "province": {
@@ -1018,9 +1000,46 @@ const docTemplate = `{
                     "description": "手机号码",
                     "type": "string"
                 },
-                "updatedTime": {
+                "updated_time": {
                     "description": "更新时间",
                     "type": "string"
+                }
+            }
+        },
+        "app.CartInfo": {
+            "type": "object",
+            "properties": {
+                "cart_item": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/app.CartItem"
+                    }
+                },
+                "total_cart": {
+                    "type": "integer"
+                },
+                "total_price": {
+                    "type": "number"
+                }
+            }
+        },
+        "app.CartItem": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "options": {
+                    "type": "string"
+                },
+                "pic_url": {
+                    "type": "string"
+                },
+                "price": {
+                    "type": "number"
                 }
             }
         },
@@ -1046,31 +1065,11 @@ const docTemplate = `{
                     "description": "商品所属类目ID",
                     "type": "integer"
                 },
-                "counter_price": {
-                    "description": "专柜价格",
-                    "type": "number"
-                },
                 "detail": {
                     "description": "商品详细介绍，是富文本格式",
                     "type": "string"
                 },
-                "gallery": {
-                    "description": "商品宣传图片列表，采用JSON数组格式",
-                    "type": "string"
-                },
                 "id": {
-                    "type": "integer"
-                },
-                "is_hot": {
-                    "description": "是否人气推荐，如果设置则可以在人气推荐页面展示",
-                    "type": "integer"
-                },
-                "is_new": {
-                    "description": "是否新品首发，如果设置则可以在新品首发页面展示",
-                    "type": "integer"
-                },
-                "is_on_sale": {
-                    "description": "是否上架",
                     "type": "integer"
                 },
                 "keywords": {
@@ -1081,44 +1080,32 @@ const docTemplate = `{
                     "description": "商品名称",
                     "type": "string"
                 },
+                "options": {
+                    "description": "商品购买选项",
+                    "type": "string"
+                },
                 "pic_url": {
-                    "description": "商品页面商品图片",
+                    "description": "商品主图",
+                    "type": "string"
+                },
+                "pic_urls": {
+                    "description": "商品附图JSON数组格式",
                     "type": "string"
                 },
                 "price": {
-                    "description": "线上价格",
+                    "description": "价格",
                     "type": "number"
                 },
-                "retail_price": {
-                    "description": "零售价格",
-                    "type": "number"
-                },
-                "weight": {
+                "status": {
+                    "description": "状态",
                     "type": "integer"
                 },
                 "unit": {
                     "description": "商品单位，例如件、盒",
                     "type": "string"
-                }
-            }
-        },
-        "app.GoodsItem": {
-            "type": "object",
-            "properties": {
-                "count": {
+                },
+                "weight": {
                     "type": "integer"
-                },
-                "id": {
-                    "type": "integer"
-                },
-                "name": {
-                    "type": "string"
-                },
-                "pic_url": {
-                    "type": "string"
-                },
-                "price": {
-                    "type": "number"
                 }
             }
         },
@@ -1152,10 +1139,6 @@ const docTemplate = `{
                     "description": "是否人气推荐，如果设置则可以在人气推荐页面展示",
                     "type": "integer"
                 },
-                "is_new": {
-                    "description": "是否新品首发，如果设置则可以在新品首发页面展示",
-                    "type": "integer"
-                },
                 "is_on_sale": {
                     "description": "是否上架",
                     "type": "integer"
@@ -1166,6 +1149,10 @@ const docTemplate = `{
                 },
                 "name": {
                     "description": "商品名称",
+                    "type": "string"
+                },
+                "options": {
+                    "description": "商品购买选项",
                     "type": "string"
                 },
                 "pic_url": {
@@ -1180,12 +1167,12 @@ const docTemplate = `{
                     "description": "零售价格",
                     "type": "number"
                 },
-                "weight": {
-                    "type": "integer"
-                },
                 "unit": {
                     "description": "商品单位，例如件、盒",
                     "type": "string"
+                },
+                "weight": {
+                    "type": "integer"
                 }
             }
         },
@@ -1200,16 +1187,8 @@ const docTemplate = `{
                     "description": "收货具体地址",
                     "type": "string"
                 },
-                "comments": {
-                    "description": "待评价订单商品数量",
-                    "type": "integer"
-                },
                 "confirm_time": {
                     "description": "用户确认收货时间",
-                    "type": "string"
-                },
-                "consignee": {
-                    "description": "收货人名称",
                     "type": "string"
                 },
                 "coupon_price": {
@@ -1236,8 +1215,12 @@ const docTemplate = `{
                     "description": "订单关闭时间",
                     "type": "string"
                 },
-                "goods_ids_count": {
-                    "description": "货品id列表",
+                "goods_count": {
+                    "description": "商品总数量",
+                    "type": "integer"
+                },
+                "goods_info": {
+                    "description": "商品信息json",
                     "type": "string"
                 },
                 "goods_price": {
@@ -1259,10 +1242,6 @@ const docTemplate = `{
                     "description": "用户订单留言",
                     "type": "string"
                 },
-                "mobile": {
-                    "description": "收货人手机号",
-                    "type": "string"
-                },
                 "open_id": {
                     "description": "用户表的用户ID",
                     "type": "string"
@@ -1280,11 +1259,11 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "ship_channel": {
-                    "description": "发货快递公司",
-                    "type": "string"
+                    "description": "外卖平台",
+                    "type": "integer"
                 },
                 "ship_sn": {
-                    "description": "发货编号",
+                    "description": "外卖订单",
                     "type": "string"
                 },
                 "ship_time": {
@@ -1292,7 +1271,11 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "status": {
-                    "description": "订单状态",
+                    "description": "订单状态 1已提交 2已完成 3撤销 4已接单不可撤销",
+                    "type": "integer"
+                },
+                "sub_status": {
+                    "description": "订单子状态 1已提交 2已完成 3撤销 4已接单不可撤销",
                     "type": "integer"
                 },
                 "updated_time": {
@@ -1301,26 +1284,14 @@ const docTemplate = `{
                 }
             }
         },
-        "app.OrderDetail": {
+        "app.UserInfo": {
             "type": "object",
             "properties": {
-                "goods_count": {
-                    "type": "integer"
+                "openId": {
+                    "type": "string"
                 },
-                "goods_item": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/app.GoodsItem"
-                    }
-                },
-                "id": {
-                    "type": "integer"
-                },
-                "stauts": {
-                    "type": "integer"
-                },
-                "total_price": {
-                    "type": "number"
+                "skey": {
+                    "type": "string"
                 }
             }
         },

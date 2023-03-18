@@ -79,6 +79,8 @@ func (o *WebOrder) GetOrderDetail(context *gin.Context) {
 // @Accept  multipart/form-data
 // @Produce  json
 // @Param open_id formData string true "open_id"
+// @Param messge formData string true "messge 备注"
+// @Param address_id formData string true "选择地址的id"
 // @Success 200 {object} response.Response "请求成功"
 // @Failure 400 {object} response.Response "请求错误"
 // @Failure 500 {object} response.Response "内部错误"

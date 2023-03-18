@@ -90,10 +90,10 @@ func (g *WebGoods) GetGoodsList(c *gin.Context) {
 	response.SuccessPage(constant.Selected, goodsList, rows, c)
 }
 
-// @Summary 获取商品列表
-// @Description 
+// @Summary 获取热门商品列表
+// @Description
 // @Accept  multipart/form-data
-// @Success 200 {object} app.GoodsList "请求成功"
+// @Success 200 {arrary} app.GoodsList "请求成功"
 // @Failure 400 {object} response.Response "请求错误"
 // @Failure 500 {object} response.Response "内部错误"
 // @Router /app/goods/hot [get]
@@ -110,6 +110,8 @@ func (g *AppGoods) GetGoodsHot(c *gin.Context) {
 // @Description 传入 category_id | kewords | name
 // @Accept  multipart/form-data
 // @Param category_id query int true "category_id"
+// @Param page_num query int true "page_num"
+// @Param page_size query int true "page_size"
 // @Success 200 {object} app.GoodsList "请求成功"
 // @Failure 400 {object} response.Response "请求错误"
 // @Failure 500 {object} response.Response "内部错误"
@@ -131,7 +133,7 @@ func (g *AppGoods) GetGoodList(c *gin.Context) {
 // @Summary 获取商品详情
 // @Description 传入 id
 // @Accept  multipart/form-data
-// @Param id query int true "id"
+// @Param goods_id query int true "goods_id"
 // @Success 200 {object} app.GoodsDetail "请求成功"
 // @Failure 400 {object} response.Response "请求错误"
 // @Failure 500 {object} response.Response "内部错误"
@@ -155,6 +157,8 @@ func (g *AppGoods) GetGoodsDetail(c *gin.Context) {
 // @Accept  multipart/form-data
 // @Param name query string false "商品名称"
 // @Param keywords query string false "关键字"
+// @Param page_num query int true "page_num"
+// @Param page_size query int true "page_size"
 // @Success 200 {object} app.GoodsList "请求成功"
 // @Failure 400 {object} response.Response "请求错误"
 // @Failure 500 {object} response.Response "内部错误"

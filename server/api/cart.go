@@ -17,13 +17,13 @@ func GetAppCart() *AppCart {
 	return &AppCart{}
 }
 
-// @Summary 更改购物车商品数量
+// @Summary 更改购物车商品选项
 // @Description 传入code进行鉴权
 // @Accept  multipart/form-data
 // @Produce  json
 // @Param open_id formData string true "open_id"
 // @Param goods_id formData int true "商品id"
-// @Param cart_number formData int true "设置的数量"
+// @Param options formData int true "商品选项设置，json格式：{"option":{"规格":"8寸","口味":"奥利奥夹心"},"count":"1"}"
 // @Success 200 {object} response.Response "请求成功"
 // @Failure 400 {object} response.Response "请求错误"
 // @Failure 500 {object} response.Response "内部错误"
@@ -41,7 +41,6 @@ func (a *AppCart) SetCart(c *gin.Context) {
 	}
 	response.Error(constant.NotCreated, c)
 }
-
 
 // @Summary 删除购物车商品
 // @Description
@@ -94,7 +93,7 @@ func (a *AppCart) ClearCart(c *gin.Context) {
 // @Accept  multipart/form-data
 // @Produce  json
 // @Param open_id formData string true "open_id"
-// @Success 200 {object} response.Response "请求成功"
+// @Success 200 {object} app.CartInfo  "请求成功"
 // @Failure 400 {object} response.Response "请求错误"
 // @Failure 500 {object} response.Response "内部错误"
 // @Router /app/cart/query [get]
