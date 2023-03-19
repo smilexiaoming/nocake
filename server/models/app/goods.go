@@ -75,7 +75,6 @@ type GoodsDetail struct {
 
 // 商品详情参数
 type GoodsSearchQueryParam struct {
-	Name     string `form:"name"`     // 商品名称
 	Keywords string `form:"keywords"` // 商品关键字，采用逗号间隔
 	PageNum  int    `form:"page_num" gorm:"required,gt=0"`
 	PageSize int    `form:"page_size" gorm:"required,gt=0"`

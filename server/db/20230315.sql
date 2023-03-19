@@ -37,8 +37,8 @@ CREATE TABLE `t_address` (
   `updated_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   `deleted_time` timestamp NULL DEFAULT NULL COMMENT '删除时间',
   PRIMARY KEY (`id`),
-  KEY `open_id` (`open_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='微信商城小程序-收货地址表';
+  KEY `idx_open_id` (`open_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='微信商城小程序-收货地址表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -49,40 +49,6 @@ LOCK TABLES `t_address` WRITE;
 /*!40000 ALTER TABLE `t_address` DISABLE KEYS */;
 INSERT INTO `t_address` VALUES (1,'张印','lainzhang','成都','','','','',1,1,'2023-03-13 09:50:57','2023-03-13 09:50:57',NULL),(2,'张印','owvNO46BJBnAfD977z7D-Vu3k7gU','北京市','北京市','东城区','2704','131',1,0,'2023-03-15 06:28:56','2023-03-15 13:07:47','0000-00-00 00:00:00'),(3,'1','owvNO46BJBnAfD977z7D-Vu3k7gU','北京市','北京市','东城区','31212','1',0,0,'2023-03-15 13:00:37','2023-03-15 13:07:46','0000-00-00 00:00:00');
 /*!40000 ALTER TABLE `t_address` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `t_cart`
---
-
-DROP TABLE IF EXISTS `t_cart`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_cart` (
-  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `open_id` varchar(63) NOT NULL DEFAULT '' COMMENT '用户表的用户ID',
-  `goods_id` int DEFAULT NULL COMMENT '商品表的商品ID',
-  `goods_name` varchar(127) DEFAULT NULL COMMENT '商品名称',
-  `price` decimal(10,2) DEFAULT '0.00' COMMENT '商品货品的价格',
-  `cart_number` smallint DEFAULT '0' COMMENT '商品货品的数量',
-  `specifications` varchar(1023) DEFAULT NULL COMMENT '商品规格值列表，采用JSON数组格式',
-  `checked` tinyint(1) DEFAULT '1' COMMENT '购物车中商品是否选择状态',
-  `pic_url` varchar(255) DEFAULT NULL COMMENT '商品图片或者商品货品图片',
-  `deleted` tinyint(1) DEFAULT '0' COMMENT '逻辑删除',
-  `created_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-  `updated_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-  `deleted_time` timestamp NULL DEFAULT NULL COMMENT '删除时间',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='微信商城小程序-购物车商品表';
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `t_cart`
---
-
-LOCK TABLES `t_cart` WRITE;
-/*!40000 ALTER TABLE `t_cart` DISABLE KEYS */;
-/*!40000 ALTER TABLE `t_cart` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -107,7 +73,7 @@ CREATE TABLE `t_category` (
   `deleted_time` timestamp NULL DEFAULT NULL COMMENT '删除时间',
   PRIMARY KEY (`id`),
   KEY `uk_pid_level` (`pid`,`level`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='微信商城小程序-类目表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='微信商城小程序-类目表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -119,44 +85,6 @@ LOCK TABLES `t_category` WRITE;
 INSERT INTO `t_category` VALUES (1,'蛋糕','蛋糕，大家都喜欢','{\"受众\":\"大众\"}',0,1,'http://tubiao.png',50,1,'2023-03-13 09:50:56','2023-03-13 09:50:56',NULL),(2,'甜品','甜品，少数人喜欢','{\"受众\":\"小众\"}',0,1,'http://tubiao.png',50,1,'2023-03-13 09:50:56','2023-03-13 09:50:56',NULL),(3,'甜品1','甜品，少数人喜欢','{\"受众\":\"小众\"}',0,1,'http://tubiao.png',50,1,'2023-03-13 09:50:56','2023-03-13 09:50:56',NULL),(4,'蛋糕2','蛋糕，大家都喜欢','{\"受众\":\"大众\"}',0,1,'http://tubiao.png',50,1,'2023-03-13 09:50:56','2023-03-13 09:50:56',NULL),(5,'甜品3','甜品，少数人喜欢','{\"受众\":\"小众\"}',0,1,'http://tubiao.png',50,1,'2023-03-13 09:50:56','2023-03-13 09:50:56',NULL),(6,'甜品4','甜品，少数人喜欢','{\"受众\":\"小众\"}',0,1,'http://tubiao.png',50,1,'2023-03-13 09:50:56','2023-03-13 09:50:56',NULL);
 /*!40000 ALTER TABLE `t_category` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Table structure for table `t_comment`
---
-
-DROP TABLE IF EXISTS `t_comment`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_comment` (
-  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `value_id` int DEFAULT '0' COMMENT '如果type=0，则是商品评论；如果是type=1，则是专题评论。',
-  `comment_type` tinyint DEFAULT '0' COMMENT '评论类型，如果type=0，则是商品评论；如果是type=1，则是专题评论；如果type=3，则是订单商品评论。',
-  `content` varchar(1023) DEFAULT NULL COMMENT '评论内容',
-  `open_id` varchar(63) NOT NULL DEFAULT '' COMMENT '用户表的用户ID',
-  `has_picture` tinyint(1) DEFAULT '0' COMMENT '是否含有图片',
-  `pic_urls` varchar(1023) DEFAULT NULL COMMENT '图片地址列表，采用JSON数组格式',
-  `star` smallint DEFAULT '1' COMMENT '评分， 1-5',
-  `deleted` tinyint(1) DEFAULT '0' COMMENT '逻辑删除',
-  `created_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-  `updated_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-  `deleted_time` timestamp NULL DEFAULT NULL COMMENT '删除时间',
-  PRIMARY KEY (`id`),
-  KEY `value_id` (`value_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='微信商城小程序-评论表';
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `t_comment`
---
-
-LOCK TABLES `t_comment` WRITE;
-/*!40000 ALTER TABLE `t_comment` DISABLE KEYS */;
-/*!40000 ALTER TABLE `t_comment` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `t_goods`
---
 
 DROP TABLE IF EXISTS `t_goods`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -181,9 +109,9 @@ CREATE TABLE `t_goods` (
   `updated_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   `deleted_time` timestamp NULL DEFAULT NULL COMMENT '删除时间',
   PRIMARY KEY (`id`),
-  KEY `category_id` (`category_id`),
-  KEY `weight` (`weight`)
-) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='微信商城小程序-商品基本信息表';
+  KEY `idx_category_id` (`category_id`),
+  KEY `idx_weight` (`weight`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='微信商城小程序-商品基本信息表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -194,37 +122,6 @@ LOCK TABLES `t_goods` WRITE;
 /*!40000 ALTER TABLE `t_goods` DISABLE KEYS */;
 INSERT INTO `t_goods` VALUES (1,'水果蛋糕1','简介11111',1,'大众,水果,蛋糕',2,2,100,'https://www.nocake.cn/images/QQ浏览器截图20221202200134.png','[\"http://tubiao.png\",\"http://tubiao1.png\"]','个',1,128.00, '{"尺寸":["8寸","6寸"],"口味":["奥利奥","原味"]}',1,'2023-03-13 09:50:56','2023-03-15 13:58:17',NULL);
 /*!40000 ALTER TABLE `t_goods` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `t_goods_product`
---
-
-DROP TABLE IF EXISTS `t_goods_product`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_goods_product` (
-  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `goods_id` int DEFAULT '0' COMMENT '商品表的商品ID',
-  `specifications` varchar(1023) DEFAULT NULL COMMENT '商品规格值列表，采用JSON数组格式',
-  `price` decimal(10,2) DEFAULT '0.00' COMMENT '商品货品价格',
-  `product_number` int DEFAULT '0' COMMENT '商品货品数量',
-  `url` varchar(125) DEFAULT NULL COMMENT '商品货品图片',
-  `deleted` tinyint(1) DEFAULT '0' COMMENT '逻辑删除',
-  `created_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-  `updated_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-  `deleted_time` timestamp NULL DEFAULT NULL COMMENT '删除时间',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='微信商城小程序-商品货品表';
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `t_goods_product`
---
-
-LOCK TABLES `t_goods_product` WRITE;
-/*!40000 ALTER TABLE `t_goods_product` DISABLE KEYS */;
-/*!40000 ALTER TABLE `t_goods_product` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -260,8 +157,9 @@ CREATE TABLE `t_order` (
   `created_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `updated_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   `deleted_time` timestamp NULL DEFAULT NULL COMMENT '删除时间',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='微信商城小程序-订单表';
+  PRIMARY KEY (`id`),
+  KEY `idx_open_id` (`open_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='微信商城小程序-订单表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -272,42 +170,6 @@ LOCK TABLES `t_order` WRITE;
 /*!40000 ALTER TABLE `t_order` DISABLE KEYS */;
 INSERT INTO `t_order` VALUES (1,'owvNO46BJBnAfD977z7D-Vu3k7gU','{\"2\":\"5\"}',0,0,'','1231231',640.00,5,0.00,0.00,0.00,0.00,0.00,0.00,'','0000-00-00 00:00:00','',0,'0000-00-00 00:00:00','0000-00-00 00:00:00','0000-00-00 00:00:00',0,'2023-03-15 13:00:48','0000-00-00 00:00:00','0000-00-00 00:00:00'),(2,'owvNO46BJBnAfD977z7D-Vu3k7gU','{\"2\":\"4\",\"8\":\"2\"}',0,0,'','321312',768.00,6,0.00,0.00,0.00,0.00,0.00,0.00,'','0000-00-00 00:00:00','',0,'0000-00-00 00:00:00','0000-00-00 00:00:00','0000-00-00 00:00:00',0,'2023-03-15 13:02:20','0000-00-00 00:00:00','0000-00-00 00:00:00'),(3,'owvNO46BJBnAfD977z7D-Vu3k7gU','{\"13\":\"1\",\"7\":\"2\"}',0,0,'{\"name\":\"张印\",\"open_id\":\"owvNO46BJBnAfD977z7D-Vu3k7gU\",\"province\":\"北京市\",\"city\":\"北京市\",\"county\":\"东城区\",\"detail\":\"2704\",\"area_code\":\"\",\"postal_code\":\"\",\"tel\":\"131\",\"is_default\":0}','1231212',384.00,3,0.00,0.00,0.00,0.00,0.00,0.00,'','0000-00-00 00:00:00','',0,'0000-00-00 00:00:00','0000-00-00 00:00:00','0000-00-00 00:00:00',0,'2023-03-15 13:02:49','0000-00-00 00:00:00','0000-00-00 00:00:00'),(4,'owvNO46BJBnAfD977z7D-Vu3k7gU','{\"1\":\"1\",\"3\":\"3\"}',0,0,'{\"name\":\"张印\",\"open_id\":\"owvNO46BJBnAfD977z7D-Vu3k7gU\",\"province\":\"北京市\",\"city\":\"北京市\",\"county\":\"东城区\",\"detail\":\"2704\",\"area_code\":\"\",\"postal_code\":\"\",\"tel\":\"131\",\"is_default\":0}','dfhgsg ',512.00,4,0.00,0.00,0.00,0.00,0.00,0.00,'','0000-00-00 00:00:00','',0,'0000-00-00 00:00:00','0000-00-00 00:00:00','0000-00-00 00:00:00',0,'2023-03-15 13:06:00','0000-00-00 00:00:00','0000-00-00 00:00:00'),(5,'owvNO46BJBnAfD977z7D-Vu3k7gU','{\"2\":\"2\",\"6\":\"3\"}',0,0,'{\"name\":\"张印\",\"open_id\":\"owvNO46BJBnAfD977z7D-Vu3k7gU\",\"province\":\"北京市\",\"city\":\"北京市\",\"county\":\"东城区\",\"detail\":\"2704\",\"area_code\":\"\",\"postal_code\":\"\",\"tel\":\"131\",\"is_default\":0}','Ddddd',640.00,5,0.00,0.00,0.00,0.00,0.00,0.00,'','0000-00-00 00:00:00','',0,'0000-00-00 00:00:00','0000-00-00 00:00:00','0000-00-00 00:00:00',0,'2023-03-15 13:07:28','0000-00-00 00:00:00','0000-00-00 00:00:00'),(6,'owvNO46BJBnAfD977z7D-Vu3k7gU','{\"5\":\"1\",\"6\":\"1\"}',0,0,'{\"name\":\"1\",\"open_id\":\"owvNO46BJBnAfD977z7D-Vu3k7gU\",\"province\":\"北京市\",\"city\":\"北京市\",\"county\":\"东城区\",\"detail\":\"31212\",\"area_code\":\"\",\"postal_code\":\"\",\"tel\":\"1\",\"is_default\":0}','吧吧吧吧吧',256.00,2,0.00,0.00,0.00,0.00,0.00,0.00,'','0000-00-00 00:00:00','',0,'0000-00-00 00:00:00','0000-00-00 00:00:00','0000-00-00 00:00:00',0,'2023-03-15 14:04:04','0000-00-00 00:00:00','0000-00-00 00:00:00');
 /*!40000 ALTER TABLE `t_order` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `t_order_goods`
---
-
-DROP TABLE IF EXISTS `t_order_goods`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_order_goods` (
-  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `order_id` int DEFAULT '0' COMMENT '订单表的订单ID',
-  `goods_id` int DEFAULT '0' COMMENT '商品表的商品ID',
-  `goods_name` varchar(127) DEFAULT NULL COMMENT '商品名称',
-  `goods_number` smallint DEFAULT '0' COMMENT '商品货品的购买数量',
-  `price` decimal(10,2) DEFAULT '0.00' COMMENT '商品货品的售价',
-  `specifications` varchar(1023) DEFAULT NULL COMMENT '商品货品的规格列表',
-  `pic_url` varchar(255) DEFAULT NULL COMMENT '商品货品图片或者商品图片',
-  `goods_comment` int DEFAULT '0' COMMENT '订单商品评论，如果是-1，则超期不能评价；如果是0，则可以评价；如果其他值，则是comment表里面的评论ID。',
-  `deleted` tinyint(1) DEFAULT '0' COMMENT '逻辑删除',
-  `created_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-  `updated_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-  `deleted_time` timestamp NULL DEFAULT NULL COMMENT '删除时间',
-  PRIMARY KEY (`id`),
-  KEY `order_id` (`order_id`),
-  KEY `goods_id` (`goods_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='微信商城小程序-订单商品表';
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `t_order_goods`
---
-
-LOCK TABLES `t_order_goods` WRITE;
-/*!40000 ALTER TABLE `t_order_goods` DISABLE KEYS */;
-/*!40000 ALTER TABLE `t_order_goods` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -331,8 +193,8 @@ CREATE TABLE `t_user` (
   `updated_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   `deleted_time` timestamp NULL DEFAULT NULL COMMENT '删除时间',
   PRIMARY KEY (`id`),
-  KEY `open_id` (`open_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='微信商城小程序-用户表';
+  KEY `idx_open_id` (`open_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='微信商城小程序-用户表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -363,7 +225,7 @@ CREATE TABLE `t_web_user` (
   `deleted_time` timestamp NULL DEFAULT NULL COMMENT '删除时间',
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='微信商城web后台-用户表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='微信商城web后台-用户表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
