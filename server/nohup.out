@@ -1,0 +1,1191 @@
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /image/*filepath          --> github.com/gin-gonic/gin.(*RouterGroup).createStaticHandler.func1 (4 handlers)
+[GIN-debug] HEAD   /image/*filepath          --> github.com/gin-gonic/gin.(*RouterGroup).createStaticHandler.func1 (4 handlers)
+[GIN-debug] GET    /app/swagger/*any         --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (4 handlers)
+[GIN-debug] GET    /web/captcha              --> nocake/api.(*WebUser).GetCaptcha-fm (4 handlers)
+[GIN-debug] POST   /web/login                --> nocake/api.(*WebUser).UserLogin-fm (4 handlers)
+[GIN-debug] POST   /web/upload               --> nocake/api.(*WebFileUpload).FileUpload-fm (5 handlers)
+[GIN-debug] POST   /web/goods/create         --> nocake/api.(*WebGoods).CreateGoods-fm (5 handlers)
+[GIN-debug] DELETE /web/goods/delete         --> nocake/api.(*WebGoods).DeleteGoods-fm (5 handlers)
+[GIN-debug] PUT    /web/goods/update         --> nocake/api.(*WebGoods).UpdateGoods-fm (5 handlers)
+[GIN-debug] PUT    /web/goods/status/update  --> nocake/api.(*WebGoods).UpdateGoodsStatus-fm (5 handlers)
+[GIN-debug] GET    /web/goods/list           --> nocake/api.(*WebGoods).GetGoodsList-fm (5 handlers)
+[GIN-debug] DELETE /web/order/delete         --> nocake/api.(*WebOrder).DeleteOrder-fm (5 handlers)
+[GIN-debug] PUT    /web/order/update         --> nocake/api.(*WebOrder).UpdateOrder-fm (5 handlers)
+[GIN-debug] GET    /web/order/list           --> nocake/api.(*WebOrder).GetOrderList-fm (5 handlers)
+[GIN-debug] GET    /web/order/detail         --> nocake/api.(*WebOrder).GetOrderDetail-fm (5 handlers)
+[GIN-debug] POST   /web/category/create      --> nocake/api.(*WebCategory).CreateCategory-fm (5 handlers)
+[GIN-debug] DELETE /web/category/delete      --> nocake/api.(*WebCategory).DeleteCategory-fm (5 handlers)
+[GIN-debug] PUT    /web/category/update      --> nocake/api.(*WebCategory).UpdateCategory-fm (5 handlers)
+[GIN-debug] GET    /web/category/list        --> nocake/api.(*WebCategory).GetCategoryList-fm (5 handlers)
+[GIN-debug] GET    /web/category/option      --> nocake/api.(*WebCategory).GetCategoryOption-fm (5 handlers)
+[GIN-debug] GET    /web/today/data           --> nocake/api.(*WebStatistics).GetTodayData-fm (5 handlers)
+[GIN-debug] GET    /web/order/data           --> nocake/api.(*WebStatistics).GetOrderData-fm (5 handlers)
+[GIN-debug] GET    /web/shop/data            --> nocake/api.(*WebStatistics).GetShopData-fm (5 handlers)
+[GIN-debug] POST   /app/login                --> nocake/api.(*AppUser).UserLogin-fm (4 handlers)
+[GIN-debug] GET    /app/category/option      --> nocake/api.(*AppCategory).GetCategoryOption-fm (4 handlers)
+[GIN-debug] GET    /app/goods/list           --> nocake/api.(*AppGoods).GetGoodList-fm (4 handlers)
+[GIN-debug] GET    /app/goods/detail         --> nocake/api.(*AppGoods).GetGoodsDetail-fm (4 handlers)
+[GIN-debug] GET    /app/goods/search         --> nocake/api.(*AppGoods).SearchGoods-fm (4 handlers)
+[GIN-debug] GET    /app/goods/hot            --> nocake/api.(*AppGoods).GetGoodsHot-fm (4 handlers)
+[GIN-debug] POST   /app/cart/set             --> nocake/api.(*AppCart).SetCart-fm (4 handlers)
+[GIN-debug] DELETE /app/cart/delete          --> nocake/api.(*AppCart).DeleteCart-fm (4 handlers)
+[GIN-debug] DELETE /app/cart/clear           --> nocake/api.(*AppCart).ClearCart-fm (4 handlers)
+[GIN-debug] GET    /app/cart/query           --> nocake/api.(*AppCart).GetCartInfo-fm (4 handlers)
+[GIN-debug] POST   /app/order/submit         --> nocake/api.(*AppOrder).SubmitOrder-fm (4 handlers)
+[GIN-debug] POST   /app/order/update         --> nocake/api.(*AppOrder).UpdateOrder-fm (4 handlers)
+[GIN-debug] GET    /app/order/list           --> nocake/api.(*AppOrder).GetOrderList-fm (4 handlers)
+[GIN-debug] POST   /app/address/submit       --> nocake/api.(*AppAddress).AddAddress-fm (4 handlers)
+[GIN-debug] POST   /app/address/update       --> nocake/api.(*AppAddress).UpdateAddress-fm (4 handlers)
+[GIN-debug] DELETE /app/address/delete       --> nocake/api.(*AppAddress).DeleteAddress-fm (4 handlers)
+[GIN-debug] GET    /app/address/list         --> nocake/api.(*AppAddress).GetAddressList-fm (4 handlers)
+[GIN-debug] GET    /app/address/detail       --> nocake/api.(*AppAddress).GetAddressDetail-fm (4 handlers)
+[GIN-debug] Listening and serving HTTP on :8000
+[GIN] 2023/03/18 - 22:40:30 | 200 |     234.262µs |       127.0.0.1 | GET      "/app/swagger/index.html"
+[GIN] 2023/03/18 - 22:40:30 | 200 |     225.743µs |       127.0.0.1 | GET      "/app/swagger/swagger-ui.css"
+[GIN] 2023/03/18 - 22:40:30 | 200 |     220.903µs |       127.0.0.1 | GET      "/app/swagger/swagger-ui-standalone-preset.js"
+[GIN] 2023/03/18 - 22:40:30 | 200 |     463.462µs |       127.0.0.1 | GET      "/app/swagger/swagger-ui-bundle.js"
+[GIN] 2023/03/18 - 22:40:32 | 200 |     315.931µs |       127.0.0.1 | GET      "/app/swagger/doc.json"
+[GIN] 2023/03/18 - 22:40:32 | 200 |       48.09µs |       127.0.0.1 | GET      "/app/swagger/favicon-32x32.png"
+[GIN] 2023/03/18 - 22:40:48 | 200 |     225.635µs |       127.0.0.1 | GET      "/app/swagger/index.html"
+[GIN] 2023/03/18 - 22:40:48 | 304 |      47.576µs |       127.0.0.1 | GET      "/app/swagger/swagger-ui.css"
+[GIN] 2023/03/18 - 22:40:48 | 304 |      24.405µs |       127.0.0.1 | GET      "/app/swagger/swagger-ui-bundle.js"
+[GIN] 2023/03/18 - 22:40:48 | 304 |      37.168µs |       127.0.0.1 | GET      "/app/swagger/swagger-ui-standalone-preset.js"
+[GIN] 2023/03/18 - 22:40:48 | 200 |     288.204µs |       127.0.0.1 | GET      "/app/swagger/doc.json"
+[GIN] 2023/03/18 - 22:40:48 | 304 |      34.205µs |       127.0.0.1 | GET      "/app/swagger/favicon-32x32.png"
+[GIN] 2023/03/18 - 22:40:48 | 200 |      90.978µs |       127.0.0.1 | GET      "/app/swagger/index.html"
+[GIN] 2023/03/18 - 22:40:49 | 200 |     438.405µs |       127.0.0.1 | GET      "/app/swagger/doc.json"
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /image/*filepath          --> github.com/gin-gonic/gin.(*RouterGroup).createStaticHandler.func1 (4 handlers)
+[GIN-debug] HEAD   /image/*filepath          --> github.com/gin-gonic/gin.(*RouterGroup).createStaticHandler.func1 (4 handlers)
+[GIN-debug] GET    /app/swagger/*any         --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (4 handlers)
+[GIN-debug] GET    /web/captcha              --> nocake/api.(*WebUser).GetCaptcha-fm (4 handlers)
+[GIN-debug] POST   /web/login                --> nocake/api.(*WebUser).UserLogin-fm (4 handlers)
+[GIN-debug] POST   /web/upload               --> nocake/api.(*WebFileUpload).FileUpload-fm (5 handlers)
+[GIN-debug] POST   /web/goods/create         --> nocake/api.(*WebGoods).CreateGoods-fm (5 handlers)
+[GIN-debug] DELETE /web/goods/delete         --> nocake/api.(*WebGoods).DeleteGoods-fm (5 handlers)
+[GIN-debug] PUT    /web/goods/update         --> nocake/api.(*WebGoods).UpdateGoods-fm (5 handlers)
+[GIN-debug] PUT    /web/goods/status/update  --> nocake/api.(*WebGoods).UpdateGoodsStatus-fm (5 handlers)
+[GIN-debug] GET    /web/goods/list           --> nocake/api.(*WebGoods).GetGoodsList-fm (5 handlers)
+[GIN-debug] DELETE /web/order/delete         --> nocake/api.(*WebOrder).DeleteOrder-fm (5 handlers)
+[GIN-debug] PUT    /web/order/update         --> nocake/api.(*WebOrder).UpdateOrder-fm (5 handlers)
+[GIN-debug] GET    /web/order/list           --> nocake/api.(*WebOrder).GetOrderList-fm (5 handlers)
+[GIN-debug] GET    /web/order/detail         --> nocake/api.(*WebOrder).GetOrderDetail-fm (5 handlers)
+[GIN-debug] POST   /web/category/create      --> nocake/api.(*WebCategory).CreateCategory-fm (5 handlers)
+[GIN-debug] DELETE /web/category/delete      --> nocake/api.(*WebCategory).DeleteCategory-fm (5 handlers)
+[GIN-debug] PUT    /web/category/update      --> nocake/api.(*WebCategory).UpdateCategory-fm (5 handlers)
+[GIN-debug] GET    /web/category/list        --> nocake/api.(*WebCategory).GetCategoryList-fm (5 handlers)
+[GIN-debug] GET    /web/category/option      --> nocake/api.(*WebCategory).GetCategoryOption-fm (5 handlers)
+[GIN-debug] GET    /web/today/data           --> nocake/api.(*WebStatistics).GetTodayData-fm (5 handlers)
+[GIN-debug] GET    /web/order/data           --> nocake/api.(*WebStatistics).GetOrderData-fm (5 handlers)
+[GIN-debug] GET    /web/shop/data            --> nocake/api.(*WebStatistics).GetShopData-fm (5 handlers)
+[GIN-debug] POST   /app/login                --> nocake/api.(*AppUser).UserLogin-fm (4 handlers)
+[GIN-debug] GET    /app/category/option      --> nocake/api.(*AppCategory).GetCategoryOption-fm (4 handlers)
+[GIN-debug] GET    /app/goods/list           --> nocake/api.(*AppGoods).GetGoodList-fm (4 handlers)
+[GIN-debug] GET    /app/goods/detail         --> nocake/api.(*AppGoods).GetGoodsDetail-fm (4 handlers)
+[GIN-debug] GET    /app/goods/search         --> nocake/api.(*AppGoods).SearchGoods-fm (4 handlers)
+[GIN-debug] GET    /app/goods/hot            --> nocake/api.(*AppGoods).GetGoodsHot-fm (4 handlers)
+[GIN-debug] POST   /app/cart/set             --> nocake/api.(*AppCart).SetCart-fm (4 handlers)
+[GIN-debug] DELETE /app/cart/delete          --> nocake/api.(*AppCart).DeleteCart-fm (4 handlers)
+[GIN-debug] DELETE /app/cart/clear           --> nocake/api.(*AppCart).ClearCart-fm (4 handlers)
+[GIN-debug] GET    /app/cart/query           --> nocake/api.(*AppCart).GetCartInfo-fm (4 handlers)
+[GIN-debug] POST   /app/order/submit         --> nocake/api.(*AppOrder).SubmitOrder-fm (4 handlers)
+[GIN-debug] POST   /app/order/update         --> nocake/api.(*AppOrder).UpdateOrder-fm (4 handlers)
+[GIN-debug] GET    /app/order/list           --> nocake/api.(*AppOrder).GetOrderList-fm (4 handlers)
+[GIN-debug] POST   /app/address/submit       --> nocake/api.(*AppAddress).AddAddress-fm (4 handlers)
+[GIN-debug] POST   /app/address/update       --> nocake/api.(*AppAddress).UpdateAddress-fm (4 handlers)
+[GIN-debug] DELETE /app/address/delete       --> nocake/api.(*AppAddress).DeleteAddress-fm (4 handlers)
+[GIN-debug] GET    /app/address/list         --> nocake/api.(*AppAddress).GetAddressList-fm (4 handlers)
+[GIN-debug] GET    /app/address/detail       --> nocake/api.(*AppAddress).GetAddressDetail-fm (4 handlers)
+[GIN-debug] Listening and serving HTTP on :8000
+[GIN] 2023/03/18 - 22:42:37 | 200 |     272.618µs |       127.0.0.1 | GET      "/app/swagger/index.html"
+[GIN] 2023/03/18 - 22:42:37 | 200 |       282.8µs |       127.0.0.1 | GET      "/app/swagger/swagger-ui.css"
+[GIN] 2023/03/18 - 22:42:37 | 200 |     286.847µs |       127.0.0.1 | GET      "/app/swagger/swagger-ui-standalone-preset.js"
+[GIN] 2023/03/18 - 22:42:37 | 200 |     559.594µs |       127.0.0.1 | GET      "/app/swagger/swagger-ui-bundle.js"
+[GIN] 2023/03/18 - 22:42:40 | 200 |     348.561µs |       127.0.0.1 | GET      "/app/swagger/doc.json"
+[GIN] 2023/03/18 - 22:42:40 | 200 |      55.465µs |       127.0.0.1 | GET      "/app/swagger/favicon-32x32.png"
+[GIN] 2023/03/18 - 23:05:29 | 204 |      36.512µs |       127.0.0.1 | OPTIONS  "/web/captcha"
+[GIN] 2023/03/18 - 23:05:29 | 200 |     627.907µs |       127.0.0.1 | GET      "/web/captcha"
+[GIN] 2023/03/18 - 23:07:15 | 200 |     142.971µs |       127.0.0.1 | GET      "/app/swagger/index.html"
+[GIN] 2023/03/18 - 23:07:15 | 200 |     295.772µs |       127.0.0.1 | GET      "/app/swagger/swagger-ui.css"
+[GIN] 2023/03/18 - 23:07:15 | 200 |     242.003µs |       127.0.0.1 | GET      "/app/swagger/swagger-ui-standalone-preset.js"
+[GIN] 2023/03/18 - 23:07:15 | 200 |     629.118µs |       127.0.0.1 | GET      "/app/swagger/swagger-ui-bundle.js"
+[GIN] 2023/03/18 - 23:07:17 | 200 |     308.817µs |       127.0.0.1 | GET      "/app/swagger/doc.json"
+[GIN] 2023/03/18 - 23:08:28 | 404 |      47.318µs |       127.0.0.1 | GET      "/app/swagger/undefined"
+param: {owvNO46BJBnAfD977z7D-Vu3k7gU 1 0 0}
+
+2023/03/18 23:31:00 [32m/data/nocake/server/service/order.go:178
+[0m[33m[1.909ms] [34;1m[rows:0][0m SELECT * FROM `t_order` WHERE open_id = 'owvNO46BJBnAfD977z7D-Vu3k7gU' and status = 1 
+[GIN] 2023/03/18 - 23:31:00 | 200 |    2.225627ms |       127.0.0.1 | GET      "/app/order/list?status=1&open_id=owvNO46BJBnAfD977z7D-Vu3k7gU"
+
+2023/03/18 23:31:00 [32m/data/nocake/server/service/category.go:118
+[0m[33m[0.893ms] [34;1m[rows:6][0m SELECT * FROM `t_category` WHERE level = 1 and pid = 0 and deleted = 1
+[GIN] 2023/03/18 - 23:31:00 | 200 |    2.089006ms |       127.0.0.1 | GET      "/app/category/option?level=1&pid=0"
+[GIN] 2023/03/18 - 23:31:00 | 200 |     450.318µs |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO46BJBnAfD977z7D-Vu3k7gU"
+
+2023/03/18 23:31:00 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.752ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE category_id = 1 and status = 2 
+[GIN] 2023/03/18 - 23:31:00 | 200 |      949.96µs |       127.0.0.1 | GET      "/app/goods/list?category_id=1"
+
+2023/03/18 23:31:01 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.809ms] [34;1m[rows:2][0m SELECT * FROM `t_goods` WHERE category_id = 2 and status = 2 
+[GIN] 2023/03/18 - 23:31:01 | 200 |      954.77µs |       127.0.0.1 | GET      "/app/goods/list?category_id=2"
+[GIN] 2023/03/19 - 00:27:30 | 200 |     964.667µs |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO46BJBnAfD977z7D-Vu3k7gU"
+[GIN] 2023/03/19 - 00:27:30 | 200 |    1.018297ms |       127.0.0.1 | GET      "/app/category/option?level=1&pid=0"
+[GIN] 2023/03/19 - 00:27:30 | 200 |     182.193µs |       127.0.0.1 | GET      "/app/category/option?level=1&pid=0"
+[GIN] 2023/03/19 - 00:27:30 | 200 |     122.613µs |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO46BJBnAfD977z7D-Vu3k7gU"
+
+2023/03/19 00:27:30 [32m/data/nocake/server/service/goods.go:99
+[0m[33m[57.876ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE is_hot = 2 and status = 2
+[GIN] 2023/03/19 - 00:27:30 | 200 |   57.972058ms |       127.0.0.1 | GET      "/app/goods/hot"
+
+2023/03/19 00:27:30 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[54.048ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE category_id = 1 and status = 2 
+[GIN] 2023/03/19 - 00:27:30 | 200 |    54.18851ms |       127.0.0.1 | GET      "/app/goods/list?category_id=1"
+
+2023/03/19 00:27:30 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[74.695ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE category_id = 1 and status = 2 
+[GIN] 2023/03/19 - 00:27:30 | 200 |   74.804873ms |       127.0.0.1 | GET      "/app/goods/list?category_id=1"
+[GIN] 2023/03/19 - 00:27:31 | 200 |  394.209525ms |       127.0.0.1 | POST     "/app/login"
+
+2023/03/19 00:27:31 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[1.112ms] [34;1m[rows:2][0m SELECT * FROM `t_goods` WHERE category_id = 2 and status = 2 
+[GIN] 2023/03/19 - 00:27:31 | 200 |    1.284672ms |       127.0.0.1 | GET      "/app/goods/list?category_id=2"
+
+2023/03/19 00:27:32 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.732ms] [34;1m[rows:0][0m SELECT * FROM `t_goods` WHERE category_id = 3 and status = 2 
+[GIN] 2023/03/19 - 00:27:32 | 200 |     861.923µs |       127.0.0.1 | GET      "/app/goods/list?category_id=3"
+
+2023/03/19 00:27:34 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.757ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE category_id = 1 and status = 2 
+[GIN] 2023/03/19 - 00:27:34 | 200 |     949.541µs |       127.0.0.1 | GET      "/app/goods/list?category_id=1"
+
+2023/03/19 00:27:35 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.657ms] [34;1m[rows:0][0m SELECT * FROM `t_goods` WHERE category_id = 6 and status = 2 
+[GIN] 2023/03/19 - 00:27:35 | 200 |     789.897µs |       127.0.0.1 | GET      "/app/goods/list?category_id=6"
+
+2023/03/19 00:27:36 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.744ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE category_id = 1 and status = 2 
+[GIN] 2023/03/19 - 00:27:36 | 200 |     884.363µs |       127.0.0.1 | GET      "/app/goods/list?category_id=1"
+
+2023/03/19 00:27:37 [32m/data/nocake/server/service/goods.go:105
+[0m[33m[1.100ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE status = 2 AND `t_goods`.`id` = 1 ORDER BY `t_goods`.`id` LIMIT 1
+[GIN] 2023/03/19 - 00:27:37 | 200 |    1.320947ms |       127.0.0.1 | GET      "/app/goods/detail?goods_id=1"
+[GIN] 2023/03/19 - 00:27:37 | 200 |     688.136µs |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO46BJBnAfD977z7D-Vu3k7gU"
+[GIN] 2023/03/19 - 00:27:38 | 200 |     260.472µs |       127.0.0.1 | GET      "/app/category/option?level=1&pid=0"
+[GIN] 2023/03/19 - 00:27:38 | 200 |     175.974µs |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO46BJBnAfD977z7D-Vu3k7gU"
+
+2023/03/19 00:27:39 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.983ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE category_id = 1 and status = 2 
+[GIN] 2023/03/19 - 00:27:39 | 200 |     1.13516ms |       127.0.0.1 | GET      "/app/goods/list?category_id=1"
+
+2023/03/19 00:27:39 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.827ms] [34;1m[rows:2][0m SELECT * FROM `t_goods` WHERE category_id = 2 and status = 2 
+[GIN] 2023/03/19 - 00:27:39 | 200 |     971.689µs |       127.0.0.1 | GET      "/app/goods/list?category_id=2"
+[GIN] 2023/03/19 - 00:27:40 | 200 |     241.466µs |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO46BJBnAfD977z7D-Vu3k7gU"
+
+2023/03/19 00:27:40 [32m/data/nocake/server/service/goods.go:105
+[0m[33m[1.058ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE status = 2 AND `t_goods`.`id` = 2 ORDER BY `t_goods`.`id` LIMIT 1
+[GIN] 2023/03/19 - 00:27:40 | 200 |    1.230822ms |       127.0.0.1 | GET      "/app/goods/detail?goods_id=2"
+[GIN] 2023/03/19 - 00:27:41 | 200 |     239.323µs |       127.0.0.1 | GET      "/app/category/option?level=1&pid=0"
+[GIN] 2023/03/19 - 00:27:41 | 200 |     158.719µs |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO46BJBnAfD977z7D-Vu3k7gU"
+
+2023/03/19 00:27:41 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.701ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE category_id = 1 and status = 2 
+[GIN] 2023/03/19 - 00:27:41 | 200 |     826.737µs |       127.0.0.1 | GET      "/app/goods/list?category_id=1"
+
+2023/03/19 00:27:42 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.744ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE category_id = 1 and status = 2 
+[GIN] 2023/03/19 - 00:27:42 | 200 |     879.823µs |       127.0.0.1 | GET      "/app/goods/list?category_id=1"
+
+2023/03/19 00:27:43 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.745ms] [34;1m[rows:2][0m SELECT * FROM `t_goods` WHERE category_id = 2 and status = 2 
+[GIN] 2023/03/19 - 00:27:43 | 200 |     877.811µs |       127.0.0.1 | GET      "/app/goods/list?category_id=2"
+[GIN] 2023/03/19 - 00:27:43 | 200 |     228.987µs |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO46BJBnAfD977z7D-Vu3k7gU"
+
+2023/03/19 00:27:43 [32m/data/nocake/server/service/goods.go:105
+[0m[33m[0.784ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE status = 2 AND `t_goods`.`id` = 2 ORDER BY `t_goods`.`id` LIMIT 1
+[GIN] 2023/03/19 - 00:27:43 | 200 |     896.217µs |       127.0.0.1 | GET      "/app/goods/detail?goods_id=2"
+[GIN] 2023/03/19 - 00:27:44 | 200 |     132.373µs |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO46BJBnAfD977z7D-Vu3k7gU"
+[GIN] 2023/03/19 - 00:27:44 | 200 |     259.514µs |       127.0.0.1 | GET      "/app/category/option?level=1&pid=0"
+
+2023/03/19 00:27:44 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.707ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE category_id = 1 and status = 2 
+[GIN] 2023/03/19 - 00:27:44 | 200 |     836.098µs |       127.0.0.1 | GET      "/app/goods/list?category_id=1"
+
+2023/03/19 00:27:46 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.715ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE category_id = 1 and status = 2 
+[GIN] 2023/03/19 - 00:27:46 | 200 |     845.146µs |       127.0.0.1 | GET      "/app/goods/list?category_id=1"
+
+2023/03/19 00:27:47 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.666ms] [34;1m[rows:2][0m SELECT * FROM `t_goods` WHERE category_id = 2 and status = 2 
+[GIN] 2023/03/19 - 00:27:47 | 200 |     795.164µs |       127.0.0.1 | GET      "/app/goods/list?category_id=2"
+
+2023/03/19 00:27:48 [32m/data/nocake/server/service/goods.go:105
+[0m[33m[0.733ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE status = 2 AND `t_goods`.`id` = 3 ORDER BY `t_goods`.`id` LIMIT 1
+[GIN] 2023/03/19 - 00:27:48 | 200 |     880.909µs |       127.0.0.1 | GET      "/app/goods/detail?goods_id=3"
+[GIN] 2023/03/19 - 00:27:48 | 200 |     229.018µs |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO46BJBnAfD977z7D-Vu3k7gU"
+[GIN] 2023/03/19 - 00:27:49 | 200 |     215.716µs |       127.0.0.1 | GET      "/app/category/option?level=1&pid=0"
+[GIN] 2023/03/19 - 00:27:49 | 200 |     146.427µs |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO46BJBnAfD977z7D-Vu3k7gU"
+
+2023/03/19 00:27:49 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.771ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE category_id = 1 and status = 2 
+[GIN] 2023/03/19 - 00:27:49 | 200 |     862.812µs |       127.0.0.1 | GET      "/app/goods/list?category_id=1"
+param: {owvNO46BJBnAfD977z7D-Vu3k7gU 1 0 0}
+
+2023/03/19 00:27:50 [32m/data/nocake/server/service/order.go:178
+[0m[33m[0.556ms] [34;1m[rows:0][0m SELECT * FROM `t_order` WHERE open_id = 'owvNO46BJBnAfD977z7D-Vu3k7gU' and status = 1 
+[GIN] 2023/03/19 - 00:27:50 | 200 |     712.294µs |       127.0.0.1 | GET      "/app/order/list?status=1&open_id=owvNO46BJBnAfD977z7D-Vu3k7gU"
+
+2023/03/19 14:23:59 [32m/data/nocake/server/service/category.go:118
+[0m[33m[57.498ms] [34;1m[rows:6][0m SELECT * FROM `t_category` WHERE level = 1 and pid = 0 and deleted = 1
+[GIN] 2023/03/19 - 14:23:59 | 200 |   58.804577ms |       127.0.0.1 | GET      "/app/category/option?level=1&pid=0"
+[GIN] 2023/03/19 - 14:23:59 | 200 |      51.521µs |       127.0.0.1 | GET      "/app/cart/query?open_id="
+
+2023/03/19 14:23:59 [32m/data/nocake/server/service/goods.go:99
+[0m[33m[6.653ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE is_hot = 2 and status = 2
+[GIN] 2023/03/19 - 14:23:59 | 200 |    6.757346ms |       127.0.0.1 | GET      "/app/goods/hot"
+[GIN] 2023/03/19 - 14:23:59 | 200 |     229.181µs |       127.0.0.1 | GET      "/app/category/option?level=1&pid=0"
+[GIN] 2023/03/19 - 14:23:59 | 200 |      38.163µs |       127.0.0.1 | GET      "/app/cart/query?open_id="
+
+2023/03/19 14:23:59 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.674ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE category_id = 1 and status = 2 
+[GIN] 2023/03/19 - 14:23:59 | 200 |     770.292µs |       127.0.0.1 | GET      "/app/goods/list?category_id=1"
+
+2023/03/19 14:23:59 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.663ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE category_id = 1 and status = 2 
+[GIN] 2023/03/19 - 14:23:59 | 200 |     778.884µs |       127.0.0.1 | GET      "/app/goods/list?category_id=1"
+
+2023/03/19 14:24:00 [31;1m/data/nocake/server/service/user.go:46 [35;1mrecord not found
+[0m[33m[0.836ms] [34;1m[rows:0][0m SELECT * FROM `t_user` WHERE open_id = 'owvNO4yOzLbxxDAMvUzE64ZPJ8H4' ORDER BY `t_user`.`id` LIMIT 1
+[GIN] 2023/03/19 - 14:24:00 | 200 |  345.113411ms |       127.0.0.1 | POST     "/app/login"
+[GIN] 2023/03/19 - 14:24:04 | 200 |     260.775µs |       127.0.0.1 | GET      "/app/category/option?level=1&pid=0"
+[GIN] 2023/03/19 - 14:24:04 | 200 |     119.918µs |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO4yOzLbxxDAMvUzE64ZPJ8H4"
+
+2023/03/19 14:24:04 [32m/data/nocake/server/service/goods.go:99
+[0m[33m[0.502ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE is_hot = 2 and status = 2
+[GIN] 2023/03/19 - 14:24:04 | 200 |     581.211µs |       127.0.0.1 | GET      "/app/goods/hot"
+[GIN] 2023/03/19 - 14:24:04 | 200 |     212.937µs |       127.0.0.1 | GET      "/app/category/option?level=1&pid=0"
+[GIN] 2023/03/19 - 14:24:04 | 200 |     122.338µs |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO4yOzLbxxDAMvUzE64ZPJ8H4"
+
+2023/03/19 14:24:04 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.761ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE category_id = 1 and status = 2 
+[GIN] 2023/03/19 - 14:24:04 | 200 |     882.646µs |       127.0.0.1 | GET      "/app/goods/list?category_id=1"
+
+2023/03/19 14:24:04 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.666ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE category_id = 1 and status = 2 
+[GIN] 2023/03/19 - 14:24:04 | 200 |     778.955µs |       127.0.0.1 | GET      "/app/goods/list?category_id=1"
+[GIN] 2023/03/19 - 14:24:04 | 200 |  216.346764ms |       127.0.0.1 | POST     "/app/login"
+[GIN] 2023/03/19 - 14:24:18 | 200 |     206.528µs |       127.0.0.1 | GET      "/app/category/option?level=1&pid=0"
+
+2023/03/19 14:24:18 [32m/data/nocake/server/service/goods.go:99
+[0m[33m[0.514ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE is_hot = 2 and status = 2
+[GIN] 2023/03/19 - 14:24:18 | 200 |     596.959µs |       127.0.0.1 | GET      "/app/goods/hot"
+[GIN] 2023/03/19 - 14:24:18 | 200 |     148.685µs |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO4yOzLbxxDAMvUzE64ZPJ8H4"
+[GIN] 2023/03/19 - 14:24:18 | 200 |     137.302µs |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO4yOzLbxxDAMvUzE64ZPJ8H4"
+[GIN] 2023/03/19 - 14:24:18 | 200 |     129.544µs |       127.0.0.1 | GET      "/app/category/option?level=1&pid=0"
+
+2023/03/19 14:24:18 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.618ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE category_id = 1 and status = 2 
+[GIN] 2023/03/19 - 14:24:18 | 200 |     706.438µs |       127.0.0.1 | GET      "/app/goods/list?category_id=1"
+
+2023/03/19 14:24:18 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.526ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE category_id = 1 and status = 2 
+[GIN] 2023/03/19 - 14:24:18 | 200 |      619.86µs |       127.0.0.1 | GET      "/app/goods/list?category_id=1"
+[GIN] 2023/03/19 - 14:24:18 | 200 |  228.754005ms |       127.0.0.1 | POST     "/app/login"
+
+2023/03/19 14:24:20 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.659ms] [34;1m[rows:2][0m SELECT * FROM `t_goods` WHERE category_id = 2 and status = 2 
+[GIN] 2023/03/19 - 14:24:20 | 200 |     803.874µs |       127.0.0.1 | GET      "/app/goods/list?category_id=2"
+
+2023/03/19 14:24:21 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.665ms] [34;1m[rows:0][0m SELECT * FROM `t_goods` WHERE category_id = 3 and status = 2 
+[GIN] 2023/03/19 - 14:24:21 | 200 |     799.051µs |       127.0.0.1 | GET      "/app/goods/list?category_id=3"
+
+2023/03/19 14:24:23 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.970ms] [34;1m[rows:2][0m SELECT * FROM `t_goods` WHERE category_id = 2 and status = 2 
+[GIN] 2023/03/19 - 14:24:23 | 200 |    1.165814ms |       127.0.0.1 | GET      "/app/goods/list?category_id=2"
+
+2023/03/19 14:24:25 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.744ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE category_id = 1 and status = 2 
+[GIN] 2023/03/19 - 14:24:25 | 200 |     874.335µs |       127.0.0.1 | GET      "/app/goods/list?category_id=1"
+
+2023/03/19 14:24:30 [32m/data/nocake/server/service/goods.go:105
+[0m[33m[0.738ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE status = 2 AND `t_goods`.`id` = 1 ORDER BY `t_goods`.`id` LIMIT 1
+[GIN] 2023/03/19 - 14:24:30 | 200 |     885.428µs |       127.0.0.1 | GET      "/app/goods/detail?goods_id=1"
+[GIN] 2023/03/19 - 14:24:30 | 200 |     152.932µs |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO4yOzLbxxDAMvUzE64ZPJ8H4"
+[GIN] 2023/03/19 - 14:24:33 | 200 |      90.311µs |       127.0.0.1 | POST     "/app/cart/set"
+[GIN] 2023/03/19 - 14:24:33 | 200 |     206.709µs |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO4yOzLbxxDAMvUzE64ZPJ8H4"
+[GIN] 2023/03/19 - 14:24:34 | 200 |      67.375µs |       127.0.0.1 | POST     "/app/cart/set"
+[GIN] 2023/03/19 - 14:24:34 | 200 |     176.657µs |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO4yOzLbxxDAMvUzE64ZPJ8H4"
+[GIN] 2023/03/19 - 14:24:35 | 200 |      77.886µs |       127.0.0.1 | POST     "/app/cart/set"
+[GIN] 2023/03/19 - 14:24:35 | 200 |     182.204µs |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO4yOzLbxxDAMvUzE64ZPJ8H4"
+[GIN] 2023/03/19 - 14:24:37 | 200 |      71.868µs |       127.0.0.1 | POST     "/app/cart/set"
+[GIN] 2023/03/19 - 14:24:37 | 200 |     204.159µs |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO4yOzLbxxDAMvUzE64ZPJ8H4"
+[GIN] 2023/03/19 - 14:24:40 | 200 |       200.9µs |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO4yOzLbxxDAMvUzE64ZPJ8H4"
+[GIN] 2023/03/19 - 14:24:40 | 200 |     759.808µs |       127.0.0.1 | GET      "/app/category/option?level=1&pid=0"
+
+2023/03/19 14:24:40 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.733ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE category_id = 1 and status = 2 
+[GIN] 2023/03/19 - 14:24:40 | 200 |     847.845µs |       127.0.0.1 | GET      "/app/goods/list?category_id=1"
+param: {owvNO4yOzLbxxDAMvUzE64ZPJ8H4 1 0 0}
+
+2023/03/19 14:31:37 [32m/data/nocake/server/service/order.go:178
+[0m[33m[0.717ms] [34;1m[rows:0][0m SELECT * FROM `t_order` WHERE open_id = 'owvNO4yOzLbxxDAMvUzE64ZPJ8H4' and status = 1 
+[GIN] 2023/03/19 - 14:31:37 | 200 |     869.817µs |       127.0.0.1 | GET      "/app/order/list?status=1&open_id=owvNO4yOzLbxxDAMvUzE64ZPJ8H4"
+param: {owvNO4yOzLbxxDAMvUzE64ZPJ8H4 1 0 0}
+
+2023/03/19 14:31:38 [32m/data/nocake/server/service/order.go:178
+[0m[33m[0.587ms] [34;1m[rows:0][0m SELECT * FROM `t_order` WHERE open_id = 'owvNO4yOzLbxxDAMvUzE64ZPJ8H4' and status = 1 
+[GIN] 2023/03/19 - 14:31:38 | 200 |     736.347µs |       127.0.0.1 | GET      "/app/order/list?status=1&open_id=owvNO4yOzLbxxDAMvUzE64ZPJ8H4"
+param: {owvNO4yOzLbxxDAMvUzE64ZPJ8H4 1 0 0}
+
+2023/03/19 14:31:39 [32m/data/nocake/server/service/order.go:178
+[0m[33m[0.586ms] [34;1m[rows:0][0m SELECT * FROM `t_order` WHERE open_id = 'owvNO4yOzLbxxDAMvUzE64ZPJ8H4' and status = 1 
+[GIN] 2023/03/19 - 14:31:39 | 200 |     724.606µs |       127.0.0.1 | GET      "/app/order/list?status=1&open_id=owvNO4yOzLbxxDAMvUzE64ZPJ8H4"
+param: {owvNO4yOzLbxxDAMvUzE64ZPJ8H4 0 0 0}
+
+2023/03/19 14:31:40 [32m/data/nocake/server/service/order.go:178
+[0m[33m[0.636ms] [34;1m[rows:0][0m SELECT * FROM `t_order` WHERE open_id = 'owvNO4yOzLbxxDAMvUzE64ZPJ8H4' and status = 0 
+[GIN] 2023/03/19 - 14:31:40 | 200 |     822.837µs |       127.0.0.1 | GET      "/app/order/list?status=0&open_id=owvNO4yOzLbxxDAMvUzE64ZPJ8H4"
+[GIN] 2023/03/19 - 14:32:11 | 200 |     766.993µs |       127.0.0.1 | GET      "/app/category/option?level=1&pid=0"
+[GIN] 2023/03/19 - 14:32:11 | 200 |     180.847µs |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO4yOzLbxxDAMvUzE64ZPJ8H4"
+
+2023/03/19 14:32:11 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[1.112ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE category_id = 1 and status = 2 
+[GIN] 2023/03/19 - 14:32:11 | 200 |    1.213588ms |       127.0.0.1 | GET      "/app/goods/list?category_id=1"
+
+2023/03/19 14:32:12 [32m/data/nocake/server/service/goods.go:118
+[0m[33m[1.257ms] [34;1m[rows:3][0m SELECT * FROM `t_goods` WHERE status = 2 
+[GIN] 2023/03/19 - 14:32:12 | 200 |    1.410387ms |       127.0.0.1 | GET      "/app/goods/search?keywords="
+[GIN] 2023/03/19 - 14:32:19 | 200 |     187.985µs |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO4yOzLbxxDAMvUzE64ZPJ8H4"
+[GIN] 2023/03/19 - 14:32:19 | 200 |     166.283µs |       127.0.0.1 | GET      "/app/category/option?level=1&pid=0"
+
+2023/03/19 14:32:19 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.634ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE category_id = 1 and status = 2 
+[GIN] 2023/03/19 - 14:32:19 | 200 |     729.508µs |       127.0.0.1 | GET      "/app/goods/list?category_id=1"
+
+2023/03/19 14:32:19 [32m/data/nocake/server/service/goods.go:118
+[0m[33m[0.498ms] [34;1m[rows:3][0m SELECT * FROM `t_goods` WHERE status = 2 
+[GIN] 2023/03/19 - 14:32:19 | 200 |     666.799µs |       127.0.0.1 | GET      "/app/goods/search?keywords="
+
+2023/03/19 14:32:28 [32m/data/nocake/server/service/goods.go:118
+[0m[33m[0.712ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE status = 2 AND keywords like '%蛋%' 
+[GIN] 2023/03/19 - 14:32:28 | 200 |     852.377µs |       127.0.0.1 | GET      "/app/goods/search?keywords=%E8%9B%8B"
+[GIN] 2023/03/19 - 14:32:46 | 200 |     208.271µs |       127.0.0.1 | GET      "/app/category/option?level=1&pid=0"
+[GIN] 2023/03/19 - 14:32:46 | 200 |     110.449µs |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO4yOzLbxxDAMvUzE64ZPJ8H4"
+
+2023/03/19 14:32:46 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.647ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE category_id = 1 and status = 2 
+[GIN] 2023/03/19 - 14:32:46 | 200 |      766.11µs |       127.0.0.1 | GET      "/app/goods/list?category_id=1"
+[GIN] 2023/03/19 - 14:32:54 | 200 |     291.059µs |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO4yOzLbxxDAMvUzE64ZPJ8H4"
+
+2023/03/19 14:32:54 [32m/data/nocake/server/service/goods.go:105
+[0m[33m[1.061ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE status = 2 AND `t_goods`.`id` = 1 ORDER BY `t_goods`.`id` LIMIT 1
+[GIN] 2023/03/19 - 14:32:54 | 200 |    1.276871ms |       127.0.0.1 | GET      "/app/goods/detail?goods_id=1"
+[GIN] 2023/03/19 - 14:33:15 | 200 |     240.914µs |       127.0.0.1 | DELETE   "/app/cart/clear?open_id=owvNO4yOzLbxxDAMvUzE64ZPJ8H4"
+[GIN] 2023/03/19 - 14:33:16 | 200 |     294.714µs |       127.0.0.1 | GET      "/app/category/option?level=1&pid=0"
+[GIN] 2023/03/19 - 14:33:16 | 200 |     150.266µs |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO4yOzLbxxDAMvUzE64ZPJ8H4"
+
+2023/03/19 14:33:16 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.682ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE category_id = 1 and status = 2 
+[GIN] 2023/03/19 - 14:33:16 | 200 |     798.727µs |       127.0.0.1 | GET      "/app/goods/list?category_id=1"
+
+2023/03/19 14:33:25 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.903ms] [34;1m[rows:2][0m SELECT * FROM `t_goods` WHERE category_id = 2 and status = 2 
+[GIN] 2023/03/19 - 14:33:25 | 200 |    1.086383ms |       127.0.0.1 | GET      "/app/goods/list?category_id=2"
+
+2023/03/19 14:33:26 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.643ms] [34;1m[rows:0][0m SELECT * FROM `t_goods` WHERE category_id = 3 and status = 2 
+[GIN] 2023/03/19 - 14:33:26 | 200 |     794.135µs |       127.0.0.1 | GET      "/app/goods/list?category_id=3"
+
+2023/03/19 14:33:27 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.776ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE category_id = 1 and status = 2 
+[GIN] 2023/03/19 - 14:33:27 | 200 |     915.509µs |       127.0.0.1 | GET      "/app/goods/list?category_id=1"
+
+2023/03/19 14:33:28 [32m/data/nocake/server/service/goods.go:105
+[0m[33m[0.776ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE status = 2 AND `t_goods`.`id` = 1 ORDER BY `t_goods`.`id` LIMIT 1
+[GIN] 2023/03/19 - 14:33:28 | 200 |     942.575µs |       127.0.0.1 | GET      "/app/goods/detail?goods_id=1"
+[GIN] 2023/03/19 - 14:33:28 | 200 |     190.852µs |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO4yOzLbxxDAMvUzE64ZPJ8H4"
+[GIN] 2023/03/19 - 14:33:30 | 200 |      69.287µs |       127.0.0.1 | POST     "/app/cart/set"
+[GIN] 2023/03/19 - 14:33:30 | 200 |      201.19µs |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO4yOzLbxxDAMvUzE64ZPJ8H4"
+[GIN] 2023/03/19 - 14:33:32 | 200 |      67.193µs |       127.0.0.1 | POST     "/app/cart/set"
+[GIN] 2023/03/19 - 14:33:32 | 200 |     164.364µs |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO4yOzLbxxDAMvUzE64ZPJ8H4"
+[GIN] 2023/03/19 - 14:33:32 | 200 |       65.84µs |       127.0.0.1 | POST     "/app/cart/set"
+[GIN] 2023/03/19 - 14:33:33 | 200 |     210.857µs |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO4yOzLbxxDAMvUzE64ZPJ8H4"
+[GIN] 2023/03/19 - 14:33:33 | 200 |      66.203µs |       127.0.0.1 | POST     "/app/cart/set"
+[GIN] 2023/03/19 - 14:33:33 | 200 |     233.625µs |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO4yOzLbxxDAMvUzE64ZPJ8H4"
+[GIN] 2023/03/19 - 14:33:34 | 200 |      61.918µs |       127.0.0.1 | POST     "/app/cart/set"
+[GIN] 2023/03/19 - 14:33:34 | 200 |     251.112µs |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO4yOzLbxxDAMvUzE64ZPJ8H4"
+[GIN] 2023/03/19 - 14:33:35 | 200 |      69.528µs |       127.0.0.1 | POST     "/app/cart/set"
+[GIN] 2023/03/19 - 14:33:35 | 200 |     183.274µs |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO4yOzLbxxDAMvUzE64ZPJ8H4"
+[GIN] 2023/03/19 - 14:33:37 | 200 |    2.270715ms |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO4yOzLbxxDAMvUzE64ZPJ8H4"
+[GIN] 2023/03/19 - 14:33:37 | 200 |    2.543995ms |       127.0.0.1 | GET      "/app/category/option?level=1&pid=0"
+
+2023/03/19 14:33:37 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.697ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE category_id = 1 and status = 2 
+[GIN] 2023/03/19 - 14:33:37 | 200 |     801.711µs |       127.0.0.1 | GET      "/app/goods/list?category_id=1"
+
+2023/03/19 14:33:40 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.603ms] [34;1m[rows:0][0m SELECT * FROM `t_goods` WHERE category_id = 4 and status = 2 
+[GIN] 2023/03/19 - 14:33:40 | 200 |     741.196µs |       127.0.0.1 | GET      "/app/goods/list?category_id=4"
+
+2023/03/19 14:33:41 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.655ms] [34;1m[rows:0][0m SELECT * FROM `t_goods` WHERE category_id = 5 and status = 2 
+[GIN] 2023/03/19 - 14:33:41 | 200 |     819.204µs |       127.0.0.1 | GET      "/app/goods/list?category_id=5"
+
+2023/03/19 14:33:41 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.720ms] [34;1m[rows:0][0m SELECT * FROM `t_goods` WHERE category_id = 6 and status = 2 
+[GIN] 2023/03/19 - 14:33:41 | 200 |     852.754µs |       127.0.0.1 | GET      "/app/goods/list?category_id=6"
+
+2023/03/19 14:33:42 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.599ms] [34;1m[rows:0][0m SELECT * FROM `t_goods` WHERE category_id = 3 and status = 2 
+[GIN] 2023/03/19 - 14:33:42 | 200 |     722.042µs |       127.0.0.1 | GET      "/app/goods/list?category_id=3"
+
+2023/03/19 14:33:43 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.769ms] [34;1m[rows:2][0m SELECT * FROM `t_goods` WHERE category_id = 2 and status = 2 
+[GIN] 2023/03/19 - 14:33:43 | 200 |     916.862µs |       127.0.0.1 | GET      "/app/goods/list?category_id=2"
+
+2023/03/19 14:33:43 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.735ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE category_id = 1 and status = 2 
+[GIN] 2023/03/19 - 14:33:43 | 200 |     882.032µs |       127.0.0.1 | GET      "/app/goods/list?category_id=1"
+
+2023/03/19 14:33:44 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.726ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE category_id = 1 and status = 2 
+[GIN] 2023/03/19 - 14:33:44 | 200 |     869.604µs |       127.0.0.1 | GET      "/app/goods/list?category_id=1"
+
+2023/03/19 14:33:44 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.692ms] [34;1m[rows:2][0m SELECT * FROM `t_goods` WHERE category_id = 2 and status = 2 
+[GIN] 2023/03/19 - 14:33:44 | 200 |     838.341µs |       127.0.0.1 | GET      "/app/goods/list?category_id=2"
+[GIN] 2023/03/19 - 14:33:46 | 200 |     213.256µs |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO4yOzLbxxDAMvUzE64ZPJ8H4"
+
+2023/03/19 14:33:46 [32m/data/nocake/server/service/goods.go:105
+[0m[33m[0.769ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE status = 2 AND `t_goods`.`id` = 2 ORDER BY `t_goods`.`id` LIMIT 1
+[GIN] 2023/03/19 - 14:33:46 | 200 |     905.594µs |       127.0.0.1 | GET      "/app/goods/detail?goods_id=2"
+[GIN] 2023/03/19 - 14:33:51 | 200 |     209.501µs |       127.0.0.1 | GET      "/app/category/option?level=1&pid=0"
+[GIN] 2023/03/19 - 14:33:51 | 200 |     119.223µs |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO4yOzLbxxDAMvUzE64ZPJ8H4"
+
+2023/03/19 14:33:51 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.636ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE category_id = 1 and status = 2 
+[GIN] 2023/03/19 - 14:33:51 | 200 |     731.091µs |       127.0.0.1 | GET      "/app/goods/list?category_id=1"
+
+2023/03/19 14:35:17 [32m/data/nocake/server/service/address.go:57
+[0m[33m[9.346ms] [34;1m[rows:0][0m SELECT * FROM `t_address` WHERE open_id = 'owvNO4yOzLbxxDAMvUzE64ZPJ8H4' and deleted != 1 ORDER BY is_default desc
+[GIN] 2023/03/19 - 14:35:17 | 200 |    9.486126ms |       127.0.0.1 | GET      "/app/address/list?open_id=owvNO4yOzLbxxDAMvUzE64ZPJ8H4"
+
+2023/03/19 14:35:43 [32m/data/nocake/server/service/address.go:57
+[0m[33m[1.565ms] [34;1m[rows:0][0m SELECT * FROM `t_address` WHERE open_id = 'owvNO4yOzLbxxDAMvUzE64ZPJ8H4' and deleted != 1 ORDER BY is_default desc
+[GIN] 2023/03/19 - 14:35:43 | 200 |    1.716641ms |       127.0.0.1 | GET      "/app/address/list?open_id=owvNO4yOzLbxxDAMvUzE64ZPJ8H4"
+
+2023/03/19 14:36:56 [32m/data/nocake/server/service/address.go:57
+[0m[33m[0.725ms] [34;1m[rows:0][0m SELECT * FROM `t_address` WHERE open_id = 'owvNO4yOzLbxxDAMvUzE64ZPJ8H4' and deleted != 1 ORDER BY is_default desc
+[GIN] 2023/03/19 - 14:36:56 | 200 |     882.253µs |       127.0.0.1 | GET      "/app/address/list?open_id=owvNO4yOzLbxxDAMvUzE64ZPJ8H4"
+param: {owvNO4yOzLbxxDAMvUzE64ZPJ8H4 1 0 0}
+
+2023/03/19 14:37:01 [32m/data/nocake/server/service/order.go:178
+[0m[33m[0.736ms] [34;1m[rows:0][0m SELECT * FROM `t_order` WHERE open_id = 'owvNO4yOzLbxxDAMvUzE64ZPJ8H4' and status = 1 
+[GIN] 2023/03/19 - 14:37:01 | 200 |     889.898µs |       127.0.0.1 | GET      "/app/order/list?status=1&open_id=owvNO4yOzLbxxDAMvUzE64ZPJ8H4"
+[GIN] 2023/03/19 - 14:37:02 | 200 |     320.536µs |       127.0.0.1 | GET      "/app/category/option?level=1&pid=0"
+[GIN] 2023/03/19 - 14:37:02 | 200 |     197.647µs |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO4yOzLbxxDAMvUzE64ZPJ8H4"
+
+2023/03/19 14:37:02 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.813ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE category_id = 1 and status = 2 
+[GIN] 2023/03/19 - 14:37:02 | 200 |     949.417µs |       127.0.0.1 | GET      "/app/goods/list?category_id=1"
+param: {owvNO4yOzLbxxDAMvUzE64ZPJ8H4 1 0 0}
+
+2023/03/19 14:37:03 [32m/data/nocake/server/service/order.go:178
+[0m[33m[0.586ms] [34;1m[rows:0][0m SELECT * FROM `t_order` WHERE open_id = 'owvNO4yOzLbxxDAMvUzE64ZPJ8H4' and status = 1 
+[GIN] 2023/03/19 - 14:37:03 | 200 |     754.147µs |       127.0.0.1 | GET      "/app/order/list?status=1&open_id=owvNO4yOzLbxxDAMvUzE64ZPJ8H4"
+param: {owvNO4yOzLbxxDAMvUzE64ZPJ8H4 1 0 0}
+
+2023/03/19 14:37:04 [32m/data/nocake/server/service/order.go:178
+[0m[33m[0.635ms] [34;1m[rows:0][0m SELECT * FROM `t_order` WHERE open_id = 'owvNO4yOzLbxxDAMvUzE64ZPJ8H4' and status = 1 
+[GIN] 2023/03/19 - 14:37:04 | 200 |     769.043µs |       127.0.0.1 | GET      "/app/order/list?status=1&open_id=owvNO4yOzLbxxDAMvUzE64ZPJ8H4"
+[GIN] 2023/03/19 - 14:37:05 | 200 |     174.446µs |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO4yOzLbxxDAMvUzE64ZPJ8H4"
+[GIN] 2023/03/19 - 14:37:05 | 200 |     214.128µs |       127.0.0.1 | GET      "/app/category/option?level=1&pid=0"
+
+2023/03/19 14:37:05 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.650ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE category_id = 1 and status = 2 
+[GIN] 2023/03/19 - 14:37:05 | 200 |     750.685µs |       127.0.0.1 | GET      "/app/goods/list?category_id=1"
+
+2023/03/19 14:40:13 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.654ms] [34;1m[rows:0][0m SELECT * FROM `t_goods` WHERE category_id = 3 and status = 2 
+[GIN] 2023/03/19 - 14:40:13 | 200 |     806.425µs |       127.0.0.1 | GET      "/app/goods/list?category_id=3"
+
+2023/03/19 14:40:14 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.747ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE category_id = 1 and status = 2 
+[GIN] 2023/03/19 - 14:40:14 | 200 |     945.524µs |       127.0.0.1 | GET      "/app/goods/list?category_id=1"
+param: {owvNO4yOzLbxxDAMvUzE64ZPJ8H4 1 0 0}
+
+2023/03/19 14:40:15 [32m/data/nocake/server/service/order.go:178
+[0m[33m[0.616ms] [34;1m[rows:0][0m SELECT * FROM `t_order` WHERE open_id = 'owvNO4yOzLbxxDAMvUzE64ZPJ8H4' and status = 1 
+[GIN] 2023/03/19 - 14:40:15 | 200 |     2.34198ms |       127.0.0.1 | GET      "/app/order/list?status=1&open_id=owvNO4yOzLbxxDAMvUzE64ZPJ8H4"
+param: {owvNO4yOzLbxxDAMvUzE64ZPJ8H4 1 0 0}
+
+2023/03/19 14:40:17 [32m/data/nocake/server/service/order.go:178
+[0m[33m[0.595ms] [34;1m[rows:0][0m SELECT * FROM `t_order` WHERE open_id = 'owvNO4yOzLbxxDAMvUzE64ZPJ8H4' and status = 1 
+[GIN] 2023/03/19 - 14:40:17 | 200 |     738.559µs |       127.0.0.1 | GET      "/app/order/list?status=1&open_id=owvNO4yOzLbxxDAMvUzE64ZPJ8H4"
+[GIN] 2023/03/19 - 14:40:18 | 200 |     250.789µs |       127.0.0.1 | GET      "/app/category/option?level=1&pid=0"
+[GIN] 2023/03/19 - 14:40:18 | 200 |      155.05µs |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO4yOzLbxxDAMvUzE64ZPJ8H4"
+
+2023/03/19 14:40:18 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.854ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE category_id = 1 and status = 2 
+[GIN] 2023/03/19 - 14:40:18 | 200 |     962.035µs |       127.0.0.1 | GET      "/app/goods/list?category_id=1"
+param: {owvNO4yOzLbxxDAMvUzE64ZPJ8H4 1 0 0}
+
+2023/03/19 14:40:19 [32m/data/nocake/server/service/order.go:178
+[0m[33m[0.620ms] [34;1m[rows:0][0m SELECT * FROM `t_order` WHERE open_id = 'owvNO4yOzLbxxDAMvUzE64ZPJ8H4' and status = 1 
+[GIN] 2023/03/19 - 14:40:19 | 200 |     766.706µs |       127.0.0.1 | GET      "/app/order/list?status=1&open_id=owvNO4yOzLbxxDAMvUzE64ZPJ8H4"
+[GIN] 2023/03/19 - 14:40:20 | 200 |     251.255µs |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO4yOzLbxxDAMvUzE64ZPJ8H4"
+[GIN] 2023/03/19 - 14:40:20 | 200 |     228.517µs |       127.0.0.1 | GET      "/app/category/option?level=1&pid=0"
+
+2023/03/19 14:40:20 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.753ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE category_id = 1 and status = 2 
+[GIN] 2023/03/19 - 14:40:20 | 200 |     882.893µs |       127.0.0.1 | GET      "/app/goods/list?category_id=1"
+
+2023/03/19 14:45:48 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[1.372ms] [34;1m[rows:0][0m SELECT * FROM `t_goods` WHERE category_id = 3 and status = 2 
+[GIN] 2023/03/19 - 14:45:48 | 200 |    1.523278ms |       127.0.0.1 | GET      "/app/goods/list?category_id=3"
+
+2023/03/19 14:45:48 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.586ms] [34;1m[rows:0][0m SELECT * FROM `t_goods` WHERE category_id = 4 and status = 2 
+[GIN] 2023/03/19 - 14:45:48 | 200 |     728.479µs |       127.0.0.1 | GET      "/app/goods/list?category_id=4"
+
+2023/03/19 14:45:48 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[80.494ms] [34;1m[rows:2][0m SELECT * FROM `t_goods` WHERE category_id = 2 and status = 2 
+[GIN] 2023/03/19 - 14:45:48 | 200 |   80.613029ms |       127.0.0.1 | GET      "/app/goods/list?category_id=2"
+
+2023/03/19 14:45:49 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.666ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE category_id = 1 and status = 2 
+[GIN] 2023/03/19 - 14:45:49 | 200 |     809.024µs |       127.0.0.1 | GET      "/app/goods/list?category_id=1"
+
+2023/03/19 14:45:49 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.662ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE category_id = 1 and status = 2 
+[GIN] 2023/03/19 - 14:45:49 | 200 |     816.932µs |       127.0.0.1 | GET      "/app/goods/list?category_id=1"
+
+2023/03/19 14:45:50 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.750ms] [34;1m[rows:2][0m SELECT * FROM `t_goods` WHERE category_id = 2 and status = 2 
+[GIN] 2023/03/19 - 14:45:50 | 200 |     886.305µs |       127.0.0.1 | GET      "/app/goods/list?category_id=2"
+
+2023/03/19 14:45:51 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.651ms] [34;1m[rows:0][0m SELECT * FROM `t_goods` WHERE category_id = 3 and status = 2 
+[GIN] 2023/03/19 - 14:45:51 | 200 |     787.503µs |       127.0.0.1 | GET      "/app/goods/list?category_id=3"
+
+2023/03/19 14:45:51 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.649ms] [34;1m[rows:0][0m SELECT * FROM `t_goods` WHERE category_id = 4 and status = 2 
+[GIN] 2023/03/19 - 14:45:51 | 200 |     800.568µs |       127.0.0.1 | GET      "/app/goods/list?category_id=4"
+
+2023/03/19 14:45:52 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.668ms] [34;1m[rows:0][0m SELECT * FROM `t_goods` WHERE category_id = 5 and status = 2 
+[GIN] 2023/03/19 - 14:45:52 | 200 |      797.15µs |       127.0.0.1 | GET      "/app/goods/list?category_id=5"
+
+2023/03/19 14:45:52 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.684ms] [34;1m[rows:0][0m SELECT * FROM `t_goods` WHERE category_id = 6 and status = 2 
+[GIN] 2023/03/19 - 14:45:52 | 200 |     853.964µs |       127.0.0.1 | GET      "/app/goods/list?category_id=6"
+
+2023/03/19 14:45:53 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.727ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE category_id = 1 and status = 2 
+[GIN] 2023/03/19 - 14:45:53 | 200 |     877.795µs |       127.0.0.1 | GET      "/app/goods/list?category_id=1"
+
+2023/03/19 14:46:00 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.685ms] [34;1m[rows:2][0m SELECT * FROM `t_goods` WHERE category_id = 2 and status = 2 
+[GIN] 2023/03/19 - 14:46:00 | 200 |     835.949µs |       127.0.0.1 | GET      "/app/goods/list?category_id=2"
+
+2023/03/19 14:46:01 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.680ms] [34;1m[rows:0][0m SELECT * FROM `t_goods` WHERE category_id = 4 and status = 2 
+[GIN] 2023/03/19 - 14:46:01 | 200 |     805.325µs |       127.0.0.1 | GET      "/app/goods/list?category_id=4"
+
+2023/03/19 14:46:01 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.694ms] [34;1m[rows:0][0m SELECT * FROM `t_goods` WHERE category_id = 5 and status = 2 
+[GIN] 2023/03/19 - 14:46:01 | 200 |     872.967µs |       127.0.0.1 | GET      "/app/goods/list?category_id=5"
+
+2023/03/19 14:46:02 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.712ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE category_id = 1 and status = 2 
+[GIN] 2023/03/19 - 14:46:02 | 200 |     872.282µs |       127.0.0.1 | GET      "/app/goods/list?category_id=1"
+
+2023/03/19 14:46:03 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.786ms] [34;1m[rows:2][0m SELECT * FROM `t_goods` WHERE category_id = 2 and status = 2 
+[GIN] 2023/03/19 - 14:46:03 | 200 |     915.954µs |       127.0.0.1 | GET      "/app/goods/list?category_id=2"
+
+2023/03/19 14:46:03 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.706ms] [34;1m[rows:0][0m SELECT * FROM `t_goods` WHERE category_id = 3 and status = 2 
+[GIN] 2023/03/19 - 14:46:03 | 200 |     857.951µs |       127.0.0.1 | GET      "/app/goods/list?category_id=3"
+
+2023/03/19 14:46:04 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.727ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE category_id = 1 and status = 2 
+[GIN] 2023/03/19 - 14:46:04 | 200 |     859.109µs |       127.0.0.1 | GET      "/app/goods/list?category_id=1"
+
+2023/03/19 14:46:05 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.794ms] [34;1m[rows:2][0m SELECT * FROM `t_goods` WHERE category_id = 2 and status = 2 
+[GIN] 2023/03/19 - 14:46:05 | 200 |     932.644µs |       127.0.0.1 | GET      "/app/goods/list?category_id=2"
+
+2023/03/19 14:46:05 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.662ms] [34;1m[rows:0][0m SELECT * FROM `t_goods` WHERE category_id = 3 and status = 2 
+[GIN] 2023/03/19 - 14:46:05 | 200 |     830.562µs |       127.0.0.1 | GET      "/app/goods/list?category_id=3"
+
+2023/03/19 14:46:06 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.738ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE category_id = 1 and status = 2 
+[GIN] 2023/03/19 - 14:46:06 | 200 |      879.32µs |       127.0.0.1 | GET      "/app/goods/list?category_id=1"
+
+2023/03/19 14:46:13 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.762ms] [34;1m[rows:0][0m SELECT * FROM `t_goods` WHERE category_id = 3 and status = 2 
+[GIN] 2023/03/19 - 14:46:13 | 200 |     903.157µs |       127.0.0.1 | GET      "/app/goods/list?category_id=3"
+
+2023/03/19 14:46:14 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.780ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE category_id = 1 and status = 2 
+[GIN] 2023/03/19 - 14:46:14 | 200 |     906.784µs |       127.0.0.1 | GET      "/app/goods/list?category_id=1"
+
+2023/03/19 14:46:14 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.787ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE category_id = 1 and status = 2 
+[GIN] 2023/03/19 - 14:46:14 | 200 |     916.069µs |       127.0.0.1 | GET      "/app/goods/list?category_id=1"
+
+2023/03/19 14:46:15 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.703ms] [34;1m[rows:2][0m SELECT * FROM `t_goods` WHERE category_id = 2 and status = 2 
+[GIN] 2023/03/19 - 14:46:15 | 200 |      854.67µs |       127.0.0.1 | GET      "/app/goods/list?category_id=2"
+
+2023/03/19 14:46:17 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.706ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE category_id = 1 and status = 2 
+[GIN] 2023/03/19 - 14:46:17 | 200 |     852.839µs |       127.0.0.1 | GET      "/app/goods/list?category_id=1"
+
+2023/03/19 14:46:17 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.790ms] [34;1m[rows:2][0m SELECT * FROM `t_goods` WHERE category_id = 2 and status = 2 
+[GIN] 2023/03/19 - 14:46:17 | 200 |     923.479µs |       127.0.0.1 | GET      "/app/goods/list?category_id=2"
+
+2023/03/19 14:46:18 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.900ms] [34;1m[rows:0][0m SELECT * FROM `t_goods` WHERE category_id = 3 and status = 2 
+[GIN] 2023/03/19 - 14:46:18 | 200 |    1.076911ms |       127.0.0.1 | GET      "/app/goods/list?category_id=3"
+
+2023/03/19 14:46:18 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.772ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE category_id = 1 and status = 2 
+[GIN] 2023/03/19 - 14:46:18 | 200 |     897.307µs |       127.0.0.1 | GET      "/app/goods/list?category_id=1"
+
+2023/03/19 14:46:19 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.760ms] [34;1m[rows:2][0m SELECT * FROM `t_goods` WHERE category_id = 2 and status = 2 
+[GIN] 2023/03/19 - 14:46:19 | 200 |     899.035µs |       127.0.0.1 | GET      "/app/goods/list?category_id=2"
+
+2023/03/19 14:46:20 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.702ms] [34;1m[rows:0][0m SELECT * FROM `t_goods` WHERE category_id = 3 and status = 2 
+[GIN] 2023/03/19 - 14:46:20 | 200 |     835.071µs |       127.0.0.1 | GET      "/app/goods/list?category_id=3"
+
+2023/03/19 14:46:20 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.703ms] [34;1m[rows:0][0m SELECT * FROM `t_goods` WHERE category_id = 4 and status = 2 
+[GIN] 2023/03/19 - 14:46:20 | 200 |     823.764µs |       127.0.0.1 | GET      "/app/goods/list?category_id=4"
+
+2023/03/19 14:46:21 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.800ms] [34;1m[rows:2][0m SELECT * FROM `t_goods` WHERE category_id = 2 and status = 2 
+[GIN] 2023/03/19 - 14:46:21 | 200 |     931.379µs |       127.0.0.1 | GET      "/app/goods/list?category_id=2"
+
+2023/03/19 14:46:21 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.807ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE category_id = 1 and status = 2 
+[GIN] 2023/03/19 - 14:46:21 | 200 |     955.652µs |       127.0.0.1 | GET      "/app/goods/list?category_id=1"
+
+2023/03/19 14:46:22 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.814ms] [34;1m[rows:2][0m SELECT * FROM `t_goods` WHERE category_id = 2 and status = 2 
+[GIN] 2023/03/19 - 14:46:22 | 200 |     970.652µs |       127.0.0.1 | GET      "/app/goods/list?category_id=2"
+
+2023/03/19 14:46:23 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.748ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE category_id = 1 and status = 2 
+[GIN] 2023/03/19 - 14:46:23 | 200 |     899.417µs |       127.0.0.1 | GET      "/app/goods/list?category_id=1"
+
+2023/03/19 14:46:23 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.867ms] [34;1m[rows:2][0m SELECT * FROM `t_goods` WHERE category_id = 2 and status = 2 
+[GIN] 2023/03/19 - 14:46:23 | 200 |    1.017982ms |       127.0.0.1 | GET      "/app/goods/list?category_id=2"
+
+2023/03/19 14:46:24 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.725ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE category_id = 1 and status = 2 
+[GIN] 2023/03/19 - 14:46:24 | 200 |     871.378µs |       127.0.0.1 | GET      "/app/goods/list?category_id=1"
+
+2023/03/19 14:46:24 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.735ms] [34;1m[rows:2][0m SELECT * FROM `t_goods` WHERE category_id = 2 and status = 2 
+[GIN] 2023/03/19 - 14:46:24 | 200 |     860.372µs |       127.0.0.1 | GET      "/app/goods/list?category_id=2"
+
+2023/03/19 14:46:25 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.774ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE category_id = 1 and status = 2 
+[GIN] 2023/03/19 - 14:46:25 | 200 |     911.391µs |       127.0.0.1 | GET      "/app/goods/list?category_id=1"
+
+2023/03/19 14:46:25 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.783ms] [34;1m[rows:2][0m SELECT * FROM `t_goods` WHERE category_id = 2 and status = 2 
+[GIN] 2023/03/19 - 14:46:25 | 200 |     920.966µs |       127.0.0.1 | GET      "/app/goods/list?category_id=2"
+
+2023/03/19 14:46:26 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.721ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE category_id = 1 and status = 2 
+[GIN] 2023/03/19 - 14:46:26 | 200 |     855.624µs |       127.0.0.1 | GET      "/app/goods/list?category_id=1"
+
+2023/03/19 14:46:27 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.796ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE category_id = 1 and status = 2 
+[GIN] 2023/03/19 - 14:46:27 | 200 |     929.542µs |       127.0.0.1 | GET      "/app/goods/list?category_id=1"
+
+2023/03/19 14:46:27 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[1.101ms] [34;1m[rows:2][0m SELECT * FROM `t_goods` WHERE category_id = 2 and status = 2 
+[GIN] 2023/03/19 - 14:46:27 | 200 |     1.27927ms |       127.0.0.1 | GET      "/app/goods/list?category_id=2"
+
+2023/03/19 14:46:28 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.759ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE category_id = 1 and status = 2 
+[GIN] 2023/03/19 - 14:46:28 | 200 |     889.092µs |       127.0.0.1 | GET      "/app/goods/list?category_id=1"
+
+2023/03/19 14:46:28 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.891ms] [34;1m[rows:2][0m SELECT * FROM `t_goods` WHERE category_id = 2 and status = 2 
+[GIN] 2023/03/19 - 14:46:28 | 200 |    1.039485ms |       127.0.0.1 | GET      "/app/goods/list?category_id=2"
+
+2023/03/19 14:46:29 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.672ms] [34;1m[rows:0][0m SELECT * FROM `t_goods` WHERE category_id = 3 and status = 2 
+[GIN] 2023/03/19 - 14:46:29 | 200 |     797.468µs |       127.0.0.1 | GET      "/app/goods/list?category_id=3"
+
+2023/03/19 14:46:29 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.750ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE category_id = 1 and status = 2 
+[GIN] 2023/03/19 - 14:46:29 | 200 |     882.225µs |       127.0.0.1 | GET      "/app/goods/list?category_id=1"
+
+2023/03/19 14:46:42 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[2.377ms] [34;1m[rows:2][0m SELECT * FROM `t_goods` WHERE category_id = 2 and status = 2 
+[GIN] 2023/03/19 - 14:46:42 | 200 |    2.529933ms |       127.0.0.1 | GET      "/app/goods/list?category_id=2"
+
+2023/03/19 14:46:42 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.716ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE category_id = 1 and status = 2 
+[GIN] 2023/03/19 - 14:46:42 | 200 |       862.1µs |       127.0.0.1 | GET      "/app/goods/list?category_id=1"
+
+2023/03/19 14:46:43 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.808ms] [34;1m[rows:2][0m SELECT * FROM `t_goods` WHERE category_id = 2 and status = 2 
+[GIN] 2023/03/19 - 14:46:43 | 200 |     970.505µs |       127.0.0.1 | GET      "/app/goods/list?category_id=2"
+
+2023/03/19 14:46:43 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.819ms] [34;1m[rows:0][0m SELECT * FROM `t_goods` WHERE category_id = 3 and status = 2 
+[GIN] 2023/03/19 - 14:46:43 | 200 |     958.268µs |       127.0.0.1 | GET      "/app/goods/list?category_id=3"
+
+2023/03/19 14:46:44 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.779ms] [34;1m[rows:2][0m SELECT * FROM `t_goods` WHERE category_id = 2 and status = 2 
+[GIN] 2023/03/19 - 14:46:44 | 200 |     918.584µs |       127.0.0.1 | GET      "/app/goods/list?category_id=2"
+
+2023/03/19 14:46:44 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.781ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE category_id = 1 and status = 2 
+[GIN] 2023/03/19 - 14:46:44 | 200 |     917.296µs |       127.0.0.1 | GET      "/app/goods/list?category_id=1"
+
+2023/03/19 14:46:45 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.891ms] [34;1m[rows:2][0m SELECT * FROM `t_goods` WHERE category_id = 2 and status = 2 
+[GIN] 2023/03/19 - 14:46:45 | 200 |    1.018637ms |       127.0.0.1 | GET      "/app/goods/list?category_id=2"
+
+2023/03/19 14:46:45 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[1.053ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE category_id = 1 and status = 2 
+[GIN] 2023/03/19 - 14:46:45 | 200 |    1.256444ms |       127.0.0.1 | GET      "/app/goods/list?category_id=1"
+
+2023/03/19 14:46:46 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.703ms] [34;1m[rows:2][0m SELECT * FROM `t_goods` WHERE category_id = 2 and status = 2 
+[GIN] 2023/03/19 - 14:46:46 | 200 |     835.024µs |       127.0.0.1 | GET      "/app/goods/list?category_id=2"
+
+2023/03/19 14:46:47 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.656ms] [34;1m[rows:0][0m SELECT * FROM `t_goods` WHERE category_id = 3 and status = 2 
+[GIN] 2023/03/19 - 14:46:47 | 200 |      778.85µs |       127.0.0.1 | GET      "/app/goods/list?category_id=3"
+
+2023/03/19 14:46:47 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.692ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE category_id = 1 and status = 2 
+[GIN] 2023/03/19 - 14:46:47 | 200 |     821.581µs |       127.0.0.1 | GET      "/app/goods/list?category_id=1"
+
+2023/03/19 14:46:48 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.798ms] [34;1m[rows:2][0m SELECT * FROM `t_goods` WHERE category_id = 2 and status = 2 
+[GIN] 2023/03/19 - 14:46:48 | 200 |      959.84µs |       127.0.0.1 | GET      "/app/goods/list?category_id=2"
+
+2023/03/19 14:46:48 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.588ms] [34;1m[rows:0][0m SELECT * FROM `t_goods` WHERE category_id = 3 and status = 2 
+[GIN] 2023/03/19 - 14:46:48 | 200 |     708.413µs |       127.0.0.1 | GET      "/app/goods/list?category_id=3"
+
+2023/03/19 14:46:49 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.770ms] [34;1m[rows:0][0m SELECT * FROM `t_goods` WHERE category_id = 4 and status = 2 
+[GIN] 2023/03/19 - 14:46:49 | 200 |     904.232µs |       127.0.0.1 | GET      "/app/goods/list?category_id=4"
+
+2023/03/19 14:46:49 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.633ms] [34;1m[rows:0][0m SELECT * FROM `t_goods` WHERE category_id = 5 and status = 2 
+[GIN] 2023/03/19 - 14:46:49 | 200 |     796.997µs |       127.0.0.1 | GET      "/app/goods/list?category_id=5"
+
+2023/03/19 14:46:50 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.677ms] [34;1m[rows:0][0m SELECT * FROM `t_goods` WHERE category_id = 6 and status = 2 
+[GIN] 2023/03/19 - 14:46:50 | 200 |     829.056µs |       127.0.0.1 | GET      "/app/goods/list?category_id=6"
+
+2023/03/19 14:46:50 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.733ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE category_id = 1 and status = 2 
+[GIN] 2023/03/19 - 14:46:50 | 200 |     890.431µs |       127.0.0.1 | GET      "/app/goods/list?category_id=1"
+
+2023/03/19 14:47:17 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.750ms] [34;1m[rows:2][0m SELECT * FROM `t_goods` WHERE category_id = 2 and status = 2 
+[GIN] 2023/03/19 - 14:47:17 | 200 |      921.89µs |       127.0.0.1 | GET      "/app/goods/list?category_id=2"
+
+2023/03/19 14:47:18 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.596ms] [34;1m[rows:0][0m SELECT * FROM `t_goods` WHERE category_id = 3 and status = 2 
+[GIN] 2023/03/19 - 14:47:18 | 200 |     731.108µs |       127.0.0.1 | GET      "/app/goods/list?category_id=3"
+
+2023/03/19 14:47:19 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.620ms] [34;1m[rows:0][0m SELECT * FROM `t_goods` WHERE category_id = 4 and status = 2 
+[GIN] 2023/03/19 - 14:47:19 | 200 |     779.759µs |       127.0.0.1 | GET      "/app/goods/list?category_id=4"
+
+2023/03/19 14:47:19 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.674ms] [34;1m[rows:0][0m SELECT * FROM `t_goods` WHERE category_id = 5 and status = 2 
+[GIN] 2023/03/19 - 14:47:19 | 200 |     823.691µs |       127.0.0.1 | GET      "/app/goods/list?category_id=5"
+
+2023/03/19 14:47:20 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.704ms] [34;1m[rows:0][0m SELECT * FROM `t_goods` WHERE category_id = 6 and status = 2 
+[GIN] 2023/03/19 - 14:47:20 | 200 |     855.041µs |       127.0.0.1 | GET      "/app/goods/list?category_id=6"
+
+2023/03/19 14:47:20 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.706ms] [34;1m[rows:0][0m SELECT * FROM `t_goods` WHERE category_id = 5 and status = 2 
+[GIN] 2023/03/19 - 14:47:20 | 200 |     843.407µs |       127.0.0.1 | GET      "/app/goods/list?category_id=5"
+
+2023/03/19 14:47:20 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.669ms] [34;1m[rows:0][0m SELECT * FROM `t_goods` WHERE category_id = 5 and status = 2 
+[GIN] 2023/03/19 - 14:47:20 | 200 |      823.91µs |       127.0.0.1 | GET      "/app/goods/list?category_id=5"
+
+2023/03/19 14:47:21 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.865ms] [34;1m[rows:0][0m SELECT * FROM `t_goods` WHERE category_id = 4 and status = 2 
+[GIN] 2023/03/19 - 14:47:21 | 200 |    1.020481ms |       127.0.0.1 | GET      "/app/goods/list?category_id=4"
+
+2023/03/19 14:47:22 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.694ms] [34;1m[rows:0][0m SELECT * FROM `t_goods` WHERE category_id = 3 and status = 2 
+[GIN] 2023/03/19 - 14:47:22 | 200 |     821.954µs |       127.0.0.1 | GET      "/app/goods/list?category_id=3"
+
+2023/03/19 14:47:22 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[1.028ms] [34;1m[rows:2][0m SELECT * FROM `t_goods` WHERE category_id = 2 and status = 2 
+[GIN] 2023/03/19 - 14:47:22 | 200 |    1.229745ms |       127.0.0.1 | GET      "/app/goods/list?category_id=2"
+
+2023/03/19 14:47:23 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.773ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE category_id = 1 and status = 2 
+[GIN] 2023/03/19 - 14:47:23 | 200 |     905.155µs |       127.0.0.1 | GET      "/app/goods/list?category_id=1"
+
+2023/03/19 14:47:30 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.787ms] [34;1m[rows:2][0m SELECT * FROM `t_goods` WHERE category_id = 2 and status = 2 
+[GIN] 2023/03/19 - 14:47:30 | 200 |     948.377µs |       127.0.0.1 | GET      "/app/goods/list?category_id=2"
+
+2023/03/19 14:47:30 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.736ms] [34;1m[rows:0][0m SELECT * FROM `t_goods` WHERE category_id = 3 and status = 2 
+[GIN] 2023/03/19 - 14:47:30 | 200 |     879.612µs |       127.0.0.1 | GET      "/app/goods/list?category_id=3"
+
+2023/03/19 14:47:31 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.731ms] [34;1m[rows:0][0m SELECT * FROM `t_goods` WHERE category_id = 4 and status = 2 
+[GIN] 2023/03/19 - 14:47:31 | 200 |     902.811µs |       127.0.0.1 | GET      "/app/goods/list?category_id=4"
+
+2023/03/19 14:47:31 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.670ms] [34;1m[rows:0][0m SELECT * FROM `t_goods` WHERE category_id = 6 and status = 2 
+[GIN] 2023/03/19 - 14:47:31 | 200 |      806.36µs |       127.0.0.1 | GET      "/app/goods/list?category_id=6"
+
+2023/03/19 14:47:32 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.674ms] [34;1m[rows:0][0m SELECT * FROM `t_goods` WHERE category_id = 4 and status = 2 
+[GIN] 2023/03/19 - 14:47:32 | 200 |     824.367µs |       127.0.0.1 | GET      "/app/goods/list?category_id=4"
+
+2023/03/19 14:47:33 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.717ms] [34;1m[rows:0][0m SELECT * FROM `t_goods` WHERE category_id = 3 and status = 2 
+[GIN] 2023/03/19 - 14:47:33 | 200 |     856.297µs |       127.0.0.1 | GET      "/app/goods/list?category_id=3"
+
+2023/03/19 14:47:33 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.829ms] [34;1m[rows:2][0m SELECT * FROM `t_goods` WHERE category_id = 2 and status = 2 
+[GIN] 2023/03/19 - 14:47:33 | 200 |     985.927µs |       127.0.0.1 | GET      "/app/goods/list?category_id=2"
+
+2023/03/19 14:47:34 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.819ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE category_id = 1 and status = 2 
+[GIN] 2023/03/19 - 14:47:34 | 200 |      947.42µs |       127.0.0.1 | GET      "/app/goods/list?category_id=1"
+[GIN] 2023/03/19 - 14:47:55 | 200 |     685.868µs |       127.0.0.1 | GET      "/app/category/option?level=1&pid=0"
+[GIN] 2023/03/19 - 14:47:55 | 200 |     157.734µs |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO4yOzLbxxDAMvUzE64ZPJ8H4"
+
+2023/03/19 14:47:55 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.651ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE category_id = 1 and status = 2 
+[GIN] 2023/03/19 - 14:47:55 | 200 |     743.831µs |       127.0.0.1 | GET      "/app/goods/list?category_id=1"
+[GIN] 2023/03/19 - 14:47:59 | 200 |      235.71µs |       127.0.0.1 | GET      "/app/category/option?level=1&pid=0"
+[GIN] 2023/03/19 - 14:47:59 | 200 |     130.013µs |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO4yOzLbxxDAMvUzE64ZPJ8H4"
+
+2023/03/19 14:47:59 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.757ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE category_id = 1 and status = 2 
+[GIN] 2023/03/19 - 14:47:59 | 200 |     857.721µs |       127.0.0.1 | GET      "/app/goods/list?category_id=1"
+param: {owvNO4yOzLbxxDAMvUzE64ZPJ8H4 1 0 0}
+
+2023/03/19 14:49:48 [32m/data/nocake/server/service/order.go:178
+[0m[33m[2.162ms] [34;1m[rows:0][0m SELECT * FROM `t_order` WHERE open_id = 'owvNO4yOzLbxxDAMvUzE64ZPJ8H4' and status = 1 
+[GIN] 2023/03/19 - 14:49:48 | 200 |    2.306015ms |       127.0.0.1 | GET      "/app/order/list?status=1&open_id=owvNO4yOzLbxxDAMvUzE64ZPJ8H4"
+param: {owvNO4yOzLbxxDAMvUzE64ZPJ8H4 1 0 0}
+
+2023/03/19 14:49:49 [32m/data/nocake/server/service/order.go:178
+[0m[33m[0.584ms] [34;1m[rows:0][0m SELECT * FROM `t_order` WHERE open_id = 'owvNO4yOzLbxxDAMvUzE64ZPJ8H4' and status = 1 
+[GIN] 2023/03/19 - 14:49:49 | 200 |     762.168µs |       127.0.0.1 | GET      "/app/order/list?status=1&open_id=owvNO4yOzLbxxDAMvUzE64ZPJ8H4"
+param: {owvNO4yOzLbxxDAMvUzE64ZPJ8H4 0 0 0}
+
+2023/03/19 14:49:49 [32m/data/nocake/server/service/order.go:178
+[0m[33m[0.870ms] [34;1m[rows:0][0m SELECT * FROM `t_order` WHERE open_id = 'owvNO4yOzLbxxDAMvUzE64ZPJ8H4' and status = 0 
+[GIN] 2023/03/19 - 14:49:49 | 200 |    1.066148ms |       127.0.0.1 | GET      "/app/order/list?status=0&open_id=owvNO4yOzLbxxDAMvUzE64ZPJ8H4"
+param: {owvNO4yOzLbxxDAMvUzE64ZPJ8H4 1 0 0}
+
+2023/03/19 14:49:50 [32m/data/nocake/server/service/order.go:178
+[0m[33m[0.661ms] [34;1m[rows:0][0m SELECT * FROM `t_order` WHERE open_id = 'owvNO4yOzLbxxDAMvUzE64ZPJ8H4' and status = 1 
+[GIN] 2023/03/19 - 14:49:50 | 200 |     825.937µs |       127.0.0.1 | GET      "/app/order/list?status=1&open_id=owvNO4yOzLbxxDAMvUzE64ZPJ8H4"
+param: {owvNO4yOzLbxxDAMvUzE64ZPJ8H4 0 0 0}
+
+2023/03/19 14:49:51 [32m/data/nocake/server/service/order.go:178
+[0m[33m[0.635ms] [34;1m[rows:0][0m SELECT * FROM `t_order` WHERE open_id = 'owvNO4yOzLbxxDAMvUzE64ZPJ8H4' and status = 0 
+[GIN] 2023/03/19 - 14:49:51 | 200 |     769.676µs |       127.0.0.1 | GET      "/app/order/list?status=0&open_id=owvNO4yOzLbxxDAMvUzE64ZPJ8H4"
+[GIN] 2023/03/19 - 14:49:53 | 200 |     259.559µs |       127.0.0.1 | GET      "/app/category/option?level=1&pid=0"
+[GIN] 2023/03/19 - 14:49:53 | 200 |      167.95µs |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO4yOzLbxxDAMvUzE64ZPJ8H4"
+
+2023/03/19 14:49:53 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.758ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE category_id = 1 and status = 2 
+[GIN] 2023/03/19 - 14:49:53 | 200 |     876.294µs |       127.0.0.1 | GET      "/app/goods/list?category_id=1"
+param: {owvNO4yOzLbxxDAMvUzE64ZPJ8H4 1 0 0}
+
+2023/03/19 14:49:54 [32m/data/nocake/server/service/order.go:178
+[0m[33m[0.614ms] [34;1m[rows:0][0m SELECT * FROM `t_order` WHERE open_id = 'owvNO4yOzLbxxDAMvUzE64ZPJ8H4' and status = 1 
+[GIN] 2023/03/19 - 14:49:54 | 200 |     757.003µs |       127.0.0.1 | GET      "/app/order/list?status=1&open_id=owvNO4yOzLbxxDAMvUzE64ZPJ8H4"
+[GIN] 2023/03/19 - 14:49:58 | 200 |     243.161µs |       127.0.0.1 | GET      "/app/category/option?level=1&pid=0"
+[GIN] 2023/03/19 - 14:49:58 | 200 |     135.025µs |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO4yOzLbxxDAMvUzE64ZPJ8H4"
+
+2023/03/19 14:49:58 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.712ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE category_id = 1 and status = 2 
+[GIN] 2023/03/19 - 14:49:58 | 200 |     823.517µs |       127.0.0.1 | GET      "/app/goods/list?category_id=1"
+param: {owvNO4yOzLbxxDAMvUzE64ZPJ8H4 1 0 0}
+
+2023/03/19 14:52:10 [32m/data/nocake/server/service/order.go:178
+[0m[33m[0.637ms] [34;1m[rows:0][0m SELECT * FROM `t_order` WHERE open_id = 'owvNO4yOzLbxxDAMvUzE64ZPJ8H4' and status = 1 
+[GIN] 2023/03/19 - 14:52:10 | 200 |     792.469µs |       127.0.0.1 | GET      "/app/order/list?status=1&open_id=owvNO4yOzLbxxDAMvUzE64ZPJ8H4"
+param: {owvNO4yOzLbxxDAMvUzE64ZPJ8H4 1 0 0}
+
+2023/03/19 14:52:11 [32m/data/nocake/server/service/order.go:178
+[0m[33m[0.728ms] [34;1m[rows:0][0m SELECT * FROM `t_order` WHERE open_id = 'owvNO4yOzLbxxDAMvUzE64ZPJ8H4' and status = 1 
+[GIN] 2023/03/19 - 14:52:11 | 200 |     895.818µs |       127.0.0.1 | GET      "/app/order/list?status=1&open_id=owvNO4yOzLbxxDAMvUzE64ZPJ8H4"
+[GIN] 2023/03/19 - 14:52:12 | 200 |     220.909µs |       127.0.0.1 | GET      "/app/category/option?level=1&pid=0"
+[GIN] 2023/03/19 - 14:52:12 | 200 |     176.312µs |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO4yOzLbxxDAMvUzE64ZPJ8H4"
+
+2023/03/19 14:52:12 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.833ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE category_id = 1 and status = 2 
+[GIN] 2023/03/19 - 14:52:12 | 200 |     960.834µs |       127.0.0.1 | GET      "/app/goods/list?category_id=1"
+param: {owvNO4yOzLbxxDAMvUzE64ZPJ8H4 1 0 0}
+
+2023/03/19 14:52:12 [32m/data/nocake/server/service/order.go:178
+[0m[33m[0.610ms] [34;1m[rows:0][0m SELECT * FROM `t_order` WHERE open_id = 'owvNO4yOzLbxxDAMvUzE64ZPJ8H4' and status = 1 
+[GIN] 2023/03/19 - 14:52:12 | 200 |     746.387µs |       127.0.0.1 | GET      "/app/order/list?status=1&open_id=owvNO4yOzLbxxDAMvUzE64ZPJ8H4"
+param: {owvNO4yOzLbxxDAMvUzE64ZPJ8H4 1 0 0}
+
+2023/03/19 14:52:13 [32m/data/nocake/server/service/order.go:178
+[0m[33m[0.642ms] [34;1m[rows:0][0m SELECT * FROM `t_order` WHERE open_id = 'owvNO4yOzLbxxDAMvUzE64ZPJ8H4' and status = 1 
+[GIN] 2023/03/19 - 14:52:13 | 200 |     803.218µs |       127.0.0.1 | GET      "/app/order/list?status=1&open_id=owvNO4yOzLbxxDAMvUzE64ZPJ8H4"
+[GIN] 2023/03/19 - 14:52:14 | 200 |      238.28µs |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO4yOzLbxxDAMvUzE64ZPJ8H4"
+[GIN] 2023/03/19 - 14:52:14 | 200 |     161.237µs |       127.0.0.1 | GET      "/app/category/option?level=1&pid=0"
+
+2023/03/19 14:52:14 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.772ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE category_id = 1 and status = 2 
+[GIN] 2023/03/19 - 14:52:14 | 200 |     895.049µs |       127.0.0.1 | GET      "/app/goods/list?category_id=1"
+
+2023/03/19 14:52:17 [32m/data/nocake/server/service/goods.go:118
+[0m[33m[0.515ms] [34;1m[rows:3][0m SELECT * FROM `t_goods` WHERE status = 2 
+[GIN] 2023/03/19 - 14:52:17 | 200 |     662.773µs |       127.0.0.1 | GET      "/app/goods/search?keywords="
+[GIN] 2023/03/19 - 14:52:23 | 200 |     204.003µs |       127.0.0.1 | GET      "/app/category/option?level=1&pid=0"
+[GIN] 2023/03/19 - 14:52:23 | 200 |     726.716µs |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO4yOzLbxxDAMvUzE64ZPJ8H4"
+
+2023/03/19 14:52:23 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.754ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE category_id = 1 and status = 2 
+[GIN] 2023/03/19 - 14:52:23 | 200 |     919.261µs |       127.0.0.1 | GET      "/app/goods/list?category_id=1"
+
+2023/03/19 14:52:25 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[1.209ms] [34;1m[rows:2][0m SELECT * FROM `t_goods` WHERE category_id = 2 and status = 2 
+[GIN] 2023/03/19 - 14:52:25 | 200 |    1.379794ms |       127.0.0.1 | GET      "/app/goods/list?category_id=2"
+
+2023/03/19 14:52:26 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.709ms] [34;1m[rows:0][0m SELECT * FROM `t_goods` WHERE category_id = 3 and status = 2 
+[GIN] 2023/03/19 - 14:52:26 | 200 |     843.871µs |       127.0.0.1 | GET      "/app/goods/list?category_id=3"
+
+2023/03/19 14:52:26 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.669ms] [34;1m[rows:0][0m SELECT * FROM `t_goods` WHERE category_id = 4 and status = 2 
+[GIN] 2023/03/19 - 14:52:26 | 200 |     800.931µs |       127.0.0.1 | GET      "/app/goods/list?category_id=4"
+
+2023/03/19 14:52:27 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.826ms] [34;1m[rows:0][0m SELECT * FROM `t_goods` WHERE category_id = 3 and status = 2 
+[GIN] 2023/03/19 - 14:52:27 | 200 |     973.001µs |       127.0.0.1 | GET      "/app/goods/list?category_id=3"
+
+2023/03/19 14:52:28 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.686ms] [34;1m[rows:2][0m SELECT * FROM `t_goods` WHERE category_id = 2 and status = 2 
+[GIN] 2023/03/19 - 14:52:28 | 200 |     816.177µs |       127.0.0.1 | GET      "/app/goods/list?category_id=2"
+
+2023/03/19 14:52:29 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.658ms] [34;1m[rows:0][0m SELECT * FROM `t_goods` WHERE category_id = 4 and status = 2 
+[GIN] 2023/03/19 - 14:52:29 | 200 |     808.376µs |       127.0.0.1 | GET      "/app/goods/list?category_id=4"
+
+2023/03/19 14:52:29 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.652ms] [34;1m[rows:0][0m SELECT * FROM `t_goods` WHERE category_id = 5 and status = 2 
+[GIN] 2023/03/19 - 14:52:29 | 200 |     778.425µs |       127.0.0.1 | GET      "/app/goods/list?category_id=5"
+
+2023/03/19 14:52:30 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.642ms] [34;1m[rows:0][0m SELECT * FROM `t_goods` WHERE category_id = 6 and status = 2 
+[GIN] 2023/03/19 - 14:52:30 | 200 |     776.526µs |       127.0.0.1 | GET      "/app/goods/list?category_id=6"
+
+2023/03/19 14:52:30 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.676ms] [34;1m[rows:0][0m SELECT * FROM `t_goods` WHERE category_id = 5 and status = 2 
+[GIN] 2023/03/19 - 14:52:30 | 200 |     807.129µs |       127.0.0.1 | GET      "/app/goods/list?category_id=5"
+
+2023/03/19 14:52:31 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.652ms] [34;1m[rows:0][0m SELECT * FROM `t_goods` WHERE category_id = 4 and status = 2 
+[GIN] 2023/03/19 - 14:52:31 | 200 |     793.234µs |       127.0.0.1 | GET      "/app/goods/list?category_id=4"
+
+2023/03/19 14:52:31 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.623ms] [34;1m[rows:0][0m SELECT * FROM `t_goods` WHERE category_id = 3 and status = 2 
+[GIN] 2023/03/19 - 14:52:31 | 200 |     752.564µs |       127.0.0.1 | GET      "/app/goods/list?category_id=3"
+
+2023/03/19 14:52:32 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.754ms] [34;1m[rows:2][0m SELECT * FROM `t_goods` WHERE category_id = 2 and status = 2 
+[GIN] 2023/03/19 - 14:52:32 | 200 |     897.288µs |       127.0.0.1 | GET      "/app/goods/list?category_id=2"
+
+2023/03/19 14:52:33 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.752ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE category_id = 1 and status = 2 
+[GIN] 2023/03/19 - 14:52:33 | 200 |     909.355µs |       127.0.0.1 | GET      "/app/goods/list?category_id=1"
+
+2023/03/19 14:52:33 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.756ms] [34;1m[rows:2][0m SELECT * FROM `t_goods` WHERE category_id = 2 and status = 2 
+[GIN] 2023/03/19 - 14:52:33 | 200 |     887.259µs |       127.0.0.1 | GET      "/app/goods/list?category_id=2"
+
+2023/03/19 14:52:34 [32m/data/nocake/server/service/goods.go:105
+[0m[33m[0.841ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE status = 2 AND `t_goods`.`id` = 2 ORDER BY `t_goods`.`id` LIMIT 1
+[GIN] 2023/03/19 - 14:52:34 | 200 |    1.013404ms |       127.0.0.1 | GET      "/app/goods/detail?goods_id=2"
+[GIN] 2023/03/19 - 14:52:34 | 200 |     238.117µs |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO4yOzLbxxDAMvUzE64ZPJ8H4"
+[GIN] 2023/03/19 - 14:52:35 | 200 |     240.949µs |       127.0.0.1 | GET      "/app/category/option?level=1&pid=0"
+[GIN] 2023/03/19 - 14:52:35 | 200 |     163.331µs |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO4yOzLbxxDAMvUzE64ZPJ8H4"
+
+2023/03/19 14:52:35 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.659ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE category_id = 1 and status = 2 
+[GIN] 2023/03/19 - 14:52:35 | 200 |     756.565µs |       127.0.0.1 | GET      "/app/goods/list?category_id=1"
+[GIN] 2023/03/19 - 15:03:47 | 200 |     133.126µs |       127.0.0.1 | GET      "/app/swagger/index.html"
+[GIN] 2023/03/19 - 15:03:47 | 200 |     210.143µs |       127.0.0.1 | GET      "/app/swagger/swagger-ui.css"
+[GIN] 2023/03/19 - 15:03:47 | 200 |     256.275µs |       127.0.0.1 | GET      "/app/swagger/swagger-ui-standalone-preset.js"
+[GIN] 2023/03/19 - 15:03:47 | 200 |     549.019µs |       127.0.0.1 | GET      "/app/swagger/swagger-ui-bundle.js"
+[GIN] 2023/03/19 - 15:03:50 | 200 |     308.815µs |       127.0.0.1 | GET      "/app/swagger/doc.json"
+
+2023/03/19 15:05:28 [32m/data/nocake/server/service/address.go:57
+[0m[33m[0.841ms] [34;1m[rows:0][0m SELECT * FROM `t_address` WHERE open_id = 'owvNO4yOzLbxxDAMvUzE64ZPJ8H4' and deleted != 1 ORDER BY is_default desc
+[GIN] 2023/03/19 - 15:05:28 | 200 |     1.02424ms |       127.0.0.1 | GET      "/app/address/list?open_id=owvNO4yOzLbxxDAMvUzE64ZPJ8H4"
+[GIN] 2023/03/19 - 15:09:50 | 200 |     746.802µs |       127.0.0.1 | GET      "/app/category/option?level=1&pid=0"
+[GIN] 2023/03/19 - 15:09:50 | 200 |     593.743µs |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO4yOzLbxxDAMvUzE64ZPJ8H4"
+
+2023/03/19 15:09:50 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.659ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE category_id = 1 and status = 2 
+[GIN] 2023/03/19 - 15:09:50 | 200 |     766.169µs |       127.0.0.1 | GET      "/app/goods/list?category_id=1"
+param: {owvNO4yOzLbxxDAMvUzE64ZPJ8H4 1 0 0}
+
+2023/03/19 15:09:51 [32m/data/nocake/server/service/order.go:178
+[0m[33m[0.665ms] [34;1m[rows:0][0m SELECT * FROM `t_order` WHERE open_id = 'owvNO4yOzLbxxDAMvUzE64ZPJ8H4' and status = 1 
+[GIN] 2023/03/19 - 15:09:51 | 200 |     828.604µs |       127.0.0.1 | GET      "/app/order/list?status=1&open_id=owvNO4yOzLbxxDAMvUzE64ZPJ8H4"
+param: {owvNO4yOzLbxxDAMvUzE64ZPJ8H4 1 0 0}
+
+2023/03/19 15:09:53 [32m/data/nocake/server/service/order.go:178
+[0m[33m[0.665ms] [34;1m[rows:0][0m SELECT * FROM `t_order` WHERE open_id = 'owvNO4yOzLbxxDAMvUzE64ZPJ8H4' and status = 1 
+[GIN] 2023/03/19 - 15:09:53 | 200 |     880.509µs |       127.0.0.1 | GET      "/app/order/list?status=1&open_id=owvNO4yOzLbxxDAMvUzE64ZPJ8H4"
+[GIN] 2023/03/19 - 15:09:53 | 200 |     287.447µs |       127.0.0.1 | GET      "/app/category/option?level=1&pid=0"
+[GIN] 2023/03/19 - 15:09:53 | 200 |     153.053µs |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO4yOzLbxxDAMvUzE64ZPJ8H4"
+
+2023/03/19 15:09:53 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.917ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE category_id = 1 and status = 2 
+[GIN] 2023/03/19 - 15:09:53 | 200 |    1.055656ms |       127.0.0.1 | GET      "/app/goods/list?category_id=1"
+
+2023/03/19 15:09:55 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.915ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE category_id = 1 and status = 2 
+[GIN] 2023/03/19 - 15:09:55 | 200 |    1.150446ms |       127.0.0.1 | GET      "/app/goods/list?category_id=1"
+
+2023/03/19 15:09:56 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.780ms] [34;1m[rows:2][0m SELECT * FROM `t_goods` WHERE category_id = 2 and status = 2 
+[GIN] 2023/03/19 - 15:09:56 | 200 |     919.599µs |       127.0.0.1 | GET      "/app/goods/list?category_id=2"
+
+2023/03/19 15:09:56 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.631ms] [34;1m[rows:0][0m SELECT * FROM `t_goods` WHERE category_id = 3 and status = 2 
+[GIN] 2023/03/19 - 15:09:56 | 200 |     771.098µs |       127.0.0.1 | GET      "/app/goods/list?category_id=3"
+
+2023/03/19 15:09:57 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.742ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE category_id = 1 and status = 2 
+[GIN] 2023/03/19 - 15:09:57 | 200 |     868.119µs |       127.0.0.1 | GET      "/app/goods/list?category_id=1"
+
+2023/03/19 15:09:58 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.784ms] [34;1m[rows:2][0m SELECT * FROM `t_goods` WHERE category_id = 2 and status = 2 
+[GIN] 2023/03/19 - 15:09:58 | 200 |      916.21µs |       127.0.0.1 | GET      "/app/goods/list?category_id=2"
+
+2023/03/19 15:09:58 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.735ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE category_id = 1 and status = 2 
+[GIN] 2023/03/19 - 15:09:58 | 200 |     878.452µs |       127.0.0.1 | GET      "/app/goods/list?category_id=1"
+
+2023/03/19 15:09:59 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.899ms] [34;1m[rows:2][0m SELECT * FROM `t_goods` WHERE category_id = 2 and status = 2 
+[GIN] 2023/03/19 - 15:09:59 | 200 |    1.029028ms |       127.0.0.1 | GET      "/app/goods/list?category_id=2"
+
+2023/03/19 15:10:00 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.706ms] [34;1m[rows:0][0m SELECT * FROM `t_goods` WHERE category_id = 3 and status = 2 
+[GIN] 2023/03/19 - 15:10:00 | 200 |     840.852µs |       127.0.0.1 | GET      "/app/goods/list?category_id=3"
+
+2023/03/19 15:10:00 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.721ms] [34;1m[rows:0][0m SELECT * FROM `t_goods` WHERE category_id = 4 and status = 2 
+[GIN] 2023/03/19 - 15:10:00 | 200 |     843.209µs |       127.0.0.1 | GET      "/app/goods/list?category_id=4"
+
+2023/03/19 15:10:01 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.680ms] [34;1m[rows:0][0m SELECT * FROM `t_goods` WHERE category_id = 5 and status = 2 
+[GIN] 2023/03/19 - 15:10:01 | 200 |     808.041µs |       127.0.0.1 | GET      "/app/goods/list?category_id=5"
+
+2023/03/19 15:10:01 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.689ms] [34;1m[rows:0][0m SELECT * FROM `t_goods` WHERE category_id = 6 and status = 2 
+[GIN] 2023/03/19 - 15:10:01 | 200 |     836.679µs |       127.0.0.1 | GET      "/app/goods/list?category_id=6"
+
+2023/03/19 15:10:02 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.704ms] [34;1m[rows:0][0m SELECT * FROM `t_goods` WHERE category_id = 5 and status = 2 
+[GIN] 2023/03/19 - 15:10:02 | 200 |     877.348µs |       127.0.0.1 | GET      "/app/goods/list?category_id=5"
+
+2023/03/19 15:10:02 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.695ms] [34;1m[rows:0][0m SELECT * FROM `t_goods` WHERE category_id = 4 and status = 2 
+[GIN] 2023/03/19 - 15:10:02 | 200 |     825.312µs |       127.0.0.1 | GET      "/app/goods/list?category_id=4"
+
+2023/03/19 15:10:02 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.725ms] [34;1m[rows:0][0m SELECT * FROM `t_goods` WHERE category_id = 3 and status = 2 
+[GIN] 2023/03/19 - 15:10:02 | 200 |      857.71µs |       127.0.0.1 | GET      "/app/goods/list?category_id=3"
+
+2023/03/19 15:10:03 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.925ms] [34;1m[rows:2][0m SELECT * FROM `t_goods` WHERE category_id = 2 and status = 2 
+[GIN] 2023/03/19 - 15:10:03 | 200 |    1.099409ms |       127.0.0.1 | GET      "/app/goods/list?category_id=2"
+
+2023/03/19 15:10:04 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.792ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE category_id = 1 and status = 2 
+[GIN] 2023/03/19 - 15:10:04 | 200 |      926.71µs |       127.0.0.1 | GET      "/app/goods/list?category_id=1"
+
+2023/03/19 15:10:04 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.730ms] [34;1m[rows:2][0m SELECT * FROM `t_goods` WHERE category_id = 2 and status = 2 
+[GIN] 2023/03/19 - 15:10:04 | 200 |     858.508µs |       127.0.0.1 | GET      "/app/goods/list?category_id=2"
+
+2023/03/19 15:10:04 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.755ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE category_id = 1 and status = 2 
+[GIN] 2023/03/19 - 15:10:04 | 200 |     892.309µs |       127.0.0.1 | GET      "/app/goods/list?category_id=1"
+
+2023/03/19 15:10:05 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.750ms] [34;1m[rows:2][0m SELECT * FROM `t_goods` WHERE category_id = 2 and status = 2 
+[GIN] 2023/03/19 - 15:10:05 | 200 |     900.127µs |       127.0.0.1 | GET      "/app/goods/list?category_id=2"
+
+2023/03/19 15:10:06 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.739ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE category_id = 1 and status = 2 
+[GIN] 2023/03/19 - 15:10:06 | 200 |     937.415µs |       127.0.0.1 | GET      "/app/goods/list?category_id=1"
+param: {owvNO4yOzLbxxDAMvUzE64ZPJ8H4 1 0 0}
+
+2023/03/19 15:13:14 [32m/data/nocake/server/service/order.go:178
+[0m[33m[0.672ms] [34;1m[rows:0][0m SELECT * FROM `t_order` WHERE open_id = 'owvNO4yOzLbxxDAMvUzE64ZPJ8H4' and status = 1 
+[GIN] 2023/03/19 - 15:13:14 | 200 |     856.586µs |       127.0.0.1 | GET      "/app/order/list?status=1&open_id=owvNO4yOzLbxxDAMvUzE64ZPJ8H4"
+[GIN] 2023/03/19 - 15:13:16 | 200 |     279.463µs |       127.0.0.1 | GET      "/app/category/option?level=1&pid=0"
+[GIN] 2023/03/19 - 15:13:16 | 200 |     195.088µs |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO4yOzLbxxDAMvUzE64ZPJ8H4"
+
+2023/03/19 15:13:16 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.786ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE category_id = 1 and status = 2 
+[GIN] 2023/03/19 - 15:13:16 | 200 |     883.312µs |       127.0.0.1 | GET      "/app/goods/list?category_id=1"
+param: {owvNO4yOzLbxxDAMvUzE64ZPJ8H4 1 0 0}
+
+2023/03/19 15:13:18 [32m/data/nocake/server/service/order.go:178
+[0m[33m[0.596ms] [34;1m[rows:0][0m SELECT * FROM `t_order` WHERE open_id = 'owvNO4yOzLbxxDAMvUzE64ZPJ8H4' and status = 1 
+[GIN] 2023/03/19 - 15:13:18 | 200 |      742.88µs |       127.0.0.1 | GET      "/app/order/list?status=1&open_id=owvNO4yOzLbxxDAMvUzE64ZPJ8H4"
+param: {owvNO4yOzLbxxDAMvUzE64ZPJ8H4 1 0 0}
+
+2023/03/19 15:13:19 [32m/data/nocake/server/service/order.go:178
+[0m[33m[0.675ms] [34;1m[rows:0][0m SELECT * FROM `t_order` WHERE open_id = 'owvNO4yOzLbxxDAMvUzE64ZPJ8H4' and status = 1 
+[GIN] 2023/03/19 - 15:13:19 | 200 |     819.811µs |       127.0.0.1 | GET      "/app/order/list?status=1&open_id=owvNO4yOzLbxxDAMvUzE64ZPJ8H4"
+[GIN] 2023/03/19 - 15:13:19 | 200 |     255.572µs |       127.0.0.1 | GET      "/app/category/option?level=1&pid=0"
+[GIN] 2023/03/19 - 15:13:19 | 200 |     144.188µs |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO4yOzLbxxDAMvUzE64ZPJ8H4"
+
+2023/03/19 15:13:19 [32m/data/nocake/server/service/goods.go:93
+[0m[33m[0.635ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE category_id = 1 and status = 2 
+[GIN] 2023/03/19 - 15:13:19 | 200 |      753.08µs |       127.0.0.1 | GET      "/app/goods/list?category_id=1"

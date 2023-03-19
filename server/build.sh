@@ -1,1 +1,1 @@
-swag init && go build && ./nocake
+swag init && go build

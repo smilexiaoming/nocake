@@ -460,7 +460,7 @@ const docTemplate = `{
         },
         "/app/cart/set": {
             "post": {
-                "description": "传入code进行鉴权",
+                "description": "options传参样例 ：{\"option\":{\"规格\":\"8寸\",\"口味\":\"奥利奥夹心\"},\"count\":\"1\"}",
                 "consumes": [
                     "multipart/form-data"
                 ],
@@ -485,7 +485,7 @@ const docTemplate = `{
                     },
                     {
                         "type": "integer",
-                        "description": "商品选项设置，json格式：{",
+                        "description": "商品选项",
                         "name": "options",
                         "in": "formData",
                         "required": true

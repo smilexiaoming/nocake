@@ -557,7 +557,7 @@ paths:
     post:
       consumes:
       - multipart/form-data
-      description: 传入code进行鉴权
+      description: options传参样例 ：{"option":{"规格":"8寸","口味":"奥利奥夹心"},"count":"1"}
       parameters:
       - description: open_id
         in: formData
@@ -569,7 +569,7 @@ paths:
         name: goods_id
         required: true
         type: integer
-      - description: 商品选项设置，json格式：{
+      - description: 商品选项
         in: formData
         name: options
         required: true
