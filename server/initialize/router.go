@@ -103,19 +103,19 @@ func Router() {
 		app.GET("/goods/hot", api.GetAppGoods().GetGoodsHot)
 
 		// 购物车
-		app.POST("/cart/set", api.GetAppCart().SetCart)
+		app.PUT("/cart/set", api.GetAppCart().SetCart)
 		app.DELETE("/cart/delete", api.GetAppCart().DeleteCart)
 		app.DELETE("/cart/clear", api.GetAppCart().ClearCart)
 		app.GET("/cart/query", api.GetAppCart().GetCartInfo)
 
 		// 订单
 		app.POST("/order/submit", api.GetAppOrder().SubmitOrder)
-		app.POST("/order/update", api.GetAppOrder().UpdateOrder)
+		app.PUT("/order/update", api.GetAppOrder().UpdateOrder)
 		app.GET("/order/list", api.GetAppOrder().GetOrderList)
 
 		// 地址管理
 		app.POST("/address/submit", api.GetAppAddress().AddAddress)
-		app.POST("/address/update", api.GetAppAddress().UpdateAddress)
+		app.PUT("/address/update", api.GetAppAddress().UpdateAddress)
 		app.DELETE("/address/delete", api.GetAppAddress().DeleteAddress)
 		app.GET("/address/list", api.GetAppAddress().GetAddressList)
 		app.GET("/address/detail", api.GetAppAddress().GetAddressDetail)
