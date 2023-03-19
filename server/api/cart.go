@@ -27,7 +27,7 @@ func GetAppCart() *AppCart {
 // @Success 200 {object} response.Response "请求成功"
 // @Failure 400 {object} response.Response "请求错误"
 // @Failure 500 {object} response.Response "内部错误"
-// @Router /app/cart/set [post]
+// @Router /app/cart/set [put]
 func (a *AppCart) SetCart(c *gin.Context) {
 	param := app.CartSetParam{}
 	if err := c.ShouldBind(&param); err != nil {

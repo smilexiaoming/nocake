@@ -84,7 +84,7 @@ func (a *AppAddress) DeleteAddress(c *gin.Context) {
 // @Success 200 {object} response.Response "请求成功"
 // @Failure 400 {object} response.Response "请求错误"
 // @Failure 500 {object} response.Response "内部错误"
-// @Router /app/address/update [post]
+// @Router /app/address/update [put]
 func (a *AppAddress) UpdateAddress(c *gin.Context) {
 	param := app.AddressUpdateParam{}
 	if err := c.Bind(&param); err != nil {

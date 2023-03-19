@@ -108,7 +108,7 @@ func (o *AppOrder) SubmitOrder(c *gin.Context) {
 // @Success 200 {object} response.Response "请求成功"
 // @Failure 400 {object} response.Response "请求错误"
 // @Failure 500 {object} response.Response "内部错误"
-// @Router /app/order/update [post]
+// @Router /app/order/update [put]
 func (o *AppOrder) UpdateOrder(c *gin.Context) {
 	param := app.OrderUpdateParam{}
 	if err := c.ShouldBind(&param); err != nil {
