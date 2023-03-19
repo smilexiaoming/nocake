@@ -9,7 +9,6 @@ type Order struct {
 	OpenId        string    `gorm:"open_id" json:"open_id"`               // 用户表的用户ID
 	Options       string    `gorm:"goods_info" json:"goods_info"`         // 商品信息json
 	Status        int       `gorm:"status" json:"status"`                 // 订单状态 1已提交 2已完成 3撤销 4已接单不可撤销
-	SubStatus     int       `gorm:"sub_status" json:"sub_status"`         // 订单子状态 1已提交 2已完成 3撤销 4已接单不可撤销
 	Address       string    `gorm:"address" json:"address"`               // 收货具体地址
 	Message       string    `gorm:"message" json:"message"`               // 用户订单留言
 	GoodsPrice    float64   `gorm:"goods_price" json:"goods_price"`       // 商品总费用
