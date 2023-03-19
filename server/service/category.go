@@ -118,8 +118,9 @@ func (c *AppCategoryService) GetOption(param app.CategoryQueryParam) (option []a
 	Db.Debug().Where("level = ? and pid = ? and deleted = 1", param.Level, param.Pid).Find(&categorys)
 	for _, item := range categorys {
 		option := app.CategoryOption{
-			Id:   item.Id,
-			Text: item.Name,
+			Id:      item.Id,
+			Text:    item.Name,
+			IconUrl: item.IconUrl,
 		}
 		categoryOptions = append(categoryOptions, option)
 	}

@@ -7,6 +7,12 @@ Component({
       icon: '/assets/home-o.png',
       activeIcon: '/assets/home.png',
       navTo: "/pages/home/index",
+    },
+    { 
+      name: '分类',
+      icon: '/assets/home-o.png',
+      activeIcon: '/assets/home.png',
+      navTo: "/pages/category/index",
     },{ 
       name: '订单',
       icon: '/assets/order-o.png',

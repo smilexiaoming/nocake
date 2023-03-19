@@ -25,6 +25,7 @@ type CategoryQueryParam struct {
 
 // 商品类目选项传输模型
 type CategoryOption struct {
-	Id   int    `json:"id"`
-	Text string `json:"text"`
+	Id      int    `json:"id"`
+	Text    string `json:"text"`
+	IconUrl string `json:"icon_url"`
 }

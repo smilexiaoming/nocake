@@ -1,114 +1,108 @@
+// pages/home/index.js
 import http from '../../utils/http'
-
+const APP = getApp()
 Page({
 
-  // 页面的初始数据
-  data: {
-    bannerList: [],
-    options: [],
-    goodsList: [],
-    show: false,
-    goodsCount: 0,
-    goodsItem: [],
-    totalPrice: 0.00,
-    checkedGoods: ['25','28'],
-    totalGoodsCount: 0
-  },
+    /**
+     * 页面的初始数据
+     */
+    data: {
+        banner_list : {},
+        options :[],
+        goodsList : [],
+        hot_goods : [],
+    },
 
-  // 跳转到搜索页面
-  toSearch(){
-    wx.navigateTo({url: '/pages/search/index'})
-  },
+    // 获取banner列表
+    async getBanner(){
+        this.setData({
+            banner_list: ["../../images/微信图片_20220820161406.jpg", "../../images/微信图片_20220820161406.jpg", "../../images/微信图片_20220820161406.jpg"],
+        })
+    },
+    // 获取分类选项
+    async getCategoryOption() {
+        console.log("options !")
+        let res = await http.GET('/category/option',{
+            level: parseInt(wx.getStorageSync('level')),
+            pid: parseInt(wx.getStorageSync('pid'))
+        })
+        this.setData({options: res.data.data})
+    },
+    // 获取热门商品
+    async getHotGoods() {
+        console.log("hot goods !")
+        let res = await http.GET('/goods/hot')
+        this.setData({hot_goods: res.data.data})
+    },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad(options) {
-    this.getCategoryOption()
-    this.getCartInfo()
-    this.getBanners()
-  },
+    // 跳转到搜索页面
+    toSearch(){
+        wx.navigateTo({url: '/pages/search/index'})
+    },
+    // 查看商品详情
+    checkGoodsDetail(event){
+        wx.navigateTo({ url: '/pages/goods/index?id=' + event.currentTarget.id })
+    },
+    /**
+     * 生命周期函数--监听页面加载
+     */
+    onLoad: function (options) {
+        this.getBanner()
+        this.getCategoryOption()
+        this.getHotGoods()
+    },
 
-  // 获取Banner，人气商品
-  async getBanners(){
-    let res = await http.GET('/goods/hot')
-    this.setData({bannerList: res.data.data})
-  },
+    /**
+     * 生命周期函数--监听页面初次渲染完成
+     */
+    onReady: function () {
 
-  // 点击banner
-  onClickBanner(event){
-    console.log("========")
-    wx.navigateTo({ url: '/pages/goods/index?id=' + event.currentTarget.id})
-  },
-  
-  // 获取分类选项
-  async getCategoryOption() {
-    let res = await http.GET('/category/option',{
-      level: parseInt(wx.getStorageSync('level')),
-      pid: parseInt(wx.getStorageSync('pid'))
-    })
-    this.setData({options: res.data.data})
-    this.getGoodsList(res.data.data[0].id)
-  },
+    },
 
-  // 获取商品列表
-  async getGoodsList(categoryId) {
-    let res = await http.GET('/goods/list', {
-      category_id: categoryId,
-    })
-    this.setData({goodsList: res.data.data})
-    console.log(this.data.goodsList);
-  },
+    /**
+     * 生命周期函数--监听页面显示
+     */
+    onShow: function () {
+        this.setData({
+            navHeight: APP.globalData.navHeight,
+            navTop: APP.globalData.navTop,
+            windowHeight: APP.globalData.windowHeight,
+            menuButtonObject: APP.globalData.menuButtonObject //小程序胶囊信息
+        })
+    },
 
-  // 商品分类切换
-  changeOption(event){
-    let categoryId;
-    for (let i = 0; i < this.data.options.length; i++){
-      if (i === event.detail.index){ categoryId = this.data.options[i].id }
+    /**
+     * 生命周期函数--监听页面隐藏
+     */
+    onHide: function () {
+
+    },
+
+    /**
+     * 生命周期函数--监听页面卸载
+     */
+    onUnload: function () {
+
+    },
+
+    /**
+     * 页面相关事件处理函数--监听用户下拉动作
+     */
+    onPullDownRefresh: function () {
+
+    },
+
+    /**
+     * 页面上拉触底事件的处理函数
+     */
+    onReachBottom: function () {
+
+    },
+
+    /**
+     * 用户点击右上角分享
+     */
+    onShareAppMessage: function () {
+
     }
-    this.getGoodsList(categoryId)
-  },
-
-  // 查看商品详情
-  checkGoodsDetail(event){
-    wx.navigateTo({ url: '/pages/goods/index?id=' + event.currentTarget.id })
-  },
-
-  // 生命周期函数--监听页面显示
-  onShow() {
-    this.getTabBar().init()
-    this.getCategoryOption()
-    this.getCartInfo()
-  },
-
-  // 展示购物车弹出框
-  showCartPopup() {
-    if(this.data.show){
-      this.setData({ show: false });
-    } else {
-      this.getCartInfo()
-      this.setData({ show: true });
-    }
-  },
-  
-  // 获取购物车信息
-  async getCartInfo(){
-    let res = await http.GET('/cart/query', {open_id: wx.getStorageSync('open_id')})
-    this.setData({
-      goodsItem: res.data.data.cart_item,
-      totalPrice: res.data.data.total_price,
-      totalGoodsCount:res.data.data.total_cart,
-    })
-  },
-
-  // 清空购物车
-  async clearCart(){
-    await http.DELETE('/cart/clear?open_id='+wx.getStorageSync('open_id'))
-    this.setData({ show: false, totalGoodsCount: 0, totalPrice: 0 });
-  },
-
-  // 点击结算
-  settleAccounts(){
-    wx.navigateTo({url: '/pages/order/confirm/index'})
-  }
 })

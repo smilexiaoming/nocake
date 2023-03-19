@@ -12,7 +12,8 @@ Page({
     goodsItem: [],
     totalPrice: 0.00,
     checked: [],
-    totalGoodsCount: 0
+    totalGoodsCount: 0,
+    option_list : [],
   },
 
   // 生命周期函数--监听页面加载
@@ -21,6 +22,12 @@ Page({
     this.setData({ windowWidth: wx.getSystemInfoSync().windowWidth })
     let res = await http.GET('/goods/detail',{ goods_id: options.id });
     this.setData({ goods: res.data.data })
+    let option_list = JSON.parse(res.data.data.options)
+    console.log("obj ", option_list)
+    this.setData({
+      option_list:option_list
+    })
+    console.log(option_list)
   },
 
   // 返回首页
@@ -43,13 +50,45 @@ Page({
 
   // 添加商品到购物车
   async addToCart() {
-    await http.POST('/cart/set',{ 
+    await http.PUT('/cart/set',{ 
       goods_id: this.data.goodsId, 
-      cart_number: this.data.cart_number,
+      options: this.data.options,
       open_id: wx.getStorageSync('open_id')
     })
     this.onShow()
   },
+    /**
+     * 可选项
+     */
+    async additionSelect(e) {
+      const propertyindex = e.currentTarget.dataset.propertyindex
+      const propertychildindex = e.currentTarget.dataset.propertychildindex
+
+      const goodsAddition = this.data.goodsAddition
+      const property = goodsAddition[propertyindex]
+      const child = property.items[propertychildindex]
+      if (child.active) {
+        // 该操作为取消选择
+        child.active = false
+        this.setData({
+          goodsAddition
+        })
+        this.calculateGoodsPrice()
+        return
+      }
+      // 单选配件取消所有子栏目选中状态
+      if (property.type == 0) {
+        property.items.forEach(child => {
+          child.active = false
+        })
+      }
+      // 设置当前选中状态
+      child.active = true
+      this.setData({
+        goodsAddition
+      })
+      this.calculateGoodsPrice()
+    },
 
   // 展示购物车
   showCartPopup() {
@@ -70,10 +109,12 @@ Page({
       totalPrice: res.data.data.total_price,
       totalGoodsCount:res.data.data.total_cart,
     })
-    for (let i = 0; i < this.data.goodsItem.length; i++) {
-      if (String(this.data.goodsItem[i].id) == this.data.goodsId) {
-        console.log(this.data.goodsItem[i].cart_number);
-        this.setData({cart_number: this.data.goodsItem[i].cart_number})
+    if (this.data.goodsItem){
+      for (let i = 0; i < this.data.goodsItem.length; i++) {
+        if (String(this.data.goodsItem[i].id) == this.data.goodsId) {
+          console.log(this.data.goodsItem[i].cart_number);
+          this.setData({cart_number: this.data.goodsItem[i].cart_number})
+        }
       }
     }
   },

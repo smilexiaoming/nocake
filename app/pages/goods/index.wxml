@@ -27,9 +27,9 @@
   <view class="footer">
     <view class="cart_card">
       <View class="cart_icon" bindtap="showCartPopup">
-        <image wx:if="{{totalGoodsCount == 0}}" src="/assets/cart-o.png" style="width: 90rpx;height: 90rpx;" />
+        <image wx:if="{{totalGoodsCount == 0}}" src="/assets/cart_null.png" style="width: 90rpx;height: 90rpx;" />
     <view wx:else>
-      <image src="/assets/cart.png" style="width: 90rpx;height: 90rpx;" />
+      <image src="/assets/cart_full.png" style="width: 90rpx;height: 90rpx;" />
       <view class="cart_icon_info">{{totalGoodsCount}}</view>
     </view>
       </View>
