@@ -93,7 +93,7 @@ func (g *WebGoods) GetGoodsList(c *gin.Context) {
 // @Summary 获取热门商品列表
 // @Description
 // @Accept  multipart/form-data
-// @Success 200 {arrary} app.GoodsList "请求成功"
+// @Success 200 {array} app.GoodsList "请求成功"
 // @Failure 400 {object} response.Response "请求错误"
 // @Failure 500 {object} response.Response "内部错误"
 // @Router /app/goods/hot [get]

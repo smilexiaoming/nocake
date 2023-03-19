@@ -23,7 +23,7 @@ func GetAppCart() *AppCart {
 // @Produce  json
 // @Param open_id formData string true "open_id"
 // @Param goods_id formData int true "商品id"
-// @Param options formData int true "商品选项"
+// @Param options formData string true "商品选项"
 // @Success 200 {object} response.Response "请求成功"
 // @Failure 400 {object} response.Response "请求错误"
 // @Failure 500 {object} response.Response "内部错误"
