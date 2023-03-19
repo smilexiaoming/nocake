@@ -14,7 +14,7 @@
   </View> -->
   <van-tree-select items="{{ options }}" id="{{ items.id }}" active-id="{{ activeId }}" bind:click-nav="changeOption">
     <view slot="content">
-      <view class="goods-card" wx:for="{{goodsList}}" wx:key="id" id="{{item.id}}"  bindtap="checkGoodsDetail">
+      <view class="goods-card" wx:for="{{goodsList}}" wx:key="id" id="{{item.id}}" bindtap="checkGoodsDetail">
         <image src="{{item.pic_url}}" class="goods-card-image"/>
         <View style="display: flex;padding: 0 10rpx;flex-direction: column;flex: 1.4;">
           <View class="goods-card-title">{{item.name}}</View>

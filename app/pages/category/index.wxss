@@ -96,12 +96,12 @@ page {
   line-height: 30rpx;
 }
 .goods_card_data{
-  flex: 1;
   display: inline-flex;
   justify-items: center;
   align-items: center;
   padding-right: 8rpx;
   justify-content: space-between;
+  margin: auto;
 }
 .goods-card-price{
   color: #fa381a;
