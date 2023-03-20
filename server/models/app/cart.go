@@ -45,3 +45,18 @@ type CartInfo struct {
 	TotalCart  int        `json:"total_cart"`
 	TotalPrice float64    `json:"total_price"`
 }
+
+type OptionItem struct {
+	Name   string
+	Price  int
+	Active bool
+}
+type Option struct {
+	Name string       `json:"name"`
+	Item []OptionItem `json:"item"`
+	Type int          `json:"type"`
+}
+type Options struct {
+	Option []Option `json:"option"`
+	Count  int      `json:"count"`
+}

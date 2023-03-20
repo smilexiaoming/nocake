@@ -52,44 +52,45 @@ Page({
   async addToCart() {
     await http.PUT('/cart/set',{ 
       goods_id: this.data.goodsId, 
-      options: this.data.options,
+      options: JSON.stringify({"option":this.data.option_list,"count":this.data.cart_number}),
       open_id: wx.getStorageSync('open_id')
     })
     this.onShow()
   },
-    /**
-     * 可选项
+  
+  /**
+     * 选择可选配件
      */
     async additionSelect(e) {
       const propertyindex = e.currentTarget.dataset.propertyindex
       const propertychildindex = e.currentTarget.dataset.propertychildindex
 
-      const goodsAddition = this.data.goodsAddition
+      const goodsAddition = this.data.option_list
       const property = goodsAddition[propertyindex]
-      const child = property.items[propertychildindex]
+      const child = property.item[propertychildindex]
       if (child.active) {
         // 该操作为取消选择
         child.active = false
         this.setData({
-          goodsAddition
+          option_list:goodsAddition
         })
-        this.calculateGoodsPrice()
+        this.addToCart()
         return
       }
       // 单选配件取消所有子栏目选中状态
       if (property.type == 0) {
-        property.items.forEach(child => {
+        property.item.forEach(child => {
           child.active = false
         })
       }
       // 设置当前选中状态
       child.active = true
       this.setData({
-        goodsAddition
+        option_list:goodsAddition
       })
-      this.calculateGoodsPrice()
+      console.log("goodsAddition  ", goodsAddition)
+      this.addToCart()
     },
-
   // 展示购物车
   showCartPopup() {
     if(this.data.show){
@@ -112,8 +113,8 @@ Page({
     if (this.data.goodsItem){
       for (let i = 0; i < this.data.goodsItem.length; i++) {
         if (String(this.data.goodsItem[i].id) == this.data.goodsId) {
-          console.log(this.data.goodsItem[i].cart_number);
-          this.setData({cart_number: this.data.goodsItem[i].cart_number})
+          let options = JSON.parse(this.data.goodsItem[i].options)
+          this.setData({cart_number: options.count})
         }
       }
     }

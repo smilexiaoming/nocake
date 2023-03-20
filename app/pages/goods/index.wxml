@@ -13,6 +13,14 @@
       </view>
     </View>
   </view>
+  <view class="sku-container">
+    <view class="sku" wx:for="{{ option_list }}" wx:key="id" wx:for-index="idx">
+      <view class="t">{{item.name}}</view>
+      <view class="items">
+        <text class="{{small.active? 'active' : ''}}" wx:for="{{item.item}}" wx:for-item="small" wx:key="id" data-propertyindex="{{idx}}" data-propertychildindex="{{index}}" bindtap="additionSelect">{{small.name}}</text>
+      </view>
+    </view>
+  </view>
   <view class="goods_detail">
     <view class="goods_detail_title">商品详情</view>
     <view class="goods_detail_view">
