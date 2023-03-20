@@ -35,7 +35,6 @@
 </view>
 <!-- 支付密码弹出框 -->
 <van-dialog
-  use-slot
   bind:confirm="confirmPay"
   title="请输入支付密码"
   show="{{ show }}"
