@@ -1189,3 +1189,581 @@ param: {owvNO4yOzLbxxDAMvUzE64ZPJ8H4 1 0 0}
 2023/03/19 15:13:19 [32m/data/nocake/server/service/goods.go:93
 [0m[33m[0.635ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE category_id = 1 and status = 2 
 [GIN] 2023/03/19 - 15:13:19 | 200 |      753.08µs |       127.0.0.1 | GET      "/app/goods/list?category_id=1"
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /image/*filepath          --> github.com/gin-gonic/gin.(*RouterGroup).createStaticHandler.func1 (4 handlers)
+[GIN-debug] HEAD   /image/*filepath          --> github.com/gin-gonic/gin.(*RouterGroup).createStaticHandler.func1 (4 handlers)
+[GIN-debug] GET    /app/swagger/*any         --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (4 handlers)
+[GIN-debug] GET    /web/captcha              --> nocake/api.(*WebUser).GetCaptcha-fm (4 handlers)
+[GIN-debug] POST   /web/login                --> nocake/api.(*WebUser).UserLogin-fm (4 handlers)
+[GIN-debug] POST   /web/upload               --> nocake/api.(*WebFileUpload).FileUpload-fm (5 handlers)
+[GIN-debug] POST   /web/goods/create         --> nocake/api.(*WebGoods).CreateGoods-fm (5 handlers)
+[GIN-debug] DELETE /web/goods/delete         --> nocake/api.(*WebGoods).DeleteGoods-fm (5 handlers)
+[GIN-debug] PUT    /web/goods/update         --> nocake/api.(*WebGoods).UpdateGoods-fm (5 handlers)
+[GIN-debug] PUT    /web/goods/status/update  --> nocake/api.(*WebGoods).UpdateGoodsStatus-fm (5 handlers)
+[GIN-debug] GET    /web/goods/list           --> nocake/api.(*WebGoods).GetGoodsList-fm (5 handlers)
+[GIN-debug] DELETE /web/order/delete         --> nocake/api.(*WebOrder).DeleteOrder-fm (5 handlers)
+[GIN-debug] PUT    /web/order/update         --> nocake/api.(*WebOrder).UpdateOrder-fm (5 handlers)
+[GIN-debug] GET    /web/order/list           --> nocake/api.(*WebOrder).GetOrderList-fm (5 handlers)
+[GIN-debug] GET    /web/order/detail         --> nocake/api.(*WebOrder).GetOrderDetail-fm (5 handlers)
+[GIN-debug] POST   /web/category/create      --> nocake/api.(*WebCategory).CreateCategory-fm (5 handlers)
+[GIN-debug] DELETE /web/category/delete      --> nocake/api.(*WebCategory).DeleteCategory-fm (5 handlers)
+[GIN-debug] PUT    /web/category/update      --> nocake/api.(*WebCategory).UpdateCategory-fm (5 handlers)
+[GIN-debug] GET    /web/category/list        --> nocake/api.(*WebCategory).GetCategoryList-fm (5 handlers)
+[GIN-debug] GET    /web/category/option      --> nocake/api.(*WebCategory).GetCategoryOption-fm (5 handlers)
+[GIN-debug] GET    /web/today/data           --> nocake/api.(*WebStatistics).GetTodayData-fm (5 handlers)
+[GIN-debug] GET    /web/order/data           --> nocake/api.(*WebStatistics).GetOrderData-fm (5 handlers)
+[GIN-debug] GET    /web/shop/data            --> nocake/api.(*WebStatistics).GetShopData-fm (5 handlers)
+[GIN-debug] POST   /app/login                --> nocake/api.(*AppUser).UserLogin-fm (4 handlers)
+[GIN-debug] GET    /app/category/option      --> nocake/api.(*AppCategory).GetCategoryOption-fm (4 handlers)
+[GIN-debug] GET    /app/goods/list           --> nocake/api.(*AppGoods).GetGoodList-fm (4 handlers)
+[GIN-debug] GET    /app/goods/detail         --> nocake/api.(*AppGoods).GetGoodsDetail-fm (4 handlers)
+[GIN-debug] GET    /app/goods/search         --> nocake/api.(*AppGoods).SearchGoods-fm (4 handlers)
+[GIN-debug] GET    /app/goods/hot            --> nocake/api.(*AppGoods).GetGoodsHot-fm (4 handlers)
+[GIN-debug] PUT    /app/cart/set             --> nocake/api.(*AppCart).SetCart-fm (4 handlers)
+[GIN-debug] DELETE /app/cart/delete          --> nocake/api.(*AppCart).DeleteCart-fm (4 handlers)
+[GIN-debug] DELETE /app/cart/clear           --> nocake/api.(*AppCart).ClearCart-fm (4 handlers)
+[GIN-debug] GET    /app/cart/query           --> nocake/api.(*AppCart).GetCartInfo-fm (4 handlers)
+[GIN-debug] POST   /app/order/submit         --> nocake/api.(*AppOrder).SubmitOrder-fm (4 handlers)
+[GIN-debug] PUT    /app/order/update         --> nocake/api.(*AppOrder).UpdateOrder-fm (4 handlers)
+[GIN-debug] GET    /app/order/list           --> nocake/api.(*AppOrder).GetOrderList-fm (4 handlers)
+[GIN-debug] POST   /app/address/submit       --> nocake/api.(*AppAddress).AddAddress-fm (4 handlers)
+[GIN-debug] PUT    /app/address/update       --> nocake/api.(*AppAddress).UpdateAddress-fm (4 handlers)
+[GIN-debug] DELETE /app/address/delete       --> nocake/api.(*AppAddress).DeleteAddress-fm (4 handlers)
+[GIN-debug] GET    /app/address/list         --> nocake/api.(*AppAddress).GetAddressList-fm (4 handlers)
+[GIN-debug] GET    /app/address/detail       --> nocake/api.(*AppAddress).GetAddressDetail-fm (4 handlers)
+[GIN-debug] Listening and serving HTTP on :8000
+[GIN] 2023/03/20 - 15:16:11 | 200 |    1.467138ms |       127.0.0.1 | GET      "/app/category/option?level=1&pid=0"
+
+2023/03/20 15:16:11 [32m/data/nocake-main/server/service/goods.go:99
+[0m[33m[1.534ms] [34;1m[rows:2][0m SELECT * FROM `t_goods` WHERE is_hot = 2 and status = 2
+[GIN] 2023/03/20 - 15:16:11 | 200 |    1.767895ms |       127.0.0.1 | GET      "/app/goods/hot"
+[GIN] 2023/03/20 - 15:16:11 | 200 |  356.902022ms |       127.0.0.1 | POST     "/app/login"
+
+2023/03/20 15:16:20 [32m/data/nocake-main/server/service/goods.go:105
+[0m[33m[0.872ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE status = 2 AND `t_goods`.`id` = 1 ORDER BY `t_goods`.`id` LIMIT 1
+[GIN] 2023/03/20 - 15:16:20 | 200 |    1.110715ms |       127.0.0.1 | GET      "/app/goods/detail?goods_id=1"
+infos: {"option":[{"name":"尺寸","item":[{"name":"8寸","price":10,"active":false},{"name":"16寸","price":20,"active":true}],"type":0},{"name":"口味","item":[{"name":"奥利奥","price":10,"active":true},{"name":"巧克力","price":10,"active":false}],"type":0}],"count":2}
+Options: {[{尺寸 [{8寸 10 false} {16寸 20 true}] 0} {口味 [{奥利奥 10 true} {巧克力 10 false}] 0}] 2}
+
+2023/03/20 15:16:20 [32m/data/nocake-main/server/service/cart.go:61
+[0m[33m[0.477ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE `t_goods`.`id` = '1'
+[GIN] 2023/03/20 - 15:16:20 | 200 |     850.087µs |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO46BJBnAfD977z7D-Vu3k7gU"
+[GIN] 2023/03/20 - 15:17:25 | 200 |     288.863µs |       127.0.0.1 | GET      "/app/category/option?level=1&pid=0"
+
+2023/03/20 15:17:25 [32m/data/nocake-main/server/service/goods.go:99
+[0m[33m[0.584ms] [34;1m[rows:2][0m SELECT * FROM `t_goods` WHERE is_hot = 2 and status = 2
+[GIN] 2023/03/20 - 15:17:25 | 200 |     669.492µs |       127.0.0.1 | GET      "/app/goods/hot"
+[GIN] 2023/03/20 - 15:17:25 | 200 |   344.81365ms |       127.0.0.1 | POST     "/app/login"
+infos: {"option":[{"name":"尺寸","item":[{"name":"8寸","price":10,"active":false},{"name":"16寸","price":20,"active":true}],"type":0},{"name":"口味","item":[{"name":"奥利奥","price":10,"active":true},{"name":"巧克力","price":10,"active":false}],"type":0}],"count":2}
+Options: {[{尺寸 [{8寸 10 false} {16寸 20 true}] 0} {口味 [{奥利奥 10 true} {巧克力 10 false}] 0}] 2}
+
+2023/03/20 15:17:33 [32m/data/nocake-main/server/service/goods.go:105
+[0m[33m[1.632ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE status = 2 AND `t_goods`.`id` = 1 ORDER BY `t_goods`.`id` LIMIT 1
+[GIN] 2023/03/20 - 15:17:33 | 200 |      1.7695ms |       127.0.0.1 | GET      "/app/goods/detail?goods_id=1"
+
+2023/03/20 15:17:33 [32m/data/nocake-main/server/service/cart.go:61
+[0m[33m[37.325ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE `t_goods`.`id` = '1'
+[GIN] 2023/03/20 - 15:17:33 | 200 |   37.886886ms |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO46BJBnAfD977z7D-Vu3k7gU"
+[GIN] 2023/03/20 - 15:17:39 | 200 |     641.913µs |       127.0.0.1 | GET      "/app/category/option?level=1&pid=0"
+infos: {"option":[{"name":"尺寸","item":[{"name":"8寸","price":10,"active":false},{"name":"16寸","price":20,"active":true}],"type":0},{"name":"口味","item":[{"name":"奥利奥","price":10,"active":true},{"name":"巧克力","price":10,"active":false}],"type":0}],"count":2}
+Options: {[{尺寸 [{8寸 10 false} {16寸 20 true}] 0} {口味 [{奥利奥 10 true} {巧克力 10 false}] 0}] 2}
+
+2023/03/20 15:17:39 [32m/data/nocake-main/server/service/cart.go:61
+[0m[33m[0.621ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE `t_goods`.`id` = '1'
+[GIN] 2023/03/20 - 15:17:39 | 200 |    1.558526ms |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO46BJBnAfD977z7D-Vu3k7gU"
+
+2023/03/20 15:17:39 [32m/data/nocake-main/server/service/goods.go:99
+[0m[33m[0.384ms] [34;1m[rows:2][0m SELECT * FROM `t_goods` WHERE is_hot = 2 and status = 2
+[GIN] 2023/03/20 - 15:17:39 | 200 |     465.622µs |       127.0.0.1 | GET      "/app/goods/hot"
+[GIN] 2023/03/20 - 15:17:39 | 200 |      126.68µs |       127.0.0.1 | GET      "/app/category/option?level=1&pid=0"
+infos: {"option":[{"name":"尺寸","item":[{"name":"8寸","price":10,"active":false},{"name":"16寸","price":20,"active":true}],"type":0},{"name":"口味","item":[{"name":"奥利奥","price":10,"active":true},{"name":"巧克力","price":10,"active":false}],"type":0}],"count":2}
+Options: {[{尺寸 [{8寸 10 false} {16寸 20 true}] 0} {口味 [{奥利奥 10 true} {巧克力 10 false}] 0}] 2}
+
+2023/03/20 15:17:39 [32m/data/nocake-main/server/service/cart.go:61
+[0m[33m[0.487ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE `t_goods`.`id` = '1'
+[GIN] 2023/03/20 - 15:17:39 | 200 |     696.832µs |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO46BJBnAfD977z7D-Vu3k7gU"
+
+2023/03/20 15:17:39 [32m/data/nocake-main/server/service/goods.go:93
+[0m[33m[2.390ms] [34;1m[rows:2][0m SELECT * FROM `t_goods` WHERE category_id = 1 and status = 2 
+[GIN] 2023/03/20 - 15:17:39 | 200 |    2.534834ms |       127.0.0.1 | GET      "/app/goods/list?category_id=1"
+
+2023/03/20 15:17:39 [32m/data/nocake-main/server/service/goods.go:93
+[0m[33m[0.585ms] [34;1m[rows:2][0m SELECT * FROM `t_goods` WHERE category_id = 1 and status = 2 
+[GIN] 2023/03/20 - 15:17:39 | 200 |     703.534µs |       127.0.0.1 | GET      "/app/goods/list?category_id=1"
+infos: {"option":[{"name":"尺寸","item":[{"name":"8寸","price":10,"active":false},{"name":"16寸","price":20,"active":true}],"type":0},{"name":"口味","item":[{"name":"奥利奥","price":10,"active":true},{"name":"巧克力","price":10,"active":false}],"type":0}],"count":2}
+Options: {[{尺寸 [{8寸 10 false} {16寸 20 true}] 0} {口味 [{奥利奥 10 true} {巧克力 10 false}] 0}] 2}
+
+2023/03/20 15:17:40 [32m/data/nocake-main/server/service/cart.go:61
+[0m[33m[43.040ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE `t_goods`.`id` = '1'
+[GIN] 2023/03/20 - 15:17:40 | 200 |    43.42883ms |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO46BJBnAfD977z7D-Vu3k7gU"
+[GIN] 2023/03/20 - 15:17:44 | 200 |     246.603µs |       127.0.0.1 | DELETE   "/app/cart/clear?open_id=owvNO46BJBnAfD977z7D-Vu3k7gU"
+[GIN] 2023/03/20 - 15:17:45 | 200 |     204.796µs |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO46BJBnAfD977z7D-Vu3k7gU"
+
+2023/03/20 15:17:45 [32m/data/nocake-main/server/service/goods.go:105
+[0m[33m[0.828ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE status = 2 AND `t_goods`.`id` = 1 ORDER BY `t_goods`.`id` LIMIT 1
+[GIN] 2023/03/20 - 15:17:45 | 200 |     963.226µs |       127.0.0.1 | GET      "/app/goods/detail?goods_id=1"
+[GIN] 2023/03/20 - 15:17:50 | 200 |     248.027µs |       127.0.0.1 | PUT      "/app/cart/set"
+infos: {"option":[{"name":"尺寸","item":[{"name":"8寸","price":10,"active":true},{"name":"16寸","price":20,"active":false}],"type":0},{"name":"口味","item":[{"name":"奥利奥","price":10},{"name":"巧克力","price":10}],"type":0}],"count":0}
+Options: {[{尺寸 [{8寸 10 true} {16寸 20 false}] 0} {口味 [{奥利奥 10 false} {巧克力 10 false}] 0}] 0}
+
+2023/03/20 15:17:50 [32m/data/nocake-main/server/service/cart.go:61
+[0m[33m[0.627ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE `t_goods`.`id` = '1'
+[GIN] 2023/03/20 - 15:17:50 | 200 |     932.956µs |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO46BJBnAfD977z7D-Vu3k7gU"
+[GIN] 2023/03/20 - 15:17:51 | 200 |     218.319µs |       127.0.0.1 | PUT      "/app/cart/set"
+infos: {"option":[{"name":"尺寸","item":[{"name":"8寸","price":10,"active":false},{"name":"16寸","price":20,"active":false}],"type":0},{"name":"口味","item":[{"name":"奥利奥","price":10},{"name":"巧克力","price":10}],"type":0}],"count":0}
+Options: {[{尺寸 [{8寸 10 false} {16寸 20 false}] 0} {口味 [{奥利奥 10 false} {巧克力 10 false}] 0}] 0}
+
+2023/03/20 15:17:51 [32m/data/nocake-main/server/service/cart.go:61
+[0m[33m[0.627ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE `t_goods`.`id` = '1'
+[GIN] 2023/03/20 - 15:17:51 | 200 |     938.957µs |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO46BJBnAfD977z7D-Vu3k7gU"
+[GIN] 2023/03/20 - 15:17:51 | 200 |     208.163µs |       127.0.0.1 | PUT      "/app/cart/set"
+infos: {"option":[{"name":"尺寸","item":[{"name":"8寸","price":10,"active":false},{"name":"16寸","price":20,"active":true}],"type":0},{"name":"口味","item":[{"name":"奥利奥","price":10},{"name":"巧克力","price":10}],"type":0}],"count":0}
+Options: {[{尺寸 [{8寸 10 false} {16寸 20 true}] 0} {口味 [{奥利奥 10 false} {巧克力 10 false}] 0}] 0}
+
+2023/03/20 15:17:51 [32m/data/nocake-main/server/service/cart.go:61
+[0m[33m[0.592ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE `t_goods`.`id` = '1'
+[GIN] 2023/03/20 - 15:17:51 | 200 |     920.661µs |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO46BJBnAfD977z7D-Vu3k7gU"
+[GIN] 2023/03/20 - 15:17:52 | 200 |     257.249µs |       127.0.0.1 | PUT      "/app/cart/set"
+infos: {"option":[{"name":"尺寸","item":[{"name":"8寸","price":10,"active":false},{"name":"16寸","price":20,"active":true}],"type":0},{"name":"口味","item":[{"name":"奥利奥","price":10,"active":true},{"name":"巧克力","price":10,"active":false}],"type":0}],"count":0}
+Options: {[{尺寸 [{8寸 10 false} {16寸 20 true}] 0} {口味 [{奥利奥 10 true} {巧克力 10 false}] 0}] 0}
+
+2023/03/20 15:17:52 [32m/data/nocake-main/server/service/cart.go:61
+[0m[33m[0.585ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE `t_goods`.`id` = '1'
+[GIN] 2023/03/20 - 15:17:52 | 200 |      889.71µs |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO46BJBnAfD977z7D-Vu3k7gU"
+[GIN] 2023/03/20 - 15:17:52 | 200 |     216.494µs |       127.0.0.1 | PUT      "/app/cart/set"
+infos: {"option":[{"name":"尺寸","item":[{"name":"8寸","price":10,"active":false},{"name":"16寸","price":20,"active":true}],"type":0},{"name":"口味","item":[{"name":"奥利奥","price":10,"active":true},{"name":"巧克力","price":10,"active":false}],"type":0}],"count":1}
+Options: {[{尺寸 [{8寸 10 false} {16寸 20 true}] 0} {口味 [{奥利奥 10 true} {巧克力 10 false}] 0}] 1}
+
+2023/03/20 15:17:52 [32m/data/nocake-main/server/service/cart.go:61
+[0m[33m[0.603ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE `t_goods`.`id` = '1'
+[GIN] 2023/03/20 - 15:17:52 | 200 |     929.567µs |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO46BJBnAfD977z7D-Vu3k7gU"
+[GIN] 2023/03/20 - 15:17:55 | 200 |     184.585µs |       127.0.0.1 | PUT      "/app/cart/set"
+infos: {"option":[{"name":"尺寸","item":[{"name":"8寸","price":10,"active":true},{"name":"16寸","price":20,"active":false}],"type":0},{"name":"口味","item":[{"name":"奥利奥","price":10,"active":true},{"name":"巧克力","price":10,"active":false}],"type":0}],"count":1}
+Options: {[{尺寸 [{8寸 10 true} {16寸 20 false}] 0} {口味 [{奥利奥 10 true} {巧克力 10 false}] 0}] 1}
+
+2023/03/20 15:17:55 [32m/data/nocake-main/server/service/cart.go:61
+[0m[33m[0.596ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE `t_goods`.`id` = '1'
+[GIN] 2023/03/20 - 15:17:55 | 200 |     932.561µs |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO46BJBnAfD977z7D-Vu3k7gU"
+[GIN] 2023/03/20 - 15:17:55 | 200 |     235.872µs |       127.0.0.1 | PUT      "/app/cart/set"
+infos: {"option":[{"name":"尺寸","item":[{"name":"8寸","price":10,"active":false},{"name":"16寸","price":20,"active":true}],"type":0},{"name":"口味","item":[{"name":"奥利奥","price":10,"active":true},{"name":"巧克力","price":10,"active":false}],"type":0}],"count":1}
+Options: {[{尺寸 [{8寸 10 false} {16寸 20 true}] 0} {口味 [{奥利奥 10 true} {巧克力 10 false}] 0}] 1}
+
+2023/03/20 15:17:55 [32m/data/nocake-main/server/service/cart.go:61
+[0m[33m[0.658ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE `t_goods`.`id` = '1'
+[GIN] 2023/03/20 - 15:17:55 | 200 |    1.018378ms |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO46BJBnAfD977z7D-Vu3k7gU"
+[GIN] 2023/03/20 - 15:17:56 | 200 |     207.418µs |       127.0.0.1 | PUT      "/app/cart/set"
+infos: {"option":[{"name":"尺寸","item":[{"name":"8寸","price":10,"active":false},{"name":"16寸","price":20,"active":true}],"type":0},{"name":"口味","item":[{"name":"奥利奥","price":10,"active":false},{"name":"巧克力","price":10,"active":true}],"type":0}],"count":1}
+Options: {[{尺寸 [{8寸 10 false} {16寸 20 true}] 0} {口味 [{奥利奥 10 false} {巧克力 10 true}] 0}] 1}
+
+2023/03/20 15:17:56 [32m/data/nocake-main/server/service/cart.go:61
+[0m[33m[0.577ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE `t_goods`.`id` = '1'
+[GIN] 2023/03/20 - 15:17:56 | 200 |     906.896µs |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO46BJBnAfD977z7D-Vu3k7gU"
+[GIN] 2023/03/20 - 15:17:57 | 200 |     234.301µs |       127.0.0.1 | PUT      "/app/cart/set"
+infos: {"option":[{"name":"尺寸","item":[{"name":"8寸","price":10,"active":false},{"name":"16寸","price":20,"active":true}],"type":0},{"name":"口味","item":[{"name":"奥利奥","price":10,"active":true},{"name":"巧克力","price":10,"active":false}],"type":0}],"count":1}
+Options: {[{尺寸 [{8寸 10 false} {16寸 20 true}] 0} {口味 [{奥利奥 10 true} {巧克力 10 false}] 0}] 1}
+
+2023/03/20 15:17:57 [32m/data/nocake-main/server/service/cart.go:61
+[0m[33m[0.625ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE `t_goods`.`id` = '1'
+[GIN] 2023/03/20 - 15:17:57 | 200 |     944.589µs |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO46BJBnAfD977z7D-Vu3k7gU"
+[GIN] 2023/03/20 - 15:17:57 | 200 |      202.61µs |       127.0.0.1 | PUT      "/app/cart/set"
+infos: {"option":[{"name":"尺寸","item":[{"name":"8寸","price":10,"active":false},{"name":"16寸","price":20,"active":true}],"type":0},{"name":"口味","item":[{"name":"奥利奥","price":10,"active":true},{"name":"巧克力","price":10,"active":false}],"type":0}],"count":2}
+Options: {[{尺寸 [{8寸 10 false} {16寸 20 true}] 0} {口味 [{奥利奥 10 true} {巧克力 10 false}] 0}] 2}
+
+2023/03/20 15:17:58 [32m/data/nocake-main/server/service/cart.go:61
+[0m[33m[0.627ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE `t_goods`.`id` = '1'
+[GIN] 2023/03/20 - 15:17:58 | 200 |     916.017µs |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO46BJBnAfD977z7D-Vu3k7gU"
+[GIN] 2023/03/20 - 15:17:58 | 200 |     215.685µs |       127.0.0.1 | PUT      "/app/cart/set"
+infos: {"option":[{"name":"尺寸","item":[{"name":"8寸","price":10,"active":false},{"name":"16寸","price":20,"active":true}],"type":0},{"name":"口味","item":[{"name":"奥利奥","price":10,"active":true},{"name":"巧克力","price":10,"active":false}],"type":0}],"count":3}
+Options: {[{尺寸 [{8寸 10 false} {16寸 20 true}] 0} {口味 [{奥利奥 10 true} {巧克力 10 false}] 0}] 3}
+
+2023/03/20 15:17:58 [32m/data/nocake-main/server/service/cart.go:61
+[0m[33m[0.615ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE `t_goods`.`id` = '1'
+[GIN] 2023/03/20 - 15:17:58 | 200 |     946.029µs |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO46BJBnAfD977z7D-Vu3k7gU"
+[GIN] 2023/03/20 - 15:17:59 | 200 |     187.678µs |       127.0.0.1 | PUT      "/app/cart/set"
+infos: {"option":[{"name":"尺寸","item":[{"name":"8寸","price":10,"active":false},{"name":"16寸","price":20,"active":true}],"type":0},{"name":"口味","item":[{"name":"奥利奥","price":10,"active":true},{"name":"巧克力","price":10,"active":false}],"type":0}],"count":4}
+Options: {[{尺寸 [{8寸 10 false} {16寸 20 true}] 0} {口味 [{奥利奥 10 true} {巧克力 10 false}] 0}] 4}
+
+2023/03/20 15:17:59 [32m/data/nocake-main/server/service/cart.go:61
+[0m[33m[0.623ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE `t_goods`.`id` = '1'
+[GIN] 2023/03/20 - 15:17:59 | 200 |     899.104µs |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO46BJBnAfD977z7D-Vu3k7gU"
+[GIN] 2023/03/20 - 15:17:59 | 200 |     230.802µs |       127.0.0.1 | PUT      "/app/cart/set"
+infos: {"option":[{"name":"尺寸","item":[{"name":"8寸","price":10,"active":true},{"name":"16寸","price":20,"active":false}],"type":0},{"name":"口味","item":[{"name":"奥利奥","price":10,"active":true},{"name":"巧克力","price":10,"active":false}],"type":0}],"count":4}
+Options: {[{尺寸 [{8寸 10 true} {16寸 20 false}] 0} {口味 [{奥利奥 10 true} {巧克力 10 false}] 0}] 4}
+
+2023/03/20 15:17:59 [32m/data/nocake-main/server/service/cart.go:61
+[0m[33m[0.622ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE `t_goods`.`id` = '1'
+[GIN] 2023/03/20 - 15:17:59 | 200 |     934.406µs |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO46BJBnAfD977z7D-Vu3k7gU"
+[GIN] 2023/03/20 - 15:18:00 | 200 |     234.803µs |       127.0.0.1 | PUT      "/app/cart/set"
+infos: {"option":[{"name":"尺寸","item":[{"name":"8寸","price":10,"active":false},{"name":"16寸","price":20,"active":true}],"type":0},{"name":"口味","item":[{"name":"奥利奥","price":10,"active":true},{"name":"巧克力","price":10,"active":false}],"type":0}],"count":4}
+Options: {[{尺寸 [{8寸 10 false} {16寸 20 true}] 0} {口味 [{奥利奥 10 true} {巧克力 10 false}] 0}] 4}
+
+2023/03/20 15:18:00 [32m/data/nocake-main/server/service/cart.go:61
+[0m[33m[0.628ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE `t_goods`.`id` = '1'
+[GIN] 2023/03/20 - 15:18:00 | 200 |     962.669µs |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO46BJBnAfD977z7D-Vu3k7gU"
+infos: {"option":[{"name":"尺寸","item":[{"name":"8寸","price":10,"active":false},{"name":"16寸","price":20,"active":true}],"type":0},{"name":"口味","item":[{"name":"奥利奥","price":10,"active":true},{"name":"巧克力","price":10,"active":false}],"type":0}],"count":4}
+Options: {[{尺寸 [{8寸 10 false} {16寸 20 true}] 0} {口味 [{奥利奥 10 true} {巧克力 10 false}] 0}] 4}
+
+2023/03/20 15:18:02 [32m/data/nocake-main/server/service/address.go:57
+[0m[33m[1.337ms] [34;1m[rows:2][0m SELECT * FROM `t_address` WHERE open_id = 'owvNO46BJBnAfD977z7D-Vu3k7gU' and deleted != 1 ORDER BY is_default desc
+
+2023/03/20 15:18:02 [32m/data/nocake-main/server/service/cart.go:61
+[0m[33m[0.568ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE `t_goods`.`id` = '1'
+[GIN] 2023/03/20 - 15:18:02 | 200 |    1.592634ms |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO46BJBnAfD977z7D-Vu3k7gU"
+[GIN] 2023/03/20 - 15:18:02 | 200 |    1.559085ms |       127.0.0.1 | GET      "/app/address/list?open_id=owvNO46BJBnAfD977z7D-Vu3k7gU"
+
+2023/03/20 15:18:10 [32m/data/nocake-main/server/service/order.go:133
+[0m[33m[0.606ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE `t_goods`.`id` = '1'
+[GIN] 2023/03/20 - 15:18:11 | 200 |   65.049563ms |       127.0.0.1 | POST     "/app/order/submit"
+param: {owvNO46BJBnAfD977z7D-Vu3k7gU 1 0 0}
+
+2023/03/20 15:18:12 [32m/data/nocake-main/server/service/order.go:177
+[0m[33m[17.744ms] [34;1m[rows:0][0m SELECT * FROM `t_order` WHERE open_id = 'owvNO46BJBnAfD977z7D-Vu3k7gU' and status = 1 
+[GIN] 2023/03/20 - 15:18:12 | 200 |   17.933259ms |       127.0.0.1 | GET      "/app/order/list?status=1&open_id=owvNO46BJBnAfD977z7D-Vu3k7gU"
+param: {owvNO46BJBnAfD977z7D-Vu3k7gU 1 0 0}
+
+2023/03/20 15:18:14 [32m/data/nocake-main/server/service/order.go:177
+[0m[33m[0.672ms] [34;1m[rows:0][0m SELECT * FROM `t_order` WHERE open_id = 'owvNO46BJBnAfD977z7D-Vu3k7gU' and status = 1 
+[GIN] 2023/03/20 - 15:18:14 | 200 |     815.141µs |       127.0.0.1 | GET      "/app/order/list?status=1&open_id=owvNO46BJBnAfD977z7D-Vu3k7gU"
+param: {owvNO46BJBnAfD977z7D-Vu3k7gU 0 0 0}
+
+2023/03/20 15:18:15 [32m/data/nocake-main/server/service/order.go:177
+[0m[33m[0.733ms] [34;1m[rows:1][0m SELECT * FROM `t_order` WHERE open_id = 'owvNO46BJBnAfD977z7D-Vu3k7gU' and status = 0 
+info: map[count: option:]
+
+2023/03/20 15:18:15 [32m/data/nocake-main/server/service/order.go:209
+[0m[33m[0.575ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE `t_goods`.`id` = '1'
+[GIN] 2023/03/20 - 15:18:15 | 200 |    1.584305ms |       127.0.0.1 | GET      "/app/order/list?status=0&open_id=owvNO46BJBnAfD977z7D-Vu3k7gU"
+param: {owvNO46BJBnAfD977z7D-Vu3k7gU 1 0 0}
+
+2023/03/20 15:19:02 [32m/data/nocake-main/server/service/order.go:177
+[0m[33m[1.022ms] [34;1m[rows:0][0m SELECT * FROM `t_order` WHERE open_id = 'owvNO46BJBnAfD977z7D-Vu3k7gU' and status = 1 
+[GIN] 2023/03/20 - 15:19:02 | 200 |    1.226161ms |       127.0.0.1 | GET      "/app/order/list?status=1&open_id=owvNO46BJBnAfD977z7D-Vu3k7gU"
+param: {owvNO46BJBnAfD977z7D-Vu3k7gU 1 0 0}
+
+2023/03/20 17:26:04 [32m/data/nocake-main/server/service/order.go:177
+[0m[33m[13.797ms] [34;1m[rows:0][0m SELECT * FROM `t_order` WHERE open_id = 'owvNO46BJBnAfD977z7D-Vu3k7gU' and status = 1 
+[GIN] 2023/03/20 - 17:26:04 | 200 |    13.98007ms |       127.0.0.1 | GET      "/app/order/list?status=1&open_id=owvNO46BJBnAfD977z7D-Vu3k7gU"
+param: {owvNO46BJBnAfD977z7D-Vu3k7gU 1 0 0}
+
+2023/03/20 17:26:07 [32m/data/nocake-main/server/service/order.go:177
+[0m[33m[0.712ms] [34;1m[rows:0][0m SELECT * FROM `t_order` WHERE open_id = 'owvNO46BJBnAfD977z7D-Vu3k7gU' and status = 1 
+[GIN] 2023/03/20 - 17:26:07 | 200 |     889.198µs |       127.0.0.1 | GET      "/app/order/list?status=1&open_id=owvNO46BJBnAfD977z7D-Vu3k7gU"
+param: {owvNO46BJBnAfD977z7D-Vu3k7gU 1 0 0}
+
+2023/03/20 17:26:09 [32m/data/nocake-main/server/service/order.go:177
+[0m[33m[0.734ms] [34;1m[rows:0][0m SELECT * FROM `t_order` WHERE open_id = 'owvNO46BJBnAfD977z7D-Vu3k7gU' and status = 1 
+[GIN] 2023/03/20 - 17:26:09 | 200 |     879.049µs |       127.0.0.1 | GET      "/app/order/list?status=1&open_id=owvNO46BJBnAfD977z7D-Vu3k7gU"
+param: {owvNO46BJBnAfD977z7D-Vu3k7gU 0 0 0}
+
+2023/03/20 17:26:09 [32m/data/nocake-main/server/service/order.go:177
+[0m[33m[0.814ms] [34;1m[rows:1][0m SELECT * FROM `t_order` WHERE open_id = 'owvNO46BJBnAfD977z7D-Vu3k7gU' and status = 0 
+info: map[count: option:]
+
+2023/03/20 17:26:09 [32m/data/nocake-main/server/service/order.go:209
+[0m[33m[0.465ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE `t_goods`.`id` = '1'
+[GIN] 2023/03/20 - 17:26:09 | 200 |    1.528819ms |       127.0.0.1 | GET      "/app/order/list?status=0&open_id=owvNO46BJBnAfD977z7D-Vu3k7gU"
+
+2023/03/20 17:26:11 [32m/data/nocake-main/server/service/category.go:118
+[0m[33m[0.790ms] [34;1m[rows:2][0m SELECT * FROM `t_category` WHERE level = 1 and pid = 0 and deleted = 1
+[GIN] 2023/03/20 - 17:26:11 | 200 |    1.845336ms |       127.0.0.1 | GET      "/app/category/option?level=1&pid=0"
+[GIN] 2023/03/20 - 17:26:11 | 200 |     153.519µs |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO46BJBnAfD977z7D-Vu3k7gU"
+
+2023/03/20 17:26:11 [32m/data/nocake-main/server/service/goods.go:93
+[0m[33m[0.698ms] [34;1m[rows:2][0m SELECT * FROM `t_goods` WHERE category_id = 1 and status = 2 
+[GIN] 2023/03/20 - 17:26:11 | 200 |     834.701µs |       127.0.0.1 | GET      "/app/goods/list?category_id=1"
+param: {owvNO46BJBnAfD977z7D-Vu3k7gU 1 0 0}
+
+2023/03/20 17:26:12 [32m/data/nocake-main/server/service/order.go:177
+[0m[33m[0.631ms] [34;1m[rows:0][0m SELECT * FROM `t_order` WHERE open_id = 'owvNO46BJBnAfD977z7D-Vu3k7gU' and status = 1 
+[GIN] 2023/03/20 - 17:26:12 | 200 |     777.229µs |       127.0.0.1 | GET      "/app/order/list?status=1&open_id=owvNO46BJBnAfD977z7D-Vu3k7gU"
+[GIN] 2023/03/20 - 17:26:15 | 200 |     378.073µs |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO46BJBnAfD977z7D-Vu3k7gU"
+
+2023/03/20 17:26:15 [32m/data/nocake-main/server/service/goods.go:105
+[0m[33m[0.703ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE status = 2 AND `t_goods`.`id` = 1 ORDER BY `t_goods`.`id` LIMIT 1
+[GIN] 2023/03/20 - 17:26:15 | 200 |     846.752µs |       127.0.0.1 | GET      "/app/goods/detail?goods_id=1"
+[GIN] 2023/03/20 - 17:26:17 | 200 |     221.398µs |       127.0.0.1 | PUT      "/app/cart/set"
+infos: {"option":[{"name":"尺寸","item":[{"name":"8寸","price":10,"active":false},{"name":"16寸","price":20,"active":true}],"type":0},{"name":"口味","item":[{"name":"奥利奥","price":10},{"name":"巧克力","price":10}],"type":0}],"count":0}
+Options: {[{尺寸 [{8寸 10 false} {16寸 20 true}] 0} {口味 [{奥利奥 10 false} {巧克力 10 false}] 0}] 0}
+
+2023/03/20 17:26:17 [32m/data/nocake-main/server/service/cart.go:61
+[0m[33m[0.560ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE `t_goods`.`id` = '1'
+[GIN] 2023/03/20 - 17:26:17 | 200 |     909.492µs |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO46BJBnAfD977z7D-Vu3k7gU"
+[GIN] 2023/03/20 - 17:26:17 | 200 |     228.378µs |       127.0.0.1 | PUT      "/app/cart/set"
+infos: {"option":[{"name":"尺寸","item":[{"name":"8寸","price":10,"active":false},{"name":"16寸","price":20,"active":true}],"type":0},{"name":"口味","item":[{"name":"奥利奥","price":10,"active":false},{"name":"巧克力","price":10,"active":true}],"type":0}],"count":0}
+Options: {[{尺寸 [{8寸 10 false} {16寸 20 true}] 0} {口味 [{奥利奥 10 false} {巧克力 10 true}] 0}] 0}
+
+2023/03/20 17:26:17 [32m/data/nocake-main/server/service/cart.go:61
+[0m[33m[0.566ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE `t_goods`.`id` = '1'
+[GIN] 2023/03/20 - 17:26:17 | 200 |     878.325µs |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO46BJBnAfD977z7D-Vu3k7gU"
+[GIN] 2023/03/20 - 17:26:18 | 200 |     216.501µs |       127.0.0.1 | PUT      "/app/cart/set"
+infos: {"option":[{"name":"尺寸","item":[{"name":"8寸","price":10,"active":false},{"name":"16寸","price":20,"active":true}],"type":0},{"name":"口味","item":[{"name":"奥利奥","price":10,"active":false},{"name":"巧克力","price":10,"active":true}],"type":0}],"count":1}
+Options: {[{尺寸 [{8寸 10 false} {16寸 20 true}] 0} {口味 [{奥利奥 10 false} {巧克力 10 true}] 0}] 1}
+
+2023/03/20 17:26:18 [32m/data/nocake-main/server/service/cart.go:61
+[0m[33m[0.918ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE `t_goods`.`id` = '1'
+[GIN] 2023/03/20 - 17:26:18 | 200 |    1.307997ms |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO46BJBnAfD977z7D-Vu3k7gU"
+[GIN] 2023/03/20 - 17:26:19 | 200 |     235.956µs |       127.0.0.1 | PUT      "/app/cart/set"
+infos: {"option":[{"name":"尺寸","item":[{"name":"8寸","price":10,"active":false},{"name":"16寸","price":20,"active":true}],"type":0},{"name":"口味","item":[{"name":"奥利奥","price":10,"active":false},{"name":"巧克力","price":10,"active":true}],"type":0}],"count":2}
+Options: {[{尺寸 [{8寸 10 false} {16寸 20 true}] 0} {口味 [{奥利奥 10 false} {巧克力 10 true}] 0}] 2}
+
+2023/03/20 17:26:19 [32m/data/nocake-main/server/service/cart.go:61
+[0m[33m[0.581ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE `t_goods`.`id` = '1'
+[GIN] 2023/03/20 - 17:26:19 | 200 |     956.777µs |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO46BJBnAfD977z7D-Vu3k7gU"
+[GIN] 2023/03/20 - 17:26:32 | 200 |      244.48µs |       127.0.0.1 | PUT      "/app/cart/set"
+infos: {"option":[{"name":"尺寸","item":[{"name":"8寸","price":10,"active":false},{"name":"16寸","price":20,"active":true}],"type":0},{"name":"口味","item":[{"name":"奥利奥","price":10,"active":false},{"name":"巧克力","price":10,"active":true}],"type":0}],"count":1}
+Options: {[{尺寸 [{8寸 10 false} {16寸 20 true}] 0} {口味 [{奥利奥 10 false} {巧克力 10 true}] 0}] 1}
+
+2023/03/20 17:26:32 [32m/data/nocake-main/server/service/cart.go:61
+[0m[33m[0.677ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE `t_goods`.`id` = '1'
+[GIN] 2023/03/20 - 17:26:32 | 200 |    1.001831ms |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO46BJBnAfD977z7D-Vu3k7gU"
+[GIN] 2023/03/20 - 17:26:33 | 200 |     221.972µs |       127.0.0.1 | PUT      "/app/cart/set"
+infos: {"option":[{"name":"尺寸","item":[{"name":"8寸","price":10,"active":true},{"name":"16寸","price":20,"active":false}],"type":0},{"name":"口味","item":[{"name":"奥利奥","price":10,"active":false},{"name":"巧克力","price":10,"active":true}],"type":0}],"count":1}
+Options: {[{尺寸 [{8寸 10 true} {16寸 20 false}] 0} {口味 [{奥利奥 10 false} {巧克力 10 true}] 0}] 1}
+
+2023/03/20 17:26:33 [32m/data/nocake-main/server/service/cart.go:61
+[0m[33m[0.702ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE `t_goods`.`id` = '1'
+[GIN] 2023/03/20 - 17:26:33 | 200 |    1.033251ms |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO46BJBnAfD977z7D-Vu3k7gU"
+[GIN] 2023/03/20 - 17:26:34 | 200 |     355.021µs |       127.0.0.1 | PUT      "/app/cart/set"
+infos: {"option":[{"name":"尺寸","item":[{"name":"8寸","price":10,"active":true},{"name":"16寸","price":20,"active":false}],"type":0},{"name":"口味","item":[{"name":"奥利奥","price":10,"active":true},{"name":"巧克力","price":10,"active":false}],"type":0}],"count":1}
+Options: {[{尺寸 [{8寸 10 true} {16寸 20 false}] 0} {口味 [{奥利奥 10 true} {巧克力 10 false}] 0}] 1}
+
+2023/03/20 17:26:34 [32m/data/nocake-main/server/service/cart.go:61
+[0m[33m[0.597ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE `t_goods`.`id` = '1'
+[GIN] 2023/03/20 - 17:26:34 | 200 |     949.407µs |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO46BJBnAfD977z7D-Vu3k7gU"
+[GIN] 2023/03/20 - 17:26:36 | 200 |     263.239µs |       127.0.0.1 | PUT      "/app/cart/set"
+infos: {"option":[{"name":"尺寸","item":[{"name":"8寸","price":10,"active":false},{"name":"16寸","price":20,"active":true}],"type":0},{"name":"口味","item":[{"name":"奥利奥","price":10,"active":true},{"name":"巧克力","price":10,"active":false}],"type":0}],"count":1}
+Options: {[{尺寸 [{8寸 10 false} {16寸 20 true}] 0} {口味 [{奥利奥 10 true} {巧克力 10 false}] 0}] 1}
+
+2023/03/20 17:26:36 [32m/data/nocake-main/server/service/cart.go:61
+[0m[33m[0.660ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE `t_goods`.`id` = '1'
+[GIN] 2023/03/20 - 17:26:36 | 200 |     986.358µs |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO46BJBnAfD977z7D-Vu3k7gU"
+[GIN] 2023/03/20 - 17:26:36 | 200 |     286.666µs |       127.0.0.1 | PUT      "/app/cart/set"
+infos: {"option":[{"name":"尺寸","item":[{"name":"8寸","price":10,"active":false},{"name":"16寸","price":20,"active":true}],"type":0},{"name":"口味","item":[{"name":"奥利奥","price":10,"active":false},{"name":"巧克力","price":10,"active":true}],"type":0}],"count":1}
+Options: {[{尺寸 [{8寸 10 false} {16寸 20 true}] 0} {口味 [{奥利奥 10 false} {巧克力 10 true}] 0}] 1}
+
+2023/03/20 17:26:36 [32m/data/nocake-main/server/service/cart.go:61
+[0m[33m[0.616ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE `t_goods`.`id` = '1'
+[GIN] 2023/03/20 - 17:26:36 | 200 |     980.851µs |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO46BJBnAfD977z7D-Vu3k7gU"
+[GIN] 2023/03/20 - 17:26:37 | 200 |     254.395µs |       127.0.0.1 | PUT      "/app/cart/set"
+infos: {"option":[{"name":"尺寸","item":[{"name":"8寸","price":10,"active":true},{"name":"16寸","price":20,"active":false}],"type":0},{"name":"口味","item":[{"name":"奥利奥","price":10,"active":false},{"name":"巧克力","price":10,"active":true}],"type":0}],"count":1}
+Options: {[{尺寸 [{8寸 10 true} {16寸 20 false}] 0} {口味 [{奥利奥 10 false} {巧克力 10 true}] 0}] 1}
+
+2023/03/20 17:26:37 [32m/data/nocake-main/server/service/cart.go:61
+[0m[33m[0.570ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE `t_goods`.`id` = '1'
+[GIN] 2023/03/20 - 17:26:37 | 200 |     912.893µs |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO46BJBnAfD977z7D-Vu3k7gU"
+[GIN] 2023/03/20 - 17:26:38 | 200 |     226.195µs |       127.0.0.1 | PUT      "/app/cart/set"
+infos: {"option":[{"name":"尺寸","item":[{"name":"8寸","price":10,"active":false},{"name":"16寸","price":20,"active":true}],"type":0},{"name":"口味","item":[{"name":"奥利奥","price":10,"active":false},{"name":"巧克力","price":10,"active":true}],"type":0}],"count":1}
+Options: {[{尺寸 [{8寸 10 false} {16寸 20 true}] 0} {口味 [{奥利奥 10 false} {巧克力 10 true}] 0}] 1}
+
+2023/03/20 17:26:38 [32m/data/nocake-main/server/service/cart.go:61
+[0m[33m[0.631ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE `t_goods`.`id` = '1'
+[GIN] 2023/03/20 - 17:26:38 | 200 |     929.811µs |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO46BJBnAfD977z7D-Vu3k7gU"
+[GIN] 2023/03/20 - 17:26:38 | 200 |     198.941µs |       127.0.0.1 | PUT      "/app/cart/set"
+infos: {"option":[{"name":"尺寸","item":[{"name":"8寸","price":10,"active":false},{"name":"16寸","price":20,"active":true}],"type":0},{"name":"口味","item":[{"name":"奥利奥","price":10,"active":false},{"name":"巧克力","price":10,"active":true}],"type":0}],"count":2}
+Options: {[{尺寸 [{8寸 10 false} {16寸 20 true}] 0} {口味 [{奥利奥 10 false} {巧克力 10 true}] 0}] 2}
+
+2023/03/20 17:26:38 [32m/data/nocake-main/server/service/cart.go:61
+[0m[33m[0.785ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE `t_goods`.`id` = '1'
+[GIN] 2023/03/20 - 17:26:38 | 200 |    1.132539ms |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO46BJBnAfD977z7D-Vu3k7gU"
+[GIN] 2023/03/20 - 17:26:39 | 200 |     276.067µs |       127.0.0.1 | PUT      "/app/cart/set"
+infos: {"option":[{"name":"尺寸","item":[{"name":"8寸","price":10,"active":false},{"name":"16寸","price":20,"active":true}],"type":0},{"name":"口味","item":[{"name":"奥利奥","price":10,"active":false},{"name":"巧克力","price":10,"active":true}],"type":0}],"count":3}
+Options: {[{尺寸 [{8寸 10 false} {16寸 20 true}] 0} {口味 [{奥利奥 10 false} {巧克力 10 true}] 0}] 3}
+
+2023/03/20 17:26:39 [32m/data/nocake-main/server/service/cart.go:61
+[0m[33m[0.556ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE `t_goods`.`id` = '1'
+[GIN] 2023/03/20 - 17:26:39 | 200 |     858.843µs |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO46BJBnAfD977z7D-Vu3k7gU"
+[GIN] 2023/03/20 - 17:26:40 | 200 |     272.079µs |       127.0.0.1 | PUT      "/app/cart/set"
+infos: {"option":[{"name":"尺寸","item":[{"name":"8寸","price":10,"active":false},{"name":"16寸","price":20,"active":true}],"type":0},{"name":"口味","item":[{"name":"奥利奥","price":10,"active":false},{"name":"巧克力","price":10,"active":true}],"type":0}],"count":4}
+Options: {[{尺寸 [{8寸 10 false} {16寸 20 true}] 0} {口味 [{奥利奥 10 false} {巧克力 10 true}] 0}] 4}
+
+2023/03/20 17:26:41 [32m/data/nocake-main/server/service/cart.go:61
+[0m[33m[0.631ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE `t_goods`.`id` = '1'
+[GIN] 2023/03/20 - 17:26:41 | 200 |    1.101764ms |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO46BJBnAfD977z7D-Vu3k7gU"
+[GIN] 2023/03/20 - 17:26:41 | 200 |     243.245µs |       127.0.0.1 | PUT      "/app/cart/set"
+infos: {"option":[{"name":"尺寸","item":[{"name":"8寸","price":10,"active":true},{"name":"16寸","price":20,"active":false}],"type":0},{"name":"口味","item":[{"name":"奥利奥","price":10,"active":false},{"name":"巧克力","price":10,"active":true}],"type":0}],"count":4}
+Options: {[{尺寸 [{8寸 10 true} {16寸 20 false}] 0} {口味 [{奥利奥 10 false} {巧克力 10 true}] 0}] 4}
+
+2023/03/20 17:26:41 [32m/data/nocake-main/server/service/cart.go:61
+[0m[33m[0.610ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE `t_goods`.`id` = '1'
+[GIN] 2023/03/20 - 17:26:41 | 200 |     950.187µs |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO46BJBnAfD977z7D-Vu3k7gU"
+[GIN] 2023/03/20 - 17:26:42 | 200 |     206.643µs |       127.0.0.1 | PUT      "/app/cart/set"
+infos: {"option":[{"name":"尺寸","item":[{"name":"8寸","price":10,"active":false},{"name":"16寸","price":20,"active":true}],"type":0},{"name":"口味","item":[{"name":"奥利奥","price":10,"active":false},{"name":"巧克力","price":10,"active":true}],"type":0}],"count":4}
+Options: {[{尺寸 [{8寸 10 false} {16寸 20 true}] 0} {口味 [{奥利奥 10 false} {巧克力 10 true}] 0}] 4}
+
+2023/03/20 17:26:42 [32m/data/nocake-main/server/service/cart.go:61
+[0m[33m[0.551ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE `t_goods`.`id` = '1'
+[GIN] 2023/03/20 - 17:26:42 | 200 |     833.987µs |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO46BJBnAfD977z7D-Vu3k7gU"
+
+2023/03/20 19:00:14 [32m/data/nocake-main/server/service/category.go:118
+[0m[33m[44.898ms] [34;1m[rows:2][0m SELECT * FROM `t_category` WHERE level = 1 and pid = 0 and deleted = 1
+[GIN] 2023/03/20 - 19:00:14 | 200 |   45.850229ms |       127.0.0.1 | GET      "/app/category/option?level=1&pid=0"
+
+2023/03/20 19:00:14 [32m/data/nocake-main/server/service/goods.go:99
+[0m[33m[45.693ms] [34;1m[rows:2][0m SELECT * FROM `t_goods` WHERE is_hot = 2 and status = 2
+[GIN] 2023/03/20 - 19:00:14 | 200 |   45.783546ms |       127.0.0.1 | GET      "/app/goods/hot"
+[GIN] 2023/03/20 - 19:00:14 | 200 |  350.662821ms |       127.0.0.1 | POST     "/app/login"
+[GIN] 2023/03/20 - 19:02:05 | 200 |     370.511µs |       127.0.0.1 | GET      "/app/category/option?level=1&pid=0"
+
+2023/03/20 19:02:05 [32m/data/nocake-main/server/service/goods.go:99
+[0m[33m[0.563ms] [34;1m[rows:2][0m SELECT * FROM `t_goods` WHERE is_hot = 2 and status = 2
+[GIN] 2023/03/20 - 19:02:05 | 200 |     688.616µs |       127.0.0.1 | GET      "/app/goods/hot"
+[GIN] 2023/03/20 - 19:02:05 | 200 |  366.600222ms |       127.0.0.1 | POST     "/app/login"
+infos: {"option":[{"name":"尺寸","item":[{"name":"8寸","price":10,"active":false},{"name":"16寸","price":20,"active":true}],"type":0},{"name":"口味","item":[{"name":"奥利奥","price":10,"active":false},{"name":"巧克力","price":10,"active":true}],"type":0}],"count":4}
+Options: {[{尺寸 [{8寸 10 false} {16寸 20 true}] 0} {口味 [{奥利奥 10 false} {巧克力 10 true}] 0}] 4}
+[GIN] 2023/03/20 - 19:05:11 | 200 |    1.241768ms |       127.0.0.1 | GET      "/app/category/option?level=1&pid=0"
+
+2023/03/20 19:05:11 [32m/data/nocake-main/server/service/cart.go:61
+[0m[33m[0.781ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE `t_goods`.`id` = '1'
+[GIN] 2023/03/20 - 19:05:11 | 200 |    1.987076ms |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO46BJBnAfD977z7D-Vu3k7gU"
+
+2023/03/20 19:05:11 [32m/data/nocake-main/server/service/goods.go:99
+[0m[33m[0.395ms] [34;1m[rows:2][0m SELECT * FROM `t_goods` WHERE is_hot = 2 and status = 2
+[GIN] 2023/03/20 - 19:05:11 | 200 |      474.23µs |       127.0.0.1 | GET      "/app/goods/hot"
+[GIN] 2023/03/20 - 19:05:11 | 200 |     275.231µs |       127.0.0.1 | GET      "/app/category/option?level=1&pid=0"
+infos: {"option":[{"name":"尺寸","item":[{"name":"8寸","price":10,"active":false},{"name":"16寸","price":20,"active":true}],"type":0},{"name":"口味","item":[{"name":"奥利奥","price":10,"active":false},{"name":"巧克力","price":10,"active":true}],"type":0}],"count":4}
+Options: {[{尺寸 [{8寸 10 false} {16寸 20 true}] 0} {口味 [{奥利奥 10 false} {巧克力 10 true}] 0}] 4}
+
+2023/03/20 19:05:11 [32m/data/nocake-main/server/service/cart.go:61
+[0m[33m[0.635ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE `t_goods`.`id` = '1'
+[GIN] 2023/03/20 - 19:05:11 | 200 |    1.008439ms |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO46BJBnAfD977z7D-Vu3k7gU"
+
+2023/03/20 19:05:11 [32m/data/nocake-main/server/service/goods.go:93
+[0m[33m[0.714ms] [34;1m[rows:2][0m SELECT * FROM `t_goods` WHERE category_id = 1 and status = 2 
+[GIN] 2023/03/20 - 19:05:11 | 200 |     880.364µs |       127.0.0.1 | GET      "/app/goods/list?category_id=1"
+
+2023/03/20 19:05:12 [32m/data/nocake-main/server/service/goods.go:93
+[0m[33m[21.288ms] [34;1m[rows:2][0m SELECT * FROM `t_goods` WHERE category_id = 1 and status = 2 
+[GIN] 2023/03/20 - 19:05:12 | 200 |    21.42959ms |       127.0.0.1 | GET      "/app/goods/list?category_id=1"
+infos: {"option":[{"name":"尺寸","item":[{"name":"8寸","price":10,"active":false},{"name":"16寸","price":20,"active":true}],"type":0},{"name":"口味","item":[{"name":"奥利奥","price":10,"active":false},{"name":"巧克力","price":10,"active":true}],"type":0}],"count":4}
+Options: {[{尺寸 [{8寸 10 false} {16寸 20 true}] 0} {口味 [{奥利奥 10 false} {巧克力 10 true}] 0}] 4}
+
+2023/03/20 19:05:15 [32m/data/nocake-main/server/service/cart.go:61
+[0m[33m[0.642ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE `t_goods`.`id` = '1'
+[GIN] 2023/03/20 - 19:05:15 | 200 |    1.014863ms |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO46BJBnAfD977z7D-Vu3k7gU"
+
+2023/03/20 19:05:18 [32m/data/nocake-main/server/service/goods.go:105
+[0m[33m[0.832ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE status = 2 AND `t_goods`.`id` = 2 ORDER BY `t_goods`.`id` LIMIT 1
+[GIN] 2023/03/20 - 19:05:18 | 200 |    1.049995ms |       127.0.0.1 | GET      "/app/goods/detail?goods_id=2"
+infos: {"option":[{"name":"尺寸","item":[{"name":"8寸","price":10,"active":false},{"name":"16寸","price":20,"active":true}],"type":0},{"name":"口味","item":[{"name":"奥利奥","price":10,"active":false},{"name":"巧克力","price":10,"active":true}],"type":0}],"count":4}
+Options: {[{尺寸 [{8寸 10 false} {16寸 20 true}] 0} {口味 [{奥利奥 10 false} {巧克力 10 true}] 0}] 4}
+
+2023/03/20 19:05:18 [32m/data/nocake-main/server/service/cart.go:61
+[0m[33m[0.490ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE `t_goods`.`id` = '1'
+[GIN] 2023/03/20 - 19:05:18 | 200 |     935.931µs |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO46BJBnAfD977z7D-Vu3k7gU"
+[GIN] 2023/03/20 - 19:05:23 | 200 |     221.944µs |       127.0.0.1 | PUT      "/app/cart/set"
+infos: {"option":[{"name":"尺寸","item":[{"name":"8寸","price":10,"active":true},{"name":"16寸","price":20,"active":false}],"type":0},{"name":"口味","item":[{"name":"奥利奥","price":10},{"name":"巧克力","price":10}],"type":0}],"count":0}
+Options: {[{尺寸 [{8寸 10 true} {16寸 20 false}] 0} {口味 [{奥利奥 10 false} {巧克力 10 false}] 0}] 0}
+infos: {"option":[{"name":"尺寸","item":[{"name":"8寸","price":10,"active":false},{"name":"16寸","price":20,"active":true}],"type":0},{"name":"口味","item":[{"name":"奥利奥","price":10,"active":false},{"name":"巧克力","price":10,"active":true}],"type":0}],"count":4}
+Options: {[{尺寸 [{8寸 10 false} {16寸 20 true}] 0} {口味 [{奥利奥 10 false} {巧克力 10 true}] 0}] 4}
+
+2023/03/20 19:05:23 [32m/data/nocake-main/server/service/cart.go:61
+[0m[33m[1.885ms] [34;1m[rows:2][0m SELECT * FROM `t_goods` WHERE `t_goods`.`id` IN ('2','1')
+[GIN] 2023/03/20 - 19:05:23 | 200 |    2.304457ms |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO46BJBnAfD977z7D-Vu3k7gU"
+[GIN] 2023/03/20 - 19:05:24 | 200 |     230.102µs |       127.0.0.1 | PUT      "/app/cart/set"
+infos: {"option":[{"name":"尺寸","item":[{"name":"8寸","price":10,"active":false},{"name":"16寸","price":20,"active":true}],"type":0},{"name":"口味","item":[{"name":"奥利奥","price":10,"active":false},{"name":"巧克力","price":10,"active":true}],"type":0}],"count":4}
+Options: {[{尺寸 [{8寸 10 false} {16寸 20 true}] 0} {口味 [{奥利奥 10 false} {巧克力 10 true}] 0}] 4}
+infos: {"option":[{"name":"尺寸","item":[{"name":"8寸","price":10,"active":true},{"name":"16寸","price":20,"active":false}],"type":0},{"name":"口味","item":[{"name":"奥利奥","price":10,"active":false},{"name":"巧克力","price":10,"active":true}],"type":0}],"count":0}
+Options: {[{尺寸 [{8寸 10 true} {16寸 20 false}] 0} {口味 [{奥利奥 10 false} {巧克力 10 true}] 0}] 0}
+
+2023/03/20 19:05:24 [32m/data/nocake-main/server/service/cart.go:61
+[0m[33m[0.620ms] [34;1m[rows:2][0m SELECT * FROM `t_goods` WHERE `t_goods`.`id` IN ('1','2')
+[GIN] 2023/03/20 - 19:05:24 | 200 |    1.030147ms |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO46BJBnAfD977z7D-Vu3k7gU"
+[GIN] 2023/03/20 - 19:05:26 | 200 |     254.515µs |       127.0.0.1 | PUT      "/app/cart/set"
+infos: {"option":[{"name":"尺寸","item":[{"name":"8寸","price":10,"active":false},{"name":"16寸","price":20,"active":true}],"type":0},{"name":"口味","item":[{"name":"奥利奥","price":10,"active":false},{"name":"巧克力","price":10,"active":true}],"type":0}],"count":4}
+Options: {[{尺寸 [{8寸 10 false} {16寸 20 true}] 0} {口味 [{奥利奥 10 false} {巧克力 10 true}] 0}] 4}
+infos: {"option":[{"name":"尺寸","item":[{"name":"8寸","price":10,"active":false},{"name":"16寸","price":20,"active":true}],"type":0},{"name":"口味","item":[{"name":"奥利奥","price":10,"active":false},{"name":"巧克力","price":10,"active":true}],"type":0}],"count":0}
+Options: {[{尺寸 [{8寸 10 false} {16寸 20 true}] 0} {口味 [{奥利奥 10 false} {巧克力 10 true}] 0}] 0}
+
+2023/03/20 19:05:26 [32m/data/nocake-main/server/service/cart.go:61
+[0m[33m[0.882ms] [34;1m[rows:2][0m SELECT * FROM `t_goods` WHERE `t_goods`.`id` IN ('1','2')
+[GIN] 2023/03/20 - 19:05:26 | 200 |    1.357007ms |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO46BJBnAfD977z7D-Vu3k7gU"
+[GIN] 2023/03/20 - 19:05:27 | 200 |     264.522µs |       127.0.0.1 | PUT      "/app/cart/set"
+infos: {"option":[{"name":"尺寸","item":[{"name":"8寸","price":10,"active":false},{"name":"16寸","price":20,"active":true}],"type":0},{"name":"口味","item":[{"name":"奥利奥","price":10,"active":false},{"name":"巧克力","price":10,"active":true}],"type":0}],"count":4}
+Options: {[{尺寸 [{8寸 10 false} {16寸 20 true}] 0} {口味 [{奥利奥 10 false} {巧克力 10 true}] 0}] 4}
+infos: {"option":[{"name":"尺寸","item":[{"name":"8寸","price":10,"active":true},{"name":"16寸","price":20,"active":false}],"type":0},{"name":"口味","item":[{"name":"奥利奥","price":10,"active":false},{"name":"巧克力","price":10,"active":true}],"type":0}],"count":0}
+Options: {[{尺寸 [{8寸 10 true} {16寸 20 false}] 0} {口味 [{奥利奥 10 false} {巧克力 10 true}] 0}] 0}
+
+2023/03/20 19:05:27 [32m/data/nocake-main/server/service/cart.go:61
+[0m[33m[0.622ms] [34;1m[rows:2][0m SELECT * FROM `t_goods` WHERE `t_goods`.`id` IN ('1','2')
+[GIN] 2023/03/20 - 19:05:27 | 200 |     983.048µs |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO46BJBnAfD977z7D-Vu3k7gU"
+[GIN] 2023/03/20 - 19:05:29 | 200 |     243.582µs |       127.0.0.1 | PUT      "/app/cart/set"
+infos: {"option":[{"name":"尺寸","item":[{"name":"8寸","price":10,"active":false},{"name":"16寸","price":20,"active":true}],"type":0},{"name":"口味","item":[{"name":"奥利奥","price":10,"active":false},{"name":"巧克力","price":10,"active":true}],"type":0}],"count":4}
+Options: {[{尺寸 [{8寸 10 false} {16寸 20 true}] 0} {口味 [{奥利奥 10 false} {巧克力 10 true}] 0}] 4}
+infos: {"option":[{"name":"尺寸","item":[{"name":"8寸","price":10,"active":true},{"name":"16寸","price":20,"active":false}],"type":0},{"name":"口味","item":[{"name":"奥利奥","price":10,"active":false},{"name":"巧克力","price":10,"active":true}],"type":0}],"count":1}
+Options: {[{尺寸 [{8寸 10 true} {16寸 20 false}] 0} {口味 [{奥利奥 10 false} {巧克力 10 true}] 0}] 1}
+
+2023/03/20 19:05:29 [32m/data/nocake-main/server/service/cart.go:61
+[0m[33m[0.698ms] [34;1m[rows:2][0m SELECT * FROM `t_goods` WHERE `t_goods`.`id` IN ('1','2')
+[GIN] 2023/03/20 - 19:05:29 | 200 |    1.027203ms |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO46BJBnAfD977z7D-Vu3k7gU"
+[GIN] 2023/03/20 - 19:25:06 | 200 |  389.605497ms |       127.0.0.1 | POST     "/app/login"
+[GIN] 2023/03/20 - 19:25:06 | 200 |     804.043µs |       127.0.0.1 | GET      "/app/category/option?level=1&pid=0"
+
+2023/03/20 19:25:06 [32m/data/nocake-main/server/service/goods.go:99
+[0m[33m[0.585ms] [34;1m[rows:2][0m SELECT * FROM `t_goods` WHERE is_hot = 2 and status = 2
+[GIN] 2023/03/20 - 19:25:06 | 200 |     688.367µs |       127.0.0.1 | GET      "/app/goods/hot"
+
+2023/03/20 19:25:13 [32m/data/nocake-main/server/service/goods.go:105
+[0m[33m[0.745ms] [34;1m[rows:1][0m SELECT * FROM `t_goods` WHERE status = 2 AND `t_goods`.`id` = 1 ORDER BY `t_goods`.`id` LIMIT 1
+[GIN] 2023/03/20 - 19:25:13 | 200 |     901.697µs |       127.0.0.1 | GET      "/app/goods/detail?goods_id=1"
+infos: {"option":[{"name":"尺寸","item":[{"name":"8寸","price":10,"active":false},{"name":"16寸","price":20,"active":true}],"type":0},{"name":"口味","item":[{"name":"奥利奥","price":10,"active":false},{"name":"巧克力","price":10,"active":true}],"type":0}],"count":4}
+Options: {[{尺寸 [{8寸 10 false} {16寸 20 true}] 0} {口味 [{奥利奥 10 false} {巧克力 10 true}] 0}] 4}
+infos: {"option":[{"name":"尺寸","item":[{"name":"8寸","price":10,"active":true},{"name":"16寸","price":20,"active":false}],"type":0},{"name":"口味","item":[{"name":"奥利奥","price":10,"active":false},{"name":"巧克力","price":10,"active":true}],"type":0}],"count":1}
+Options: {[{尺寸 [{8寸 10 true} {16寸 20 false}] 0} {口味 [{奥利奥 10 false} {巧克力 10 true}] 0}] 1}
+
+2023/03/20 19:25:13 [32m/data/nocake-main/server/service/cart.go:61
+[0m[33m[0.532ms] [34;1m[rows:2][0m SELECT * FROM `t_goods` WHERE `t_goods`.`id` IN ('1','2')
+[GIN] 2023/03/20 - 19:25:13 | 200 |     902.009µs |       127.0.0.1 | GET      "/app/cart/query?open_id=owvNO46BJBnAfD977z7D-Vu3k7gU"
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /image/*filepath          --> github.com/gin-gonic/gin.(*RouterGroup).createStaticHandler.func1 (4 handlers)
+[GIN-debug] HEAD   /image/*filepath          --> github.com/gin-gonic/gin.(*RouterGroup).createStaticHandler.func1 (4 handlers)
+[GIN-debug] GET    /app/swagger/*any         --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (4 handlers)
+[GIN-debug] GET    /web/captcha              --> nocake/api.(*WebUser).GetCaptcha-fm (4 handlers)
+[GIN-debug] POST   /web/login                --> nocake/api.(*WebUser).UserLogin-fm (4 handlers)
+[GIN-debug] POST   /web/upload               --> nocake/api.(*WebFileUpload).FileUpload-fm (5 handlers)
+[GIN-debug] POST   /web/goods/create         --> nocake/api.(*WebGoods).CreateGoods-fm (5 handlers)
+[GIN-debug] DELETE /web/goods/delete         --> nocake/api.(*WebGoods).DeleteGoods-fm (5 handlers)
+[GIN-debug] PUT    /web/goods/update         --> nocake/api.(*WebGoods).UpdateGoods-fm (5 handlers)
+[GIN-debug] PUT    /web/goods/status/update  --> nocake/api.(*WebGoods).UpdateGoodsStatus-fm (5 handlers)
+[GIN-debug] GET    /web/goods/list           --> nocake/api.(*WebGoods).GetGoodsList-fm (5 handlers)
+[GIN-debug] DELETE /web/order/delete         --> nocake/api.(*WebOrder).DeleteOrder-fm (5 handlers)
+[GIN-debug] PUT    /web/order/update         --> nocake/api.(*WebOrder).UpdateOrder-fm (5 handlers)
+[GIN-debug] GET    /web/order/list           --> nocake/api.(*WebOrder).GetOrderList-fm (5 handlers)
+[GIN-debug] GET    /web/order/detail         --> nocake/api.(*WebOrder).GetOrderDetail-fm (5 handlers)
+[GIN-debug] POST   /web/category/create      --> nocake/api.(*WebCategory).CreateCategory-fm (5 handlers)
+[GIN-debug] DELETE /web/category/delete      --> nocake/api.(*WebCategory).DeleteCategory-fm (5 handlers)
+[GIN-debug] PUT    /web/category/update      --> nocake/api.(*WebCategory).UpdateCategory-fm (5 handlers)
+[GIN-debug] GET    /web/category/list        --> nocake/api.(*WebCategory).GetCategoryList-fm (5 handlers)
+[GIN-debug] GET    /web/category/option      --> nocake/api.(*WebCategory).GetCategoryOption-fm (5 handlers)
+[GIN-debug] GET    /web/today/data           --> nocake/api.(*WebStatistics).GetTodayData-fm (5 handlers)
+[GIN-debug] GET    /web/order/data           --> nocake/api.(*WebStatistics).GetOrderData-fm (5 handlers)
+[GIN-debug] GET    /web/shop/data            --> nocake/api.(*WebStatistics).GetShopData-fm (5 handlers)
+[GIN-debug] POST   /app/login                --> nocake/api.(*AppUser).UserLogin-fm (4 handlers)
+[GIN-debug] GET    /app/category/option      --> nocake/api.(*AppCategory).GetCategoryOption-fm (4 handlers)
+[GIN-debug] GET    /app/goods/list           --> nocake/api.(*AppGoods).GetGoodList-fm (4 handlers)
+[GIN-debug] GET    /app/goods/detail         --> nocake/api.(*AppGoods).GetGoodsDetail-fm (4 handlers)
+[GIN-debug] GET    /app/goods/search         --> nocake/api.(*AppGoods).SearchGoods-fm (4 handlers)
+[GIN-debug] GET    /app/goods/hot            --> nocake/api.(*AppGoods).GetGoodsHot-fm (4 handlers)
+[GIN-debug] PUT    /app/cart/set             --> nocake/api.(*AppCart).SetCart-fm (4 handlers)
+[GIN-debug] DELETE /app/cart/delete          --> nocake/api.(*AppCart).DeleteCart-fm (4 handlers)
+[GIN-debug] DELETE /app/cart/clear           --> nocake/api.(*AppCart).ClearCart-fm (4 handlers)
+[GIN-debug] GET    /app/cart/query           --> nocake/api.(*AppCart).GetCartInfo-fm (4 handlers)
+[GIN-debug] POST   /app/order/submit         --> nocake/api.(*AppOrder).SubmitOrder-fm (4 handlers)
+[GIN-debug] PUT    /app/order/update         --> nocake/api.(*AppOrder).UpdateOrder-fm (4 handlers)
+[GIN-debug] GET    /app/order/list           --> nocake/api.(*AppOrder).GetOrderList-fm (4 handlers)
+[GIN-debug] POST   /app/address/submit       --> nocake/api.(*AppAddress).AddAddress-fm (4 handlers)
+[GIN-debug] PUT    /app/address/update       --> nocake/api.(*AppAddress).UpdateAddress-fm (4 handlers)
+[GIN-debug] DELETE /app/address/delete       --> nocake/api.(*AppAddress).DeleteAddress-fm (4 handlers)
+[GIN-debug] GET    /app/address/list         --> nocake/api.(*AppAddress).GetAddressList-fm (4 handlers)
+[GIN-debug] GET    /app/address/detail       --> nocake/api.(*AppAddress).GetAddressDetail-fm (4 handlers)
+[GIN-debug] Listening and serving HTTP on :8000
+[GIN-debug] [ERROR] listen tcp :8000: bind: address already in use

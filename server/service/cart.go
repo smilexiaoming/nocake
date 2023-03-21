@@ -2,6 +2,7 @@ package service
 
 import (
 	"encoding/json"
+	"fmt"
 	"nocake/global"
 	"nocake/models/app"
 	"strconv"
@@ -38,7 +39,9 @@ func (c *AppCartService) GetInfo(param app.CartQueryParam) app.CartInfo {
 	optionPriceMap := make(map[int]float64)
 	for goodsId, infos := range goodsInfo {
 		Options := app.Options{}
+		fmt.Printf("infos: %v\n", infos)
 		json.Unmarshal([]byte(infos), &Options)
+		fmt.Printf("Options: %v\n", Options)
 		id, _ := strconv.Atoi(goodsId)
 		count := Options.Count
 		goodsIds = append(goodsIds, goodsId)

@@ -4,5 +4,7 @@
 # IntelliJ project files
 .idea
 *.iml
-server/logs/*
-web/node_modules/*
+server/logs
+web/node_modules
+app/node_modules
+app/miniprogram_npm
