@@ -8,4 +8,3 @@ server/logs
 web/node_modules
 app/node_modules
 app/miniprogram_npm
-server/config.yaml
