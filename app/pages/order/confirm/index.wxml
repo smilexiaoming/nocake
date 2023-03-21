@@ -1,11 +1,18 @@
 <!--pages/order/confirm/index.wxml-->
 <view wx:if="{{showView}}">
 <view>
-选择地址：
-  <van-dropdown-menu size="large" direction="up">
+选择当前地址：
+<button class="order_submit_btn" bindtap="chooseLocation"> 选择 </button>
+<a>{{choice_address}}</a>
+<a>{{choice_name}}</a>
+</view>
+<view>
+选择已有地址：
+  <van-dropdown-menu size="large">
     <van-dropdown-item value="{{ address_value }}" options="{{ address_option }}" />
   </van-dropdown-menu>
 </view>
+
 <van-card custom-class="goods_van_card" title-class="goods_van_card_title" wx:for="{{goodsItem}}" wx:key="{{item.id}}" id="{{item.id}}" price="{{item.price}}" title="{{item.title}}" num="{{item.count}}" thumb="{{item.pic_url}}" bindtap="checkGoodsDetail" />
 
 <van-cell-group>
@@ -33,6 +40,7 @@
       <button class="order_submit_btn" bindtap="submitOrder">提交订单</button>
     </view>
 </view>
+
 <!-- 支付密码弹出框 -->
 <van-dialog
   bind:confirm="confirmPay"

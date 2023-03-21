@@ -13,13 +13,38 @@ Page({
     addressList:[],
     message:"",
     address_option: [],
-    address_value: {},
+    address_id: 0,
+    choice_name : "",
+    choice_address : "",
+    address_value : 0
   },
 
   // 生命周期函数--监听页面显示
   onShow() {
     this.getCartInfo()
     this.getDefaultAddress()
+  },
+
+  // 获取地理位置
+
+  async chooseLocation(){
+    wx.chooseLocation({
+      altitude: 'altitude',
+      highAccuracyExpireTime: 0,
+      isHighAccuracy: true,
+      type: 'type',
+      success: (result) => {
+        console.log("res.name ", result.name)
+        console.log("res.address ", result.address)
+        this.setData({
+          choice_name: result.name,
+          choice_address: result.address
+        })
+      },
+      fail: (res) => {},
+      complete: (res) => {},
+  })
+  
   },
 
   // 获取购物车信息
@@ -43,7 +68,8 @@ Page({
     console.log("address_option:", address_option)
     this.setData({
       address_option: address_option,
-      address_value:address_list[0].id
+      address_id:address_list[0].id,
+      address_value:address_option[0]["value"]
     })
   },
 
@@ -65,7 +91,8 @@ Page({
     http.POST('/order/submit', {
       open_id: wx.getStorageSync('open_id'),
       message:this.data.message,
-      address_id:this.data.address_value,
+      address_id:this.data.address_id,
+      address_choice:this.data.choice_address + this.data.choice_name
     })
   },
 

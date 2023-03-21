@@ -2,7 +2,6 @@ package service
 
 import (
 	"encoding/json"
-	"fmt"
 	"nocake/global"
 	"nocake/models/app"
 	"strconv"
@@ -34,18 +33,21 @@ func (c *AppCartService) GetInfo(param app.CartQueryParam) app.CartInfo {
 	key := strings.Join([]string{"user", param.OpenId, "cart"}, ":")
 	goodsInfo := global.Rdb.HGetAll(ctx, key).Val()
 	goodsIds := make([]string, 0)
-	// 遍历，获取所有的goods_id
 	idsAndCounts := make(map[uint64]int, 0)
 	optionPriceMap := make(map[int]float64)
 	for goodsId, infos := range goodsInfo {
 		Options := app.Options{}
-		fmt.Printf("infos: %v\n", infos)
 		json.Unmarshal([]byte(infos), &Options)
-		fmt.Printf("Options: %v\n", Options)
 		id, _ := strconv.Atoi(goodsId)
-		count := Options.Count
+
+		// 存id列表
 		goodsIds = append(goodsIds, goodsId)
+
+		// 存数量
+		count := Options.Count
 		idsAndCounts[uint64(id)] = count
+
+		// 存配件的价格
 		var tempOptionPirce float64
 		tempOptionPirce = 0
 		for _, item := range Options.Option {
