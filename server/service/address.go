@@ -13,9 +13,6 @@ func (a *AppAddressService) Add(param app.AddressAddParam) int64 {
 	address := app.Address{
 		Name:        param.Name,
 		OpenId:      param.OpenId,
-		Province:    param.Province,
-		City:        param.City,
-		County:      param.County,
 		Detail:      param.Detail,
 		Tel:         param.Tel,
 		IsDefault:   param.IsDefault,
@@ -30,9 +27,6 @@ func (a *AppAddressService) Add(param app.AddressAddParam) int64 {
 func (a *AppAddressService) Updata(param app.AddressUpdateParam) int64 {
 	address := app.Address{
 		Name:        param.Name,
-		Province:    param.Province,
-		City:        param.City,
-		County:      param.County,
 		Detail:      param.Detail,
 		Tel:         param.Tel,
 		IsDefault:   param.IsDefault,

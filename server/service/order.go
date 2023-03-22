@@ -161,9 +161,6 @@ func (o *AppOrderService) Submit(param app.OrderSubmitParam) int64 {
 		addressInfo := app.AddressAddParam{
 			Name:     address.Name,
 			OpenId:   address.OpenId,
-			Province: address.Province,
-			City:     address.City,
-			County:   address.County,
 			Detail:   address.Detail,
 			Tel:      address.Tel,
 		}

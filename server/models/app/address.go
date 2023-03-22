@@ -9,9 +9,6 @@ type Address struct {
 	Id          int       `gorm:"id" json:"id"`
 	Name        string    `gorm:"name" json:"name"`                 // 收货人名称
 	OpenId      string    `gorm:"open_id" json:"open_id"`           // 用户表的用户ID
-	Province    string    `gorm:"province" json:"province"`         // 行政区域表的省ID
-	City        string    `gorm:"city" json:"city"`                 // 行政区域表的市ID
-	County      string    `gorm:"county" json:"county"`             // 行政区域表的区县ID
 	Detail      string    `gorm:"detail" json:"detail"`             // 详细收货地址
 	Tel         string    `gorm:"tel" json:"tel"`                   // 手机号码
 	IsDefault   int       `gorm:"is_default" json:"is_default"`     // 是否默认地址
@@ -25,9 +22,6 @@ type Address struct {
 type AddressAddParam struct {
 	Name      string `form:"name" json:"name"`             // 收货人名称
 	OpenId    string `form:"open_id" json:"open_id"`       // 用户表的用户ID
-	Province  string `form:"province" json:"province"`     // 行政区域表的省ID
-	City      string `form:"city" json:"city"`             // 行政区域表的市ID
-	County    string `form:"county" json:"county"`         // 行政区域表的区县ID
 	Detail    string `form:"detail" json:"detail"`         // 详细收货地址
 	Tel       string `form:"tel" json:"tel"`               // 手机号码
 	IsDefault int    `form:"is_default" json:"is_default"` // 是否默认地址
@@ -54,9 +48,6 @@ type AddressUpdateParam struct {
 	AddressId int    `form:"address_id"`
 	Name      string `form:"name"`       // 收货人名称
 	OpenId    string `form:"open_id"`    // 用户表的用户ID
-	Province  string `form:"province"`   // 行政区域表的省ID
-	City      string `form:"city"`       // 行政区域表的市ID
-	County    string `form:"county"`     // 行政区域表的区县ID
 	Detail    string `form:"detail"`     // 详细收货地址
 	Tel       string `form:"tel"`        // 手机号码
 	IsDefault int    `form:"is_default"` // 是否默认地址
