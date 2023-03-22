@@ -50,15 +50,11 @@ Page({
 
   // 添加商品到购物车
   async addToCart() {
-    if (this.data.cart_number == 0){
-      this.deleteOneGoods()
-    }else{
-      await http.PUT('/cart/set',{ 
-        goods_id: this.data.goodsId, 
-        options: JSON.stringify({"option":this.data.option_list,"count":this.data.cart_number}),
-        open_id: wx.getStorageSync('open_id')
-      })
-    }
+    await http.PUT('/cart/set',{ 
+      goods_id: this.data.goodsId, 
+      options: JSON.stringify({"option":this.data.option_list,"count":this.data.cart_number}),
+      open_id: wx.getStorageSync('open_id')
+    })
     this.onShow()
   },
   
@@ -109,35 +105,25 @@ Page({
   async onShow() {
     // 获取购物车信息
     let res = await http.GET('/cart/query', {open_id: wx.getStorageSync('open_id')})
-    let goodsItem = res.data.data.cart_item
-    if (goodsItem){
-      for (let i = 0; i < goodsItem.length; i++) {
-        let options = JSON.parse(goodsItem[i].options)
-        goodsItem[i].cart_number = options.count
-        if (String(goodsItem[i].id) == this.data.goodsId) {
-          this.data.option_list = options.option
+    this.setData({
+      goodsItem: res.data.data.cart_item,
+      totalPrice: res.data.data.total_price,
+      totalGoodsCount:res.data.data.total_cart,
+    })
+    if (this.data.goodsItem){
+      for (let i = 0; i < this.data.goodsItem.length; i++) {
+        if (String(this.data.goodsItem[i].id) == this.data.goodsId) {
+          let options = JSON.parse(this.data.goodsItem[i].options)
           this.setData({cart_number: options.count})
         }
       }
     }
-    console.log("this.data.option_list : ", this.data.option_list)
-    this.setData({
-      goodsItem: goodsItem,
-      option_list: this.data.option_list,
-      totalPrice: res.data.data.total_price,
-      totalGoodsCount:res.data.data.total_cart,
-    })
   },
 
   // 清空购物车
   async clearCart(){
     await http.DELETE('/cart/clear?open_id='+wx.getStorageSync('open_id'))
     this.setData({ show: false, totalGoodsCount: 0, totalPrice: 0 });
-  },
-
-  // 删除购物车某个商品
-  async deleteOneGoods(){
-    await http.DELETE('/cart/delete?open_id='+wx.getStorageSync('open_id') + "&goods_id="+this.data.goodsId)
   },
   
   // 购物车选中

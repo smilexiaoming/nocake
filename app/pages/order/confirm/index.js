@@ -92,7 +92,7 @@ Page({
       open_id: wx.getStorageSync('open_id'),
       message:this.data.message,
       address_id:this.data.address_id,
-      address_choice:this.data.choice_address + this.data.choice_name
+      choice_address:this.data.choice_address + this.data.choice_name
     })
   },
 

@@ -41,9 +41,10 @@ type OrderUpdateParam struct {
 
 // 提交订单模型
 type OrderSubmitParam struct {
-	OpenId    string `form:"open_id"`
-	Message   string `form:"message"` // 用户订单留言
-	AddressId int    `form:"address_id"`
+	OpenId        string `form:"open_id"`
+	Message       string `form:"message"` // 用户订单留言
+	AddressId     int    `form:"address_id"`
+	ChoiceAddress string `form:"choice_address"`
 }
 
 // 查询订单列表模型

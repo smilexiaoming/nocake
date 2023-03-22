@@ -111,45 +111,65 @@ func (o *AppOrderService) Update(param app.OrderUpdateParam) int64 {
 
 func (o *AppOrderService) Submit(param app.OrderSubmitParam) int64 {
 	var rowsAffected int64
+
+	fmt.Printf("param: %v\n", param)
 	cartInfo := app.CartInfo{}
 	key := strings.Join([]string{"user", param.OpenId, "cart"}, ":")
 	redisInfo := global.Rdb.HGetAll(ctx, key).Val()
 	goodsIds := make([]string, 0)
-	// 遍历，获取所有的goods_id
 	idsAndCounts := make(map[uint64]int, 0)
+	optionPriceMap := make(map[int]float64)
 	for goodsId, infos := range redisInfo {
-		info := make(map[string]string)
-		json.Unmarshal([]byte(infos), &info)
+		Options := app.Options{}
+		json.Unmarshal([]byte(infos), &Options)
 		id, _ := strconv.Atoi(goodsId)
-		count, _ := strconv.Atoi(info["count"])
+
+		// 存id列表
 		goodsIds = append(goodsIds, goodsId)
+
+		// 存数量
+		count := Options.Count
 		idsAndCounts[uint64(id)] = count
+
+		// 存配件的价格
+		var tempOptionPirce float64
+		tempOptionPirce = 0
+		for _, item := range Options.Option {
+			for _, v := range item.Item {
+				if v.Active {
+					tempOptionPirce += float64(v.Price)
+				}
+			}
+		}
+		optionPriceMap[id] = tempOptionPirce
 	}
 	// 计算价格、总价、数量
-	if len(redisInfo) <= 0 {
-		return rowsAffected
+	if len(redisInfo) > 0 {
+		global.Db.Debug().Table("t_goods").Find(&cartInfo.CartItem, goodsIds)
+		for i, item := range cartInfo.CartItem {
+			cartInfo.CartItem[i].Options = redisInfo[strconv.Itoa(int(item.Id))]
+			cartInfo.CartItem[i].Price = optionPriceMap[int(item.Id)] + item.Price*float64(idsAndCounts[item.Id])
+			cartInfo.TotalPrice += cartInfo.CartItem[i].Price
+			cartInfo.TotalCart += idsAndCounts[item.Id]
+		}
 	}
 
-	global.Db.Debug().Table("t_goods").Find(&cartInfo.CartItem, goodsIds)
-	for i, item := range cartInfo.CartItem {
-		cartInfo.CartItem[i].Options = redisInfo[strconv.Itoa(int(item.Id))]
-		cartInfo.TotalPrice = cartInfo.TotalPrice + item.Price*float64(idsAndCounts[item.Id])
-		cartInfo.TotalCart = cartInfo.TotalCart + idsAndCounts[item.Id]
-	}
-
+	adressStr := ""
 	address := app.AddressAddParam{}
 	rows_affect := global.Db.Table("t_address").Where("open_id = ? and id = ?", param.OpenId, param.AddressId).Find(&address).RowsAffected
-	adressStr := ""
-	addressInfo := app.AddressAddParam{
-		Name:     address.Name,
-		OpenId:   address.OpenId,
-		Province: address.Province,
-		City:     address.City,
-		County:   address.County,
-		Detail:   address.Detail,
-		Tel:      address.Tel,
-	}
 	if rows_affect > 0 {
+		addressInfo := app.AddressAddParam{
+			Name:     address.Name,
+			OpenId:   address.OpenId,
+			Province: address.Province,
+			City:     address.City,
+			County:   address.County,
+			Detail:   address.Detail,
+			Tel:      address.Tel,
+		}
+		if param.ChoiceAddress != "" {
+			addressInfo.Detail = param.ChoiceAddress
+		}
 		addressByte, _ := json.Marshal(addressInfo)
 		adressStr = string(addressByte)
 	}
