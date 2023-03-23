@@ -146,12 +146,12 @@
 
 .container {
   background-color: #fff;
-  min-height: 100%;
+  min-height: 80%;
   display: block;
 }
 
 .category-container {
-  padding: 0 0 10px 0;
+  padding: 0 20px 10px 0;
   margin-top: 16rpx;
   position: relative;
   background-color: white;
@@ -267,7 +267,7 @@
 .goods-box .goods-price {
   overflow: hidden;
   font-size: 34rpx;
-  color: #F20C32;
+  color: #f5506c;
   margin-left: 24rpx;
 }
 

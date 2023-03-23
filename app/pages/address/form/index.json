@@ -6,7 +6,8 @@
     "van-button": "@vant/weapp/button/index",
     "van-area": "@vant/weapp/area/index",
     "van-popup": "@vant/weapp/popup/index",
-    "van-cell-group": "@vant/weapp/cell-group/index"
+    "van-cell-group": "@vant/weapp/cell-group/index",
+    "van-icon": "@vant/weapp/icon/index"
   },
   "backgroundColor": "#f7f8fa",
   "navigationBarTitleText": "我的地址"

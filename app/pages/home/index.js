@@ -1,6 +1,6 @@
 // pages/home/index.js
 import http from '../../utils/http'
-const APP = getApp()
+const app = getApp()
 Page({
 
     /**
@@ -35,9 +35,15 @@ Page({
         this.setData({hot_goods: res.data.data})
     },
 
+    // 跳转到分类
+    tabClick(event){
+        console.log("event ", event)
+        app.globalData.option_id = event.currentTarget.id 
+        wx.switchTab({ url: '/pages/category/index'})
+    },
     // 跳转到搜索页面
     toSearch(){
-        wx.navigateTo({url: '/pages/search/index'})
+        wx.tabbar({url: '/pages/search/index'})
     },
     // 查看商品详情
     checkGoodsDetail(event){
@@ -63,11 +69,12 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
+      this.getTabBar().init()
         this.setData({
-            navHeight: APP.globalData.navHeight,
-            navTop: APP.globalData.navTop,
-            windowHeight: APP.globalData.windowHeight,
-            menuButtonObject: APP.globalData.menuButtonObject //小程序胶囊信息
+            navHeight: app.globalData.navHeight,
+            navTop: app.globalData.navTop,
+            windowHeight: app.globalData.windowHeight,
+            menuButtonObject: app.globalData.menuButtonObject //小程序胶囊信息
         })
     },
 

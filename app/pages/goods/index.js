@@ -50,11 +50,15 @@ Page({
 
   // 添加商品到购物车
   async addToCart() {
-    await http.PUT('/cart/set',{ 
-      goods_id: this.data.goodsId, 
-      options: JSON.stringify({"option":this.data.option_list,"count":this.data.cart_number}),
-      open_id: wx.getStorageSync('open_id')
-    })
+    if (this.data.cart_number > 0){
+      await http.PUT('/cart/set',{ 
+        goods_id: this.data.goodsId, 
+        options: JSON.stringify({"option":this.data.option_list,"count":this.data.cart_number}),
+        open_id: wx.getStorageSync('open_id')
+      })
+    }else{
+      await http.DELETE('/cart/delete?openid=' + wx.getStorageSync('open_id') + "&goods_id=" + this.data.goodsId)
+    }
     this.onShow()
   },
   

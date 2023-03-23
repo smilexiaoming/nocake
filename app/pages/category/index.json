@@ -9,7 +9,9 @@
     "van-stepper": "@vant/weapp/stepper/index",
     "van-checkbox": "@vant/weapp/checkbox/index",
     "van-icon": "@vant/weapp/icon/index",
-    "van-checkbox-group": "@vant/weapp/checkbox-group/index"
+    "van-checkbox-group": "@vant/weapp/checkbox-group/index",
+    "van-sidebar": "@vant/weapp/sidebar/index",
+    "van-sidebar-item": "@vant/weapp/sidebar-item/index"
   },
   "navigationStyle": "custom",
   "backgroundColor": "#fff"

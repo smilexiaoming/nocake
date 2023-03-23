@@ -9,14 +9,14 @@ Page({
    */
   data: {
     // tabList: ['未完成','已完成'],
-    tabList: [{"text":'未完成', value:"1"},{"text":'已完成', value:"2"}],
+    tabList: [{"text":'未付款', value:"1"},{"text":'已取消', value:"2"},{"text":'已付款', value:"3"}, {"text":'配送中', value:"4"},{"text":'已完成', value:"5"}],
     active: 0,
     orderList: []
   },
 
   tabsChange(event) {
     console.log("event.detail.name : ", event.detail.name)
-    this.getOrderList(event.detail.name)
+    this.getOrderList(event.detail.name+1)
   },
 
   // 添加商品到购物车
@@ -32,6 +32,9 @@ Page({
   onShow() {
     this.getTabBar().init();
     this.getOrderList(1)
+    this.setData({
+      active:0
+    })
   },
 
   // 获取订单列表
@@ -40,16 +43,30 @@ Page({
       status: orderType,
       open_id: wx.getStorageSync('open_id'),
     });
-    this.setData({orderList: res.data.data})
+    
+    this.setData({
+      orderList: res.data.data
+    })
   },
 
   // 取消订单
   async cancelOrder(event){
     let res = await http.PUT('/order/update',{
-      id: event.currentTarget.id,
-      status: 3
+      order_id: event.currentTarget.id,
+      status: 2
     });
   },
+    // 付款
+    async payOrder(event){
+      let res = await http.PUT('/order/update',{
+        order_id: event.currentTarget.id,
+        status: 3
+      });
+      this.setData({
+        active:2
+      })
+      this.getOrderList(3)
+    },
 
   // 确认取消订单
   confirmCancelOrder(event){
@@ -58,7 +75,10 @@ Page({
       title: '确认取消订单吗'
     }).then(() => {
       _this.cancelOrder(event)
-      _this.getOrderList()
+      this.setData({
+        active:1,
+      })
+      _this.getOrderList(1)
     });
   },
 })

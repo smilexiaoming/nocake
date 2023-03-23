@@ -39,6 +39,7 @@ App({
     wx.setStorageSync('pid', '0');
   },
   globalData: {
-    userInfo: null
+    userInfo: null,
+    option_id : 1
   }
 })

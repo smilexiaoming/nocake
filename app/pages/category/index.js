@@ -1,5 +1,5 @@
 import http from '../../utils/http'
-
+const app = getApp()
 Page({
 
   // 页面的初始数据
@@ -12,7 +12,8 @@ Page({
     goodsItem: [],
     totalPrice: 0.00,
     checkedGoods: ['25','28'],
-    totalGoodsCount: 0
+    totalGoodsCount: 0,
+    activeId : 1
   },
 
   // 跳转到搜索页面
@@ -23,7 +24,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad(options) {
+  onLoad() {
     this.getCategoryOption()
     this.getCartInfo()
     this.getBanners()
@@ -37,7 +38,6 @@ Page({
 
   // 点击banner
   onClickBanner(event){
-    console.log("========")
     wx.navigateTo({ url: '/pages/goods/index?id=' + event.currentTarget.id})
   },
   
@@ -47,8 +47,8 @@ Page({
       level: parseInt(wx.getStorageSync('level')),
       pid: parseInt(wx.getStorageSync('pid'))
     })
-    this.setData({options: res.data.data})
-    this.getGoodsList(res.data.data[0].id)
+    this.setData({options: res.data.data, activeId:app.globalData.option_id})
+    this.getGoodsList(app.globalData.option_id)
   },
 
   // 获取商品列表
@@ -66,6 +66,7 @@ Page({
     for (let i = 0; i < this.data.options.length; i++){
       if (i === event.detail.index){ categoryId = this.data.options[i].id }
     }
+    app.globalData.option_id = categoryId
     this.getGoodsList(categoryId)
   },
 

@@ -2,11 +2,11 @@
 <van-swipe-cell wx:for="{{ addressList }}" wx:key="{{item.id}}" right-width="{{ 65 }}">
     <van-cell size="large" use-label-slot center>
       <view slot="title">
-        <view>{{item.name}}<text style="margin-left: 20rpx;">{{item.mobile}}</text></view>
+        <view>{{item.name}}<text style="margin-left: 20rpx;">{{item.tel}}</text></view>
       </view>
       <view slot="label" class="cell_label">
         <view>
-          <van-tag color="#c6edf8" wx:if="{{item.is_default === 1}}" text-color="#02bef1">默认</van-tag>{{' ' + item.province + ' ' + item.city + ' ' + item.county + ' ' + item.detail}}
+          <van-tag color="#c6edf8" wx:if="{{item.is_default === 1}}" text-color="#02bef1">默认</van-tag>{{item.detail}}
         </view>
       </view>
       <view style="padding: 10rpx 24rpx;">

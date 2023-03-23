@@ -26,7 +26,6 @@ Page({
   },
 
   // 获取地理位置
-
   async chooseLocation(){
     wx.chooseLocation({
       altitude: 'altitude',
@@ -44,7 +43,6 @@ Page({
       fail: (res) => {},
       complete: (res) => {},
   })
-  
   },
 
   // 获取购物车信息

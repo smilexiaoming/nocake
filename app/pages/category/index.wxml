@@ -24,8 +24,6 @@
               <text style="font-size: 28xrpx;padding-right: 5rpx;">¥</text>
               <text>{{item.price}}</text>
             </view>
-            <!-- <View class="goods-card-dec">月售 {{item.sales}}</View> -->
-            <!-- <view><view class="goods_plus_icon"></view></view> -->
           </View>
         </View>
       </view>
