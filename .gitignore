@@ -11,3 +11,4 @@ app/miniprogram_npm
 server/config.yaml
 go.sum
 go.mod
+*.zip
