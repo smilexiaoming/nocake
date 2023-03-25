@@ -46,6 +46,7 @@ func (c *WebCategoryService) Create(param web.CategoryCreateParam) int64 {
 		Level:       param.Level,
 		IconUrl:     param.IconUrl,
 		Weight:      param.Weight,
+		Deleted:     1,
 		CreatedTime: time.Now(),
 	}
 	return global.Db.Debug().Table("t_category").Create(&category).RowsAffected

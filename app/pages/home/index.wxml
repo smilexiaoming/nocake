@@ -14,8 +14,8 @@
 
 <view class="swiper-container">
   <swiper class="swiper1" indicator-dots="true" indicator-active-color="#fff" autoplay circular>
-    <swiper-item wx:for="{{banner_list}}" wx:key="id">
-      <image mode="aspectFill" bindtap="tapBanner" src="{{item}}" />
+    <swiper-item wx:for="{{banner_list}}" wx:key="index" >
+      <image mode="aspectFill" wx:id="{{item.id}}" src="{{item}}" />
     </swiper-item>
   </swiper>
   <view wx:if="{{goodsDynamic && show_buy_dynamic == '1' }}" class="goodsDynamic">

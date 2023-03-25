@@ -1,16 +1,13 @@
 <!--pages/order/confirm/index.wxml-->
 <view wx:if="{{showView}}">
 <view>
-选择当前地址：
-<button class="order_submit_btn" bindtap="chooseLocation"> 选择 </button>
-<a>{{choice_address}}</a>
-<a>{{choice_name}}</a>
-</view>
-<view>
-选择已有地址：
   <van-dropdown-menu size="large">
     <van-dropdown-item value="{{ address_value }}" options="{{ address_option }}" />
+    <van-icon style="float: right; margin-right: 10px; margin-left: 10px;" size="20px" name="location-o" bindtap="chooseLocation"/>
   </van-dropdown-menu>
+  <view wx:if="{{show_choice_address}}">
+  <a>本订单地址将替换为：{{choice_address}}</a>
+  </view>
 </view>
 
 <van-card custom-class="goods_van_card" title-class="goods_van_card_title" wx:for="{{goodsItem}}" wx:key="{{item.id}}" id="{{item.id}}" price="{{item.price}}" title="{{item.title}}" num="{{item.count}}" thumb="{{item.pic_url}}" bindtap="checkGoodsDetail" />
@@ -26,7 +23,7 @@
     v-model="message"
     label="备注"
     type="textarea"
-    placeholder="请输入备注"
+    placeholder="请备注送达时间"
     rows="1"
     autosize
   />

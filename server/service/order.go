@@ -159,10 +159,10 @@ func (o *AppOrderService) Submit(param app.OrderSubmitParam) int64 {
 	rows_affect := global.Db.Table("t_address").Where("open_id = ? and id = ?", param.OpenId, param.AddressId).Find(&address).RowsAffected
 	if rows_affect > 0 {
 		addressInfo := app.AddressAddParam{
-			Name:     address.Name,
-			OpenId:   address.OpenId,
-			Detail:   address.Detail,
-			Tel:      address.Tel,
+			Name:   address.Name,
+			OpenId: address.OpenId,
+			Detail: address.Detail,
+			Tel:    address.Tel,
 		}
 		if param.ChoiceAddress != "" {
 			addressInfo.Detail = param.ChoiceAddress
@@ -179,6 +179,7 @@ func (o *AppOrderService) Submit(param app.OrderSubmitParam) int64 {
 		GoodsCount:  cartInfo.TotalCart,
 		OpenId:      param.OpenId,
 		CreatedTime: time.Now(),
+		Status:      1,
 		Message:     param.Message,
 	}
 

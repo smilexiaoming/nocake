@@ -11,9 +11,8 @@ Page({
     goodsCount: 0,
     goodsItem: [],
     totalPrice: 0.00,
-    checkedGoods: ['25','28'],
     totalGoodsCount: 0,
-    activeId : 1
+    activeIndex:0
   },
 
   // 跳转到搜索页面
@@ -36,6 +35,25 @@ Page({
     this.setData({bannerList: res.data.data})
   },
 
+    // 当进步器改变时，修改商品数量
+  stepperChange(event){
+    console.log("event stepperchange ", event)
+    this.addToCart(event.currentTarget.id, event.detail)
+  },
+
+  // 添加商品到购物车
+  async addToCart(id, count) {
+    if (count > 0){
+      await http.PUT('/cart/set',{ 
+        goods_id: id, 
+        options: JSON.stringify({"option":this.data.option_list,"count":count}),
+        open_id: wx.getStorageSync('open_id')
+      })
+    }else{
+      await http.DELETE('/cart/delete?open_id=' + wx.getStorageSync('open_id') + "&goods_id=" + id)
+    }
+    this.onShow()
+  },
   // 点击banner
   onClickBanner(event){
     wx.navigateTo({ url: '/pages/goods/index?id=' + event.currentTarget.id})
@@ -47,7 +65,7 @@ Page({
       level: parseInt(wx.getStorageSync('level')),
       pid: parseInt(wx.getStorageSync('pid'))
     })
-    this.setData({options: res.data.data, activeId:app.globalData.option_id})
+    this.setData({options: res.data.data, activeIndex:app.globalData.option_id - 1})
     this.getGoodsList(app.globalData.option_id)
   },
 
@@ -57,16 +75,19 @@ Page({
       category_id: categoryId,
     })
     this.setData({goodsList: res.data.data})
-    console.log(this.data.goodsList);
   },
 
   // 商品分类切换
   changeOption(event){
     let categoryId;
+    console.log("event ", event)
     for (let i = 0; i < this.data.options.length; i++){
-      if (i === event.detail.index){ categoryId = this.data.options[i].id }
+      if (i === event.detail.index){
+         categoryId = this.data.options[i].id 
+        }
     }
     app.globalData.option_id = categoryId
+    this.setData({activeIndex:categoryId - 1})
     this.getGoodsList(categoryId)
   },
 
@@ -96,11 +117,19 @@ Page({
   // 获取购物车信息
   async getCartInfo(){
     let res = await http.GET('/cart/query', {open_id: wx.getStorageSync('open_id')})
-    this.setData({
-      goodsItem: res.data.data.cart_item,
-      totalPrice: res.data.data.total_price,
-      totalGoodsCount:res.data.data.total_cart,
-    })
+    if (res.data.data.cart_item){
+      for (let index = 0; index < res.data.data.cart_item.length; index++) {
+        const element = res.data.data.cart_item[index];
+        let option = JSON.parse(element["options"])
+        res.data.data.cart_item[index].cart_number = option.count
+      }
+      console.log("res.data.data.cart_item ",res.data.data.cart_item )
+      this.setData({
+        goodsItem: res.data.data.cart_item,
+        totalPrice: res.data.data.total_price,
+        totalGoodsCount:res.data.data.total_cart,
+      })
+    }
   },
 
   // 清空购物车

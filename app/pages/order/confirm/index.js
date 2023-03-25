@@ -14,9 +14,9 @@ Page({
     message:"",
     address_option: [],
     address_id: 0,
-    choice_name : "",
     choice_address : "",
-    address_value : 0
+    address_value : 0,
+    show_choice_address:false
   },
 
   // 生命周期函数--监听页面显示
@@ -33,11 +33,9 @@ Page({
       isHighAccuracy: true,
       type: 'type',
       success: (result) => {
-        console.log("res.name ", result.name)
-        console.log("res.address ", result.address)
         this.setData({
-          choice_name: result.name,
-          choice_address: result.address
+          choice_address: result.name + result.address,
+          show_choice_address:true
         })
       },
       fail: (res) => {},

@@ -30,37 +30,43 @@ Page({
     console.log(option_list)
   },
 
-  // 返回首页
+  // 返回
   backToHome() {
-    wx.switchTab({ url: '/pages/home/index' })
+    wx.navigateBack({
+      delta: 1
+    })
   },
 
   // 增加商品数量
   addGoods() {
-    this.setData({cart_number: 1})
-    this.addToCart()
+    this.setData({
+      cart_number : this.data.cart_number + 1
+    })
+    this.addToCart(this.data.goodsId, this.data.cart_number)
   },
 
-  // 当进步器改变时，修改商品数量
-  stepperChange(event){
-    console.log(event)
-    this.setData({cart_number: event.detail})
-    this.addToCart()
-  },
-
-  // 添加商品到购物车
-  async addToCart() {
-    if (this.data.cart_number > 0){
-      await http.PUT('/cart/set',{ 
-        goods_id: this.data.goodsId, 
-        options: JSON.stringify({"option":this.data.option_list,"count":this.data.cart_number}),
-        open_id: wx.getStorageSync('open_id')
+    // 当进步器改变时，修改商品数量
+    stepperChange(event){
+      console.log("event stepperchange ", event)
+      this.setData({
+        cart_number : event.detail
       })
-    }else{
-      await http.DELETE('/cart/delete?openid=' + wx.getStorageSync('open_id') + "&goods_id=" + this.data.goodsId)
-    }
-    this.onShow()
-  },
+      this.addToCart(event.currentTarget.id, event.detail)
+    },
+
+    // 添加商品到购物车
+    async addToCart(id, count) {
+      if (count > 0){
+        await http.PUT('/cart/set',{ 
+          goods_id: id, 
+          options: JSON.stringify({"option":this.data.option_list,"count":count}),
+          open_id: wx.getStorageSync('open_id')
+        })
+      }else{
+        await http.DELETE('/cart/delete?open_id=' + wx.getStorageSync('open_id') + "&goods_id=" + id)
+      }
+      this.onShow()
+    },
   
   /**
      * 选择可选配件
@@ -78,7 +84,7 @@ Page({
         this.setData({
           option_list:goodsAddition
         })
-        this.addToCart()
+        this.addToCart(this.data.goodsId, this.data.cart_number)
         return
       }
       // 单选配件取消所有子栏目选中状态
@@ -93,8 +99,8 @@ Page({
         option_list:goodsAddition
       })
       console.log("goodsAddition  ", goodsAddition)
-      this.addToCart()
-    },
+      this.addToCart(this.data.goodsId, this.data.cart_number)
+  },
   // 展示购物车
   showCartPopup() {
     if(this.data.show){
@@ -109,25 +115,28 @@ Page({
   async onShow() {
     // 获取购物车信息
     let res = await http.GET('/cart/query', {open_id: wx.getStorageSync('open_id')})
+    if (res.data.data.cart_item){
+      for (let index = 0; index < res.data.data.cart_item.length; index++) {
+        const element = res.data.data.cart_item[index];
+        let option = JSON.parse(element.options)
+        res.data.data.cart_item[index].cart_number = option.count
+        if (String(element.id) == this.data.goodsId) {
+          let options = JSON.parse(element.options)
+          this.setData({cart_number: options.count})
+        }
+      }
+    }
     this.setData({
       goodsItem: res.data.data.cart_item,
       totalPrice: res.data.data.total_price,
       totalGoodsCount:res.data.data.total_cart,
     })
-    if (this.data.goodsItem){
-      for (let i = 0; i < this.data.goodsItem.length; i++) {
-        if (String(this.data.goodsItem[i].id) == this.data.goodsId) {
-          let options = JSON.parse(this.data.goodsItem[i].options)
-          this.setData({cart_number: options.count})
-        }
-      }
-    }
   },
 
   // 清空购物车
   async clearCart(){
     await http.DELETE('/cart/clear?open_id='+wx.getStorageSync('open_id'))
-    this.setData({ show: false, totalGoodsCount: 0, totalPrice: 0 });
+    this.setData({ show: false, totalGoodsCount: 0, totalPrice: 0 ,cart_number: 0});
   },
   
   // 购物车选中

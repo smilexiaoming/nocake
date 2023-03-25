@@ -1,6 +1,6 @@
 <view class="header">
   <van-tabs active="{{ active }}" bind:change="onChange" color="#12CAFF" line-width="40rpx" line-height="10rpx" tab-class="custom-tab" custom-class="custom-tabs" bind:change="tabsChange" swipeable>
-    <van-tab wx:for="{{tabList}}" wx:key="{{item}}" title="{{item.text}}">
+    <van-tab wx:for="{{tabList}}" wx:key="index" title="{{item.text}}">
       <view wx:if="{{orderList.length > 0}}" class="order-card-container">
         <view class="order-card" wx:for="{{orderList}}" wx:key="{{item.id}}">
           <view class="order-card_header">

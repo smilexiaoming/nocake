@@ -9,7 +9,7 @@
       <view class="price_value"><text style="font-size: 35rpx;padding-right: 8rpx;">¥</text>{{goods.price}}</view>
       <view>
         <view wx:if="{{cart_number == 0}}" class="goods_plus_icon" bindtap="addGoods" />
-        <van-stepper wx:else value="{{ cart_number }}" minus-class="goods_van_stepper_minus" input-class="goods_van_stepper_input" plus-class="goods_van_stepper_plus" min="0" bind:change="stepperChange"/>
+        <van-stepper id="{{goods.id}}" wx:else value="{{ cart_number }}" minus-class="goods_van_stepper_minus" input-class="goods_van_stepper_input" plus-class="goods_van_stepper_plus" min="0" bind:change="stepperChange"/>
       </view>
     </View>
   </view>
@@ -62,7 +62,7 @@
       <view name="{{item.id}}" wx:for="{{goodsItem}}" wx:key="{{item.id}}" label-class="popup_van_checkbox_label" checked-color="#12CAFF" icon-size="32rpx">
           <van-card custom-class="popup_van_card" thumb-class="popup_van_card_thumb" title-class="popup_van_card_title" price="{{item.price}}" title="{{item.name}}" thumb="{{item.pic_url}}">
             <view slot="num" style="float: right;margin-top: -12rpx;">
-              <van-stepper value="{{ item.cart_number }}" minus-class="popup_van_stepper_minus" input-class="popup_van_stepper_input" plus-class="popup_van_stepper_plus" bind:change="stepperChange"/>
+              <van-stepper min="0" id="{{item.id}}" value="{{ item.cart_number }}"  minus-class="popup_van_stepper_minus" input-class="popup_van_stepper_input" plus-class="popup_van_stepper_plus" bind:change="stepperChange"/>
             </view>
           </van-card>
       </view>

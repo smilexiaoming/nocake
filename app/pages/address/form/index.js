@@ -7,7 +7,7 @@ Page({
     areaList,
     id: '',
     name: '',
-    mobile: '',
+    tel: '',
     detail:"",
     isDefault: 0,
     show: false,
