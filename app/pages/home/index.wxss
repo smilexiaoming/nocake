@@ -145,9 +145,11 @@
 }
 
 .container {
-  background-color: #fff;
-  min-height: 80%;
-  display: block;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  box-sizing: content-box;
+  padding: 10 24rpx;
 }
 
 .category-container {
@@ -605,4 +607,7 @@
 }
 .pingtuantag {
   margin-left: 16rpx;
+}
+.tuijian {
+  color: #CA954E;
 }

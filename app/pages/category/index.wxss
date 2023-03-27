@@ -5,7 +5,7 @@ page {
 .content {
   position: fixed;
   width: 100%;
-  /* top: 340rpx; */
+  top: 60rpx;
   bottom: 0;
   background: #fff;
   border-radius: 15rpx 15rpx 0 0;
@@ -205,7 +205,7 @@ page {
 .cart_button{
   width: 280rpx;
   height: 80rpx;
-  background-color: #12CAFF;
+  background-color: #acff12;
   font-size: 28rpx;
   line-height: 80rpx;
   color: white;

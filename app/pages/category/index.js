@@ -12,7 +12,9 @@ Page({
     goodsItem: [],
     totalPrice: 0.00,
     totalGoodsCount: 0,
-    activeIndex:0
+    activeIndex:0,
+    pageNum: 1,
+    pageSize: 10,
   },
 
   // 跳转到搜索页面

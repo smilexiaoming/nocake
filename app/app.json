@@ -9,14 +9,15 @@
         "pages/address/form/index",
         "pages/address/list/index",
         "pages/feedback/index",
-        "pages/search/index",
-        "pages/order/detail/index"
+        "pages/search/index"
     ],
     "window": {
-        "backgroundTextStyle": "light",
-        "navigationBarBackgroundColor": "#fff",
-        "navigationBarTitleText": "Weixin",
-        "navigationBarTextStyle": "black"
+      "backgroundColor": "#BDB76B",
+      "backgroundTextStyle": "light",
+      "navigationBarBackgroundColor": "#BDB76B",
+      "navigationBarTitleText": "不吃蛋糕",
+      "navigationBarTextStyle": "white",
+      "onReachBottomDistance": 300
     },
     "tabBar": {
         "custom": true,
@@ -42,5 +43,13 @@
             }
         ]
     },
-    "sitemapLocation": "sitemap.json"
+    "sitemapLocation": "sitemap.json",
+    "permission": {
+      "scope.userLocation": {
+        "desc": "你的位置信息将用于外卖送达" 
+      }
+   },
+   "requiredPrivateInfos": [
+      "chooseLocation"
+  ]
 }

@@ -3,7 +3,7 @@
   <view class="search" style="height:{{navHeight}}px;padding-top:{{navTop}}px">
     <view class="search-title" src="../../images/actLogo/ytlogo.png"
       style="height:{{navHeight-navTop-5}}px;line-height:{{navHeight-navTop-5}}px;width:{{132/52*(navHeight-navTop-5)}}px;">
-      不吃蛋糕
+      <view style="color:rgb(78, 78, 42)">不吃蛋糕</view>
     </view>
     <input placeholder-class="search-placeholder"
       style="width:{{menuButtonObject.left-18-((132/52)*(navHeight-navTop-5))}}px" type="text" placeholder="输入关键词搜索" disabled
@@ -46,7 +46,9 @@
 <view class="container">
   <view class="space"></view>
   <van-divider custom-class="table-text"contentPosition="center">
-    <image class="table-icon-tuijian" src="../../assets/recommend.png"></image> 爆品推荐
+    <view class="tuijian">
+    <text> 掌柜推荐 </text>
+  </view>
   </van-divider>
   <view class="goods-container">
     <view class="goods-box" wx:for="{{hot_goods}}" wx:key="id" bindtap="toDetailsTap" data-id="{{item.id}}" data-supplytype="{{item.supplyType}}" data-yyid="{{item.yyId}}">
